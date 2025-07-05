@@ -2,11 +2,11 @@
 import paho.mqtt.client as mqtt
 
 # Define Variables
-MQTT_HOST = "192.168.0.200"
+MQTT_HOST = "192.168.1.112"
 MQTT_PORT = 1883
 MQTT_KEEPALIVE_INTERVAL = 5
-MQTT_TOPIC = "hello/world"
-MQTT_MSG = "Hello MQTT"
+MQTT_TOPIC = "robot/battery"
+# MQTT_MSG = "Hello MQTT"
 
 # Define on_connect event Handler
 def on_connect(mosq, obj, flags, rc):

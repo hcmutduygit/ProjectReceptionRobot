@@ -11,6 +11,7 @@ from robot_ui import Ui_MainWindow
 from jetson.camera_publisher import CameraPublisherThread
 from camera_subcriber import CameraSubscriberThread
 from attendance import AttendanceTab
+from battery_subscriber import BatterySubscriberThread
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
@@ -32,12 +33,15 @@ class MainWindow(QMainWindow):
 ]
         
         # phan tram pin 
-        battery_percent = 82 
-        self.ui.label_battery.setText(f"{battery_percent}%")
+        self.battery_percent = 82 
+        self.ui.label_battery.setText(f"{self.battery_percent}%")
 
         # khoi tao camera
         self.camera_pub_thread = None
         self.camera_sub_thread = None
+        
+        # khoi tao battery subscriber
+        self.battery_sub_thread = None
 
         # khoi tao tab diem danh
         self.attendance_tab = AttendanceTab(self.ui)
@@ -66,6 +70,8 @@ class MainWindow(QMainWindow):
             if user["username"] == username and user["password"] == password:
                 self.switch_to_page(self.ui.Page_attendance)  # sang giao diện chính
                 self.ui.Dashboard.setCurrentWidget(self.ui.Dashboard_main)
+                # Bắt đầu battery subscriber sau khi đăng nhập thành công
+                self.start_battery_subscriber()
                 return
         else:
             QMessageBox.warning(self, "Login Failed", "Incorrect username or password")
@@ -126,6 +132,7 @@ class MainWindow(QMainWindow):
 
         if reply == QMessageBox.Yes:
             self.stop_camera()
+            self.stop_battery_subscriber()
             self.ui.Page.setCurrentWidget(self.ui.Page_signin)
             self.ui.Dashboard.setCurrentWidget(self.ui.Dashboard_signin)
 
@@ -169,8 +176,34 @@ class MainWindow(QMainWindow):
         if self.ui.Page.currentWidget() == self.ui.Page_Camera:
             self.ui.camera_label.setPixmap(QPixmap.fromImage(image))
 
+    def start_battery_subscriber(self):
+        """Khởi tạo và bắt đầu battery subscriber thread"""
+        if not hasattr(self, "battery_sub_thread") or self.battery_sub_thread is None:
+            self.battery_sub_thread = BatterySubscriberThread(
+                mqtt_host="192.168.1.112",  # Thay đổi địa chỉ IP này theo broker của bạn
+                mqtt_port=1883,
+                mqtt_topic="robot/battery"  # Thay đổi topic này theo topic bạn đang sử dụng
+            )
+            self.battery_sub_thread.battery_update.connect(self.update_battery_display)
+            self.battery_sub_thread.start()
+            print("Battery subscriber started")
+
+    def stop_battery_subscriber(self):
+        """Dừng battery subscriber thread"""
+        if self.battery_sub_thread:
+            self.battery_sub_thread.stop()
+            self.battery_sub_thread = None
+            print("Battery subscriber stopped")
+
+    def update_battery_display(self, battery_percent):
+        """Cập nhật hiển thị phần trăm pin trên UI"""
+        self.battery_percent = battery_percent
+        self.ui.label_battery.setText(f"{battery_percent}%")
+        print(f"Battery updated to: {battery_percent}%")
+
     def closeEvent(self, event):
         self.stop_camera()
+        self.stop_battery_subscriber()
         rclpy.shutdown()
         event.accept()  
 
