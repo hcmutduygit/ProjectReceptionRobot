@@ -27,15 +27,18 @@ class AttendanceTab(QWidget):
                
         # Du lieu gia 
         self.attendance_data = [
-            {"id": "E001", "name": "Alice", "dept": "HR", "email": "alice@example.com", "status": None},
-            {"id": "E002", "name": "Bob", "dept": "IT", "email": "bob@example.com", "status": None},
-            {"id": "E003", "name": "Charlie", "dept": "Finance", "email": "charlie@example.com", "status": None},
+            {"id": "E001", "name": "Ky", "dept": "HR", "email": "ky@example.com", "status": None},
+            {"id": "E002", "name": "Duy", "dept": "IT", "email": "phu@example.com", "status": None},
+            {"id": "E003", "name": "Phu", "dept": "Finance", "email": "duy@example.com", "status": None},
+            {"id": "E004", "name": "Thu", "dept": "Finance", "email": "thu@example.com", "status": None},
+            {"id": "E005", "name": "Loi", "dept": "Finance", "email": "loi@example.com", "status": None},
+            {"id": "E006", "name": "Thien", "dept": "Finance", "email": "thien@example.com", "status": None},
         ]
 
         # Nhan du lieu tu MQTT va them vao data 
-        self.id = "E002"
+        self.name = "Ky"
         self.status = "Present"
-        self.update_status(id=self.id, status=self.status)
+        self.update_status(name=self.name, status=self.status)
 
         # Gan nut search 
         self.ui.search_btn.clicked.connect(self.search_attendance)
@@ -54,9 +57,9 @@ class AttendanceTab(QWidget):
             self.ui.table_attendance.setItem(row, 4, QTableWidgetItem(entry["email"]))
         
     # ham cap nhat trang thai 
-    def update_status(self, id=None, status=None):
+    def update_status(self, name=None, status=None):
         for entry in self.attendance_data:
-            if (id and entry["id"] == id):
+            if (name and entry["name"] == name):
                 entry["status"] = status
                 break
 

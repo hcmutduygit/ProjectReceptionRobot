@@ -8,11 +8,11 @@ from robot_ui import Ui_MainWindow
 # pyside6-uic Robot_UI.ui -o robot_ui.py
 # hello
 
-#from jetson.camera_publisher import CameraPublisherThread
+from jetson.camera_publisher import CameraPublisherThread
 from camera_subcriber import CameraSubscriberThread
 from attendance import AttendanceTab
 from battery_manager import BatteryManager
-
+from attendance_manager import AttendanceManager
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -33,6 +33,7 @@ class MainWindow(QMainWindow):
 ]
         
         # khoi tao camera
+        self.camera_pub_thread = None
         self.camera_sub_thread = None
         
         # khoi tao battery manager
@@ -41,8 +42,14 @@ class MainWindow(QMainWindow):
         # khoi tao tab diem danh
         self.attendance_tab = AttendanceTab(self.ui)
 
+        # khoi tao attendance manager voi tham chieu den attendance_tab
+        self.attendance_manager = AttendanceManager(self.ui, self.attendance_tab)
+
         # khoi tao battery subscriber ngay khi app bat dau
         self.battery_manager.start_battery_subscriber()
+
+        # khoi tao attendance subscriber ngay khi app bat dau
+        self.attendance_manager.start_attendance_subscriber()
 
         # set moi vô thi hien cai nao 
         self.ui.Page.setCurrentWidget(self.ui.Page_signin)
@@ -58,7 +65,6 @@ class MainWindow(QMainWindow):
         self.ui.Main_btn_camera.clicked.connect(lambda: self.switch_to_page(self.ui.Page_Camera))
         self.ui.Main_btn_tracking.clicked.connect(lambda: self.switch_to_page(self.ui.Page_tracking))
         self.ui.Main_btn_attendance.clicked.connect(lambda: self.switch_to_page(self.ui.Page_attendance))
-        self.ui.Main_btn_robotstatus.clicked.connect(lambda: self.switch_to_page(self.ui.Page_robotstatus))
         self.ui.Account__btnlogout.clicked.connect(self.handle_logout)
 
     def handle_login(self):
@@ -130,6 +136,7 @@ class MainWindow(QMainWindow):
         if reply == QMessageBox.Yes:
             self.stop_camera()
             self.battery_manager.stop_battery_subscriber()
+            self.attendance_manager.stop_attendance_subscriber()
             self.ui.Page.setCurrentWidget(self.ui.Page_signin)
             self.ui.Dashboard.setCurrentWidget(self.ui.Dashboard_signin)
 
@@ -152,12 +159,19 @@ class MainWindow(QMainWindow):
 
 
     def start_camera(self):
+        if not hasattr(self, "camera_pub_thread") or self.camera_pub_thread is None:
+            self.camera_pub_thread = CameraPublisherThread()
+            self.camera_pub_thread.start()
+
         if not hasattr(self, "camera_sub_thread") or self.camera_sub_thread is None:
             self.camera_sub_thread = CameraSubscriberThread(self.ui.camera_label)
             self.camera_sub_thread.ImageUpdate.connect(self.update_camera_frame)
             self.camera_sub_thread.start()
 
     def stop_camera(self):
+        if self.camera_pub_thread:
+            self.camera_pub_thread.stop()
+            self.camera_pub_thread = None
         if self.camera_sub_thread:
             self.camera_sub_thread.stop()
             self.camera_sub_thread = None
@@ -166,10 +180,10 @@ class MainWindow(QMainWindow):
         if self.ui.Page.currentWidget() == self.ui.Page_Camera:
             self.ui.camera_label.setPixmap(QPixmap.fromImage(image))
 
-
     def closeEvent(self, event):
         self.stop_camera()
         self.battery_manager.stop_battery_subscriber()
+        self.attendance_manager.stop_attendance_subscriber()
         rclpy.shutdown()
         event.accept()  
 
