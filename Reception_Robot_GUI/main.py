@@ -8,7 +8,7 @@ from robot_ui import Ui_MainWindow
 # pyside6-uic Robot_UI.ui -o robot_ui.py
 # hello
 
-from jetson.camera_publisher import CameraPublisherThread
+#from jetson.camera_publisher import CameraPublisherThread
 from camera_subcriber import CameraSubscriberThread
 from attendance import AttendanceTab
 from battery_manager import BatteryManager
@@ -33,7 +33,6 @@ class MainWindow(QMainWindow):
 ]
         
         # khoi tao camera
-        self.camera_pub_thread = None
         self.camera_sub_thread = None
         
         # khoi tao battery manager
@@ -152,19 +151,12 @@ class MainWindow(QMainWindow):
 
 
     def start_camera(self):
-        if not hasattr(self, "camera_pub_thread") or self.camera_pub_thread is None:
-            self.camera_pub_thread = CameraPublisherThread()
-            self.camera_pub_thread.start()
-
         if not hasattr(self, "camera_sub_thread") or self.camera_sub_thread is None:
             self.camera_sub_thread = CameraSubscriberThread(self.ui.camera_label)
             self.camera_sub_thread.ImageUpdate.connect(self.update_camera_frame)
             self.camera_sub_thread.start()
 
     def stop_camera(self):
-        if self.camera_pub_thread:
-            self.camera_pub_thread.stop()
-            self.camera_pub_thread = None
         if self.camera_sub_thread:
             self.camera_sub_thread.stop()
             self.camera_sub_thread = None
@@ -172,6 +164,7 @@ class MainWindow(QMainWindow):
     def update_camera_frame(self, image):
         if self.ui.Page.currentWidget() == self.ui.Page_Camera:
             self.ui.camera_label.setPixmap(QPixmap.fromImage(image))
+
 
     def closeEvent(self, event):
         self.stop_camera()

@@ -40,3 +40,16 @@ class CameraPublisherThread(QThread):
         self._active = False
         self.quit()
         self.wait()
+    
+if __name__ == '__main__':
+    import rclpy
+    rclpy.init()
+    from camera_publisher import CameraPublisherThread
+
+    camera_thread = CameraPublisherThread()
+    camera_thread.start()
+    try:
+        while True:
+            pass  # hoặc dùng time.sleep(1)
+    except KeyboardInterrupt:
+        camera_thread.stop()
