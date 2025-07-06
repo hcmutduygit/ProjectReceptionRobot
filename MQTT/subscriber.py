@@ -2,7 +2,7 @@
 import paho.mqtt.client as mqtt
 
 # Define Variables
-MQTT_HOST = "192.168.1.112"
+MQTT_HOST = "192.168.1.110"
 MQTT_PORT = 1883
 MQTT_KEEPALIVE_INTERVAL = 5
 MQTT_TOPIC = "robot/battery"
