@@ -41,8 +41,18 @@ class MainWindow(QMainWindow):
         # khoi tao tab diem danh
         self.attendance_tab = AttendanceTab(self.ui)
 
+        # bien trang thai mqtt
+        self.ui.label_mqtt.setText("disconnected")
+
         # khoi tao battery subscriber ngay khi app bat dau
         self.battery_manager.start_battery_subscriber()
+
+        # bien trang thai locker 
+        style = "border-radius: 20px;border: 3px solid rgb(0, 41, 77);"
+        ocupied = style + "background-color: red;"
+        empty = style + "background-color: green;"
+        self.ui.right_status.setStyleSheet(empty)
+        self.ui.left_status.setStyleSheet(ocupied)
 
         # set moi vô thi hien cai nao 
         self.ui.Page.setCurrentWidget(self.ui.Page_signin)
@@ -136,16 +146,13 @@ class MainWindow(QMainWindow):
     
     def switch_to_page(self, page_widget):
         self.ui.Page.setCurrentWidget(page_widget)
-
         # dung cac process dang chay 
         # self.stop_camera()
-
         # Bật process phù hợp
         page_handlers = {
             self.ui.Page_Camera: self.start_camera,
             #self.ui.Page_tracking: self.start_tracking,...
         }
-
         handler = page_handlers.get(page_widget)
         if handler:
             handler()
