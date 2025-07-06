@@ -42,8 +42,14 @@ class MainWindow(QMainWindow):
         # khoi tao tab diem danh
         self.attendance_tab = AttendanceTab(self.ui)
 
+        # khoi tao attendance manager voi tham chieu den attendance_tab
+        self.attendance_manager = AttendanceManager(self.ui, self.attendance_tab)
+
         # khoi tao battery subscriber ngay khi app bat dau
         self.battery_manager.start_battery_subscriber()
+
+        # khoi tao attendance subscriber ngay khi app bat dau
+        self.attendance_manager.start_attendance_subscriber()
 
         # set moi vô thi hien cai nao 
         self.ui.Page.setCurrentWidget(self.ui.Page_signin)
