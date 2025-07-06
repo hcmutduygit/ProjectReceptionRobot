@@ -88,7 +88,7 @@ class Ui_MainWindow(object):
         self.Dashboard.setLineWidth(0)
         self.Dashboard_signin = QWidget()
         self.Dashboard_signin.setObjectName(u"Dashboard_signin")
-        self.Dashboard_signin.setMinimumSize(QSize(260, 900))
+        self.Dashboard_signin.setMinimumSize(QSize(260, 800))
         self.Dashboard_signin.setMaximumSize(QSize(350, 1080))
         self.Dashboard_signin.setStyleSheet(u"QWidget {\n"
 "background-color: qlineargradient(spread: pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb(4, 3, 47), stop:0.5 rgb(86, 80, 140), stop:1 rgb(114, 159, 207))\n"
@@ -100,8 +100,13 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.Signin_logo = QFrame(self.Dashboard_signin)
         self.Signin_logo.setObjectName(u"Signin_logo")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.MinimumExpanding)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.Signin_logo.sizePolicy().hasHeightForWidth())
+        self.Signin_logo.setSizePolicy(sizePolicy1)
         self.Signin_logo.setMinimumSize(QSize(260, 150))
-        self.Signin_logo.setMaximumSize(QSize(350, 170))
+        self.Signin_logo.setMaximumSize(QSize(16777215, 300))
         self.Signin_logo.setStyleSheet(u"")
         self.Signin_logo.setFrameShape(QFrame.NoFrame)
         self.Signin_logo.setFrameShadow(QFrame.Plain)
@@ -112,24 +117,12 @@ class Ui_MainWindow(object):
         self.gridLayout_4.setHorizontalSpacing(12)
         self.gridLayout_4.setVerticalSpacing(0)
         self.gridLayout_4.setContentsMargins(20, 25, 20, 20)
-        self.Logo_fab = QLabel(self.Signin_logo)
-        self.Logo_fab.setObjectName(u"Logo_fab")
-        sizePolicy.setHeightForWidth(self.Logo_fab.sizePolicy().hasHeightForWidth())
-        self.Logo_fab.setSizePolicy(sizePolicy)
-        self.Logo_fab.setMinimumSize(QSize(50, 50))
-        self.Logo_fab.setStyleSheet(u"background-color: rgb(238, 238, 236);\n"
-"border-radius:  15px;")
-        self.Logo_fab.setPixmap(QPixmap(u":/logos/Logos/Fablab Logo-aftercut.png"))
-        self.Logo_fab.setScaledContents(True)
-        self.Logo_fab.setAlignment(Qt.AlignCenter)
-
-        self.gridLayout_4.addWidget(self.Logo_fab, 0, 0, 1, 1)
-
         self.Logo_BK = QLabel(self.Signin_logo)
         self.Logo_BK.setObjectName(u"Logo_BK")
         sizePolicy.setHeightForWidth(self.Logo_BK.sizePolicy().hasHeightForWidth())
         self.Logo_BK.setSizePolicy(sizePolicy)
         self.Logo_BK.setMinimumSize(QSize(50, 50))
+        self.Logo_BK.setMaximumSize(QSize(150, 150))
         self.Logo_BK.setStyleSheet(u"background-color: rgb(238, 238, 236);\n"
 "border-radius:  15px;")
         self.Logo_BK.setFrameShape(QFrame.NoFrame)
@@ -139,13 +132,27 @@ class Ui_MainWindow(object):
 
         self.gridLayout_4.addWidget(self.Logo_BK, 0, 1, 1, 1)
 
+        self.Logo_fab = QLabel(self.Signin_logo)
+        self.Logo_fab.setObjectName(u"Logo_fab")
+        sizePolicy.setHeightForWidth(self.Logo_fab.sizePolicy().hasHeightForWidth())
+        self.Logo_fab.setSizePolicy(sizePolicy)
+        self.Logo_fab.setMinimumSize(QSize(50, 50))
+        self.Logo_fab.setMaximumSize(QSize(150, 150))
+        self.Logo_fab.setStyleSheet(u"background-color: rgb(238, 238, 236);\n"
+"border-radius:  15px;")
+        self.Logo_fab.setPixmap(QPixmap(u":/logos/Logos/Fablab Logo-aftercut.png"))
+        self.Logo_fab.setScaledContents(True)
+        self.Logo_fab.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_4.addWidget(self.Logo_fab, 0, 2, 1, 1)
+
         self.gridLayout_4.setColumnStretch(0, 1)
-        self.gridLayout_4.setColumnStretch(1, 1)
 
         self.verticalLayout_3.addWidget(self.Signin_logo)
 
         self.Signin_line = QFrame(self.Dashboard_signin)
         self.Signin_line.setObjectName(u"Signin_line")
+        self.Signin_line.setEnabled(True)
         self.Signin_line.setMinimumSize(QSize(260, 20))
         self.Signin_line.setMaximumSize(QSize(350, 20))
         self.Signin_line.setFrameShape(QFrame.NoFrame)
@@ -157,11 +164,11 @@ class Ui_MainWindow(object):
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.Line = QFrame(self.Signin_line)
         self.Line.setObjectName(u"Line")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
-        sizePolicy1.setHorizontalStretch(3)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.Line.sizePolicy().hasHeightForWidth())
-        self.Line.setSizePolicy(sizePolicy1)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
+        sizePolicy2.setHorizontalStretch(3)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.Line.sizePolicy().hasHeightForWidth())
+        self.Line.setSizePolicy(sizePolicy2)
         self.Line.setMinimumSize(QSize(210, 3))
         self.Line.setMaximumSize(QSize(250, 3))
         self.Line.setSizeIncrement(QSize(0, 0))
@@ -189,7 +196,7 @@ class Ui_MainWindow(object):
         self.Signin_btn = QFrame(self.Dashboard_signin)
         self.Signin_btn.setObjectName(u"Signin_btn")
         self.Signin_btn.setMinimumSize(QSize(260, 660))
-        self.Signin_btn.setMaximumSize(QSize(350, 820))
+        self.Signin_btn.setMaximumSize(QSize(350, 700))
         self.Signin_btn.setStyleSheet(u"")
         self.Signin_btn.setFrameShape(QFrame.NoFrame)
         self.Signin_btn.setFrameShadow(QFrame.Raised)
@@ -200,6 +207,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.setContentsMargins(0, 150, 0, 150)
         self.Signin_btn_signin = QPushButton(self.Signin_btn)
         self.Signin_btn_signin.setObjectName(u"Signin_btn_signin")
+        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.Signin_btn_signin.sizePolicy().hasHeightForWidth())
+        self.Signin_btn_signin.setSizePolicy(sizePolicy3)
         self.Signin_btn_signin.setMaximumSize(QSize(16777215, 50))
         font1 = QFont()
         font1.setFamilies([u"Roboto"])
@@ -218,6 +230,8 @@ class Ui_MainWindow(object):
 
         self.Signin_btn_signup = QPushButton(self.Signin_btn)
         self.Signin_btn_signup.setObjectName(u"Signin_btn_signup")
+        sizePolicy3.setHeightForWidth(self.Signin_btn_signup.sizePolicy().hasHeightForWidth())
+        self.Signin_btn_signup.setSizePolicy(sizePolicy3)
         self.Signin_btn_signup.setMaximumSize(QSize(16777215, 50))
         self.Signin_btn_signup.setFont(font1)
         self.Signin_btn_signup.setFocusPolicy(Qt.NoFocus)
@@ -248,7 +262,6 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.addWidget(self.Signin_text, 0, Qt.AlignBottom)
 
         self.verticalLayout_3.setStretch(0, 170)
-        self.verticalLayout_3.setStretch(1, 20)
         self.verticalLayout_3.setStretch(2, 820)
         self.verticalLayout_3.setStretch(3, 70)
         self.Dashboard.addWidget(self.Dashboard_signin)
@@ -269,7 +282,7 @@ class Ui_MainWindow(object):
         self.Main_Logo = QFrame(self.Dashboard_main)
         self.Main_Logo.setObjectName(u"Main_Logo")
         self.Main_Logo.setMinimumSize(QSize(260, 150))
-        self.Main_Logo.setMaximumSize(QSize(260, 120))
+        self.Main_Logo.setMaximumSize(QSize(16777215, 200))
         self.Main_Logo.setStyleSheet(u"")
         self.Main_Logo.setFrameShape(QFrame.NoFrame)
         self.Main_Logo.setFrameShadow(QFrame.Plain)
@@ -280,26 +293,12 @@ class Ui_MainWindow(object):
         self.gridLayout_5.setHorizontalSpacing(12)
         self.gridLayout_5.setVerticalSpacing(0)
         self.gridLayout_5.setContentsMargins(20, 25, 20, 20)
-        self.Logo_fab_2 = QLabel(self.Main_Logo)
-        self.Logo_fab_2.setObjectName(u"Logo_fab_2")
-        sizePolicy.setHeightForWidth(self.Logo_fab_2.sizePolicy().hasHeightForWidth())
-        self.Logo_fab_2.setSizePolicy(sizePolicy)
-        self.Logo_fab_2.setMinimumSize(QSize(50, 50))
-        self.Logo_fab_2.setMaximumSize(QSize(100, 100))
-        self.Logo_fab_2.setStyleSheet(u"background-color: rgb(238, 238, 236);\n"
-"border-radius:  15px;")
-        self.Logo_fab_2.setPixmap(QPixmap(u":/logos/Logos/Fablab Logo-aftercut.png"))
-        self.Logo_fab_2.setScaledContents(True)
-        self.Logo_fab_2.setAlignment(Qt.AlignCenter)
-
-        self.gridLayout_5.addWidget(self.Logo_fab_2, 0, 0, 1, 1)
-
         self.Logo_BK_2 = QLabel(self.Main_Logo)
         self.Logo_BK_2.setObjectName(u"Logo_BK_2")
         sizePolicy.setHeightForWidth(self.Logo_BK_2.sizePolicy().hasHeightForWidth())
         self.Logo_BK_2.setSizePolicy(sizePolicy)
         self.Logo_BK_2.setMinimumSize(QSize(50, 50))
-        self.Logo_BK_2.setMaximumSize(QSize(100, 100))
+        self.Logo_BK_2.setMaximumSize(QSize(150, 150))
         self.Logo_BK_2.setStyleSheet(u"background-color: rgb(238, 238, 236);\n"
 "border-radius:  15px;")
         self.Logo_BK_2.setPixmap(QPixmap(u":/logos/Logos/Logo BK.png"))
@@ -308,7 +307,20 @@ class Ui_MainWindow(object):
 
         self.gridLayout_5.addWidget(self.Logo_BK_2, 0, 1, 1, 1)
 
-        self.gridLayout_5.setColumnStretch(0, 1)
+        self.Logo_fab_2 = QLabel(self.Main_Logo)
+        self.Logo_fab_2.setObjectName(u"Logo_fab_2")
+        sizePolicy.setHeightForWidth(self.Logo_fab_2.sizePolicy().hasHeightForWidth())
+        self.Logo_fab_2.setSizePolicy(sizePolicy)
+        self.Logo_fab_2.setMinimumSize(QSize(50, 50))
+        self.Logo_fab_2.setMaximumSize(QSize(150, 150))
+        self.Logo_fab_2.setStyleSheet(u"background-color: rgb(238, 238, 236);\n"
+"border-radius:  15px;")
+        self.Logo_fab_2.setPixmap(QPixmap(u":/logos/Logos/Fablab Logo-aftercut.png"))
+        self.Logo_fab_2.setScaledContents(True)
+        self.Logo_fab_2.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_5.addWidget(self.Logo_fab_2, 0, 2, 1, 1)
+
 
         self.verticalLayout.addWidget(self.Main_Logo)
 
@@ -317,12 +329,9 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.Main_btn.sizePolicy().hasHeightForWidth())
         self.Main_btn.setSizePolicy(sizePolicy)
         self.Main_btn.setMinimumSize(QSize(260, 200))
-        self.Main_btn.setMaximumSize(QSize(260, 770))
+        self.Main_btn.setMaximumSize(QSize(16777215, 16777215))
         self.Main_btn.setFont(font)
-        self.Main_btn.setStyleSheet(u"QPushButton#Main_btn_orders{ \n"
-"background-color: rgb(216, 229, 254);\n"
-" color: rgb(0, 41, 77); \n"
-"}")
+        self.Main_btn.setStyleSheet(u"")
         self.Main_btn.setFrameShape(QFrame.NoFrame)
         self.Main_btn.setFrameShadow(QFrame.Raised)
         self.Main_btn.setLineWidth(0)
@@ -333,7 +342,7 @@ class Ui_MainWindow(object):
         self.Main_line = QFrame(self.Main_btn)
         self.Main_line.setObjectName(u"Main_line")
         self.Main_line.setMinimumSize(QSize(260, 20))
-        self.Main_line.setMaximumSize(QSize(350, 20))
+        self.Main_line.setMaximumSize(QSize(16777215, 20))
         self.Main_line.setContextMenuPolicy(Qt.NoContextMenu)
         self.Main_line.setFrameShape(QFrame.NoFrame)
         self.Main_line.setFrameShadow(QFrame.Raised)
@@ -361,7 +370,7 @@ class Ui_MainWindow(object):
 
         self.Main__frame_admin = QFrame(self.Main_btn)
         self.Main__frame_admin.setObjectName(u"Main__frame_admin")
-        self.Main__frame_admin.setMaximumSize(QSize(260, 400))
+        self.Main__frame_admin.setMaximumSize(QSize(16777215, 400))
         self.Main__frame_admin.setFrameShape(QFrame.NoFrame)
         self.Main__frame_admin.setFrameShadow(QFrame.Raised)
         self.verticalLayout_8 = QVBoxLayout(self.Main__frame_admin)
@@ -428,7 +437,7 @@ class Ui_MainWindow(object):
 
         self.Main_frame_admin = QFrame(self.Main_btn)
         self.Main_frame_admin.setObjectName(u"Main_frame_admin")
-        self.Main_frame_admin.setMaximumSize(QSize(260, 200))
+        self.Main_frame_admin.setMaximumSize(QSize(16777215, 200))
         self.Main_frame_admin.setFrameShape(QFrame.NoFrame)
         self.Main_frame_admin.setFrameShadow(QFrame.Raised)
         self.verticalLayout_9 = QVBoxLayout(self.Main_frame_admin)
@@ -476,11 +485,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_16.setContentsMargins(0, 0, 0, 0)
         self.frame_3 = QFrame(self.widget)
         self.frame_3.setObjectName(u"frame_3")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Maximum)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.frame_3.sizePolicy().hasHeightForWidth())
-        self.frame_3.setSizePolicy(sizePolicy2)
+        sizePolicy4 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Maximum)
+        sizePolicy4.setHorizontalStretch(0)
+        sizePolicy4.setVerticalStretch(0)
+        sizePolicy4.setHeightForWidth(self.frame_3.sizePolicy().hasHeightForWidth())
+        self.frame_3.setSizePolicy(sizePolicy4)
         self.frame_3.setMinimumSize(QSize(0, 30))
         self.frame_3.setMaximumSize(QSize(16777215, 30))
         self.frame_3.setStyleSheet(u"\n"
@@ -532,8 +541,13 @@ class Ui_MainWindow(object):
 
         self.Page = QStackedWidget(self.widget)
         self.Page.setObjectName(u"Page")
-        self.Page.setMinimumSize(QSize(1180, 900))
-        self.Page.setMaximumSize(QSize(1995, 1080))
+        sizePolicy5 = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
+        sizePolicy5.setHorizontalStretch(0)
+        sizePolicy5.setVerticalStretch(0)
+        sizePolicy5.setHeightForWidth(self.Page.sizePolicy().hasHeightForWidth())
+        self.Page.setSizePolicy(sizePolicy5)
+        self.Page.setMinimumSize(QSize(1180, 850))
+        self.Page.setMaximumSize(QSize(1995, 1050))
         self.Page.setStyleSheet(u"background-color: rgb(240, 246, 255);")
         self.Page.setFrameShadow(QFrame.Raised)
         self.Page.setLineWidth(0)
@@ -577,11 +591,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_7.setContentsMargins(0, 0, 0, 0)
         self.label_2 = QLabel(self.Title)
         self.label_2.setObjectName(u"label_2")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
-        sizePolicy3.setHorizontalStretch(1)
-        sizePolicy3.setVerticalStretch(0)
-        sizePolicy3.setHeightForWidth(self.label_2.sizePolicy().hasHeightForWidth())
-        self.label_2.setSizePolicy(sizePolicy3)
+        sizePolicy6 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
+        sizePolicy6.setHorizontalStretch(1)
+        sizePolicy6.setVerticalStretch(0)
+        sizePolicy6.setHeightForWidth(self.label_2.sizePolicy().hasHeightForWidth())
+        self.label_2.setSizePolicy(sizePolicy6)
         self.label_2.setMinimumSize(QSize(720, 0))
         self.label_2.setMaximumSize(QSize(720, 100))
         font7 = QFont()
@@ -597,8 +611,8 @@ class Ui_MainWindow(object):
 
         self.label_4 = QLabel(self.Title)
         self.label_4.setObjectName(u"label_4")
-        sizePolicy3.setHeightForWidth(self.label_4.sizePolicy().hasHeightForWidth())
-        self.label_4.setSizePolicy(sizePolicy3)
+        sizePolicy6.setHeightForWidth(self.label_4.sizePolicy().hasHeightForWidth())
+        self.label_4.setSizePolicy(sizePolicy6)
         self.label_4.setMinimumSize(QSize(720, 0))
         self.label_4.setMaximumSize(QSize(720, 100))
         font8 = QFont()
@@ -725,8 +739,8 @@ class Ui_MainWindow(object):
         self.formLayout.setContentsMargins(0, 0, -1, 0)
         self.Title_signup = QLabel(self.Signup_form)
         self.Title_signup.setObjectName(u"Title_signup")
-        sizePolicy3.setHeightForWidth(self.Title_signup.sizePolicy().hasHeightForWidth())
-        self.Title_signup.setSizePolicy(sizePolicy3)
+        sizePolicy6.setHeightForWidth(self.Title_signup.sizePolicy().hasHeightForWidth())
+        self.Title_signup.setSizePolicy(sizePolicy6)
         self.Title_signup.setMinimumSize(QSize(720, 70))
         self.Title_signup.setMaximumSize(QSize(720, 70))
         self.Title_signup.setFont(font7)
@@ -865,13 +879,258 @@ class Ui_MainWindow(object):
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
         self.verticalLayout_13.setContentsMargins(0, 0, 0, 0)
         self.Page.addWidget(self.Page_orders)
-        self.Page_robots = QWidget()
-        self.Page_robots.setObjectName(u"Page_robots")
-        self.verticalLayout_14 = QVBoxLayout(self.Page_robots)
-        self.verticalLayout_14.setSpacing(0)
+        self.Page_robotstatus = QWidget()
+        self.Page_robotstatus.setObjectName(u"Page_robotstatus")
+        self.Page_robotstatus.setEnabled(True)
+        self.Page_robotstatus.setMinimumSize(QSize(0, 0))
+        self.Page_robotstatus.setMaximumSize(QSize(16777215, 16777215))
+        self.Page_robotstatus.setStyleSheet(u"#menu_robotstatus {\n"
+"border: 1px solid gray;\n"
+"}")
+        self.verticalLayout_5 = QVBoxLayout(self.Page_robotstatus)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.verticalLayout_5.setContentsMargins(-1, 0, -1, 0)
+        self.menu_robotstatus = QFrame(self.Page_robotstatus)
+        self.menu_robotstatus.setObjectName(u"menu_robotstatus")
+        self.menu_robotstatus.setMinimumSize(QSize(0, 100))
+        self.menu_robotstatus.setMaximumSize(QSize(16777215, 100))
+        self.menu_robotstatus.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
+"border-radius: 20px;")
+        self.menu_robotstatus.setFrameShape(QFrame.NoFrame)
+        self.menu_robotstatus.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_8 = QHBoxLayout(self.menu_robotstatus)
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.label_29 = QLabel(self.menu_robotstatus)
+        self.label_29.setObjectName(u"label_29")
+        self.label_29.setMinimumSize(QSize(0, 70))
+        self.label_29.setMaximumSize(QSize(16777215, 70))
+        font12 = QFont()
+        font12.setFamilies([u"Roboto"])
+        font12.setPointSize(30)
+        font12.setBold(True)
+        font12.setItalic(False)
+        font12.setUnderline(False)
+        font12.setStrikeOut(False)
+        font12.setKerning(True)
+        self.label_29.setFont(font12)
+        self.label_29.setStyleSheet(u"")
+        self.label_29.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_8.addWidget(self.label_29)
+
+
+        self.verticalLayout_5.addWidget(self.menu_robotstatus)
+
+        self.widget_3 = QWidget(self.Page_robotstatus)
+        self.widget_3.setObjectName(u"widget_3")
+        self.horizontalLayout_9 = QHBoxLayout(self.widget_3)
+        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
+        self.widget_4 = QWidget(self.widget_3)
+        self.widget_4.setObjectName(u"widget_4")
+        self.verticalLayout_14 = QVBoxLayout(self.widget_4)
         self.verticalLayout_14.setObjectName(u"verticalLayout_14")
-        self.verticalLayout_14.setContentsMargins(0, 0, 0, 0)
-        self.Page.addWidget(self.Page_robots)
+        self.verticalLayout_14.setContentsMargins(-1, 0, -1, 0)
+        self.UGV1_3 = QFrame(self.widget_4)
+        self.UGV1_3.setObjectName(u"UGV1_3")
+        self.UGV1_3.setMinimumSize(QSize(0, 0))
+        self.UGV1_3.setMaximumSize(QSize(16777215, 16777215))
+        self.UGV1_3.setStyleSheet(u"")
+        self.verticalLayout_22 = QVBoxLayout(self.UGV1_3)
+        self.verticalLayout_22.setSpacing(0)
+        self.verticalLayout_22.setObjectName(u"verticalLayout_22")
+        self.verticalLayout_22.setContentsMargins(0, 0, 0, 0)
+        self.frame_7 = QFrame(self.UGV1_3)
+        self.frame_7.setObjectName(u"frame_7")
+        self.frame_7.setMaximumSize(QSize(16777215, 100))
+        self.frame_7.setStyleSheet(u"QFrame{\n"
+"	border-top-left-radius: 15;\n"
+"	border-top-right-radius: 15;\n"
+"	border-style: solid;\n"
+"	border-color:rgb(0, 41, 77);\n"
+"	background-color: qlineargradient(spread: pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb(4, 3, 47), stop:0.5 rgb(86, 80, 140), stop:1 rgb(114, 159, 207));\n"
+"}")
+        self.frame_7.setLineWidth(0)
+        self.verticalLayout_23 = QVBoxLayout(self.frame_7)
+        self.verticalLayout_23.setObjectName(u"verticalLayout_23")
+        self.Robot_label1_3 = QLabel(self.frame_7)
+        self.Robot_label1_3.setObjectName(u"Robot_label1_3")
+        font13 = QFont()
+        font13.setFamilies([u"Roboto"])
+        font13.setPointSize(23)
+        self.Robot_label1_3.setFont(font13)
+        self.Robot_label1_3.setStyleSheet(u"QLabel{\n"
+"background-color: transparent; \n"
+"color: rgb(238, 238, 236);\n"
+"}")
+        self.Robot_label1_3.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_23.addWidget(self.Robot_label1_3, 0, Qt.AlignHCenter)
+
+
+        self.verticalLayout_22.addWidget(self.frame_7)
+
+        self.ManageUGV1_3 = QFrame(self.UGV1_3)
+        self.ManageUGV1_3.setObjectName(u"ManageUGV1_3")
+        sizePolicy.setHeightForWidth(self.ManageUGV1_3.sizePolicy().hasHeightForWidth())
+        self.ManageUGV1_3.setSizePolicy(sizePolicy)
+        self.ManageUGV1_3.setMaximumSize(QSize(16777215, 200))
+        self.ManageUGV1_3.setStyleSheet(u"")
+        self.ManageUGV1_3.setFrameShape(QFrame.StyledPanel)
+        self.ManageUGV1_3.setFrameShadow(QFrame.Plain)
+        self.ManageUGV1_3.setLineWidth(1)
+        self.gridLayout_14 = QGridLayout(self.ManageUGV1_3)
+        self.gridLayout_14.setObjectName(u"gridLayout_14")
+        self.gridLayout_14.setHorizontalSpacing(0)
+        self.gridLayout_14.setVerticalSpacing(4)
+        self.gridLayout_14.setContentsMargins(10, 10, 10, 10)
+        self.label_18 = QLabel(self.ManageUGV1_3)
+        self.label_18.setObjectName(u"label_18")
+        font14 = QFont()
+        font14.setFamilies([u"Roboto"])
+        font14.setPointSize(13)
+        font14.setBold(True)
+        self.label_18.setFont(font14)
+        self.label_18.setStyleSheet(u"")
+        self.label_18.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_14.addWidget(self.label_18, 0, 2, 1, 1)
+
+        self.label_20 = QLabel(self.ManageUGV1_3)
+        self.label_20.setObjectName(u"label_20")
+        self.label_20.setMaximumSize(QSize(3, 16777215))
+        self.label_20.setStyleSheet(u"background-color: rgb(0, 41, 77);")
+        self.label_20.setFrameShape(QFrame.StyledPanel)
+
+        self.gridLayout_14.addWidget(self.label_20, 0, 1, 4, 1)
+
+        self.label_7 = QLabel(self.ManageUGV1_3)
+        self.label_7.setObjectName(u"label_7")
+        self.label_7.setFont(font14)
+        self.label_7.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_14.addWidget(self.label_7, 0, 0, 1, 1)
+
+        self.Status_UGV1 = QLabel(self.ManageUGV1_3)
+        self.Status_UGV1.setObjectName(u"Status_UGV1")
+        self.Status_UGV1.setMinimumSize(QSize(40, 20))
+        self.Status_UGV1.setMaximumSize(QSize(40, 40))
+        self.Status_UGV1.setStyleSheet(u"QLabel{background-color: red;border-radius: 20px; \n"
+"border: 3px solid rgb(100, 0, 0);}")
+        self.Status_UGV1.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_14.addWidget(self.Status_UGV1, 1, 0, 1, 1)
+
+        self.Status_UGV1_3 = QLabel(self.ManageUGV1_3)
+        self.Status_UGV1_3.setObjectName(u"Status_UGV1_3")
+        self.Status_UGV1_3.setMinimumSize(QSize(40, 40))
+        self.Status_UGV1_3.setMaximumSize(QSize(40, 40))
+        self.Status_UGV1_3.setStyleSheet(u"QLabel{background-color: red;border-radius: 20px; \n"
+"border: 3px solid rgb(100, 0, 0);}")
+        self.Status_UGV1_3.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_14.addWidget(self.Status_UGV1_3, 1, 2, 1, 1)
+
+
+        self.verticalLayout_22.addWidget(self.ManageUGV1_3)
+
+
+        self.verticalLayout_14.addWidget(self.UGV1_3)
+
+        self.UGV1_2 = QFrame(self.widget_4)
+        self.UGV1_2.setObjectName(u"UGV1_2")
+        self.UGV1_2.setMinimumSize(QSize(0, 0))
+        self.UGV1_2.setMaximumSize(QSize(16777215, 16777215))
+        self.UGV1_2.setStyleSheet(u"")
+        self.verticalLayout_20 = QVBoxLayout(self.UGV1_2)
+        self.verticalLayout_20.setSpacing(0)
+        self.verticalLayout_20.setObjectName(u"verticalLayout_20")
+        self.verticalLayout_20.setContentsMargins(0, 0, 0, 0)
+        self.frame_6 = QFrame(self.UGV1_2)
+        self.frame_6.setObjectName(u"frame_6")
+        sizePolicy7 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.MinimumExpanding)
+        sizePolicy7.setHorizontalStretch(0)
+        sizePolicy7.setVerticalStretch(0)
+        sizePolicy7.setHeightForWidth(self.frame_6.sizePolicy().hasHeightForWidth())
+        self.frame_6.setSizePolicy(sizePolicy7)
+        self.frame_6.setStyleSheet(u"QFrame{\n"
+"	border-top-left-radius: 15;\n"
+"	border-top-right-radius: 15;\n"
+"	border-style: solid;\n"
+"	border-color:rgb(0, 41, 77);\n"
+"	background-color: qlineargradient(spread: pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb(4, 3, 47), stop:0.5 rgb(86, 80, 140), stop:1 rgb(114, 159, 207));\n"
+"}")
+        self.frame_6.setLineWidth(0)
+        self.verticalLayout_21 = QVBoxLayout(self.frame_6)
+        self.verticalLayout_21.setObjectName(u"verticalLayout_21")
+        self.Robot_label1_2 = QLabel(self.frame_6)
+        self.Robot_label1_2.setObjectName(u"Robot_label1_2")
+        self.Robot_label1_2.setFont(font13)
+        self.Robot_label1_2.setStyleSheet(u"QLabel{\n"
+"background-color: transparent; \n"
+"color: rgb(238, 238, 236);\n"
+"}")
+
+        self.verticalLayout_21.addWidget(self.Robot_label1_2, 0, Qt.AlignHCenter)
+
+
+        self.verticalLayout_20.addWidget(self.frame_6)
+
+
+        self.verticalLayout_14.addWidget(self.UGV1_2)
+
+
+        self.horizontalLayout_9.addWidget(self.widget_4)
+
+        self.frame_4 = QFrame(self.widget_3)
+        self.frame_4.setObjectName(u"frame_4")
+        self.frame_4.setFrameShape(QFrame.StyledPanel)
+        self.frame_4.setFrameShadow(QFrame.Raised)
+
+        self.horizontalLayout_9.addWidget(self.frame_4)
+
+        self.UGV1 = QFrame(self.widget_3)
+        self.UGV1.setObjectName(u"UGV1")
+        sizePolicy.setHeightForWidth(self.UGV1.sizePolicy().hasHeightForWidth())
+        self.UGV1.setSizePolicy(sizePolicy)
+        self.UGV1.setMinimumSize(QSize(0, 0))
+        self.UGV1.setMaximumSize(QSize(16777215, 16777215))
+        self.UGV1.setStyleSheet(u"")
+        self.verticalLayout_18 = QVBoxLayout(self.UGV1)
+        self.verticalLayout_18.setSpacing(0)
+        self.verticalLayout_18.setObjectName(u"verticalLayout_18")
+        self.verticalLayout_18.setContentsMargins(0, 0, 0, 0)
+        self.frame_5 = QFrame(self.UGV1)
+        self.frame_5.setObjectName(u"frame_5")
+        self.frame_5.setStyleSheet(u"QFrame{\n"
+"	border-top-left-radius: 15;\n"
+"	border-top-right-radius: 15;\n"
+"	border-style: solid;\n"
+"	border-color:rgb(0, 41, 77);\n"
+"	background-color: qlineargradient(spread: pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb(4, 3, 47), stop:0.5 rgb(86, 80, 140), stop:1 rgb(114, 159, 207));\n"
+"}")
+        self.frame_5.setLineWidth(0)
+        self.verticalLayout_19 = QVBoxLayout(self.frame_5)
+        self.verticalLayout_19.setObjectName(u"verticalLayout_19")
+        self.Robot_label1 = QLabel(self.frame_5)
+        self.Robot_label1.setObjectName(u"Robot_label1")
+        self.Robot_label1.setFont(font13)
+        self.Robot_label1.setStyleSheet(u"QLabel{\n"
+"background-color: transparent; \n"
+"color: rgb(238, 238, 236);\n"
+"}")
+
+        self.verticalLayout_19.addWidget(self.Robot_label1)
+
+
+        self.verticalLayout_18.addWidget(self.frame_5)
+
+
+        self.horizontalLayout_9.addWidget(self.UGV1)
+
+
+        self.verticalLayout_5.addWidget(self.widget_3)
+
+        self.Page.addWidget(self.Page_robotstatus)
         self.Page_tracking = QWidget()
         self.Page_tracking.setObjectName(u"Page_tracking")
         self.Page_tracking.setStyleSheet(u"*{\n"
@@ -890,7 +1149,7 @@ class Ui_MainWindow(object):
 "}")
         self.gridLayout_6 = QGridLayout(self.Page_tracking)
         self.gridLayout_6.setObjectName(u"gridLayout_6")
-        self.gridLayout_6.setContentsMargins(-1, 0, -1, 0)
+        self.gridLayout_6.setContentsMargins(-1, 0, 9, 0)
         self.menu_tracking = QFrame(self.Page_tracking)
         self.menu_tracking.setObjectName(u"menu_tracking")
         self.menu_tracking.setMinimumSize(QSize(0, 100))
@@ -905,14 +1164,6 @@ class Ui_MainWindow(object):
         self.label_26.setObjectName(u"label_26")
         self.label_26.setMinimumSize(QSize(0, 70))
         self.label_26.setMaximumSize(QSize(16777215, 70))
-        font12 = QFont()
-        font12.setFamilies([u"Roboto"])
-        font12.setPointSize(30)
-        font12.setBold(True)
-        font12.setItalic(False)
-        font12.setUnderline(False)
-        font12.setStrikeOut(False)
-        font12.setKerning(True)
         self.label_26.setFont(font12)
         self.label_26.setStyleSheet(u"")
         self.label_26.setAlignment(Qt.AlignCenter)
@@ -990,7 +1241,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_6 = QHBoxLayout(self.Page_attendance)
         self.horizontalLayout_6.setSpacing(0)
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.horizontalLayout_6.setContentsMargins(9, 0, 9, 0)
+        self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
         self.widget_2 = QWidget(self.Page_attendance)
         self.widget_2.setObjectName(u"widget_2")
         self.verticalLayout_15 = QVBoxLayout(self.widget_2)
@@ -1010,11 +1261,11 @@ class Ui_MainWindow(object):
         self.label_28.setMinimumSize(QSize(0, 70))
         self.label_28.setMaximumSize(QSize(16777215, 100))
         self.label_28.setBaseSize(QSize(0, 70))
-        font13 = QFont()
-        font13.setFamilies([u"Roboto"])
-        font13.setPointSize(30)
-        font13.setBold(True)
-        self.label_28.setFont(font13)
+        font15 = QFont()
+        font15.setFamilies([u"Roboto"])
+        font15.setPointSize(30)
+        font15.setBold(True)
+        self.label_28.setFont(font15)
         self.label_28.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
 "border-radius: 20px;\n"
 "")
@@ -1031,11 +1282,11 @@ class Ui_MainWindow(object):
         self.info_frame = QFrame(self.widget_2)
         self.info_frame.setObjectName(u"info_frame")
         self.info_frame.setMaximumSize(QSize(16777215, 200))
-        font14 = QFont()
-        font14.setFamilies([u"Roboto"])
-        font14.setPointSize(16)
-        font14.setBold(False)
-        self.info_frame.setFont(font14)
+        font16 = QFont()
+        font16.setFamilies([u"Roboto"])
+        font16.setPointSize(16)
+        font16.setBold(False)
+        self.info_frame.setFont(font16)
         self.info_frame.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
 "border-radius: 20px;")
         self.gridLayout_9 = QGridLayout(self.info_frame)
@@ -1050,36 +1301,36 @@ class Ui_MainWindow(object):
         self.label = QLabel(self.info_frame)
         self.label.setObjectName(u"label")
         self.label.setMaximumSize(QSize(16777215, 50))
-        font15 = QFont()
-        font15.setFamilies([u"Roboto"])
-        font15.setPointSize(12)
-        font15.setBold(False)
-        self.label.setFont(font15)
+        font17 = QFont()
+        font17.setFamilies([u"Roboto"])
+        font17.setPointSize(12)
+        font17.setBold(False)
+        self.label.setFont(font17)
 
         self.gridLayout_11.addWidget(self.label, 0, 0, 1, 1)
 
         self.label_3 = QLabel(self.info_frame)
         self.label_3.setObjectName(u"label_3")
         self.label_3.setMaximumSize(QSize(16777215, 50))
-        self.label_3.setFont(font15)
+        self.label_3.setFont(font17)
 
         self.gridLayout_11.addWidget(self.label_3, 1, 0, 1, 1)
 
         self.lineEdit_2 = QLineEdit(self.info_frame)
         self.lineEdit_2.setObjectName(u"lineEdit_2")
-        sizePolicy4 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
-        sizePolicy4.setHorizontalStretch(0)
-        sizePolicy4.setVerticalStretch(0)
-        sizePolicy4.setHeightForWidth(self.lineEdit_2.sizePolicy().hasHeightForWidth())
-        self.lineEdit_2.setSizePolicy(sizePolicy4)
+        sizePolicy8 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        sizePolicy8.setHorizontalStretch(0)
+        sizePolicy8.setVerticalStretch(0)
+        sizePolicy8.setHeightForWidth(self.lineEdit_2.sizePolicy().hasHeightForWidth())
+        self.lineEdit_2.setSizePolicy(sizePolicy8)
         self.lineEdit_2.setMaximumSize(QSize(16777215, 50))
 
         self.gridLayout_11.addWidget(self.lineEdit_2, 1, 1, 1, 1)
 
         self.lineEdit = QLineEdit(self.info_frame)
         self.lineEdit.setObjectName(u"lineEdit")
-        sizePolicy4.setHeightForWidth(self.lineEdit.sizePolicy().hasHeightForWidth())
-        self.lineEdit.setSizePolicy(sizePolicy4)
+        sizePolicy8.setHeightForWidth(self.lineEdit.sizePolicy().hasHeightForWidth())
+        self.lineEdit.setSizePolicy(sizePolicy8)
         self.lineEdit.setMaximumSize(QSize(16777215, 50))
         self.lineEdit.setInputMethodHints(Qt.ImhDigitsOnly)
 
@@ -1090,9 +1341,6 @@ class Ui_MainWindow(object):
 
         self.search_btn = QPushButton(self.info_frame)
         self.search_btn.setObjectName(u"search_btn")
-        sizePolicy5 = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
-        sizePolicy5.setHorizontalStretch(0)
-        sizePolicy5.setVerticalStretch(0)
         sizePolicy5.setHeightForWidth(self.search_btn.sizePolicy().hasHeightForWidth())
         self.search_btn.setSizePolicy(sizePolicy5)
         self.search_btn.setMaximumSize(QSize(50, 50))
@@ -1110,32 +1358,32 @@ class Ui_MainWindow(object):
         self.label_6 = QLabel(self.info_frame)
         self.label_6.setObjectName(u"label_6")
         self.label_6.setMaximumSize(QSize(16777215, 50))
-        font16 = QFont()
-        font16.setFamilies([u"Roboto"])
-        font16.setPointSize(12)
-        self.label_6.setFont(font16)
+        font18 = QFont()
+        font18.setFamilies([u"Roboto"])
+        font18.setPointSize(12)
+        self.label_6.setFont(font18)
 
         self.gridLayout_10.addWidget(self.label_6, 1, 0, 1, 1)
 
         self.label_5 = QLabel(self.info_frame)
         self.label_5.setObjectName(u"label_5")
         self.label_5.setMaximumSize(QSize(16777215, 50))
-        self.label_5.setFont(font15)
+        self.label_5.setFont(font17)
 
         self.gridLayout_10.addWidget(self.label_5, 0, 0, 1, 1)
 
         self.lineEdit_3 = QLineEdit(self.info_frame)
         self.lineEdit_3.setObjectName(u"lineEdit_3")
-        sizePolicy4.setHeightForWidth(self.lineEdit_3.sizePolicy().hasHeightForWidth())
-        self.lineEdit_3.setSizePolicy(sizePolicy4)
+        sizePolicy8.setHeightForWidth(self.lineEdit_3.sizePolicy().hasHeightForWidth())
+        self.lineEdit_3.setSizePolicy(sizePolicy8)
         self.lineEdit_3.setMaximumSize(QSize(16777215, 50))
 
         self.gridLayout_10.addWidget(self.lineEdit_3, 0, 1, 1, 1)
 
         self.lineEdit_4 = QLineEdit(self.info_frame)
         self.lineEdit_4.setObjectName(u"lineEdit_4")
-        sizePolicy4.setHeightForWidth(self.lineEdit_4.sizePolicy().hasHeightForWidth())
-        self.lineEdit_4.setSizePolicy(sizePolicy4)
+        sizePolicy8.setHeightForWidth(self.lineEdit_4.sizePolicy().hasHeightForWidth())
+        self.lineEdit_4.setSizePolicy(sizePolicy8)
         self.lineEdit_4.setMaximumSize(QSize(16777215, 50))
 
         self.gridLayout_10.addWidget(self.lineEdit_4, 1, 1, 1, 1)
@@ -1154,35 +1402,35 @@ class Ui_MainWindow(object):
         self.table_attendance = QTableWidget(self.result_frame)
         if (self.table_attendance.columnCount() < 5):
             self.table_attendance.setColumnCount(5)
-        font17 = QFont()
-        font17.setFamilies([u"DejaVu Sans"])
-        font17.setPointSize(12)
-        font17.setBold(True)
+        font19 = QFont()
+        font19.setFamilies([u"DejaVu Sans"])
+        font19.setPointSize(12)
+        font19.setBold(True)
         __qtablewidgetitem = QTableWidgetItem()
         __qtablewidgetitem.setTextAlignment(Qt.AlignLeading|Qt.AlignVCenter);
-        __qtablewidgetitem.setFont(font17);
+        __qtablewidgetitem.setFont(font19);
         self.table_attendance.setHorizontalHeaderItem(0, __qtablewidgetitem)
         __qtablewidgetitem1 = QTableWidgetItem()
         __qtablewidgetitem1.setTextAlignment(Qt.AlignLeading|Qt.AlignVCenter);
-        __qtablewidgetitem1.setFont(font17);
+        __qtablewidgetitem1.setFont(font19);
         self.table_attendance.setHorizontalHeaderItem(1, __qtablewidgetitem1)
         __qtablewidgetitem2 = QTableWidgetItem()
         __qtablewidgetitem2.setTextAlignment(Qt.AlignLeading|Qt.AlignVCenter);
-        __qtablewidgetitem2.setFont(font17);
+        __qtablewidgetitem2.setFont(font19);
         self.table_attendance.setHorizontalHeaderItem(2, __qtablewidgetitem2)
         __qtablewidgetitem3 = QTableWidgetItem()
         __qtablewidgetitem3.setTextAlignment(Qt.AlignLeading|Qt.AlignVCenter);
-        __qtablewidgetitem3.setFont(font17);
+        __qtablewidgetitem3.setFont(font19);
         self.table_attendance.setHorizontalHeaderItem(3, __qtablewidgetitem3)
         __qtablewidgetitem4 = QTableWidgetItem()
         __qtablewidgetitem4.setTextAlignment(Qt.AlignLeading|Qt.AlignVCenter);
-        __qtablewidgetitem4.setFont(font17);
+        __qtablewidgetitem4.setFont(font19);
         self.table_attendance.setHorizontalHeaderItem(4, __qtablewidgetitem4)
         self.table_attendance.setObjectName(u"table_attendance")
-        font18 = QFont()
-        font18.setFamilies([u"Roboto"])
-        font18.setPointSize(11)
-        self.table_attendance.setFont(font18)
+        font20 = QFont()
+        font20.setFamilies([u"Roboto"])
+        font20.setPointSize(11)
+        self.table_attendance.setFont(font20)
         self.table_attendance.setFocusPolicy(Qt.NoFocus)
         self.table_attendance.setStyleSheet(u"")
         self.table_attendance.setFrameShape(QFrame.NoFrame)
@@ -1281,20 +1529,19 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.widget)
 
-        self.horizontalLayout.setStretch(0, 350)
         MainWindow.setCentralWidget(self.centralwidget)
         QWidget.setTabOrder(self.Main_btn_tracking, self.Signin_btn_signin)
         QWidget.setTabOrder(self.Signin_btn_signin, self.Signin_btn_signup)
 
         self.retranslateUi(MainWindow)
 
-        self.Dashboard.setCurrentIndex(1)
+        self.Dashboard.setCurrentIndex(0)
         self.Main_btn_attendance.setDefault(True)
         self.Main_btn_camera.setDefault(True)
         self.Main_btn_tracking.setDefault(True)
         self.Main_btn_robotstatus.setDefault(True)
         self.Account__btnlogout.setDefault(True)
-        self.Page.setCurrentIndex(6)
+        self.Page.setCurrentIndex(3)
         self.Signin_btn_login.setDefault(True)
         self.Signup_btn_signup.setDefault(True)
 
@@ -1304,14 +1551,14 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Robot Management", None))
-        self.Logo_fab.setText("")
         self.Logo_BK.setText("")
+        self.Logo_fab.setText("")
         self.Signin_btn_signin.setText(QCoreApplication.translate("MainWindow", u"SIGN IN", None))
         self.Signin_btn_signup.setText(QCoreApplication.translate("MainWindow", u"SIGN UP", None))
         self.Signin_text.setText(QCoreApplication.translate("MainWindow", u"FAB-LAB \n"
 " All rights reserved", None))
-        self.Logo_fab_2.setText("")
         self.Logo_BK_2.setText("")
+        self.Logo_fab_2.setText("")
         self.Label_admin.setText(QCoreApplication.translate("MainWindow", u"ADMIN", None))
         self.Main_btn_attendance.setText(QCoreApplication.translate("MainWindow", u"ATTENDANCE", None))
         self.Main_btn_camera.setText(QCoreApplication.translate("MainWindow", u"CAMERA", None))
@@ -1339,6 +1586,15 @@ class Ui_MainWindow(object):
         self.Signup_code.setText("")
         self.Signup_code.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Verify code", None))
         self.Signup_btn_signup.setText(QCoreApplication.translate("MainWindow", u"Create Account", None))
+        self.label_29.setText(QCoreApplication.translate("MainWindow", u"ROBOT STATUS", None))
+        self.Robot_label1_3.setText(QCoreApplication.translate("MainWindow", u"	LOCKER", None))
+        self.label_18.setText(QCoreApplication.translate("MainWindow", u"Right", None))
+        self.label_20.setText("")
+        self.label_7.setText(QCoreApplication.translate("MainWindow", u"Left", None))
+        self.Status_UGV1.setText("")
+        self.Status_UGV1_3.setText("")
+        self.Robot_label1_2.setText(QCoreApplication.translate("MainWindow", u"tobecontinue", None))
+        self.Robot_label1.setText(QCoreApplication.translate("MainWindow", u"tobecontinue", None))
         self.label_26.setText(QCoreApplication.translate("MainWindow", u"TRACKING", None))
         self.traking_label.setText("")
         self.label_28.setText(QCoreApplication.translate("MainWindow", u"ATTENDANCE", None))
