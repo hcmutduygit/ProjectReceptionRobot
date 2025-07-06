@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="Icons">
+    <file>Icons/battery.svg</file>
+    <file>Icons/mqtt_icon.svg</file>
     <file>Icons/Check_icon.png</file>
     <file>Icons/menu.svg</file>
     <file>Icons/Orders_icon_off.png</file>

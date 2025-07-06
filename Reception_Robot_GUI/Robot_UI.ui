@@ -1281,6 +1281,95 @@ color: rgb(0, 41, 77);</string>
            </spacer>
           </item>
           <item>
+           <widget class="QFrame" name="frame_2">
+            <property name="styleSheet">
+             <string notr="true">
+border-radius: 20px;
+</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_10">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_8">
+               <property name="minimumSize">
+                <size>
+                 <width>30</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>50</width>
+                 <height>50</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="pixmap">
+                <pixmap resource="resources/resources.qrc">:/Icons/Icons/mqtt_icon.svg</pixmap>
+               </property>
+               <property name="scaledContents">
+                <bool>false</bool>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_mqtt">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>50</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Roboto</family>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>connected</string>
+               </property>
+               <property name="textFormat">
+                <enum>Qt::PlainText</enum>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
            <widget class="QFrame" name="frame">
             <property name="styleSheet">
              <string notr="true">
@@ -1335,6 +1424,12 @@ border-radius: 20px;
                </property>
                <property name="styleSheet">
                 <string notr="true"/>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
                </property>
                <property name="text">
                 <string>battery</string>
@@ -2389,7 +2484,7 @@ border-radius: 20px;</string>
                   <number>0</number>
                  </property>
                  <item>
-                  <widget class="QFrame" name="UGV1_3">
+                  <widget class="QFrame" name="locker">
                    <property name="minimumSize">
                     <size>
                      <width>0</width>
@@ -2443,7 +2538,7 @@ border-radius: 20px;</string>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_23">
                        <item alignment="Qt::AlignHCenter">
-                        <widget class="QLabel" name="Robot_label1_3">
+                        <widget class="QLabel" name="label1_3">
                          <property name="font">
                           <font>
                            <family>Roboto</family>
@@ -2468,7 +2563,7 @@ color: rgb(238, 238, 236);
                      </widget>
                     </item>
                     <item>
-                     <widget class="QFrame" name="ManageUGV1_3">
+                     <widget class="QFrame" name="frame_8">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                         <horstretch>0</horstretch>
@@ -2571,7 +2666,7 @@ color: rgb(238, 238, 236);
                         </widget>
                        </item>
                        <item row="1" column="0">
-                        <widget class="QLabel" name="Status_UGV1">
+                        <widget class="QLabel" name="left_status">
                          <property name="minimumSize">
                           <size>
                            <width>40</width>
@@ -2585,8 +2680,10 @@ color: rgb(238, 238, 236);
                           </size>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">QLabel{background-color: red;border-radius: 20px; 
-border: 3px solid rgb(100, 0, 0);}</string>
+                          <string notr="true">QLabel{
+border-radius: 20px; 
+border: 3px solid rgb(0, 41, 77);
+}</string>
                          </property>
                          <property name="text">
                           <string/>
@@ -2597,7 +2694,7 @@ border: 3px solid rgb(100, 0, 0);}</string>
                         </widget>
                        </item>
                        <item row="1" column="2">
-                        <widget class="QLabel" name="Status_UGV1_3">
+                        <widget class="QLabel" name="right_status">
                          <property name="minimumSize">
                           <size>
                            <width>40</width>
@@ -2611,8 +2708,10 @@ border: 3px solid rgb(100, 0, 0);}</string>
                           </size>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">QLabel{background-color: red;border-radius: 20px; 
-border: 3px solid rgb(100, 0, 0);}</string>
+                          <string notr="true">QLabel{
+border-radius: 20px; 
+border: 3px solid rgb(0, 41, 77);
+}</string>
                          </property>
                          <property name="text">
                           <string/>

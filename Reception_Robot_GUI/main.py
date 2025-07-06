@@ -42,14 +42,8 @@ class MainWindow(QMainWindow):
         # khoi tao tab diem danh
         self.attendance_tab = AttendanceTab(self.ui)
 
-        # khoi tao attendance manager voi tham chieu den attendance_tab
-        self.attendance_manager = AttendanceManager(self.ui, self.attendance_tab)
-
         # khoi tao battery subscriber ngay khi app bat dau
         self.battery_manager.start_battery_subscriber()
-
-        # khoi tao attendance subscriber ngay khi app bat dau
-        self.attendance_manager.start_attendance_subscriber()
 
         # set moi vô thi hien cai nao 
         self.ui.Page.setCurrentWidget(self.ui.Page_signin)
@@ -143,16 +137,13 @@ class MainWindow(QMainWindow):
     
     def switch_to_page(self, page_widget):
         self.ui.Page.setCurrentWidget(page_widget)
-
         # dung cac process dang chay 
         # self.stop_camera()
-
         # Bật process phù hợp
         page_handlers = {
             self.ui.Page_Camera: self.start_camera,
             #self.ui.Page_tracking: self.start_tracking,...
         }
-
         handler = page_handlers.get(page_widget)
         if handler:
             handler()
