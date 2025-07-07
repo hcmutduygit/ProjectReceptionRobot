@@ -270,7 +270,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.Dashboard_main.sizePolicy().hasHeightForWidth())
         self.Dashboard_main.setSizePolicy(sizePolicy)
         self.Dashboard_main.setMinimumSize(QSize(240, 900))
-        self.Dashboard_main.setMaximumSize(QSize(16777215, 1080))
+        self.Dashboard_main.setMaximumSize(QSize(350, 1080))
         self.Dashboard_main.setFont(font)
         self.Dashboard_main.setStyleSheet(u"QWidget {\n"
 "background-color: qlineargradient(spread: pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb(4, 3, 47), stop:0.5 rgb(86, 80, 140), stop:1 rgb(114, 159, 207))\n"
@@ -281,10 +281,10 @@ class Ui_MainWindow(object):
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.Main_Logo = QFrame(self.Dashboard_main)
         self.Main_Logo.setObjectName(u"Main_Logo")
-        sizePolicy3.setHeightForWidth(self.Main_Logo.sizePolicy().hasHeightForWidth())
-        self.Main_Logo.setSizePolicy(sizePolicy3)
+        sizePolicy.setHeightForWidth(self.Main_Logo.sizePolicy().hasHeightForWidth())
+        self.Main_Logo.setSizePolicy(sizePolicy)
         self.Main_Logo.setMinimumSize(QSize(260, 100))
-        self.Main_Logo.setMaximumSize(QSize(300, 150))
+        self.Main_Logo.setMaximumSize(QSize(16777215, 300))
         self.Main_Logo.setStyleSheet(u"")
         self.Main_Logo.setFrameShape(QFrame.NoFrame)
         self.Main_Logo.setFrameShadow(QFrame.Plain)
@@ -337,8 +337,8 @@ class Ui_MainWindow(object):
         self.Main_btn.setObjectName(u"Main_btn")
         sizePolicy.setHeightForWidth(self.Main_btn.sizePolicy().hasHeightForWidth())
         self.Main_btn.setSizePolicy(sizePolicy)
-        self.Main_btn.setMinimumSize(QSize(260, 200))
-        self.Main_btn.setMaximumSize(QSize(16777215, 16777215))
+        self.Main_btn.setMinimumSize(QSize(260, 750))
+        self.Main_btn.setMaximumSize(QSize(16777215, 780))
         self.Main_btn.setFont(font)
         self.Main_btn.setStyleSheet(u"")
         self.Main_btn.setFrameShape(QFrame.NoFrame)
@@ -379,7 +379,7 @@ class Ui_MainWindow(object):
 
         self.Main__frame_admin = QFrame(self.Main_btn)
         self.Main__frame_admin.setObjectName(u"Main__frame_admin")
-        self.Main__frame_admin.setMaximumSize(QSize(16777215, 400))
+        self.Main__frame_admin.setMaximumSize(QSize(16777215, 600))
         self.Main__frame_admin.setFrameShape(QFrame.NoFrame)
         self.Main__frame_admin.setFrameShadow(QFrame.Raised)
         self.verticalLayout_8 = QVBoxLayout(self.Main__frame_admin)
@@ -481,6 +481,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.Main_btn)
 
+        self.verticalLayout.setStretch(1, 1)
         self.Dashboard.addWidget(self.Dashboard_main)
 
         self.horizontalLayout.addWidget(self.Dashboard)
@@ -771,7 +772,8 @@ class Ui_MainWindow(object):
         self.Signup_form.setObjectName(u"Signup_form")
         self.Signup_form.setMaximumSize(QSize(720, 650))
         self.Signup_form.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"border-radius: 20px;")
+"border-radius: 20px;\n"
+"color: rgb(0, 41, 77);")
         self.Signup_form.setFrameShape(QFrame.NoFrame)
         self.Signup_form.setFrameShadow(QFrame.Raised)
         self.Signup_form.setLineWidth(5)
@@ -935,7 +937,8 @@ class Ui_MainWindow(object):
         self.menu_robotstatus.setMinimumSize(QSize(0, 100))
         self.menu_robotstatus.setMaximumSize(QSize(16777215, 100))
         self.menu_robotstatus.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"border-radius: 20px;")
+"border-radius: 20px;\n"
+"color: rgb(0, 41, 77);")
         self.menu_robotstatus.setFrameShape(QFrame.NoFrame)
         self.menu_robotstatus.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_8 = QHBoxLayout(self.menu_robotstatus)
@@ -1017,7 +1020,8 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.frame_8.sizePolicy().hasHeightForWidth())
         self.frame_8.setSizePolicy(sizePolicy)
         self.frame_8.setMaximumSize(QSize(16777215, 200))
-        self.frame_8.setStyleSheet(u"")
+        self.frame_8.setStyleSheet(u"\n"
+"color: rgb(0, 41, 77);")
         self.frame_8.setFrameShape(QFrame.StyledPanel)
         self.frame_8.setFrameShadow(QFrame.Plain)
         self.frame_8.setLineWidth(1)
@@ -1209,7 +1213,8 @@ class Ui_MainWindow(object):
         self.menu_tracking.setMinimumSize(QSize(0, 100))
         self.menu_tracking.setMaximumSize(QSize(16777215, 100))
         self.menu_tracking.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"border-radius: 20px;")
+"border-radius: 20px;\n"
+"color: rgb(0, 41, 77);")
         self.menu_tracking.setFrameShape(QFrame.NoFrame)
         self.menu_tracking.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_3 = QHBoxLayout(self.menu_tracking)
@@ -1310,7 +1315,8 @@ class Ui_MainWindow(object):
         self.menu_attendance.setMinimumSize(QSize(0, 100))
         self.menu_attendance.setMaximumSize(QSize(16777215, 100))
         self.menu_attendance.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"border-radius: 20px;")
+"border-radius: 20px;\n"
+"color: rgb(0, 41, 77);")
         self.horizontalLayout_5 = QHBoxLayout(self.menu_attendance)
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
         self.label_28 = QLabel(self.menu_attendance)
@@ -1342,7 +1348,8 @@ class Ui_MainWindow(object):
         font17.setBold(False)
         self.info_frame.setFont(font17)
         self.info_frame.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"border-radius: 20px;")
+"border-radius: 20px;\n"
+"color: rgb(0, 41, 77);")
         self.gridLayout_9 = QGridLayout(self.info_frame)
         self.gridLayout_9.setObjectName(u"gridLayout_9")
         self.gridLayout_9.setHorizontalSpacing(20)
@@ -1448,6 +1455,8 @@ class Ui_MainWindow(object):
         self.result_frame = QFrame(self.widget_2)
         self.result_frame.setObjectName(u"result_frame")
         self.result_frame.setMaximumSize(QSize(16777215, 625))
+        self.result_frame.setStyleSheet(u"\n"
+"color: rgb(0, 41, 77);")
         self.gridLayout_8 = QGridLayout(self.result_frame)
         self.gridLayout_8.setObjectName(u"gridLayout_8")
         self.table_attendance = QTableWidget(self.result_frame)
@@ -1545,6 +1554,7 @@ class Ui_MainWindow(object):
         self.menu_camera.setMaximumSize(QSize(16777215, 100))
         self.menu_camera.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
 "border-radius: 20px;\n"
+"color: rgb(0, 41, 77);\n"
 "")
         self.menu_camera.setFrameShape(QFrame.NoFrame)
         self.menu_camera.setFrameShadow(QFrame.Raised)
@@ -1596,7 +1606,7 @@ class Ui_MainWindow(object):
         self.Main_btn_tracking.setDefault(True)
         self.Main_btn_robotstatus.setDefault(True)
         self.Account__btnlogout.setDefault(True)
-        self.Page.setCurrentIndex(3)
+        self.Page.setCurrentIndex(1)
         self.Signin_btn_login.setDefault(True)
         self.Signup_btn_signup.setDefault(True)
 
