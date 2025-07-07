@@ -34,11 +34,10 @@ class AttendanceTab(QWidget):
             {"id": "E005", "name": "Loi", "dept": "Finance", "email": "loi@example.com", "status": None},
             {"id": "E006", "name": "Thien", "dept": "Finance", "email": "thien@example.com", "status": None},
         ]
-
-        # Nhan du lieu tu MQTT va them vao data 
-        self.name = "Ky"
-        self.status = "Present"
-        self.update_status(name=self.name, status=self.status)
+        # # Gan gia tri mac dinh
+        # self.name = "Ky"
+        # self.status = "Present"
+        # self.update_status(name=self.name, status=self.status)
 
         # Gan nut search 
         self.ui.search_btn.clicked.connect(self.search_attendance)

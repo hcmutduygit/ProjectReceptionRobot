@@ -39,6 +39,6 @@ def read_serial_data(port='/dev/ttyUSB1', baudrate=2000000, timeout=1):
         if 'ser' in locals() and ser.is_open:
             ser.close()
             print("Đã đóng cổng serial")
-
+ 
 if __name__ == "__main__":
-    read_serial_data(port='/dev/ttyUSB1', baudrate=2000000)
+    read_serial_data(port='/dev/ttyUSB0', baudrate=2000000)
