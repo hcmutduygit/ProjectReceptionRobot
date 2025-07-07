@@ -35,21 +35,25 @@ class MainWindow(QMainWindow):
         # khoi tao camera
         self.camera_pub_thread = None
         self.camera_sub_thread = None
-        
-        # khoi tao battery manager
-        self.battery_manager = BatteryManager(self.ui)
 
-        # khoi tao tab diem danh
+        # khoi tao tab
         self.attendance_tab = AttendanceTab(self.ui)
-
+        
+        # khoi tao cac manager
+        self.battery_manager = BatteryManager(self.ui)
         # khoi tao attendance manager voi tham chieu den attendance_tab
         self.attendance_manager = AttendanceManager(self.ui, self.attendance_tab)
 
-        # khoi tao battery subscriber ngay khi app bat dau
+        # bat dau subscribe ngay khi app duoc mo 
         self.battery_manager.start_battery_subscriber()
-
-        # khoi tao attendance subscriber ngay khi app bat dau
         self.attendance_manager.start_attendance_subscriber()
+
+        # bien trang thai locker 
+        style = "border-radius: 20px;border: 3px solid rgb(0, 41, 77);"
+        ocupied = style + "background-color: red;"
+        empty = style + "background-color: green;"
+        self.ui.right_status.setStyleSheet(empty)
+        self.ui.left_status.setStyleSheet(ocupied)
 
         # set moi vô thi hien cai nao 
         self.ui.Page.setCurrentWidget(self.ui.Page_signin)
@@ -65,6 +69,7 @@ class MainWindow(QMainWindow):
         self.ui.Main_btn_camera.clicked.connect(lambda: self.switch_to_page(self.ui.Page_Camera))
         self.ui.Main_btn_tracking.clicked.connect(lambda: self.switch_to_page(self.ui.Page_tracking))
         self.ui.Main_btn_attendance.clicked.connect(lambda: self.switch_to_page(self.ui.Page_attendance))
+        self.ui.Main_btn_robotstatus.clicked.connect(lambda: self.switch_to_page(self.ui.Page_robotstatus))
         self.ui.Account__btnlogout.clicked.connect(self.handle_logout)
 
     def handle_login(self):
