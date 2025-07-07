@@ -7,7 +7,7 @@ class MQTTConfig:
     """Class chứa tất cả cấu hình MQTT"""
     
     # Thông số kết nối MQTT Broker
-    MQTT_HOST = "192.168.0.107"
+    MQTT_HOST = "192.168.0.125"
     MQTT_PORT = 1883
     MQTT_KEEPALIVE = 60
     
