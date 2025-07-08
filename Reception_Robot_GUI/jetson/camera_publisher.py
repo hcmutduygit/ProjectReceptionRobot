@@ -1,55 +1,43 @@
-import cv2
-from cv_bridge import CvBridge
-from sensor_msgs.msg import Image
-import rclpy
-from PySide6.QtCore import QThread
-from rclpy.executors import SingleThreadedExecutor
+import rclpy  # Import the ROS 2 Python client library
+from rclpy.node import Node  # Import the Node class from ROS 2
+import cv2  # Import OpenCV for computer vision tasks
+from cv_bridge import CvBridge  # Import CvBridge to convert between ROS and OpenCV images
+from sensor_msgs.msg import Image  # Import the Image message type from sensor_msgs
 
-class CameraPublisherThread(QThread):
+class CameraNode(Node):
     def __init__(self):
-        super().__init__()
-        self._active = True
+        super().__init__('webcam_node')  # Initialize the Node with the name 'webcam_node'
+        self.publisher_ = self.create_publisher(Image, 'webcam_image', 10)  # Create a publisher for the Image topic with queue size of 1
+        self.timer = self.create_timer(0.001, self.timer_callback)  # Create a timer to call timer_callback every 0.033 seconds (30 FPS)
+        self.cap = cv2.VideoCapture(0)  # Open the default webcam
+        self.cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)  # Set the buffer size to 1 to minimize latency
+        self.bridge = CvBridge()  # Initialize the CvBridge to convert between ROS and OpenCV images
 
-    def run(self):
-        node = rclpy.create_node('camera_publisher')
-        executor = SingleThreadedExecutor()
-        executor.add_node(node)
-        publisher = node.create_publisher(Image, 'webcam_image', 10)
-        cap = cv2.VideoCapture(0)
-        cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
-        bridge = CvBridge()
+    def timer_callback(self):
+        ret, frame = self.cap.read()  # Capture a frame from the webcam
+        if ret:  # Check if the frame was captured successfully cv2.INTER_NEAREST
+            frame = cv2.resize(frame,(640,480), interpolation=cv2.INTER_NEAREST)
+            msg = self.bridge.cv2_to_imgmsg(frame, encoding="bgr8")  # Convert the OpenCV image to a ROS Image message
+            self.publisher_.publish(msg)  # Publish the Image message
+            # cv2.imshow('Webcam', frame)  # Display the frame in an OpenCV window
+            if cv2.waitKey(1) & 0xFF == ord('q'):  # Check if the 'q' key is pressed
+                rclpy.shutdown()  # Shut down the ROS 2 node
+        else:
+            self.get_logger().error('Failed to capture image')  # Log an error message if the frame was not captured
 
-        def publish():
-            if self._active:
-                ret, frame = cap.read()
-                if ret:
-                    msg = bridge.cv2_to_imgmsg(frame, encoding='bgr8')
-                    publisher.publish(msg)
-
-        timer = node.create_timer(0.03, publish)
-
-        try:
-            while self._active:
-                executor.spin_once(timeout_sec=0.1)
-        finally:
-            cap.release()
-            executor.shutdown()
-            node.destroy_node()
-
-    def stop(self):
-        self._active = False
-        self.quit()
-        self.wait()
-    
-if __name__ == '__main__':
-    import rclpy
-    rclpy.init()
-    from camera_publisher import CameraPublisherThread
-
-    camera_thread = CameraPublisherThread()
-    camera_thread.start()
+def main(args=None):
+    rclpy.init(args=args)  # Initialize the ROS 2 Python client library
+    node = CameraNode()  # Create an instance of the CameraNode
     try:
-        while True:
-            pass  # hoặc dùng time.sleep(1)
+        rclpy.spin(node)  # Spin the node to keep it alive and processing callbacks
     except KeyboardInterrupt:
-        camera_thread.stop()
+        pass  # Allow the user to exit with Ctrl+C
+    finally:
+        node.cap.release()  # Release the webcam
+        cv2.destroyAllWindows()  # Close any OpenCV windows
+        node.destroy_node()  # Destroy the ROS 2 node
+        rclpy.shutdown()  # Shut down the ROS 2 Python client library
+
+if __name__ == '__main__':
+    main()  # Run the main function if this script is executed
+

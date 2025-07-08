@@ -28,7 +28,7 @@ class CameraSubscriberThread(QThread):
             scaled = img.scaled(self.target_label.width(), self.target_label.height(), Qt.KeepAspectRatio)
             self.ImageUpdate.emit(scaled)
 
-        sub = node.create_subscription(Image, 'webcam_image', callback, 10)
+        sub = node.create_subscription(Image, 'image_raw', callback, 10)
 
         try:
             while self._active:
