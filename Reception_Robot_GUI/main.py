@@ -1,19 +1,19 @@
 import sys, rclpy
 
-from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox
+from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtGui import QPixmap
-from PySide6.QtCore import QTimer
 
-from robot_ui import Ui_MainWindow
-from user import handle_login, handle_signup, handle_logout
 # pyside6-uic Robot_UI.ui -o robot_ui.py
 
 #from jetson.camera_publisher import CameraPublisherThread
-
+from robot_ui import Ui_MainWindow
+from user import handle_login, handle_signup, handle_logout
 from camera_subcriber import CameraSubscriberThread
 from attendance import AttendanceTab
 from battery_manager import BatteryManager
 from attendance_manager import AttendanceManager
+
+
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -23,33 +23,25 @@ class MainWindow(QMainWindow):
         self.resize(950, 630)
 
         # list user
-        self.registered_users = [
-    {
-        "username": "admin",
-        "password": "123",
-        "fullname": "Admin User",
-        "phone": "0123456789",
-        "verify": "fablab"
-    }
-]
-        
+        self.registered_users = [{"username": "admin","password": "123","fullname": "Admin User","phone": "0123456789","verify": "fablab"}]
+
+
+        # khoi tao battery 
+        self.battery_manager = BatteryManager(self.ui)
+        self.battery_manager.start_battery_subscriber()
+
+
         # khoi tao camera
-        '''self.camera_pub_thread = None'''
         self.camera_sub_thread = None
 
-        # khoi tao tab
-        self.attendance_tab = AttendanceTab(self.ui)
-        
-        # khoi tao cac manager
-        self.battery_manager = BatteryManager(self.ui)
-        # khoi tao attendance manager voi tham chieu den attendance_tab
-        self.attendance_manager = AttendanceManager(self.ui, self.attendance_tab)
 
-        # bat dau subscribe ngay khi app duoc mo 
-        self.battery_manager.start_battery_subscriber()
+        # khoi tao tab diem danh 
+        self.attendance_tab = AttendanceTab(self.ui)    # hien giao dien 
+        self.attendance_manager = AttendanceManager(self.ui, self.attendance_tab)   # du lieu do manager cap nhat tham chieu den attendance table 
         self.attendance_manager.start_attendance_subscriber()
 
-        # bien trang thai locker 
+        
+        # bien trang thai locker (mot tao file robot status)
         style = "border-radius: 20px;border: 3px solid rgb(0, 41, 77);"
         ocupied = style + "background-color: red;"
         empty = style + "background-color: green;"
@@ -60,13 +52,12 @@ class MainWindow(QMainWindow):
         self.ui.Page.setCurrentWidget(self.ui.Page_signin)
         self.ui.Dashboard.setCurrentWidget(self.ui.Dashboard_signin)   
 
-        # click sang tab khac thi chuyen trang 
+        # gan su kien trang dang nhap 
         self.ui.Signin_btn_signup.clicked.connect(lambda: self.ui.Page.setCurrentWidget(self.ui.Page_signup))
         self.ui.Signin_btn_signin.clicked.connect(lambda: self.ui.Page.setCurrentWidget(self.ui.Page_signin))
         self.ui.Signin_btn_login.clicked.connect(self._handle_login)
-        self.ui.Signup_btn_signup.clicked.connect(self._handle_signup)
     
-        # click sang tab khac thi chuyen trang 
+        # gan su kien trang sau dang nhap 
         self.ui.Main_btn_camera.clicked.connect(lambda: self.switch_to_page(self.ui.Page_Camera))
         self.ui.Main_btn_tracking.clicked.connect(lambda: self.switch_to_page(self.ui.Page_tracking))
         self.ui.Main_btn_attendance.clicked.connect(lambda: self.switch_to_page(self.ui.Page_attendance))
@@ -74,9 +65,8 @@ class MainWindow(QMainWindow):
         self.ui.Account__btnlogout.clicked.connect(self._handle_logout)
 
     def switch_to_page(self, page_widget):
-            self.ui.Page.setCurrentWidget(page_widget)
-            # dung cac process dang chay 
-            # self.stop_camera()
+            self.ui.Page.setCurrentWidget(page_widget)  # chuyen tab 
+
             # Bật process phù hợp
             page_handlers = {
                 self.ui.Page_Camera: self.start_camera,

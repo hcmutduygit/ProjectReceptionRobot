@@ -10,17 +10,17 @@ class AttendanceTab(QWidget):
         # font va cac thuoc tinh khac 
         font = QFont("Roboto", 13)
         self.ui.table_attendance.setFont(font)
-        header = self.ui.table_attendance.horizontalHeader()
-        header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
-        header.setSectionResizeMode(QHeaderView.Interactive) 
-        header.resizeSection(0, 200)  # Cột 0: ID
-        header.resizeSection(1, 200)  # Cột 1: Name
-        header.resizeSection(2, 200)  # Cột 2: Department 
-        header.resizeSection(3, 200)  # Cột 3: Status
-        header.resizeSection(4, 200)  # Cột 4: Check-in Time 
-        header.resizeSection(4, 240)  # Cột 5: email
+        
         self.ui.table_attendance.horizontalHeader().setFixedHeight(40)
         self.ui.table_attendance.verticalHeader().setDefaultSectionSize(40)
+
+        header = self.ui.table_attendance.horizontalHeader()
+        # do rong cot 
+        for i in range(self.ui.table_attendance.columnCount() - 1):
+            header.setSectionResizeMode(i, QHeaderView.Fixed)
+            header.resizeSection(i, 200)
+        header.setSectionResizeMode(self.ui.table_attendance.columnCount() - 1, QHeaderView.Stretch)
+        # so cot va ten 
         self.ui.table_attendance.setColumnCount(6)
         self.ui.table_attendance.setHorizontalHeaderLabels([
             "Employee ID", "Name", "Department", "Status","Check-in Time", "Email"
