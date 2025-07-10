@@ -9,6 +9,7 @@ from user import handle_login, handle_signup, handle_logout
 # pyside6-uic Robot_UI.ui -o robot_ui.py
 
 #from jetson.camera_publisher import CameraPublisherThread
+
 from camera_subcriber import CameraSubscriberThread
 from attendance import AttendanceTab
 from battery_manager import BatteryManager
