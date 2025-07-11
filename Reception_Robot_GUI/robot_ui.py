@@ -23,7 +23,6 @@ from PySide6.QtWidgets import (QAbstractItemView, QApplication, QFormLayout, QFr
 from resources import resources_rc
 from resources import icon_rc
 
-
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
@@ -1589,6 +1588,7 @@ class Ui_MainWindow(object):
         self.camera.setObjectName(u"camera")
         self.camera_label = QLabel(self.Page_Camera)
         self.camera_label.setObjectName(u"camera_label")
+        self.camera_label.setScaledContents(False)
         self.camera_label.setAlignment(Qt.AlignCenter)
 
         self.camera.addWidget(self.camera_label)
@@ -1615,7 +1615,7 @@ class Ui_MainWindow(object):
         self.Main_btn_tracking.setDefault(True)
         self.Main_btn_robotstatus.setDefault(True)
         self.Account__btnlogout.setDefault(True)
-        self.Page.setCurrentIndex(5)
+        self.Page.setCurrentIndex(6)
         self.Signin_btn_login.setDefault(True)
         self.Signup_btn_signup.setDefault(True)
 

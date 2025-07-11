@@ -7,7 +7,7 @@ from sensor_msgs.msg import Image  # Import the Image message type from sensor_m
 class CameraNode(Node):
     def __init__(self):
         super().__init__('webcam_node')  # Initialize the Node with the name 'webcam_node'
-        self.publisher_ = self.create_publisher(Image, 'webcam_image', 10)  # Create a publisher for the Image topic with queue size of 1
+        self.publisher_ = self.create_publisher(Image, 'image_raw', 10)  # Create a publisher for the Image topic with queue size of 1
         self.timer = self.create_timer(0.001, self.timer_callback)  # Create a timer to call timer_callback every 0.033 seconds (30 FPS)
         self.cap = cv2.VideoCapture(0)  # Open the default webcam
         self.cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)  # Set the buffer size to 1 to minimize latency
@@ -16,12 +16,10 @@ class CameraNode(Node):
     def timer_callback(self):
         ret, frame = self.cap.read()  # Capture a frame from the webcam
         if ret:  # Check if the frame was captured successfully cv2.INTER_NEAREST
-            frame = cv2.resize(frame,(640,480), interpolation=cv2.INTER_NEAREST)
+            frame = cv2.resize(frame,(950,543), interpolation=cv2.INTER_NEAREST)
             msg = self.bridge.cv2_to_imgmsg(frame, encoding="bgr8")  # Convert the OpenCV image to a ROS Image message
             self.publisher_.publish(msg)  # Publish the Image message
             # cv2.imshow('Webcam', frame)  # Display the frame in an OpenCV window
-            if cv2.waitKey(1) & 0xFF == ord('q'):  # Check if the 'q' key is pressed
-                rclpy.shutdown()  # Shut down the ROS 2 node
         else:
             self.get_logger().error('Failed to capture image')  # Log an error message if the frame was not captured
 
