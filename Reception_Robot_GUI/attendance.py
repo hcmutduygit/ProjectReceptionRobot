@@ -10,29 +10,30 @@ class AttendanceTab(QWidget):
         # font va cac thuoc tinh khac 
         font = QFont("Roboto", 13)
         self.ui.table_attendance.setFont(font)
-        header = self.ui.table_attendance.horizontalHeader()
-        header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
-        header.setSectionResizeMode(QHeaderView.Interactive) 
-        header.resizeSection(0, 200)  # Cột 0: ID
-        header.resizeSection(1, 200)  # Cột 1: Name
-        header.resizeSection(2, 200)  # Cột 2: Department 
-        header.resizeSection(3, 200)  # Cột 3: Status
-        header.resizeSection(4, 240)  # Cột 4: email
+        
         self.ui.table_attendance.horizontalHeader().setFixedHeight(40)
         self.ui.table_attendance.verticalHeader().setDefaultSectionSize(40)
-        self.ui.table_attendance.setColumnCount(5)
+
+        header = self.ui.table_attendance.horizontalHeader()
+        # do rong cot 
+        for i in range(self.ui.table_attendance.columnCount() - 1):
+            header.setSectionResizeMode(i, QHeaderView.Fixed)
+            header.resizeSection(i, 200)
+        header.setSectionResizeMode(self.ui.table_attendance.columnCount() - 1, QHeaderView.Stretch)
+        # so cot va ten 
+        self.ui.table_attendance.setColumnCount(6)
         self.ui.table_attendance.setHorizontalHeaderLabels([
-            "Employee ID", "Name", "Department", "Status", "Email"
+            "Employee ID", "Name", "Department", "Status","Check-in Time", "Email"
         ])
                
         # Du lieu gia 
         self.attendance_data = [
-            {"id": "E001", "name": "Ky", "dept": "HR", "email": "ky@example.com", "status": None},
-            {"id": "E002", "name": "Duy", "dept": "IT", "email": "phu@example.com", "status": None},
-            {"id": "E003", "name": "Phu", "dept": "Finance", "email": "duy@example.com", "status": None},
-            {"id": "E004", "name": "Thu", "dept": "Finance", "email": "thu@example.com", "status": None},
-            {"id": "E005", "name": "Loi", "dept": "Finance", "email": "loi@example.com", "status": None},
-            {"id": "E006", "name": "Thien", "dept": "Finance", "email": "thien@example.com", "status": None},
+            {"id": "E001", "name": "Ky", "dept": "HR", "email": "ky@example.com", "status": None, "time": None },
+            {"id": "E002", "name": "Duy", "dept": "IT", "email": "phu@example.com", "status": None, "time": None },
+            {"id": "E003", "name": "Phu", "dept": "Finance", "email": "duy@example.com", "status": None, "time": None },
+            {"id": "E004", "name": "Thu", "dept": "Finance", "email": "thu@example.com", "status": None, "time": None },
+            {"id": "E005", "name": "Loi", "dept": "Finance", "email": "loi@example.com", "status": None, "time": None },
+            {"id": "E006", "name": "Thien", "dept": "Finance", "email": "thien@example.com", "status": None, "time": None },
         ]
         # # Gan gia tri mac dinh
         # self.name = "Ky"
@@ -53,7 +54,8 @@ class AttendanceTab(QWidget):
             self.ui.table_attendance.setItem(row, 1, QTableWidgetItem(entry["name"]))
             self.ui.table_attendance.setItem(row, 2, QTableWidgetItem(entry["dept"]))
             self.ui.table_attendance.setItem(row, 3, QTableWidgetItem(entry.get("status") or "—"))
-            self.ui.table_attendance.setItem(row, 4, QTableWidgetItem(entry["email"]))
+            self.ui.table_attendance.setItem(row, 4, QTableWidgetItem(entry.get("time") or "—"))
+            self.ui.table_attendance.setItem(row, 5, QTableWidgetItem(entry["email"]))
         
     # ham cap nhat trang thai 
     def update_status(self, name=None, status=None):

@@ -542,7 +542,11 @@ class Ui_MainWindow(object):
         self.label_mqtt.setSizePolicy(sizePolicy)
         self.label_mqtt.setMinimumSize(QSize(0, 30))
         self.label_mqtt.setMaximumSize(QSize(16777215, 50))
-        self.label_mqtt.setFont(font3)
+        font6 = QFont()
+        font6.setFamilies([u"Roboto"])
+        font6.setPointSize(12)
+        font6.setBold(True)
+        self.label_mqtt.setFont(font6)
         self.label_mqtt.setTextFormat(Qt.PlainText)
 
         self.horizontalLayout_10.addWidget(self.label_mqtt)
@@ -566,7 +570,7 @@ class Ui_MainWindow(object):
         self.label_battery.setSizePolicy(sizePolicy)
         self.label_battery.setMinimumSize(QSize(0, 30))
         self.label_battery.setMaximumSize(QSize(16777215, 50))
-        self.label_battery.setFont(font3)
+        self.label_battery.setFont(font6)
         self.label_battery.setStyleSheet(u"")
         self.label_battery.setFrameShape(QFrame.StyledPanel)
         self.label_battery.setFrameShadow(QFrame.Raised)
@@ -597,11 +601,11 @@ class Ui_MainWindow(object):
         self.Page.setLineWidth(0)
         self.Page_signin = QWidget()
         self.Page_signin.setObjectName(u"Page_signin")
-        font6 = QFont()
-        font6.setFamilies([u"Roboto"])
-        font6.setPointSize(9)
-        font6.setBold(False)
-        self.Page_signin.setFont(font6)
+        font7 = QFont()
+        font7.setFamilies([u"Roboto"])
+        font7.setPointSize(9)
+        font7.setBold(False)
+        self.Page_signin.setFont(font7)
         self.Page_signin.setStyleSheet(u"background-color: rgb(240, 246, 255);")
         self.gridLayout_2 = QGridLayout(self.Page_signin)
         self.gridLayout_2.setSpacing(0)
@@ -642,11 +646,11 @@ class Ui_MainWindow(object):
         self.label_2.setSizePolicy(sizePolicy7)
         self.label_2.setMinimumSize(QSize(720, 0))
         self.label_2.setMaximumSize(QSize(720, 100))
-        font7 = QFont()
-        font7.setFamilies([u"Roboto"])
-        font7.setPointSize(26)
-        font7.setBold(True)
-        self.label_2.setFont(font7)
+        font8 = QFont()
+        font8.setFamilies([u"Roboto"])
+        font8.setPointSize(26)
+        font8.setBold(True)
+        self.label_2.setFont(font8)
         self.label_2.setFocusPolicy(Qt.TabFocus)
         self.label_2.setScaledContents(False)
         self.label_2.setAlignment(Qt.AlignCenter)
@@ -659,12 +663,12 @@ class Ui_MainWindow(object):
         self.label_4.setSizePolicy(sizePolicy7)
         self.label_4.setMinimumSize(QSize(720, 0))
         self.label_4.setMaximumSize(QSize(720, 100))
-        font8 = QFont()
-        font8.setFamilies([u"Roboto"])
-        font8.setPointSize(15)
-        font8.setBold(False)
-        font8.setItalic(True)
-        self.label_4.setFont(font8)
+        font9 = QFont()
+        font9.setFamilies([u"Roboto"])
+        font9.setPointSize(15)
+        font9.setBold(False)
+        font9.setItalic(True)
+        self.label_4.setFont(font9)
         self.label_4.setTextFormat(Qt.PlainText)
         self.label_4.setAlignment(Qt.AlignCenter)
 
@@ -684,12 +688,12 @@ class Ui_MainWindow(object):
         self.Signin_btn_login.setGeometry(QRect(285, 10, 150, 50))
         self.Signin_btn_login.setMinimumSize(QSize(150, 50))
         self.Signin_btn_login.setMaximumSize(QSize(150, 50))
-        font9 = QFont()
-        font9.setFamilies([u"Roboto"])
-        font9.setPointSize(17)
-        font9.setBold(False)
-        font9.setItalic(False)
-        self.Signin_btn_login.setFont(font9)
+        font10 = QFont()
+        font10.setFamilies([u"Roboto"])
+        font10.setPointSize(17)
+        font10.setBold(False)
+        font10.setItalic(False)
+        self.Signin_btn_login.setFont(font10)
         self.Signin_btn_login.setFocusPolicy(Qt.WheelFocus)
         self.Signin_btn_login.setStyleSheet(u"\n"
 "QPushButton{\n"
@@ -721,11 +725,11 @@ class Ui_MainWindow(object):
         self.Signin_username.setSizePolicy(sizePolicy)
         self.Signin_username.setMinimumSize(QSize(500, 50))
         self.Signin_username.setMaximumSize(QSize(500, 50))
-        font10 = QFont()
-        font10.setFamilies([u"Roboto"])
-        font10.setPointSize(17)
-        font10.setBold(False)
-        self.Signin_username.setFont(font10)
+        font11 = QFont()
+        font11.setFamilies([u"Roboto"])
+        font11.setPointSize(17)
+        font11.setBold(False)
+        self.Signin_username.setFont(font11)
         self.Signin_username.setFocusPolicy(Qt.StrongFocus)
         self.Signin_username.setStyleSheet(u"background-color: rgb(238, 238, 236);\n"
 "color: rgb(0, 41, 77);")
@@ -741,10 +745,10 @@ class Ui_MainWindow(object):
         self.Signin_password.setSizePolicy(sizePolicy)
         self.Signin_password.setMinimumSize(QSize(500, 50))
         self.Signin_password.setMaximumSize(QSize(500, 50))
-        font11 = QFont()
-        font11.setFamilies([u"Roboto"])
-        font11.setPointSize(17)
-        self.Signin_password.setFont(font11)
+        font12 = QFont()
+        font12.setFamilies([u"Roboto"])
+        font12.setPointSize(17)
+        self.Signin_password.setFont(font12)
         self.Signin_password.setFocusPolicy(Qt.StrongFocus)
         self.Signin_password.setStyleSheet(u"background-color: rgb(238, 238, 236);\n"
 "color: rgb(0, 41, 77);")
@@ -786,7 +790,7 @@ class Ui_MainWindow(object):
         self.label_9.setObjectName(u"label_9")
         self.label_9.setMinimumSize(QSize(720, 70))
         self.label_9.setMaximumSize(QSize(720, 70))
-        self.label_9.setFont(font7)
+        self.label_9.setFont(font8)
         self.label_9.setAlignment(Qt.AlignCenter)
 
         self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label_9)
@@ -807,7 +811,7 @@ class Ui_MainWindow(object):
         self.Signup_name.setSizePolicy(sizePolicy)
         self.Signup_name.setMinimumSize(QSize(500, 50))
         self.Signup_name.setMaximumSize(QSize(500, 50))
-        self.Signup_name.setFont(font10)
+        self.Signup_name.setFont(font11)
         self.Signup_name.setFocusPolicy(Qt.StrongFocus)
         self.Signup_name.setStyleSheet(u"background-color: rgb(238, 238, 236);\n"
 "color: rgb(0, 41, 77);")
@@ -821,7 +825,7 @@ class Ui_MainWindow(object):
         self.Signup_phone.setSizePolicy(sizePolicy)
         self.Signup_phone.setMinimumSize(QSize(500, 50))
         self.Signup_phone.setMaximumSize(QSize(500, 50))
-        self.Signup_phone.setFont(font11)
+        self.Signup_phone.setFont(font12)
         self.Signup_phone.setFocusPolicy(Qt.StrongFocus)
         self.Signup_phone.setStyleSheet(u"background-color: rgb(238, 238, 236);\n"
 "color: rgb(0, 41, 77);")
@@ -836,7 +840,7 @@ class Ui_MainWindow(object):
         self.Signup_username.setSizePolicy(sizePolicy)
         self.Signup_username.setMinimumSize(QSize(500, 50))
         self.Signup_username.setMaximumSize(QSize(500, 50))
-        self.Signup_username.setFont(font11)
+        self.Signup_username.setFont(font12)
         self.Signup_username.setFocusPolicy(Qt.StrongFocus)
         self.Signup_username.setStyleSheet(u"background-color: rgb(238, 238, 236);\n"
 "color: rgb(0, 41, 77);")
@@ -851,7 +855,7 @@ class Ui_MainWindow(object):
         self.Signup_password.setSizePolicy(sizePolicy)
         self.Signup_password.setMinimumSize(QSize(500, 50))
         self.Signup_password.setMaximumSize(QSize(500, 50))
-        self.Signup_password.setFont(font11)
+        self.Signup_password.setFont(font12)
         self.Signup_password.setFocusPolicy(Qt.StrongFocus)
         self.Signup_password.setStyleSheet(u"background-color: rgb(238, 238, 236);\n"
 "color: rgb(0, 41, 77);")
@@ -866,7 +870,7 @@ class Ui_MainWindow(object):
         self.Signup_code.setSizePolicy(sizePolicy)
         self.Signup_code.setMinimumSize(QSize(500, 50))
         self.Signup_code.setMaximumSize(QSize(500, 50))
-        self.Signup_code.setFont(font10)
+        self.Signup_code.setFont(font11)
         self.Signup_code.setFocusPolicy(Qt.StrongFocus)
         self.Signup_code.setStyleSheet(u"background-color: rgb(238, 238, 236);\n"
 "color: rgb(0, 41, 77);")
@@ -891,7 +895,7 @@ class Ui_MainWindow(object):
         self.Signup_btn_signup.setObjectName(u"Signup_btn_signup")
         self.Signup_btn_signup.setMinimumSize(QSize(250, 50))
         self.Signup_btn_signup.setMaximumSize(QSize(250, 50))
-        self.Signup_btn_signup.setFont(font9)
+        self.Signup_btn_signup.setFont(font10)
         self.Signup_btn_signup.setFocusPolicy(Qt.TabFocus)
         self.Signup_btn_signup.setStyleSheet(u"\n"
 "QPushButton{\n"
@@ -947,15 +951,15 @@ class Ui_MainWindow(object):
         self.label_29.setObjectName(u"label_29")
         self.label_29.setMinimumSize(QSize(0, 70))
         self.label_29.setMaximumSize(QSize(16777215, 70))
-        font12 = QFont()
-        font12.setFamilies([u"Roboto"])
-        font12.setPointSize(30)
-        font12.setBold(True)
-        font12.setItalic(False)
-        font12.setUnderline(False)
-        font12.setStrikeOut(False)
-        font12.setKerning(True)
-        self.label_29.setFont(font12)
+        font13 = QFont()
+        font13.setFamilies([u"Roboto"])
+        font13.setPointSize(30)
+        font13.setBold(True)
+        font13.setItalic(False)
+        font13.setUnderline(False)
+        font13.setStrikeOut(False)
+        font13.setKerning(True)
+        self.label_29.setFont(font13)
         self.label_29.setStyleSheet(u"")
         self.label_29.setAlignment(Qt.AlignCenter)
 
@@ -999,11 +1003,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_23.setObjectName(u"verticalLayout_23")
         self.label1_3 = QLabel(self.frame_7)
         self.label1_3.setObjectName(u"label1_3")
-        font13 = QFont()
-        font13.setFamilies([u"Roboto"])
-        font13.setPointSize(23)
-        font13.setBold(False)
-        self.label1_3.setFont(font13)
+        font14 = QFont()
+        font14.setFamilies([u"Roboto"])
+        font14.setPointSize(23)
+        font14.setBold(False)
+        self.label1_3.setFont(font14)
         self.label1_3.setStyleSheet(u"QLabel{\n"
 "background-color: transparent; \n"
 "color: rgb(238, 238, 236);\n"
@@ -1032,11 +1036,11 @@ class Ui_MainWindow(object):
         self.gridLayout_14.setContentsMargins(10, 10, 10, 10)
         self.label_18 = QLabel(self.frame_8)
         self.label_18.setObjectName(u"label_18")
-        font14 = QFont()
-        font14.setFamilies([u"Roboto"])
-        font14.setPointSize(13)
-        font14.setBold(True)
-        self.label_18.setFont(font14)
+        font15 = QFont()
+        font15.setFamilies([u"Roboto"])
+        font15.setPointSize(13)
+        font15.setBold(True)
+        self.label_18.setFont(font15)
         self.label_18.setStyleSheet(u"")
         self.label_18.setAlignment(Qt.AlignCenter)
 
@@ -1052,7 +1056,7 @@ class Ui_MainWindow(object):
 
         self.label_7 = QLabel(self.frame_8)
         self.label_7.setObjectName(u"label_7")
-        self.label_7.setFont(font14)
+        self.label_7.setFont(font15)
         self.label_7.setAlignment(Qt.AlignCenter)
 
         self.gridLayout_14.addWidget(self.label_7, 0, 0, 1, 1)
@@ -1116,10 +1120,10 @@ class Ui_MainWindow(object):
         self.Robot_label1_2 = QLabel(self.frame_6)
         self.Robot_label1_2.setObjectName(u"Robot_label1_2")
         self.Robot_label1_2.setEnabled(True)
-        font15 = QFont()
-        font15.setFamilies([u"Roboto"])
-        font15.setPointSize(23)
-        self.Robot_label1_2.setFont(font15)
+        font16 = QFont()
+        font16.setFamilies([u"Roboto"])
+        font16.setPointSize(23)
+        self.Robot_label1_2.setFont(font16)
         self.Robot_label1_2.setStyleSheet(u"QLabel{\n"
 "background-color: transparent; \n"
 "color: rgb(238, 238, 236);\n"
@@ -1171,7 +1175,7 @@ class Ui_MainWindow(object):
         self.Robot_label1 = QLabel(self.frame_5)
         self.Robot_label1.setObjectName(u"Robot_label1")
         self.Robot_label1.setEnabled(True)
-        self.Robot_label1.setFont(font15)
+        self.Robot_label1.setFont(font16)
         self.Robot_label1.setStyleSheet(u"QLabel{\n"
 "background-color: transparent; \n"
 "color: rgb(238, 238, 236);\n"
@@ -1223,11 +1227,11 @@ class Ui_MainWindow(object):
         self.label_26.setObjectName(u"label_26")
         self.label_26.setMinimumSize(QSize(0, 70))
         self.label_26.setMaximumSize(QSize(16777215, 70))
-        font16 = QFont()
-        font16.setFamilies([u"Roboto"])
-        font16.setPointSize(30)
-        font16.setBold(True)
-        self.label_26.setFont(font16)
+        font17 = QFont()
+        font17.setFamilies([u"Roboto"])
+        font17.setPointSize(30)
+        font17.setBold(True)
+        self.label_26.setFont(font17)
         self.label_26.setStyleSheet(u"")
         self.label_26.setAlignment(Qt.AlignCenter)
 
@@ -1258,6 +1262,9 @@ class Ui_MainWindow(object):
 "#menu_attendance {\n"
 "	border: 1px solid gray;\n"
 "} \n"
+"#info_frame {\n"
+"	border: 1px solid gray;\n"
+"} \n"
 "#info_frame QLineEdit,\n"
 "#info_frame QComboBox {\n"
 "	padding: 4px 5px;\n"
@@ -1286,7 +1293,6 @@ class Ui_MainWindow(object):
 "	padding: 5px 10px;\n"
 "	border: 2px solid #f0f0f0;\n"
 "	border-radius: 5px;\n"
-"	background-color: #84e8f7;\n"
 "}\n"
 "\n"
 "#info_frame QPushButton:hover {\n"
@@ -1325,7 +1331,7 @@ class Ui_MainWindow(object):
         self.label_28.setMinimumSize(QSize(0, 70))
         self.label_28.setMaximumSize(QSize(16777215, 100))
         self.label_28.setBaseSize(QSize(0, 70))
-        self.label_28.setFont(font16)
+        self.label_28.setFont(font17)
         self.label_28.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
 "border-radius: 20px;\n"
 "")
@@ -1342,19 +1348,20 @@ class Ui_MainWindow(object):
         self.info_frame = QFrame(self.widget_2)
         self.info_frame.setObjectName(u"info_frame")
         self.info_frame.setMaximumSize(QSize(16777215, 200))
-        font17 = QFont()
-        font17.setFamilies([u"Roboto"])
-        font17.setPointSize(16)
-        font17.setBold(False)
-        self.info_frame.setFont(font17)
-        self.info_frame.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"border-radius: 20px;\n"
+        font18 = QFont()
+        font18.setFamilies([u"Roboto"])
+        font18.setPointSize(16)
+        font18.setBold(False)
+        self.info_frame.setFont(font18)
+        self.info_frame.setStyleSheet(u"border-radius: 20px;\n"
 "color: rgb(0, 41, 77);")
+        self.info_frame.setFrameShape(QFrame.StyledPanel)
+        self.info_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_9 = QGridLayout(self.info_frame)
         self.gridLayout_9.setObjectName(u"gridLayout_9")
         self.gridLayout_9.setHorizontalSpacing(20)
         self.gridLayout_9.setVerticalSpacing(10)
-        self.gridLayout_9.setContentsMargins(30, 0, 30, 0)
+        self.gridLayout_9.setContentsMargins(20, 0, 20, 0)
         self.gridLayout_11 = QGridLayout()
         self.gridLayout_11.setObjectName(u"gridLayout_11")
         self.gridLayout_11.setHorizontalSpacing(10)
@@ -1362,18 +1369,18 @@ class Ui_MainWindow(object):
         self.label = QLabel(self.info_frame)
         self.label.setObjectName(u"label")
         self.label.setMaximumSize(QSize(16777215, 50))
-        font18 = QFont()
-        font18.setFamilies([u"Roboto"])
-        font18.setPointSize(12)
-        font18.setBold(False)
-        self.label.setFont(font18)
+        font19 = QFont()
+        font19.setFamilies([u"Roboto"])
+        font19.setPointSize(12)
+        font19.setBold(False)
+        self.label.setFont(font19)
 
         self.gridLayout_11.addWidget(self.label, 0, 0, 1, 1)
 
         self.label_3 = QLabel(self.info_frame)
         self.label_3.setObjectName(u"label_3")
         self.label_3.setMaximumSize(QSize(16777215, 50))
-        self.label_3.setFont(font18)
+        self.label_3.setFont(font19)
 
         self.gridLayout_11.addWidget(self.label_3, 1, 0, 1, 1)
 
@@ -1419,14 +1426,14 @@ class Ui_MainWindow(object):
         self.label_6 = QLabel(self.info_frame)
         self.label_6.setObjectName(u"label_6")
         self.label_6.setMaximumSize(QSize(16777215, 50))
-        self.label_6.setFont(font18)
+        self.label_6.setFont(font19)
 
         self.gridLayout_10.addWidget(self.label_6, 1, 0, 1, 1)
 
         self.label_5 = QLabel(self.info_frame)
         self.label_5.setObjectName(u"label_5")
         self.label_5.setMaximumSize(QSize(16777215, 50))
-        self.label_5.setFont(font18)
+        self.label_5.setFont(font19)
 
         self.gridLayout_10.addWidget(self.label_5, 0, 0, 1, 1)
 
@@ -1460,15 +1467,11 @@ class Ui_MainWindow(object):
         self.gridLayout_8 = QGridLayout(self.result_frame)
         self.gridLayout_8.setObjectName(u"gridLayout_8")
         self.table_attendance = QTableWidget(self.result_frame)
-        if (self.table_attendance.columnCount() < 5):
-            self.table_attendance.setColumnCount(5)
-        font19 = QFont()
-        font19.setFamilies([u"Roboto"])
-        font19.setPointSize(12)
-        font19.setBold(True)
+        if (self.table_attendance.columnCount() < 6):
+            self.table_attendance.setColumnCount(6)
         __qtablewidgetitem = QTableWidgetItem()
         __qtablewidgetitem.setTextAlignment(Qt.AlignLeading|Qt.AlignVCenter);
-        __qtablewidgetitem.setFont(font19);
+        __qtablewidgetitem.setFont(font6);
         self.table_attendance.setHorizontalHeaderItem(0, __qtablewidgetitem)
         font20 = QFont()
         font20.setFamilies([u"Roboto"])
@@ -1480,16 +1483,20 @@ class Ui_MainWindow(object):
         self.table_attendance.setHorizontalHeaderItem(1, __qtablewidgetitem1)
         __qtablewidgetitem2 = QTableWidgetItem()
         __qtablewidgetitem2.setTextAlignment(Qt.AlignLeading|Qt.AlignVCenter);
-        __qtablewidgetitem2.setFont(font19);
+        __qtablewidgetitem2.setFont(font6);
         self.table_attendance.setHorizontalHeaderItem(2, __qtablewidgetitem2)
         __qtablewidgetitem3 = QTableWidgetItem()
         __qtablewidgetitem3.setTextAlignment(Qt.AlignLeading|Qt.AlignVCenter);
-        __qtablewidgetitem3.setFont(font19);
+        __qtablewidgetitem3.setFont(font6);
         self.table_attendance.setHorizontalHeaderItem(3, __qtablewidgetitem3)
         __qtablewidgetitem4 = QTableWidgetItem()
         __qtablewidgetitem4.setTextAlignment(Qt.AlignLeading|Qt.AlignVCenter);
-        __qtablewidgetitem4.setFont(font19);
+        __qtablewidgetitem4.setFont(font6);
         self.table_attendance.setHorizontalHeaderItem(4, __qtablewidgetitem4)
+        __qtablewidgetitem5 = QTableWidgetItem()
+        __qtablewidgetitem5.setTextAlignment(Qt.AlignLeading|Qt.AlignVCenter);
+        __qtablewidgetitem5.setFont(font6);
+        self.table_attendance.setHorizontalHeaderItem(5, __qtablewidgetitem5)
         self.table_attendance.setObjectName(u"table_attendance")
         font21 = QFont()
         font21.setFamilies([u"Roboto"])
@@ -1507,6 +1514,7 @@ class Ui_MainWindow(object):
         self.table_attendance.setWordWrap(True)
         self.table_attendance.setCornerButtonEnabled(False)
         self.table_attendance.setRowCount(0)
+        self.table_attendance.setColumnCount(6)
         self.table_attendance.horizontalHeader().setCascadingSectionResizes(False)
         self.table_attendance.horizontalHeader().setMinimumSectionSize(50)
         self.table_attendance.horizontalHeader().setDefaultSectionSize(120)
@@ -1564,7 +1572,7 @@ class Ui_MainWindow(object):
         self.label_27.setObjectName(u"label_27")
         self.label_27.setMinimumSize(QSize(0, 70))
         self.label_27.setMaximumSize(QSize(16777215, 100))
-        self.label_27.setFont(font12)
+        self.label_27.setFont(font13)
         self.label_27.setStyleSheet(u"")
         self.label_27.setFrameShape(QFrame.StyledPanel)
         self.label_27.setFrameShadow(QFrame.Sunken)
@@ -1580,6 +1588,7 @@ class Ui_MainWindow(object):
         self.camera.setObjectName(u"camera")
         self.camera_label = QLabel(self.Page_Camera)
         self.camera_label.setObjectName(u"camera_label")
+        self.camera_label.setScaledContents(False)
         self.camera_label.setAlignment(Qt.AlignCenter)
 
         self.camera.addWidget(self.camera_label)
@@ -1606,7 +1615,7 @@ class Ui_MainWindow(object):
         self.Main_btn_tracking.setDefault(True)
         self.Main_btn_robotstatus.setDefault(True)
         self.Account__btnlogout.setDefault(True)
-        self.Page.setCurrentIndex(1)
+        self.Page.setCurrentIndex(6)
         self.Signin_btn_login.setDefault(True)
         self.Signup_btn_signup.setDefault(True)
 
@@ -1679,7 +1688,9 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem3 = self.table_attendance.horizontalHeaderItem(3)
         ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"Status", None));
         ___qtablewidgetitem4 = self.table_attendance.horizontalHeaderItem(4)
-        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"Email Address", None));
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"Check-in Time", None));
+        ___qtablewidgetitem5 = self.table_attendance.horizontalHeaderItem(5)
+        ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"Email Address", None));
         self.label_27.setText(QCoreApplication.translate("MainWindow", u"CAMERA", None))
         self.camera_label.setText("")
     # retranslateUi

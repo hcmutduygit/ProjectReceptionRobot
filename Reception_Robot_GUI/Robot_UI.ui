@@ -1367,6 +1367,7 @@ border-radius: 20px;
                <property name="font">
                 <font>
                  <family>Roboto</family>
+                 <pointsize>12</pointsize>
                  <weight>75</weight>
                  <bold>true</bold>
                 </font>
@@ -1431,6 +1432,7 @@ border-radius: 20px;
                <property name="font">
                 <font>
                  <family>Roboto</family>
+                 <pointsize>12</pointsize>
                  <weight>75</weight>
                  <bold>true</bold>
                 </font>
@@ -1497,7 +1499,7 @@ border-radius: 20px;
           <number>0</number>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>6</number>
          </property>
          <widget class="QWidget" name="Page_signin">
           <property name="font">
@@ -3073,6 +3075,9 @@ background-color: rgb(240, 246, 255);
 #menu_attendance {
 	border: 1px solid gray;
 } 
+#info_frame {
+	border: 1px solid gray;
+} 
 #info_frame QLineEdit,
 #info_frame QComboBox {
 	padding: 4px 5px;
@@ -3101,7 +3106,6 @@ QComboBox::down-arrow {
 	padding: 5px 10px;
 	border: 2px solid #f0f0f0;
 	border-radius: 5px;
-	background-color: #84e8f7;
 }
 
 #info_frame QPushButton:hover {
@@ -3232,19 +3236,24 @@ border-radius: 20px;
                  </font>
                 </property>
                 <property name="styleSheet">
-                 <string notr="true">background-color: rgb(255, 255, 255);
-border-radius: 20px;
+                 <string notr="true">border-radius: 20px;
 color: rgb(0, 41, 77);</string>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_9">
                  <property name="leftMargin">
-                  <number>30</number>
+                  <number>20</number>
                  </property>
                  <property name="topMargin">
                   <number>0</number>
                  </property>
                  <property name="rightMargin">
-                  <number>30</number>
+                  <number>20</number>
                  </property>
                  <property name="bottomMargin">
                   <number>0</number>
@@ -3515,6 +3524,9 @@ color: rgb(0, 41, 77);</string>
                    <property name="rowCount">
                     <number>0</number>
                    </property>
+                   <property name="columnCount">
+                    <number>6</number>
+                   </property>
                    <attribute name="horizontalHeaderCascadingSectionResizes">
                     <bool>false</bool>
                    </attribute>
@@ -3602,6 +3614,22 @@ color: rgb(0, 41, 77);</string>
                    <column>
                     <property name="text">
                      <string>Status</string>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Roboto</family>
+                      <pointsize>12</pointsize>
+                      <weight>75</weight>
+                      <bold>true</bold>
+                     </font>
+                    </property>
+                    <property name="textAlignment">
+                     <set>AlignLeading|AlignVCenter</set>
+                    </property>
+                   </column>
+                   <column>
+                    <property name="text">
+                     <string>Check-in Time</string>
                     </property>
                     <property name="font">
                      <font>
@@ -3747,6 +3775,9 @@ color: rgb(0, 41, 77);
               <widget class="QLabel" name="camera_label">
                <property name="text">
                 <string/>
+               </property>
+               <property name="scaledContents">
+                <bool>false</bool>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
