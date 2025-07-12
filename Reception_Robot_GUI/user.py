@@ -1,4 +1,5 @@
 from PySide6.QtWidgets import QMessageBox
+from resources.style import QMSGBOX_STYLE
 
 def handle_login(ui, registered_users):
     username = ui.Signin_username.text()
@@ -7,7 +8,12 @@ def handle_login(ui, registered_users):
     for user in registered_users:
         if user["username"] == username and user["password"] == password:
             return True  # Thành công
-    QMessageBox.warning(None, "Login Failed", "Incorrect username or password")
+    msg = QMessageBox()
+    msg.setWindowTitle("Login Failed")
+    msg.setIcon(QMessageBox.Information)
+    msg.setText("Incorrect username or password")
+    msg.setStyleSheet(QMSGBOX_STYLE)
+    msg.exec()
     return False
 
 def handle_signup(ui, registered_users):
@@ -18,16 +24,31 @@ def handle_signup(ui, registered_users):
     verify   = ui.Signup_code.text()
 
     if not all([fullname, phone, username, password, verify]):
-        QMessageBox.warning(None, "Sign Up Failed", "Please fill in all fields.")
+        msg = QMessageBox()
+        msg.setWindowTitle("Sign Up Failed")
+        msg.setText("Please fill in all fields")
+        msg.setIcon(QMessageBox.Information)
+        msg.setStyleSheet(QMSGBOX_STYLE)
+        msg.exec()
         return False
 
     if verify.strip().lower() != "fablab":
-        QMessageBox.warning(None, "Sign Up Failed", "Incorrect verification code.")
+        msg = QMessageBox()
+        msg.setWindowTitle("Sign Up Failed")
+        msg.setText("Incorrect verification code")
+        msg.setIcon(QMessageBox.Information)
+        msg.setStyleSheet(QMSGBOX_STYLE)
+        msg.exec()
         return False
 
     for user in registered_users:
         if user["username"] == username:
-            QMessageBox.warning(None, "Sign Up Failed", "Username already exists.")
+            msg = QMessageBox()
+            msg.setWindowTitle("Sign Up Failed")
+            msg.setText("Username already exists")
+            msg.setIcon(QMessageBox.Information)
+            msg.setStyleSheet(QMSGBOX_STYLE)
+            msg.exec()
             return False
 
     registered_users.append({
@@ -37,8 +58,12 @@ def handle_signup(ui, registered_users):
         "password": password,
         "verify": verify
     })
-
-    QMessageBox.information(None, "Success", "Account created successfully!")
+    msg = QMessageBox()
+    msg.setWindowTitle("Success")
+    msg.setText("Account created successfully")
+    msg.setIcon(QMessageBox.Information)
+    msg.setStyleSheet(QMSGBOX_STYLE)
+    msg.exec()  
     return True
 
 
