@@ -34,6 +34,7 @@ class CameraSubscriberThread(QThread):
 
     def _image_callback(self, msg):
         try:
+            print("[SUB] Received image")
             frame = self._bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
             rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             h, w, ch = rgb.shape

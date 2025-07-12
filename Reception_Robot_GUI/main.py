@@ -12,6 +12,8 @@ from camera_subcriber import CameraSubscriberThread
 from attendance import AttendanceTab
 from battery_manager import BatteryManager
 from attendance_manager import AttendanceManager
+from dataplotting import PlotTab
+
 
 
 class MainWindow(QMainWindow):
@@ -34,6 +36,8 @@ class MainWindow(QMainWindow):
         # khoi tao camera
         self.camera_sub_thread = None
 
+        # khoi tao bieu do 
+        self.plot_tab = PlotTab(self.ui)
 
         # khoi tao tab diem danh 
         self.attendance_tab = AttendanceTab(self.ui)    # hien giao dien 
@@ -56,12 +60,14 @@ class MainWindow(QMainWindow):
         self.ui.Signin_btn_signup.clicked.connect(lambda: self.ui.Page.setCurrentWidget(self.ui.Page_signup))
         self.ui.Signin_btn_signin.clicked.connect(lambda: self.ui.Page.setCurrentWidget(self.ui.Page_signin))
         self.ui.Signin_btn_login.clicked.connect(self._handle_login)
+        self.ui.Signup_btn_signup.clicked.connect(self._handle_signup)
     
         # gan su kien trang sau dang nhap 
         self.ui.Main_btn_camera.clicked.connect(lambda: self.switch_to_page(self.ui.Page_Camera))
         self.ui.Main_btn_tracking.clicked.connect(lambda: self.switch_to_page(self.ui.Page_tracking))
         self.ui.Main_btn_attendance.clicked.connect(lambda: self.switch_to_page(self.ui.Page_attendance))
         self.ui.Main_btn_robotstatus.clicked.connect(lambda: self.switch_to_page(self.ui.Page_robotstatus))
+        self.ui.Main_btn_data.clicked.connect(lambda: self.switch_to_page(self.ui.Page_data))
         self.ui.Account__btnlogout.clicked.connect(self._handle_logout)
 
     def switch_to_page(self, page_widget):

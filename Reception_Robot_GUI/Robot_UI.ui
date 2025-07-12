@@ -68,9 +68,7 @@ font-family:  &quot;Roboto&quot;;
     </size>
    </property>
    <property name="styleSheet">
-    <string notr="true">QWidget{
-	
-}</string>
+    <string notr="true"/>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0">
     <property name="spacing">
@@ -1003,6 +1001,7 @@ margin-left: 10px;
                  <font>
                   <family>Roboto</family>
                   <pointsize>18</pointsize>
+                  <kerning>true</kerning>
                  </font>
                 </property>
                 <property name="focusPolicy">
@@ -1100,6 +1099,25 @@ margin-left: 10px;
                 </property>
                 <property name="flat">
                  <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="Main_btn_data">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Roboto</family>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>LIVE TELEMETRY </string>
                 </property>
                </widget>
               </item>
@@ -1499,7 +1517,7 @@ border-radius: 20px;
           <number>0</number>
          </property>
          <property name="currentIndex">
-          <number>6</number>
+          <number>2</number>
          </property>
          <widget class="QWidget" name="Page_signin">
           <property name="font">
@@ -2366,23 +2384,75 @@ QPushButton:hover{
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="Page_orders">
+         <widget class="QWidget" name="Page_data">
           <layout class="QVBoxLayout" name="verticalLayout_13">
-           <property name="spacing">
-            <number>0</number>
-           </property>
-           <property name="leftMargin">
-            <number>0</number>
-           </property>
-           <property name="topMargin">
-            <number>0</number>
-           </property>
-           <property name="rightMargin">
-            <number>0</number>
-           </property>
-           <property name="bottomMargin">
-            <number>0</number>
-           </property>
+           <item>
+            <widget class="QFrame" name="menu_data">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>100</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>100</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 20px;
+color: rgb(0, 41, 77);</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_11">
+              <item>
+               <widget class="QLabel" name="label_30">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>70</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>70</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Roboto</family>
+                  <pointsize>30</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+                <property name="text">
+                 <string>LIVE TELEMETRY </string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="data">
+             <layout class="QVBoxLayout" name="plotdata"/>
+            </widget>
+           </item>
           </layout>
          </widget>
          <widget class="QWidget" name="Page_robotstatus">
@@ -3804,6 +3874,7 @@ color: rgb(0, 41, 77);
  <resources>
   <include location="resources/resources.qrc"/>
   <include location="resources/icon.qrc"/>
+  <include location="resources/resources.qrc"/>
  </resources>
  <connections/>
 </ui>
