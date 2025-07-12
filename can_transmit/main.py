@@ -2,9 +2,11 @@ from USB_CAN_A_Waveshare.waveshare_can import WaveshareCAN
 import time
 import struct
 def process_frame(can_id, data):
-    if can_id == 0x130:
+    if can_id == 0x012:
         # Example: publish to topic_A
-        print(f"ID 0x130 received: {data.hex(' ')}")
+        print(f"ID 0x012 received: {data.hex(' ')}")
+        print(f"Yaw: {data.hex()[0:4]}")
+        
     elif can_id == 0x200:
         # Maybe decode as float?
         value = struct.unpack('<f', data[0:4])[0]
