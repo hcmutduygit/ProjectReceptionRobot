@@ -28,10 +28,12 @@ class MainWindow(QMainWindow):
         self.registered_users = [{"username": "admin","password": "123","fullname": "Admin User","phone": "0123456789","verify": "fablab"}]
 
 
+        # bien trang thai mqtt
+        self.ui.label_mqtt.setText("disconnected")
+
         # khoi tao battery 
         self.battery_manager = BatteryManager(self.ui)
         self.battery_manager.start_battery_subscriber()
-
 
         # khoi tao camera
         self.camera_sub_thread = None
