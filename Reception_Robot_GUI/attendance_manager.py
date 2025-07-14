@@ -25,20 +25,20 @@ class AttendanceManager(BaseManager):
         """Dừng attendance subscriber thread"""
         self.stop_subscriber()
 
-    def handle_data_update(self, name):
+    def handle_data_update(self, name, time_str):
         """Cập nhật hiển thị tên người trên UI và cập nhật trạng thái attendance"""
         self.current_name = name
         
         # Cập nhật trạng thái "Present" cho người vừa được nhận diện
         if self.attendance_tab:
-            self.attendance_tab.update_status(name=name, status="Present")
-            print(f"Attendance updated: {name} - Present")
+            self.attendance_tab.update_status(name=name, status="Present", time=time_str)
+            print(f"Attendance updated: {name} - Present at {time_str}")
         else:
-            print(f"Attendance received: {name} (No attendance tab connected)")
+            print(f"Attendance received: {name} at {time_str} (No attendance tab connected)")
             
         # Có thể cập nhật thêm label hiển thị tên hiện tại nếu có
         if hasattr(self.ui, 'label_current_person'):
-            self.ui.label_current_person.setText(f"Current: {name}")
+            self.ui.label_current_person.setText(f"Current: {name} ({time_str})")
 
     def get_current_attendance(self):
         """Trả về tên người hiện tại"""

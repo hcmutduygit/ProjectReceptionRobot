@@ -2,7 +2,7 @@ import paho.mqtt.client as mqtt
 from PySide6.QtCore import QThread
 
 class MQTTSubscriberThread(QThread):
-    def __init__(self, mqtt_host="192.168.1.110", mqtt_port=1883, mqtt_topic="default/topic", mqtt_keepalive=60):
+    def __init__(self, mqtt_host, mqtt_port, mqtt_topic="default/topic", mqtt_keepalive=60):
         super().__init__()
         self.mqtt_host = mqtt_host
         self.mqtt_port = mqtt_port

@@ -58,10 +58,11 @@ class AttendanceTab(QWidget):
             self.ui.table_attendance.setItem(row, 5, QTableWidgetItem(entry["email"]))
         
     # ham cap nhat trang thai 
-    def update_status(self, name=None, status=None):
+    def update_status(self, name=None, status=None, time=None):
         for entry in self.attendance_data:
             if (name and entry["name"] == name):
                 entry["status"] = status
+                entry["time"] = time
                 break
 
         self.load_attendance_table(self.attendance_data)
