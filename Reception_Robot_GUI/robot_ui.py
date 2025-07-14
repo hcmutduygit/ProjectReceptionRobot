@@ -963,6 +963,11 @@ class Ui_MainWindow(object):
         self.data.setObjectName(u"data")
         self.plotdata = QVBoxLayout(self.data)
         self.plotdata.setObjectName(u"plotdata")
+        self.data_container = QVBoxLayout()
+        self.data_container.setObjectName(u"data_container")
+
+        self.plotdata.addLayout(self.data_container)
+
 
         self.verticalLayout_13.addWidget(self.data)
 

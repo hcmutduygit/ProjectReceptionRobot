@@ -2450,7 +2450,11 @@ color: rgb(0, 41, 77);</string>
            </item>
            <item>
             <widget class="QFrame" name="data">
-             <layout class="QVBoxLayout" name="plotdata"/>
+             <layout class="QVBoxLayout" name="plotdata">
+              <item>
+               <layout class="QVBoxLayout" name="data_container"/>
+              </item>
+             </layout>
             </widget>
            </item>
           </layout>
