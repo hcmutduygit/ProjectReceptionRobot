@@ -84,18 +84,19 @@ class WaveshareCAN:
                 continue
             if b[0] == 0xAA:
                 break
-
+        header = self.ser.read(3)
         cmd = self.ser.read(1)
-        if not cmd or cmd[0] != 0xC8:
-            raise ValueError("Invalid CMD byte")
+        # if not cmd or cmd[0] != 0xC8:
+        #     raise ValueError("Invalid CMD byte")
 
         idl = self.ser.read(1)
-        idh = self.ser.read(1)
+        idh = self.ser.read(3)
+        length = self.ser.read(1)
         data = self.ser.read(8)
         tail = self.ser.read(1)
 
-        if not tail or tail[0] != 0x55:
-            raise ValueError("Invalid tail byte")
+        # if not tail or tail[0] != 0x55:
+        #     raise ValueError("Invalid tail byte")
 
         can_id = idl[0] | (idh[0] << 8)
 
