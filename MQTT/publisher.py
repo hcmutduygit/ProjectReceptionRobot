@@ -29,13 +29,13 @@ mqttc.on_connect = on_connect
 # Connect with MQTT Broker
 mqttc.connect(MQTT_HOST, MQTT_PORT, MQTT_KEEPALIVE_INTERVAL) 
 
-# Publish message to MQTT Topic 
+'''# Publish message to MQTT Topic 
 mqttc.publish(MQTT_TOPIC,MQTT_MSG)
 
 # Disconnect from MQTT_Broker
-mqttc.disconnect()
+mqttc.disconnect()'''
 
-'''
+
 BATTERY_TOPIC = "robot/battery"
 ATTENDANCE_TOPIC = "robot/attendance"
 ATTENDANCE_LIST = ["Phu", "Ky", "Duy", "Thu", "Loi", "Thien"]
@@ -83,4 +83,4 @@ except KeyboardInterrupt:
     battery_thread.join()
     attendance_thread.join()
     mqttc.disconnect()
-    print("✅ MQTT client đã ngắt kết nối an toàn.")'''
+    print("✅ MQTT client đã ngắt kết nối an toàn.")

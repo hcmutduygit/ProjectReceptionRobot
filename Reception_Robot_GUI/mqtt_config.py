@@ -6,8 +6,8 @@ Tập trung quản lý các thông số MQTT để tránh hard-code ở nhiều 
 class MQTTConfig:
     """Class chứa tất cả cấu hình MQTT"""
     
-    # Thông số kết nối MQTT Broker
-    MQTT_HOST = "192.168.0.125"
+    # Thông số kết nối MQTT Broker, sudo netstat -tulnp | grep mosquitto
+    MQTT_HOST = "127.0.0.1" #192.168.0.125
     MQTT_PORT = 1883
     MQTT_KEEPALIVE = 60
     
