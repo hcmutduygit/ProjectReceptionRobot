@@ -1,67 +1,57 @@
-import time
-import math
-import numpy as np
-import pyqtgraph as pg
-from PySide6.QtCore import QTimer
 from PySide6.QtWidgets import QWidget, QVBoxLayout
+import pyqtgraph as pg
+import time
+import numpy as np
+from collections import deque
+from PySide6.QtCore import QTimer
+
 
 class PlotTab(QWidget):
     def __init__(self, ui):
         super().__init__()
         self.ui = ui
 
-        # Khởi tạo biểu đồ
+        # --- Create the plot ---
         self.plot_widget = pg.PlotWidget()
         self.plot_widget.setBackground('w')
-        self.plot_widget.setTitle("📈 Real-Time Robot Data", color='black', size='14pt')
-        self.plot_widget.setLabel('left', 'Value', units='unit')
-        self.plot_widget.setLabel('bottom', 'Time', units='s')
+        self.plot_widget.setTitle("📈 Real-Time Sin/Cos Scrolling", color='black', size='14pt')
+        self.plot_widget.setLabel("left", "Value")
+        self.plot_widget.setLabel("bottom", "Time (s)")
         self.plot_widget.showGrid(x=True, y=True)
-        self.plot_widget.setMouseEnabled(x=True, y=True)
-        self.plot_widget.getViewBox().setLimits(xMin=0, yMin=0)
-        self.plot_widget.setYRange(0, 40)
-        self.plot_widget.setXRange(0, 10)
-        self.plot_widget.enableAutoRange(False)  # chỉ auto Y
         self.plot_widget.addLegend()
+        self.plot_widget.setYRange(-1.5, 1.5)
+        self.plot_widget.setXRange(0, 10)
 
-        # Gắn vào layout trong ui
-        layout = self.ui.data_container.layout()
-        if layout is None:
-            layout = QVBoxLayout()
-            self.ui.data_container.setLayout(layout)
+        # ✅ Tạo layout mới (KHÔNG dùng layout Designer nữa)
+        layout = self.ui.data_container
         layout.addWidget(self.plot_widget)
 
-        # Dữ liệu
-        self.x = []
-        self.y = []
+        # Data and curve
+        self.max_points = 1000
+        self.x = deque(maxlen=self.max_points)
+        self.y_sin = deque(maxlen=self.max_points)
+        self.y_cos = deque(maxlen=self.max_points)
         self.start_time = time.time()
-        self.curve = self.plot_widget.plot(pen='b', name="Speed")
 
-        # Timer cập nhật mỗi 100ms
+        self.curve_sin = self.plot_widget.plot(pen=pg.mkPen('y', width=2), name='sin')
+        self.curve_cos = self.plot_widget.plot(pen=pg.mkPen('c', width=2), name='cos')
+
+        # Timer update
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_plot)
-        self.timer.start(100)
-
-        print(">> Creating PlotTab")
-        print(">> Layout exists:", self.ui.data_container.layout() is not None)
-
+        self.timer.start(50)
 
     def update_plot(self):
-        # Giả lập dữ liệu: giá trị sin dao động
-        t = time.time() - self.start_time
-        value = math.sin(t) * 15 + 20
+        now = time.time() - self.start_time
+        value_sin = np.sin(2 * np.pi * now)
+        value_cos = np.cos(2 * np.pi * now)
 
-        self.x.append(t)
-        self.y.append(value)
+        self.x.append(now)
+        self.y_sin.append(value_sin)
+        self.y_cos.append(value_cos)
 
-        # Giữ dữ liệu tối đa 60s (mỗi 0.1s → 600 điểm)
-        if t > 60:
-            self.x = self.x[-600:]
-            self.y = self.y[-600:]
+        self.curve_sin.setData(self.x, self.y_sin)
+        self.curve_cos.setData(self.x, self.y_cos)
 
-        if not self.x or not self.y or not math.isfinite(self.x[-1]) or not math.isfinite(self.y[-1]):
-            return
-
-        self.curve.setData(self.x, self.y)
-        if self.x[-1] > 10:
-            self.plot_widget.setXRange(self.x[-1] - 10, self.x[-1])
+        if now > 10:
+            self.plot_widget.setXRange(now - 10, now)

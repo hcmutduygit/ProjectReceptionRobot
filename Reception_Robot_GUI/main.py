@@ -5,7 +5,6 @@ from PySide6.QtGui import QPixmap
 
 # pyside6-uic Robot_UI.ui -o robot_ui.py
 
-#from jetson.camera_publisher import CameraPublisherThread
 from robot_ui import Ui_MainWindow
 from user import handle_login, handle_signup, handle_logout
 from camera_subcriber import CameraSubscriberThread
