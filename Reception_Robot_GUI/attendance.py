@@ -1,5 +1,5 @@
-from PySide6.QtWidgets import QWidget, QTableWidgetItem, QHeaderView
-from PySide6.QtGui import QFont
+from PyQt6.QtWidgets import QWidget, QTableWidgetItem, QHeaderView
+from PyQt6.QtGui import QFont
 
 
 class AttendanceTab(QWidget):
@@ -17,9 +17,9 @@ class AttendanceTab(QWidget):
         header = self.ui.table_attendance.horizontalHeader()
         # do rong cot 
         for i in range(self.ui.table_attendance.columnCount() - 1):
-            header.setSectionResizeMode(i, QHeaderView.Fixed)
+            header.setSectionResizeMode(i, QHeaderView.ResizeMode.Fixed)
             header.resizeSection(i, 200)
-        header.setSectionResizeMode(self.ui.table_attendance.columnCount() - 1, QHeaderView.Stretch)
+        header.setSectionResizeMode(self.ui.table_attendance.columnCount() - 1, QHeaderView.ResizeMode.Stretch)
         # so cot va ten 
         self.ui.table_attendance.setColumnCount(6)
         self.ui.table_attendance.setHorizontalHeaderLabels([

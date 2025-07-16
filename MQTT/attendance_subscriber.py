@@ -1,8 +1,8 @@
-from PySide6.QtCore import Signal
+from PyQt6.QtCore import pyqtSignal
 from .mqtt_subscriber import MQTTSubscriberThread
 
 class AttendanceSubscriberThread(MQTTSubscriberThread):
-    attendance_update = Signal(str, str)  # Signal để gửi giá trị tên về main window
+    attendance_update = pyqtSignal(str, str)  # Signal để gửi giá trị tên về main window
 
     def __init__(self, mqtt_host, mqtt_port, mqtt_topic="robot/attendance"):
         super().__init__(mqtt_host, mqtt_port, mqtt_topic)

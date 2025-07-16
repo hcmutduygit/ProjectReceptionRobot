@@ -1,5 +1,5 @@
-from PySide6.QtWidgets import QMessageBox
-from resources.style import QMSGBOX_STYLE
+from PyQt6.QtWidgets import QMessageBox
+from ui.style import QMSGBOX_STYLE
 
 def handle_login(ui, registered_users):
     username = ui.Signin_username.text()
@@ -10,7 +10,7 @@ def handle_login(ui, registered_users):
             return True  # Thành công
     msg = QMessageBox()
     msg.setWindowTitle("Login Failed")
-    msg.setIcon(QMessageBox.Information)
+    msg.setIcon(QMessageBox.Icon.Information)
     msg.setText("Incorrect username or password")
     msg.setStyleSheet(QMSGBOX_STYLE)
     msg.exec()
@@ -27,7 +27,7 @@ def handle_signup(ui, registered_users):
         msg = QMessageBox()
         msg.setWindowTitle("Sign Up Failed")
         msg.setText("Please fill in all fields")
-        msg.setIcon(QMessageBox.Information)
+        msg.setIcon(QMessageBox.Icon.Information)
         msg.setStyleSheet(QMSGBOX_STYLE)
         msg.exec()
         return False
@@ -36,7 +36,7 @@ def handle_signup(ui, registered_users):
         msg = QMessageBox()
         msg.setWindowTitle("Sign Up Failed")
         msg.setText("Incorrect verification code")
-        msg.setIcon(QMessageBox.Information)
+        msg.setIcon(QMessageBox.Icon.Information)
         msg.setStyleSheet(QMSGBOX_STYLE)
         msg.exec()
         return False
@@ -46,7 +46,7 @@ def handle_signup(ui, registered_users):
             msg = QMessageBox()
             msg.setWindowTitle("Sign Up Failed")
             msg.setText("Username already exists")
-            msg.setIcon(QMessageBox.Information)
+            msg.setIcon(QMessageBox.Icon.Information)
             msg.setStyleSheet(QMSGBOX_STYLE)
             msg.exec()
             return False
@@ -61,7 +61,7 @@ def handle_signup(ui, registered_users):
     msg = QMessageBox()
     msg.setWindowTitle("Success")
     msg.setText("Account created successfully")
-    msg.setIcon(QMessageBox.Information)
+    msg.setIcon(QMessageBox.Icon.Information)
     msg.setStyleSheet(QMSGBOX_STYLE)
     msg.exec()  
     return True
@@ -72,9 +72,9 @@ def handle_logout(main_window):
         main_window,
         "Confirm Logout",
         "Are you sure you want to log out?",
-        QMessageBox.Yes | QMessageBox.No
+        QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
     )
-    if reply == QMessageBox.Yes:
+    if reply == QMessageBox.StandardButton.Yes:
         main_window._shutdown_all_services()
         main_window.ui.Page.setCurrentWidget(main_window.ui.Page_signin)
         main_window.ui.Dashboard.setCurrentWidget(main_window.ui.Dashboard_signin)

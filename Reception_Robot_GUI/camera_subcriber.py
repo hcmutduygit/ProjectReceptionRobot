@@ -1,14 +1,14 @@
+from PyQt6.QtCore import QThread, pyqtSignal, Qt
+from PyQt6.QtGui import QImage
 import cv2
 from cv_bridge import CvBridge
-from sensor_msgs.msg import Image
 import rclpy
 from rclpy.executors import SingleThreadedExecutor
-from PySide6.QtCore import QThread, Signal, Qt
-from PySide6.QtGui import QImage
+from sensor_msgs.msg import Image
 
 
 class CameraSubscriberThread(QThread):
-    ImageUpdate = Signal(QImage)
+    ImageUpdate = pyqtSignal(QImage)
 
     def __init__(self, target_label):
         super().__init__()

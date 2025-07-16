@@ -1,11 +1,12 @@
 import sys, rclpy
 
-from PySide6.QtWidgets import QApplication, QMainWindow
-from PySide6.QtGui import QPixmap
+from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget
+from PyQt6.QtGui import QPixmap, QFont
 
-# pyside6-uic Robot_UI.ui -o robot_ui.py
+# pyuic6 Robot_UI.ui -o robot_ui.py
 
-from robot_ui import Ui_MainWindow
+from ui.font_configurator import apply_custom_fonts
+from ui.robot_ui import Ui_MainWindow
 from user import handle_login, handle_signup, handle_logout
 from camera_subcriber import CameraSubscriberThread
 from attendance import AttendanceTab
@@ -14,14 +15,13 @@ from attendance_manager import AttendanceManager
 from dataplotting import PlotTab
 
 
-
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        # Set the size
         self.resize(950, 630)
+        apply_custom_fonts(self.ui)
 
         # list user
         self.registered_users = [{"username": "admin","password": "123","fullname": "Admin User","phone": "0123456789","verify": "fablab"}]

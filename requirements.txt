@@ -1,4 +1,4 @@
-PySide6     # giao dien
+PyQt6       # giao dien
 paho-mqtt   # truyen tin nhan 
 rclpy       # giao tiep voi ros
 pyqtgraph   # ve bieu do 

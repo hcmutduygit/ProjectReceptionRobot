@@ -1,9 +1,9 @@
 import json
-from PySide6.QtCore import Signal
+from PyQt6.QtCore import pyqtSignal
 from .mqtt_subscriber import MQTTSubscriberThread
 
 class BatterySubscriberThread(MQTTSubscriberThread):
-    battery_update = Signal(int)  # Signal để gửi giá trị battery về main window
+    battery_update = pyqtSignal(int)  # Signal để gửi giá trị battery về main window
 
     def __init__(self, mqtt_host, mqtt_port, mqtt_topic="robot/battery"):
         super().__init__(mqtt_host, mqtt_port, mqtt_topic)

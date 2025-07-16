@@ -1,5 +1,5 @@
 import paho.mqtt.client as mqtt
-from PySide6.QtCore import QThread
+from PyQt6.QtCore import QThread
 
 class MQTTSubscriberThread(QThread):
     def __init__(self, mqtt_host, mqtt_port, mqtt_topic="default/topic", mqtt_keepalive=60):
