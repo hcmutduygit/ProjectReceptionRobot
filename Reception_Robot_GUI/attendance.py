@@ -24,8 +24,14 @@ class AttendanceTab(QWidget):
         self.ui.table_attendance.setColumnCount(6)
         self.ui.table_attendance.setHorizontalHeaderLabels([
             "Employee ID", "Name", "Department", "Status","Check-in Time", "Email"
-        ])
-               
+                ])
+                
+        self.ui.table_attendance.setStyleSheet("""
+            QHeaderView::section {
+                font-weight: bold;
+                font-size: 13pt;}""")
+
+
         # Du lieu gia 
         self.attendance_data = [
             {"id": "E001", "name": "Ky", "dept": "HR", "email": "ky@example.com", "status": None, "time": None },
@@ -35,10 +41,6 @@ class AttendanceTab(QWidget):
             {"id": "E005", "name": "Loi", "dept": "Finance", "email": "loi@example.com", "status": None, "time": None },
             {"id": "E006", "name": "Thien", "dept": "Finance", "email": "thien@example.com", "status": None, "time": None },
         ]
-        # # Gan gia tri mac dinh
-        # self.name = "Ky"
-        # self.status = "Present"
-        # self.update_status(name=self.name, status=self.status)
 
         # Gan nut search 
         self.ui.search_btn.clicked.connect(self.search_attendance)
