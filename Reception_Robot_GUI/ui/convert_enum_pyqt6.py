@@ -1,6 +1,10 @@
 import re
 
-# Danh sách chuyển đổi enum từ PyQt5 → PyQt6
+'''
+from PyQt6.QtGui import QPixmap
+from resources import resources_rc, icon_rc 
+'''
+# Danh sách chuyển đổi enum từ PyQt5 → PyQt6 
 replacements = {
     # Qt enums
     r'\bQtCore\.Qt\.ApplicationModal\b': 'QtCore.Qt.WindowModality.ApplicationModal',

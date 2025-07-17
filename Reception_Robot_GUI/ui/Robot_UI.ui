@@ -268,7 +268,7 @@ border-radius:  15px;</string>
               <string/>
              </property>
              <property name="pixmap">
-              <pixmap resource="resources/resources.qrc">:/logos/Logos/Logo BK.png</pixmap>
+              <pixmap resource="../resources/resources.qrc">:/logos/Logos/Logo BK.png</pixmap>
              </property>
              <property name="scaledContents">
               <bool>true</bool>
@@ -306,7 +306,7 @@ border-radius:  15px;</string>
               <string/>
              </property>
              <property name="pixmap">
-              <pixmap resource="resources/resources.qrc">:/logos/Logos/Fablab Logo-aftercut.png</pixmap>
+              <pixmap resource="../resources/resources.qrc">:/logos/Logos/Fablab Logo-aftercut.png</pixmap>
              </property>
              <property name="scaledContents">
               <bool>true</bool>
@@ -730,7 +730,7 @@ border-radius:  15px;</string>
               <string/>
              </property>
              <property name="pixmap">
-              <pixmap resource="resources/resources.qrc">:/logos/Logos/Logo BK.png</pixmap>
+              <pixmap resource="../resources/resources.qrc">:/logos/Logos/Logo BK.png</pixmap>
              </property>
              <property name="scaledContents">
               <bool>true</bool>
@@ -775,7 +775,7 @@ border-radius:  15px;</string>
               <string/>
              </property>
              <property name="pixmap">
-              <pixmap resource="resources/resources.qrc">:/logos/Logos/Fablab Logo-aftercut.png</pixmap>
+              <pixmap resource="../resources/resources.qrc">:/logos/Logos/Fablab Logo-aftercut.png</pixmap>
              </property>
              <property name="scaledContents">
               <bool>true</bool>
@@ -1352,7 +1352,7 @@ border-radius: 20px;
                 <string/>
                </property>
                <property name="pixmap">
-                <pixmap resource="resources/resources.qrc">:/Icons/Icons/mqtt_icon.svg</pixmap>
+                <pixmap resource="../resources/resources.qrc">:/Icons/Icons/mqtt_icon.svg</pixmap>
                </property>
                <property name="scaledContents">
                 <bool>false</bool>
@@ -1517,7 +1517,7 @@ border-radius: 20px;
           <number>0</number>
          </property>
          <property name="currentIndex">
-          <number>2</number>
+          <number>4</number>
          </property>
          <widget class="QWidget" name="Page_signin">
           <property name="font">
@@ -3126,24 +3126,32 @@ color: rgb(0, 41, 77);</string>
             </widget>
            </item>
            <item row="1" column="0">
-            <layout class="QVBoxLayout" name="tracking">
-             <item>
-              <widget class="QLabel" name="traking_label">
-               <property name="text">
-                <string/>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
-               </property>
-               <property name="margin">
-                <number>1</number>
-               </property>
-               <property name="indent">
-                <number>1</number>
-               </property>
-              </widget>
-             </item>
-            </layout>
+            <widget class="QWidget" name="tracking_main" native="true">
+             <layout class="QVBoxLayout" name="tracking">
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="label_10">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="../resources/resources.qrc">:/map/Map/map.png</pixmap>
+                </property>
+                <property name="scaledContents">
+                 <bool>false</bool>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -3449,7 +3457,7 @@ color: rgb(0, 41, 77);</string>
                     <string/>
                    </property>
                    <property name="icon">
-                    <iconset resource="resources/resources.qrc">
+                    <iconset resource="../resources/resources.qrc">
                      <normaloff>:/Icons/Icons/search.svg</normaloff>:/Icons/Icons/search.svg</iconset>
                    </property>
                    <property name="iconSize">
@@ -3882,9 +3890,8 @@ color: rgb(0, 41, 77);
   <tabstop>Signin_btn_signup</tabstop>
  </tabstops>
  <resources>
-  <include location="resources/resources.qrc"/>
-  <include location="resources/icon.qrc"/>
-  <include location="resources/resources.qrc"/>
+  <include location="../resources/icon.qrc"/>
+  <include location="../resources/resources.qrc"/>
  </resources>
  <connections/>
 </ui>

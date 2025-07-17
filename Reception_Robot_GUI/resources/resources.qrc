@@ -10,6 +10,10 @@
     <file>Icons/search.svg</file>
     <file>Icons/Uncheck_icon.png</file>
   </qresource>
+  <qresource prefix="map">
+    <file>Map/map.pgm</file>
+    <file>Map/map.png</file>
+  </qresource>
   <qresource prefix="markers">
     <file>Markers/marker.png</file>
     <file>Markers/marker2.png</file>
