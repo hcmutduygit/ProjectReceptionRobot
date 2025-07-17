@@ -3135,7 +3135,14 @@ color: rgb(0, 41, 77);</string>
                <number>0</number>
               </property>
               <item>
-               <widget class="QGraphicsView" name="view_map"/>
+               <widget class="QGraphicsView" name="view_map">
+                <property name="sizeAdjustPolicy">
+                 <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
+                </property>
+                <property name="dragMode">
+                 <enum>QGraphicsView::ScrollHandDrag</enum>
+                </property>
+               </widget>
               </item>
              </layout>
             </widget>
