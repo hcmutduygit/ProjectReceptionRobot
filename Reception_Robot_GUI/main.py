@@ -9,7 +9,7 @@ from ui.font_configurator import apply_custom_fonts
 from ui.robot_ui import Ui_MainWindow
 
 from user import handle_login, handle_signup, handle_logout
-from camera_subcriber import CameraSubscriberThread
+#from camera_subcriber import CameraSubscriberThread
 from attendance import AttendanceTab
 from attendance_manager import AttendanceManager
 from battery_manager import BatteryManager
@@ -108,7 +108,7 @@ class MainWindow(QMainWindow):
             self.camera_pub_thread.start()'''
 
         if not hasattr(self, "camera_sub_thread") or self.camera_sub_thread is None:
-            self.camera_sub_thread = CameraSubscriberThread(self.ui.camera_label)
+            #self.camera_sub_thread = CameraSubscriberThread(self.ui.camera_label)
             self.camera_sub_thread.ImageUpdate.connect(self.update_camera_frame)
             self.camera_sub_thread.start()
 
