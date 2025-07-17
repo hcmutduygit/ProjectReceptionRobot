@@ -66,6 +66,17 @@ replacements = {
 
     # Alignment
     r'\bQt::Align[A-Za-z]+\b': lambda m: m.group(0).replace('Qt::Align', 'Qt.AlignmentFlag.Align'),
+
+        # QGraphicsView DragMode
+    r'\bQtWidgets\.QGraphicsView\.ScrollHandDrag\b': 'QtWidgets.QGraphicsView.DragMode.ScrollHandDrag',
+    r'\bQGraphicsView\.ScrollHandDrag\b': 'QGraphicsView.DragMode.ScrollHandDrag',
+
+    # QGraphicsView RenderHint
+    r'\bQGraphicsView\.Antialiasing\b': 'QGraphicsView.RenderHint.Antialiasing',
+    r'\bQtWidgets\.QGraphicsView\.Antialiasing\b': 'QtWidgets.QGraphicsView.RenderHint.Antialiasing',
+    r'\bQtWidgets\.QGraphicsView\.NoDrag\b': 'QtWidgets.QGraphicsView.DragMode.NoDrag',
+    r'\bQtWidgets\.QGraphicsView\.RubberBandDrag\b': 'QtWidgets.QGraphicsView.DragMode.RubberBandDrag',
+
 }
 
 def convert_pyqt6_enums(code: str) -> str:

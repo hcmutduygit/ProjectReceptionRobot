@@ -1285,6 +1285,8 @@ class Ui_MainWindow(object):
         self.tracking.setContentsMargins(-1, 0, -1, 0)
         self.tracking.setObjectName("tracking")
         self.view_map = QtWidgets.QGraphicsView(parent=self.tracking_main)
+        self.view_map.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.SizeAdjustPolicy.AdjustToContentsOnFirstShow)
+        self.view_map.setDragMode(QtWidgets.QGraphicsView.DragMode.ScrollHandDrag)
         self.view_map.setObjectName("view_map")
         self.tracking.addWidget(self.view_map)
         self.gridLayout_6.addWidget(self.tracking_main, 1, 0, 1, 1)

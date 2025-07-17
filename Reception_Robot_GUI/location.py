@@ -1,7 +1,20 @@
-
-from PyQt6.QtWidgets import QWidget, QGraphicsScene
-from PyQt6.QtGui import QPixmap, QBrush, QPen
+from PyQt6.QtWidgets import QWidget, QGraphicsScene, QGraphicsView
+from PyQt6.QtGui import QPixmap, QBrush, QPen, QWheelEvent, QPainter
 from PyQt6.QtCore import Qt
+
+
+class MapGraphicsView(QGraphicsView):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setRenderHint(QPainter.RenderHint.Antialiasing)
+        self.setDragMode(QGraphicsView.DragMode.ScrollHandDrag)
+        self.zoom_factor = 1.25
+
+    def wheelEvent(self, event: QWheelEvent):
+        if event.angleDelta().y() > 0:
+            self.scale(self.zoom_factor, self.zoom_factor)
+        else:
+            self.scale(1 / self.zoom_factor, 1 / self.zoom_factor)
 
 
 class LocationTab(QWidget):
@@ -12,9 +25,6 @@ class LocationTab(QWidget):
         # Tạo scene và gán vào QGraphicsView
         scene = QGraphicsScene()
         pixmap = QPixmap("resources/Map/map.png")  # Ảnh bản đồ
-        if pixmap.isNull():
-            print("Error: Map image not found.")
-            return
         scene.addPixmap(pixmap)
         self.ui.view_map.setScene(scene)
 
