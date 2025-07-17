@@ -12,6 +12,9 @@ class LocationTab(QWidget):
         # Tạo scene và gán vào QGraphicsView
         scene = QGraphicsScene()
         pixmap = QPixmap("resources/Map/map.png")  # Ảnh bản đồ
+        if pixmap.isNull():
+            print("Error: Map image not found.")
+            return
         scene.addPixmap(pixmap)
         self.ui.view_map.setScene(scene)
 

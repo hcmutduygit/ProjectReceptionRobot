@@ -23,41 +23,34 @@ uint16_t hex_to_unsigned(const std::vector<uint8_t>& data, size_t start_idx) {
 }
 
 void send_vel(WaveshareCAN& can) {
-    std::cout << "Enter right wheel velocity: ";
-    std::string right_input;
-    std::getline(std::cin, right_input);
-    
-    std::cout << "Enter left wheel velocity: ";
-    std::string left_input;
-    std::getline(std::cin, left_input);
-    
-    try {
-        float right_vel = std::stof(right_input);
-        float left_vel = std::stof(left_input);
-        
-        std::cout << "Right velocity: " << right_vel << ", Left velocity: " << left_vel << std::endl;
-        
-        // Convert float to bytes for CAN transmission
-        uint8_t left_bytes[4];
-        uint8_t right_bytes[4];
-        std::memcpy(left_bytes, &left_vel, sizeof(float));
-        std::memcpy(right_bytes, &right_vel, sizeof(float));
-        
-        // Create data vectors
-        std::vector<uint8_t> left_data(left_bytes, left_bytes + 4);
-        std::vector<uint8_t> right_data(right_bytes, right_bytes + 4);
-        
-        // Send left velocity to ID 0x013
-        can.send(0x013, left_data);
-        std::cout << "Sent left velocity " << left_vel << " to ID 0x013" << std::endl;
-        
-        // Send right velocity to ID 0x014
-        can.send(0x014, right_data);
-        std::cout << "Sent right velocity " << right_vel << " to ID 0x014" << std::endl;
-        
-    } catch (const std::exception& e) {
-        std::cerr << "Invalid velocity input: " << e.what() << std::endl;
-    }
+    float right_vel = 5.5;
+    float left_vel = 5.5;
+
+    uint8_t left_bytes[4];
+    uint8_t right_bytes[4];
+    std::memcpy(left_bytes, &left_vel, sizeof(float));
+    std::memcpy(right_bytes, &right_vel, sizeof(float));
+
+    std::vector<uint8_t> left_data(left_bytes, left_bytes + 4);
+    std::vector<uint8_t> right_data(right_bytes, right_bytes + 4);
+
+    can.send(0x013, left_data);
+    std::cout << "Sent left velocity to ID 0x013\n";
+    std::this_thread::sleep_for(std::chrono::milliseconds(50)); // thêm
+
+    can.send(0x014, right_data);
+    std::cout << "Sent right velocity to ID 0x014\n";
+    std::this_thread::sleep_for(std::chrono::milliseconds(50)); // thêm
+
+    can.send(0x015, {0x01, 0x02, 0x03, 0x04});
+    std::this_thread::sleep_for(std::chrono::milliseconds(50)); // thêm
+    can.send(0x016, {0x05, 0x06, 0x07, 0x08});
+    std::this_thread::sleep_for(std::chrono::milliseconds(50)); // thêm
+    // can.send(0x017, {0x09, 0x0A, 0x0B, 0x0C});
+    // std::this_thread::sleep_for(std::chrono::milliseconds(50)); // thêm
+    // can.send(0x018, {0x0D, 0x0E, 0x0F, 0x10});
+    // std::this_thread::sleep_for(std::chrono::milliseconds(50)); // thêm
+    // std::cout << "Sent ID 0x016\n";
 }
 // Process CAN frame (equivalent to Python's process_frame)
 void process_frame(uint16_t can_id, const std::vector<uint8_t>& data) {
@@ -97,48 +90,48 @@ int main() {
     WaveshareCAN can("/dev/ttyUSB0", 2000000, 2.0);
     can.open();
     can.start_receive_loop(process_frame);
-    
+    send_vel(can);
     while (true) {
-        std::cout << "\n=== CAN Control Menu ===" << std::endl;
-        std::cout << "1. Send single float value (ID 0x123)" << std::endl;
-        std::cout << "2. Send wheel velocities (Left: ID 0x013, Right: ID 0x014)" << std::endl;
-        std::cout << "3. Skip/Continue" << std::endl;
-        std::cout << "Enter your choice (1/2/3): ";
+        // std::cout << "\n=== CAN Control Menu ===" << std::endl;
+        // std::cout << "1. Send single float value (ID 0x123)" << std::endl;
+        // std::cout << "2. Send wheel velocities (Left: ID 0x013, Right: ID 0x014)" << std::endl;
+        // std::cout << "3. Skip/Continue" << std::endl;
+        // std::cout << "Enter your choice (1/2/3): ";
         
-        std::string choice;
-        std::getline(std::cin, choice);
+        // std::string choice;
+        // std::getline(std::cin, choice);
 
-        if (choice == "1") {
-            std::cout << "Enter float to send: ";
-            std::string input;
-            std::getline(std::cin, input);
+        // if (choice == "1") {
+        //     std::cout << "Enter float to send: ";
+        //     std::string input;
+        //     std::getline(std::cin, input);
 
-            if (!input.empty()) {
-                try {
-                    float value = std::stof(input);
+        //     if (!input.empty()) {
+        //         try {
+        //             float value = std::stof(input);
 
-                    uint8_t bytes[4];
-                    std::memcpy(bytes, &value, sizeof(float));
+        //             uint8_t bytes[4];
+        //             std::memcpy(bytes, &value, sizeof(float));
 
-                    std::vector<uint8_t> data(bytes, bytes + 4);
-                    can.send(0x123, data);
-                    std::cout << "Sent float " << value << " to ID 0x123" << std::endl;
+        //             std::vector<uint8_t> data(bytes, bytes + 4);
+        //             can.send(0x123, data);
+        //             std::cout << "Sent float " << value << " to ID 0x123" << std::endl;
 
-                } catch (const std::exception& e) {
-                    std::cerr << "Invalid input: " << e.what() << "\n";
-                }
-            }
-        }
-        else if (choice == "2") {
-            send_vel(can);
-        }
-        else if (choice == "3") {
-            std::cout << "Continuing..." << std::endl;
-        }
-        else {
-            std::cout << "Invalid choice. Please enter 1, 2, or 3." << std::endl;
-        }
-
+        //         } catch (const std::exception& e) {
+        //             std::cerr << "Invalid input: " << e.what() << "\n";
+        //         }
+        //     }
+        // }
+        // else if (choice == "2") {
+        //     send_vel(can);
+        // }
+        // else if (choice == "3") {
+        //     std::cout << "Continuing..." << std::endl;
+        // }
+        // else {
+        //     std::cout << "Invalid choice. Please enter 1, 2, or 3." << std::endl;
+        // }
+        send_vel(can);
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 

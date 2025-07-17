@@ -1,0 +1,16 @@
+<launch>
+  <!-- Robot Data Monitor Launch File -->
+  
+  <!-- Launch the robot data monitor node -->
+  <node name="robot_data_monitor_node" pkg="robot_data_monitor" type="robot_data_monitor_node" output="screen">
+    <!-- Parameters -->
+    <param name="publish_rate" value="10.0" />
+    <param name="monitor_sensors" value="true" />
+    <param name="monitor_navigation" value="true" />
+    <param name="log_level" value="info" />
+  </node>
+
+  <!-- Optional: Launch rviz for visualization -->
+  <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot_data_monitor)/config/monitor.rviz" /> -->
+
+</launch>
