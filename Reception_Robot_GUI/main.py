@@ -1,19 +1,20 @@
 import sys, rclpy
 
-from PyQt6.QtWidgets import QApplication, QMainWindow, QGraphicsScene
-from PyQt6.QtGui import QPixmap, QBrush, QPen
-from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QApplication, QMainWindow
+from PyQt6.QtGui import QPixmap
 
 # pyuic6 Robot_UI.ui -o robot_ui.py
 
 from ui.font_configurator import apply_custom_fonts
 from ui.robot_ui import Ui_MainWindow
+
 from user import handle_login, handle_signup, handle_logout
 from camera_subcriber import CameraSubscriberThread
 from attendance import AttendanceTab
-from battery_manager import BatteryManager
 from attendance_manager import AttendanceManager
+from battery_manager import BatteryManager
 from dataplotting import PlotTab
+from location import LocationTab
 
 
 class MainWindow(QMainWindow):
@@ -26,17 +27,6 @@ class MainWindow(QMainWindow):
 
         # list user
         self.registered_users = [{"username": "admin","password": "123","fullname": "Admin User","phone": "0123456789","verify": "fablab"}]
-
-        # Tạo scene và gán vào QGraphicsView
-        scene = QGraphicsScene()
-        pixmap = QPixmap("resources/Map/map.png")  # Ảnh bản đồ
-        scene.addPixmap(pixmap)
-        self.ui.view_map.setScene(scene)
-
-        # Gợi ý lưu lại để sau này vẽ robot
-        self.map_scene = scene
-        x, y = 150, 120  # Tọa độ robot trên ảnh
-        self.map_scene.addEllipse(x, y, 10, 10, QPen(Qt.GlobalColor.red), QBrush(Qt.GlobalColor.red))
 
 
         # bien trang thai mqtt
@@ -51,6 +41,9 @@ class MainWindow(QMainWindow):
 
         # khoi tao bieu do 
         self.plot_tab = PlotTab(self.ui)
+
+        # khoi tao map
+        self.location_tab = LocationTab(self.ui)
 
         # khoi tao tab diem danh 
         self.attendance_tab = AttendanceTab(self.ui)    # hien giao dien 
