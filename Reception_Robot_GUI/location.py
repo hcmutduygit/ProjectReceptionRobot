@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import QWidget, QGraphicsScene, QGraphicsView, QGraphicsPolygonItem
-from PyQt6.QtGui import QPixmap, QPolygonF, QWheelEvent, QPainter
-from PyQt6.QtCore import QPointF
+from PyQt6.QtGui import QPixmap, QPolygonF, QWheelEvent, QPainter, QBrush, QPen, QColor
+from PyQt6.QtCore import QPointF, Qt
 
 
 class MapGraphicsView(QGraphicsView):
@@ -39,15 +39,17 @@ class LocationTab(QWidget):
 
         # 5. Gan toa do 
         triangle = QPolygonF([
-            QPointF(0, -10),   # Đầu mũi tên
+            QPointF(0, -8),   # Đầu mũi tên
             QPointF(5, 10),
             QPointF(-5, 10)
         ])
 
         robot_item = QGraphicsPolygonItem(triangle)
+        robot_item.setBrush(QBrush(QColor(101, 230, 248)))
+        robot_item.setPen(QPen(Qt.GlobalColor.black, 1))
         self.map_scene.addItem(robot_item)
 
-        x,y,theta = 150,120,90
+        x,y,theta = 0,0,90
         robot_item.setPos(x, y)
         robot_item.setTransformOriginPoint(0, 0)  # Tâm xoay tại điểm gốc hình tam giác
         robot_item.setRotation(theta)
