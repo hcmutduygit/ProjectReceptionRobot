@@ -1,7 +1,8 @@
 import sys, rclpy
 
 from PyQt6.QtWidgets import QApplication, QMainWindow, QGraphicsScene
-from PyQt6.QtGui import QPixmap
+from PyQt6.QtGui import QPixmap, QBrush, QPen
+from PyQt6.QtCore import Qt
 
 # pyuic6 Robot_UI.ui -o robot_ui.py
 
@@ -29,14 +30,13 @@ class MainWindow(QMainWindow):
         # Tạo scene và gán vào QGraphicsView
         scene = QGraphicsScene()
         pixmap = QPixmap("resources/Map/map.png")  # Ảnh bản đồ
-        print(pixmap.isNull())  # Nếu True nghĩa là ảnh không load được
-
         scene.addPixmap(pixmap)
-
         self.ui.view_map.setScene(scene)
 
         # Gợi ý lưu lại để sau này vẽ robot
         self.map_scene = scene
+        x, y = 150, 120  # Tọa độ robot trên ảnh
+        self.map_scene.addEllipse(x, y, 10, 10, QPen(Qt.GlobalColor.red), QBrush(Qt.GlobalColor.red))
 
 
         # bien trang thai mqtt
