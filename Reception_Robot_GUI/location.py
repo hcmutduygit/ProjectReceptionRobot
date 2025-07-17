@@ -21,12 +21,7 @@ class LocationTab(QWidget):
     def __init__(self, ui):
         super().__init__()
         self.ui = ui  # truyền Ui_MainWindow từ file main
-
-        # Tạo scene và gán vào QGraphicsView
-        scene = QGraphicsScene()
-        pixmap = QPixmap("resources/Map/map.png")  # Ảnh bản đồ
-        scene.addPixmap(pixmap)
-        self.ui.view_map.setScene(scene)
+        self.map_scene = QGraphicsScene()
 
         # 1. Lấy layout hiện đang chứa view_map
         layout = self.ui.view_map.parent().layout()
