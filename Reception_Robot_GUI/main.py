@@ -1,7 +1,7 @@
 import sys, rclpy
 
-from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget
-from PyQt6.QtGui import QPixmap, QFont
+from PyQt6.QtWidgets import QApplication, QMainWindow, QGraphicsScene
+from PyQt6.QtGui import QPixmap
 
 # pyuic6 Robot_UI.ui -o robot_ui.py
 
@@ -25,6 +25,18 @@ class MainWindow(QMainWindow):
 
         # list user
         self.registered_users = [{"username": "admin","password": "123","fullname": "Admin User","phone": "0123456789","verify": "fablab"}]
+
+        # Tạo scene và gán vào QGraphicsView
+        scene = QGraphicsScene()
+        pixmap = QPixmap("resources/Map/map.png")  # Ảnh bản đồ
+        print(pixmap.isNull())  # Nếu True nghĩa là ảnh không load được
+
+        scene.addPixmap(pixmap)
+
+        self.ui.view_map.setScene(scene)
+
+        # Gợi ý lưu lại để sau này vẽ robot
+        self.map_scene = scene
 
 
         # bien trang thai mqtt
