@@ -1,4 +1,7 @@
-PyQt6       # giao dien
-paho-mqtt   # truyen tin nhan 
-rclpy       # giao tiep voi ros
+PyQt6       # giao dien 6.4.2
+PyQt6-WebEngine, PyQt6-WebEngine-Qt6  # giao tiep web 6.4.0
+
 pyqtgraph   # ve bieu do 
+
+paho-mqtt   # truyen tin nhan 
+rclpy       # giao tiep voi ros2

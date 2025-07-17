@@ -7,9 +7,9 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-
 from PyQt6.QtGui import QPixmap
 from resources import resources_rc, icon_rc 
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -1652,12 +1652,6 @@ class Ui_MainWindow(object):
         self.gridLayout_7.addWidget(self.menu_camera, 0, 0, 1, 1)
         self.camera = QtWidgets.QVBoxLayout()
         self.camera.setObjectName("camera")
-        self.camera_label = QtWidgets.QLabel(parent=self.Page_Camera)
-        self.camera_label.setText("")
-        self.camera_label.setScaledContents(False)
-        self.camera_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.camera_label.setObjectName("camera_label")
-        self.camera.addWidget(self.camera_label)
         self.gridLayout_7.addLayout(self.camera, 1, 0, 1, 1)
         self.Page.addWidget(self.Page_Camera)
         self.verticalLayout_16.addWidget(self.Page)
@@ -1666,7 +1660,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.Dashboard.setCurrentIndex(1)
-        self.Page.setCurrentIndex(4)
+        self.Page.setCurrentIndex(6)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.setTabOrder(self.Main_btn_tracking, self.Signin_btn_signin)
         MainWindow.setTabOrder(self.Signin_btn_signin, self.Signin_btn_signup)

@@ -15,6 +15,7 @@ from attendance_manager import AttendanceManager
 from battery_manager import BatteryManager
 from dataplotting import PlotTab
 from location import LocationTab
+from camera import CameraTab
 
 
 class MainWindow(QMainWindow):
@@ -37,7 +38,8 @@ class MainWindow(QMainWindow):
         self.battery_manager.start_battery_subscriber()
 
         # khoi tao camera
-        self.camera_sub_thread = None
+        #self.camera_sub_thread = None
+        self.camera_tab = CameraTab(self.ui)
 
         # khoi tao bieu do 
         self.plot_tab = PlotTab(self.ui)
@@ -81,7 +83,7 @@ class MainWindow(QMainWindow):
 
             # Bật process phù hợp
             page_handlers = {
-                self.ui.Page_Camera: self.start_camera,
+                #self.ui.Page_Camera: self.start_camera,
                 #self.ui.Page_tracking: self.start_tracking,...
             }
             handler = page_handlers.get(page_widget)
@@ -101,21 +103,20 @@ class MainWindow(QMainWindow):
     def _handle_logout(self):
         handle_logout(self)        
     
-
+    '''
     def start_camera(self):
-        '''if not hasattr(self, "camera_pub_thread") or self.camera_pub_thread is None:
+        if not hasattr(self, "camera_pub_thread") or self.camera_pub_thread is None:
             self.camera_pub_thread = CameraPublisherThread()
-            self.camera_pub_thread.start()'''
-
+            self.camera_pub_thread.start()
         if not hasattr(self, "camera_sub_thread") or self.camera_sub_thread is None:
-            #self.camera_sub_thread = CameraSubscriberThread(self.ui.camera_label)
+            self.camera_sub_thread = CameraSubscriberThread(self.ui.camera_label)
             self.camera_sub_thread.ImageUpdate.connect(self.update_camera_frame)
             self.camera_sub_thread.start()
 
     def stop_camera(self):
-        '''if self.camera_pub_thread:
+        if self.camera_pub_thread:
             self.camera_pub_thread.stop()
-            self.camera_pub_thread = None'''
+            self.camera_pub_thread = None
         if self.camera_sub_thread:
             self.camera_sub_thread.stop()
             self.camera_sub_thread = None
@@ -123,9 +124,10 @@ class MainWindow(QMainWindow):
     def update_camera_frame(self, image):
         if self.ui.Page.currentWidget() == self.ui.Page_Camera:
             self.ui.camera_label.setPixmap(QPixmap.fromImage(image))
+    '''
 
     def _shutdown_all_services(self):
-        self.stop_camera()
+        #self.stop_camera()
         self.battery_manager.stop_battery_subscriber()
         self.attendance_manager.stop_attendance_subscriber()
         rclpy.shutdown()

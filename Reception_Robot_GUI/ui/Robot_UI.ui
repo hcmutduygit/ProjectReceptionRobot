@@ -1517,7 +1517,7 @@ border-radius: 20px;
           <number>0</number>
          </property>
          <property name="currentIndex">
-          <number>4</number>
+          <number>6</number>
          </property>
          <widget class="QWidget" name="Page_signin">
           <property name="font">
@@ -3852,21 +3852,7 @@ color: rgb(0, 41, 77);
             </widget>
            </item>
            <item row="1" column="0">
-            <layout class="QVBoxLayout" name="camera">
-             <item>
-              <widget class="QLabel" name="camera_label">
-               <property name="text">
-                <string/>
-               </property>
-               <property name="scaledContents">
-                <bool>false</bool>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-            </layout>
+            <layout class="QVBoxLayout" name="camera"/>
            </item>
           </layout>
          </widget>
