@@ -89,7 +89,7 @@ class LocationTab(QWidget):
         self.robot_item = QGraphicsPolygonItem(triangle)
         self.robot_item.setBrush(QBrush(QColor(101, 230, 248)))
         self.robot_item.setPen(QPen(Qt.GlobalColor.black, 1))
-        self.robot_item.setTransformOriginPoint(0, 0)
+        self.robot_item.setTransformOriginPoint(0, 2)
         self.map_scene.addItem(self.robot_item)
 
         # Lưu trữ vị trí mới nhất
@@ -119,7 +119,7 @@ class LocationTab(QWidget):
         view_size = self.ui.view_map.viewport().size()
         scale_x = view_size.width() / pixmap.width()
         scale_y = view_size.height() / pixmap.height()
-        scale = min(scale_x+2, 2+scale_y)
+        scale = min(scale_x, scale_y)
 
         # Scale thủ công
         self.ui.view_map.resetTransform()
@@ -185,12 +185,17 @@ class LocationTab(QWidget):
         # Điều chỉnh cho Qt và ảnh xoay 90 độ
         px = self.map_width - px_raw
         py = self.map_height - py_raw
-        # Tính phạm vi hợp lệ dựa trên kích thước bản đồ
+        # Thêm offset thủ công (có thể điều chỉnh giá trị này)
+        offset_x = -10  
+        offset_y = -39  
+        px += offset_x
+        py += offset_y
+        '''# Tính phạm vi hợp lệ dựa trên kích thước bản đồ
         map_max_x = self.map_width
         map_max_y = self.map_height
         # Giới hạn tọa độ trong kích thước bản đồ
         px = max(0, min(px, map_max_x))
-        py = max(0, min(py, map_max_y))
+        py = max(0, min(py, map_max_y))'''
         #print(f"[SIM] x={x:.2f}, y={y:.2f}, px_raw={px_raw:.1f}, py_raw={py_raw:.1f}, "f"px={px:.1f}, py={py:.1f}, θ={theta:.1f}")
         self.robot_item.setPos(px, py)
         self.robot_item.setRotation(-theta)  # Giữ nguyên theta
