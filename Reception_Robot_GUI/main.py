@@ -1,7 +1,6 @@
 import sys, rclpy, threading
 
 from PyQt6.QtWidgets import QApplication, QMainWindow
-from PyQt6.QtGui import QPixmap
 
 # pyuic6 Robot_UI.ui -o robot_ui.py
 from ui.font_configurator import apply_custom_fonts
@@ -13,7 +12,7 @@ from battery_manager import BatteryManager
 from dataplotting import PlotTab
 from location import LocationTab
 from camera import CameraTab
-from location import MapGuiNode  # Thêm MapGuiNode từ location
+from location import MapGuiNode  
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
