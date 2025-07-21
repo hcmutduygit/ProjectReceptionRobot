@@ -3,9 +3,9 @@ import sys, rclpy, threading
 from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget
 
 # pyuic6 Robot_UI.ui -o robot_ui.py
-from ui.font_configurator import apply_custom_fonts
+from ui.font_configurator import apply_custom_fonts, apply_custom_fonts_2
 from ui.login import Ui_Login
-from ui.robot import Ui_Form_3
+from ui.robot import Ui_Form
 from user import handle_login, handle_signup, handle_logout
 from attendance import AttendanceTab
 from attendance_manager import AttendanceManager
@@ -26,9 +26,10 @@ class LoginPage(QWidget):
 class RobotPage(QWidget):
     def __init__(self):
         super().__init__()
-        self.ui = Ui_Form_3()
+        self.ui = Ui_Form()
         self.ui.setupUi(self)
         self.resize(950, 630)
+        apply_custom_fonts_2(self.ui)
 
 
 class MainWindow(QMainWindow):

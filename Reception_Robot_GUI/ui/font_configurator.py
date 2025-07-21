@@ -46,3 +46,25 @@ def apply_custom_fonts(ui):
     set_regular(ui.label1_3)
     set_bold(ui.label_7)
     set_bold(ui.label_18)
+
+
+def apply_custom_fonts_2(ui):  
+    #thanh cong cu
+    set_bold(ui.label_mqtt)
+    set_bold(ui.label_battery)
+
+    #page_attendance
+    set_regular(ui.label)
+    set_regular(ui.label_3)
+    set_regular(ui.label_5)
+    set_regular(ui.label_6)
+    set_bold(ui.table_attendance)
+
+    #page_control 
+    set_regular(ui.label1_3)
+    set_bold(ui.label_left)
+    set_bold(ui.label_right)
+    set_regular(ui.label1_4)
+    set_bold(ui.label_7)
+    set_bold(ui.label_18)
+    set_bold(ui.label_2)
