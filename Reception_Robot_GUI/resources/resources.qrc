@@ -2,13 +2,13 @@
   <qresource prefix="Icons">
     <file>Icons/battery.svg</file>
     <file>Icons/mqtt_icon.svg</file>
-    <file>Icons/Check_icon.png</file>
     <file>Icons/menu.svg</file>
-    <file>Icons/Orders_icon_off.png</file>
-    <file>Icons/Orders_icon_on.png</file>
+    <file>Icons/chevron-down.svg</file>
+    <file>Icons/chevron-left.svg</file>
+    <file>Icons/chevron-right.svg</file>
+    <file>Icons/chevron-up.svg</file>
     <file>Icons/Refresh_icon.png</file>
     <file>Icons/search.svg</file>
-    <file>Icons/Uncheck_icon.png</file>
   </qresource>
   <qresource prefix="map">
     <file>Map/map.pgm</file>

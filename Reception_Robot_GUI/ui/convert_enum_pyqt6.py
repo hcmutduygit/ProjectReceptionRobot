@@ -1,9 +1,5 @@
 import re
 
-'''
-from PyQt6.QtGui import QPixmap
-from resources import resources_rc, icon_rc 
-'''
 # Danh sách chuyển đổi enum từ PyQt5 → PyQt6 
 replacements = {
     # Qt enums
@@ -90,7 +86,7 @@ def convert_pyqt6_enums(code: str) -> str:
 
 # Dùng thử
 if __name__ == "__main__":
-    input_file = "robot_ui.py"  # hoặc bất kỳ file .py nào bạn muốn sửa
+    input_file = "robot_ui_4.py"  # hoặc bất kỳ file .py nào bạn muốn sửa
     with open(input_file, "r", encoding="utf-8") as f:
         original_code = f.read()
 
@@ -100,3 +96,8 @@ if __name__ == "__main__":
         f.write(converted_code)
 
     print(f"Doi enum PyQt6 trong file: {input_file}")
+
+'''
+from PyQt6.QtGui import QPixmap
+from resources import resources_rc, icon_rc 
+'''
