@@ -71,12 +71,12 @@ class LocationTab(QWidget):
         self.ui = ui
         self.map_scene = QGraphicsScene()
 
-        layout = self.ui.view_map.parent().layout()
-        self.ui.view_map.setParent(None)
+        layout = self.ui.view_map_2.parent().layout()
+        self.ui.view_map_2.setParent(None)
 
-        self.ui.view_map = MapGraphicsView()
-        layout.addWidget(self.ui.view_map)
-        self.ui.view_map.setScene(self.map_scene)
+        self.ui.view_map_2 = MapGraphicsView()
+        layout.addWidget(self.ui.view_map_2)
+        self.ui.view_map_2.setScene(self.map_scene)
 
         self.load_map("Reception_Robot_GUI/resources/Map/map_2.png")
 
@@ -116,14 +116,14 @@ class LocationTab(QWidget):
         self.map_scene.setSceneRect(0, 0, pixmap.width(), pixmap.height())
         
         # Lấy kích thước của view để tính scale
-        view_size = self.ui.view_map.viewport().size()
+        view_size = self.ui.view_map_2.viewport().size()
         scale_x = view_size.width() / pixmap.width()
         scale_y = view_size.height() / pixmap.height()
         scale = min(scale_x, scale_y)
 
         # Scale thủ công
-        self.ui.view_map.resetTransform()
-        self.ui.view_map.scale(scale, scale)
+        self.ui.view_map_2.resetTransform()
+        self.ui.view_map_2.scale(scale, scale)
 
         # Lưu thông tin ảnh
         self.map_width = pixmap.width()

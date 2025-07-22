@@ -21,8 +21,8 @@ class PlotTab(QWidget):
         self.plot_widget.setYRange(-1.5, 1.5)
         self.plot_widget.setXRange(0, 10)
 
-        # Tạo layout mới (sử dụng data_container từ UI)
-        layout = self.ui.data_container
+        # Tạo layout mới (sử dụng data1_container từ UI)
+        layout = self.ui.data1_container_2
         for i in reversed(range(layout.count())):
             layout.itemAt(i).widget().setParent(None)
         layout.addWidget(self.plot_widget)
@@ -41,8 +41,8 @@ class PlotTab(QWidget):
             self.y_sin.append(np.sin(2 * np.pi * t))
             self.y_cos.append(np.cos(2 * np.pi * t))
 
-        self.curve_sin = self.plot_widget.plot(pen=pg.mkPen('y', width=2), name='sin')
-        self.curve_cos = self.plot_widget.plot(pen=pg.mkPen('c', width=2), name='cos')
+        self.curve_sin = self.plot_widget.plot(pen=pg.mkPen('r', width=2), name='sin')
+        self.curve_cos = self.plot_widget.plot(pen=pg.mkPen('b', width=2), name='cos')
 
         # Set initial data
         self.curve_sin.setData(list(self.x), list(self.y_sin))

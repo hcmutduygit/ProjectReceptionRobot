@@ -28,43 +28,24 @@ def apply_custom_fonts(ui):
     set_regular(ui.Signup_username)
     set_regular(ui.Signup_btn_signup)
 
-    #page_attendance
-    set_bold(ui.label_28)
-    set_regular(ui.label)
-    set_regular(ui.label_3)
-    set_regular(ui.label_5)
-    set_regular(ui.label_6)
-    set_bold(ui.table_attendance)
-
-    #page_camera, live telemetry, tracking
-    set_bold(ui.label_26)
-    set_bold(ui.label_27)
-    set_bold(ui.label_30)
-
-    #page_robotstatus
-    set_bold(ui.label_29)
-    set_regular(ui.label1_3)
-    set_bold(ui.label_7)
-    set_bold(ui.label_18)
-
-
-def apply_custom_fonts_2(ui):  
     #thanh cong cu
-    set_bold(ui.label_mqtt)
-    set_bold(ui.label_battery)
+    set_bold(ui.label_mqtt_3)
+    set_bold(ui.label_battery_3)
+    set_bold(ui.comboBox_2)
 
     #page_attendance
-    set_regular(ui.label)
-    set_regular(ui.label_3)
-    set_regular(ui.label_5)
-    set_regular(ui.label_6)
-    set_bold(ui.table_attendance)
+    set_regular(ui.label_22)
+    set_regular(ui.label_15)
+    set_regular(ui.label_16)
+    set_regular(ui.label_17)
+    set_bold(ui.table_attendance_2)
 
     #page_control 
-    set_regular(ui.label1_3)
-    set_bold(ui.label_left)
-    set_bold(ui.label_right)
-    set_regular(ui.label1_4)
-    set_bold(ui.label_7)
-    set_bold(ui.label_18)
-    set_bold(ui.label_2)
+    set_regular(ui.label1_5)
+    set_bold(ui.label_left_2)
+    set_bold(ui.label_right_2)
+    set_regular(ui.label1_6)
+    set_bold(ui.label_13)
+    set_bold(ui.label_19)
+    set_bold(ui.label_14)
+    set_bold(ui.mode_select_2)

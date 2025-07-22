@@ -86,7 +86,7 @@ def convert_pyqt6_enums(code: str) -> str:
 
 # Dùng thử
 if __name__ == "__main__":
-    input_file = "robot.py"  # hoặc bất kỳ file .py nào bạn muốn sửa
+    input_file = "main_ui.py"  # hoặc bất kỳ file .py nào bạn muốn sửa
     with open(input_file, "r", encoding="utf-8") as f:
         original_code = f.read()
 

@@ -8,25 +8,25 @@ class AttendanceTab(QWidget):
         self.ui = ui  # truyền Ui_MainWindow từ file main
 
         # font va cac thuoc tinh khac 
-        font = QFont("Roboto", 13)
-        self.ui.table_attendance.setFont(font)
+        font = QFont("Roboto", 15)
+        self.ui.table_attendance_2.setFont(font)
         
-        self.ui.table_attendance.horizontalHeader().setFixedHeight(40)
-        self.ui.table_attendance.verticalHeader().setDefaultSectionSize(40)
+        self.ui.table_attendance_2.horizontalHeader().setFixedHeight(40)
+        self.ui.table_attendance_2.verticalHeader().setDefaultSectionSize(40)
 
-        header = self.ui.table_attendance.horizontalHeader()
+        header = self.ui.table_attendance_2.horizontalHeader()
         # do rong cot 
-        for i in range(self.ui.table_attendance.columnCount() - 1):
+        for i in range(self.ui.table_attendance_2.columnCount() - 1):
             header.setSectionResizeMode(i, QHeaderView.ResizeMode.Fixed)
             header.resizeSection(i, 200)
-        header.setSectionResizeMode(self.ui.table_attendance.columnCount() - 1, QHeaderView.ResizeMode.Stretch)
+        header.setSectionResizeMode(self.ui.table_attendance_2.columnCount() - 1, QHeaderView.ResizeMode.Stretch)
         # so cot va ten 
-        self.ui.table_attendance.setColumnCount(6)
-        self.ui.table_attendance.setHorizontalHeaderLabels([
+        self.ui.table_attendance_2.setColumnCount(6)
+        self.ui.table_attendance_2.setHorizontalHeaderLabels([
             "Employee ID", "Name", "Department", "Status","Check-in Time", "Email"
                 ])
                 
-        self.ui.table_attendance.setStyleSheet("""
+        self.ui.table_attendance_2.setStyleSheet("""
             QHeaderView::section {
                 font-weight: bold;
                 font-size: 13pt;}""")
@@ -43,21 +43,21 @@ class AttendanceTab(QWidget):
         ]
 
         # Gan nut search 
-        self.ui.search_btn.clicked.connect(self.search_attendance)
+        self.ui.search_btn_2.clicked.connect(self.search_attendance)
 
         # Hien thi bang 
         self.load_attendance_table(self.attendance_data)
 
     # hien bang 
     def load_attendance_table(self, data):
-        self.ui.table_attendance.setRowCount(len(data))
+        self.ui.table_attendance_2.setRowCount(len(data))
         for row, entry in enumerate(data):
-            self.ui.table_attendance.setItem(row, 0, QTableWidgetItem(entry["id"]))
-            self.ui.table_attendance.setItem(row, 1, QTableWidgetItem(entry["name"]))
-            self.ui.table_attendance.setItem(row, 2, QTableWidgetItem(entry["dept"]))
-            self.ui.table_attendance.setItem(row, 3, QTableWidgetItem(entry.get("status") or "—"))
-            self.ui.table_attendance.setItem(row, 4, QTableWidgetItem(entry.get("time") or "—"))
-            self.ui.table_attendance.setItem(row, 5, QTableWidgetItem(entry["email"]))
+            self.ui.table_attendance_2.setItem(row, 0, QTableWidgetItem(entry["id"]))
+            self.ui.table_attendance_2.setItem(row, 1, QTableWidgetItem(entry["name"]))
+            self.ui.table_attendance_2.setItem(row, 2, QTableWidgetItem(entry["dept"]))
+            self.ui.table_attendance_2.setItem(row, 3, QTableWidgetItem(entry.get("status") or "—"))
+            self.ui.table_attendance_2.setItem(row, 4, QTableWidgetItem(entry.get("time") or "—"))
+            self.ui.table_attendance_2.setItem(row, 5, QTableWidgetItem(entry["email"]))
         
     # ham cap nhat trang thai 
     def update_status(self, name=None, status=None, time=None):
@@ -71,10 +71,10 @@ class AttendanceTab(QWidget):
 
     # ham search 
     def search_attendance(self):
-        id_text = self.ui.lineEdit.text().strip().lower()
-        name_text = self.ui.lineEdit_2.text().strip().lower()
-        dept_text = self.ui.lineEdit_3.text().strip().lower()
-        email_text = self.ui.lineEdit_4.text().strip().lower()
+        id_text = self.ui.lineEdit_6.text().strip().lower()
+        name_text = self.ui.lineEdit_5.text().strip().lower()
+        dept_text = self.ui.lineEdit_7.text().strip().lower()
+        email_text = self.ui.lineEdit_8.text().strip().lower()
 
         filtered = []
         for entry in self.attendance_data:

@@ -15,8 +15,8 @@ class CameraTab(QWidget):
         self.browser.setUrl(QUrl("http://192.168.0.128:5000/"))  # web tu may anh 
 
         # Gan web 
-        layout = self.ui.camera.layout()
+        layout = self.ui.camera_2.layout()
         if layout is None:
-            layout = QVBoxLayout(self.ui.camera)
-            self.ui.camera.setLayout(layout)
+            layout = QVBoxLayout(self.ui.camera_2)
+            self.ui.camera_2.setLayout(layout)
         layout.addWidget(self.browser)

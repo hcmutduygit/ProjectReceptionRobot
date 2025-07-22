@@ -67,14 +67,3 @@ def handle_signup(ui, registered_users):
     return True
 
 
-def handle_logout(main_window):
-    reply = QMessageBox.question(
-        main_window,
-        "Confirm Logout",
-        "Are you sure you want to log out?",
-        QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
-    )
-    if reply == QMessageBox.StandardButton.Yes:
-        main_window._shutdown_all_services()
-        main_window.ui.Page.setCurrentWidget(main_window.ui.Page_signin)
-        main_window.ui.Dashboard.setCurrentWidget(main_window.ui.Dashboard_signin)
