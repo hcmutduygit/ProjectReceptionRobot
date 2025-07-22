@@ -12,7 +12,7 @@ class CameraTab(QWidget):
 
         # Tạo widget web
         self.browser = QWebEngineView()
-        self.browser.setUrl(QUrl("http://192.168.0.128:5000/"))  # web tu may anh 
+        self.browser.setUrl(QUrl("https://music.youtube.com/watch?v=QF7v2FjlTyk&list=RDAMVMPtubtUTZI7A"))  # web tu may anh http://192.168.0.128:5000/
 
         # Gan web 
         layout = self.ui.camera_2.layout()

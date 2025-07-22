@@ -2512,6 +2512,10 @@ QComboBox::drop-down {
         border: 0px;
         width: 0px;
     }
+QComboBox::item:hover {
+    background-color: #e0e0e0;
+    color: black; 
+}
  </string>
              </property>
              <property name="editable">
@@ -2714,7 +2718,7 @@ color: rgb(0, 41, 77);</string>
            <number>0</number>
           </property>
           <widget class="QWidget" name="page_control_2">
-           <layout class="QHBoxLayout" name="horizontalLayout_17">
+           <layout class="QHBoxLayout" name="horizontalLayout_17" stretch="3,2">
             <property name="spacing">
              <number>0</number>
             </property>
@@ -2732,6 +2736,12 @@ color: rgb(0, 41, 77);</string>
             </property>
             <item>
              <widget class="QWidget" name="widget_13" native="true">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
               <layout class="QVBoxLayout" name="verticalLayout_19">
                <property name="spacing">
                 <number>30</number>
@@ -2787,7 +2797,7 @@ color: rgb(0, 41, 77);</string>
                </item>
                <item>
                 <widget class="QWidget" name="widget_14" native="true">
-                 <layout class="QHBoxLayout" name="horizontalLayout_18">
+                 <layout class="QHBoxLayout" name="horizontalLayout_18" stretch="1,1">
                   <property name="spacing">
                    <number>30</number>
                   </property>
@@ -3218,6 +3228,12 @@ border: 3px solid rgb(0, 41, 77);
             </item>
             <item>
              <widget class="QWidget" name="widget_15" native="true">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
               <layout class="QVBoxLayout" name="verticalLayout_21" stretch="0,0,0">
                <property name="spacing">
                 <number>20</number>
@@ -3266,15 +3282,9 @@ border: 3px solid rgb(0, 41, 77);
                    <height>50</height>
                   </size>
                  </property>
-                 <layout class="QHBoxLayout" name="horizontalLayout_19">
-                  <property name="leftMargin">
-                   <number>9</number>
-                  </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="1,0,1">
                   <property name="topMargin">
                    <number>0</number>
-                  </property>
-                  <property name="rightMargin">
-                   <number>9</number>
                   </property>
                   <property name="bottomMargin">
                    <number>0</number>
@@ -3289,73 +3299,89 @@ border: 3px solid rgb(0, 41, 77);
                     </property>
                     <property name="sizeHint" stdset="0">
                      <size>
-                      <width>40</width>
+                      <width>100</width>
                       <height>20</height>
                      </size>
                     </property>
                    </spacer>
                   </item>
                   <item>
-                   <widget class="QLabel" name="label_14">
-                    <property name="maximumSize">
-                     <size>
-                      <width>60</width>
-                      <height>16777215</height>
-                     </size>
-                    </property>
-                    <property name="font">
-                     <font>
-                      <family>Roboto</family>
-                      <pointsize>14</pointsize>
-                      <weight>75</weight>
-                      <bold>true</bold>
-                     </font>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true">
+                   <widget class="QWidget" name="widget_2" native="true">
+                    <layout class="QHBoxLayout" name="horizontalLayout_3">
+                     <property name="topMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <widget class="QLabel" name="label_14">
+                       <property name="maximumSize">
+                        <size>
+                         <width>60</width>
+                         <height>16777215</height>
+                        </size>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <family>Roboto</family>
+                         <pointsize>14</pointsize>
+                         <weight>75</weight>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">
 color: rgb(0, 41, 77);</string>
-                    </property>
-                    <property name="text">
-                     <string>MODE:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QComboBox" name="mode_select_2">
-                    <property name="minimumSize">
-                     <size>
-                      <width>300</width>
-                      <height>40</height>
-                     </size>
-                    </property>
-                    <property name="font">
-                     <font>
-                      <family>Roboto</family>
-                      <pointsize>14</pointsize>
-                      <weight>75</weight>
-                      <bold>true</bold>
-                     </font>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true">border-radius:  13px;
+                       </property>
+                       <property name="text">
+                        <string>MODE:</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QComboBox" name="mode_select_2">
+                       <property name="minimumSize">
+                        <size>
+                         <width>300</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <family>Roboto</family>
+                         <pointsize>14</pointsize>
+                         <weight>75</weight>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">border-radius:  13px;
 background-color: rgb(255, 255, 255);
 color: rgb(0, 41, 77);
 QComboBox::drop-down {
         border: 0px;
         width: 0px;
     }
- </string>
-                    </property>
-                    <item>
-                     <property name="text">
-                      <string>Manual</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Auto</string>
-                     </property>
-                    </item>
+ 
+QComboBox::item:hover {
+    background-color: #e0e0e0;
+    color: black; 
+}</string>
+                       </property>
+                       <item>
+                        <property name="text">
+                         <string>Manual</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Auto</string>
+                        </property>
+                       </item>
+                      </widget>
+                     </item>
+                    </layout>
                    </widget>
                   </item>
                   <item>
@@ -3368,7 +3394,7 @@ QComboBox::drop-down {
                     </property>
                     <property name="sizeHint" stdset="0">
                      <size>
-                      <width>250</width>
+                      <width>100</width>
                       <height>20</height>
                      </size>
                     </property>
@@ -3449,6 +3475,14 @@ QComboBox::drop-down {
                           <horstretch>0</horstretch>
                           <verstretch>0</verstretch>
                          </sizepolicy>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true">QPushButton:hover {
+	border-color: #4c96f7;
+}
+QPushButton {
+    border: 2px solid rgb(0, 41, 77); 
+}</string>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_12">
                          <property name="topMargin">

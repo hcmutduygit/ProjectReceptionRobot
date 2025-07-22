@@ -1013,6 +1013,10 @@ class Ui_MainWindow(object):
 "        border: 0px;\n"
 "        width: 0px;\n"
 "    }\n"
+"QComboBox::item:hover {\n"
+"    background-color: #e0e0e0;\n"
+"    color: black; \n"
+"}\n"
 " ")
         self.comboBox_2.setEditable(False)
         self.comboBox_2.setObjectName("comboBox_2")
@@ -1097,6 +1101,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_17.setSpacing(0)
         self.horizontalLayout_17.setObjectName("horizontalLayout_17")
         self.widget_13 = QtWidgets.QWidget(parent=self.page_control_2)
+        self.widget_13.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.widget_13.setObjectName("widget_13")
         self.verticalLayout_19 = QtWidgets.QVBoxLayout(self.widget_13)
         self.verticalLayout_19.setContentsMargins(80, 30, 50, 15)
@@ -1304,9 +1309,12 @@ class Ui_MainWindow(object):
         self.gridLayout_15.addWidget(self.right_status_2, 1, 2, 1, 1)
         self.verticalLayout_28.addWidget(self.frame_14)
         self.horizontalLayout_18.addWidget(self.locker_2)
+        self.horizontalLayout_18.setStretch(0, 1)
+        self.horizontalLayout_18.setStretch(1, 1)
         self.verticalLayout_19.addWidget(self.widget_14)
         self.horizontalLayout_17.addWidget(self.widget_13)
         self.widget_15 = QtWidgets.QWidget(parent=self.page_control_2)
+        self.widget_15.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.widget_15.setObjectName("widget_15")
         self.verticalLayout_21 = QtWidgets.QVBoxLayout(self.widget_15)
         self.verticalLayout_21.setContentsMargins(0, 30, 50, 15)
@@ -1322,12 +1330,17 @@ class Ui_MainWindow(object):
         self.widget_16.setMinimumSize(QtCore.QSize(0, 50))
         self.widget_16.setMaximumSize(QtCore.QSize(16777215, 50))
         self.widget_16.setObjectName("widget_16")
-        self.horizontalLayout_19 = QtWidgets.QHBoxLayout(self.widget_16)
-        self.horizontalLayout_19.setContentsMargins(9, 0, 9, 0)
-        self.horizontalLayout_19.setObjectName("horizontalLayout_19")
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_19.addItem(spacerItem2)
-        self.label_14 = QtWidgets.QLabel(parent=self.widget_16)
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.widget_16)
+        self.horizontalLayout_4.setContentsMargins(-1, 0, -1, 0)
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        spacerItem2 = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_4.addItem(spacerItem2)
+        self.widget_2 = QtWidgets.QWidget(parent=self.widget_16)
+        self.widget_2.setObjectName("widget_2")
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.widget_2)
+        self.horizontalLayout_3.setContentsMargins(-1, 0, -1, 0)
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        self.label_14 = QtWidgets.QLabel(parent=self.widget_2)
         self.label_14.setMaximumSize(QtCore.QSize(60, 16777215))
         font = QtGui.QFont()
         font.setFamily("Roboto")
@@ -1338,8 +1351,8 @@ class Ui_MainWindow(object):
         self.label_14.setStyleSheet("\n"
 "color: rgb(0, 41, 77);")
         self.label_14.setObjectName("label_14")
-        self.horizontalLayout_19.addWidget(self.label_14)
-        self.mode_select_2 = QtWidgets.QComboBox(parent=self.widget_16)
+        self.horizontalLayout_3.addWidget(self.label_14)
+        self.mode_select_2 = QtWidgets.QComboBox(parent=self.widget_2)
         self.mode_select_2.setMinimumSize(QtCore.QSize(300, 40))
         font = QtGui.QFont()
         font.setFamily("Roboto")
@@ -1354,13 +1367,20 @@ class Ui_MainWindow(object):
 "        border: 0px;\n"
 "        width: 0px;\n"
 "    }\n"
-" ")
+" \n"
+"QComboBox::item:hover {\n"
+"    background-color: #e0e0e0;\n"
+"    color: black; \n"
+"}")
         self.mode_select_2.setObjectName("mode_select_2")
         self.mode_select_2.addItem("")
         self.mode_select_2.addItem("")
-        self.horizontalLayout_19.addWidget(self.mode_select_2)
-        spacerItem3 = QtWidgets.QSpacerItem(250, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_19.addItem(spacerItem3)
+        self.horizontalLayout_3.addWidget(self.mode_select_2)
+        self.horizontalLayout_4.addWidget(self.widget_2)
+        spacerItem3 = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_4.addItem(spacerItem3)
+        self.horizontalLayout_4.setStretch(0, 1)
+        self.horizontalLayout_4.setStretch(2, 1)
         self.verticalLayout_21.addWidget(self.widget_16)
         self.robot_mode_2 = QtWidgets.QStackedWidget(parent=self.widget_15)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Ignored, QtWidgets.QSizePolicy.Policy.Ignored)
@@ -1395,6 +1415,12 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.widget_18.sizePolicy().hasHeightForWidth())
         self.widget_18.setSizePolicy(sizePolicy)
+        self.widget_18.setStyleSheet("QPushButton:hover {\n"
+"    border-color: #4c96f7;\n"
+"}\n"
+"QPushButton {\n"
+"    border: 2px solid rgb(0, 41, 77); \n"
+"}")
         self.widget_18.setObjectName("widget_18")
         self.gridLayout_12 = QtWidgets.QGridLayout(self.widget_18)
         self.gridLayout_12.setContentsMargins(-1, 0, -1, -1)
@@ -1470,6 +1496,8 @@ class Ui_MainWindow(object):
         self.robot_mode_2.addWidget(self.page_6)
         self.verticalLayout_21.addWidget(self.robot_mode_2)
         self.horizontalLayout_17.addWidget(self.widget_15)
+        self.horizontalLayout_17.setStretch(0, 3)
+        self.horizontalLayout_17.setStretch(1, 2)
         self.stackedWidget_2.addWidget(self.page_control_2)
         self.page_attendance_2 = QtWidgets.QWidget()
         self.page_attendance_2.setStyleSheet("\n"
