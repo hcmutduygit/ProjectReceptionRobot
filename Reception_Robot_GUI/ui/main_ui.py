@@ -1009,6 +1009,7 @@ class Ui_MainWindow(object):
         self.comboBox_2.setFont(font)
         self.comboBox_2.setStyleSheet("border-radius:  15px;\n"
 "color: rgb(0, 41, 77);\n"
+"padding-left: 15px;\n"
 "QComboBox::drop-down {\n"
 "        border: 0px;\n"
 "        width: 0px;\n"
@@ -1338,7 +1339,8 @@ class Ui_MainWindow(object):
         self.widget_2 = QtWidgets.QWidget(parent=self.widget_16)
         self.widget_2.setObjectName("widget_2")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.widget_2)
-        self.horizontalLayout_3.setContentsMargins(-1, 0, -1, 0)
+        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_3.setSpacing(15)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.label_14 = QtWidgets.QLabel(parent=self.widget_2)
         self.label_14.setMaximumSize(QtCore.QSize(60, 16777215))
@@ -1363,6 +1365,7 @@ class Ui_MainWindow(object):
         self.mode_select_2.setStyleSheet("border-radius:  13px;\n"
 "background-color: rgb(255, 255, 255);\n"
 "color: rgb(0, 41, 77);\n"
+"padding-left: 10px;\n"
 "QComboBox::drop-down {\n"
 "        border: 0px;\n"
 "        width: 0px;\n"
@@ -1376,6 +1379,8 @@ class Ui_MainWindow(object):
         self.mode_select_2.addItem("")
         self.mode_select_2.addItem("")
         self.horizontalLayout_3.addWidget(self.mode_select_2)
+        self.horizontalLayout_3.setStretch(0, 1)
+        self.horizontalLayout_3.setStretch(1, 1)
         self.horizontalLayout_4.addWidget(self.widget_2)
         spacerItem3 = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem3)
