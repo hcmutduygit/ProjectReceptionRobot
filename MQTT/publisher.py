@@ -5,11 +5,11 @@ import time
 import threading
 
 # Define Variables
-MQTT_HOST = "127.0.0.1" #"192.168.0.200"
+MQTT_HOST = "192.168.0.130" #"192.168.0.200"
 MQTT_PORT = 1883
 MQTT_KEEPALIVE_INTERVAL = 5
-MQTT_TOPIC = "hello/nigga"
-MQTT_MSG = "Hello MQTT"
+MQTT_TOPIC = "robot/attendance"
+MQTT_MSG = "Ky"
 
 # Define on_connect event Handler
 def on_connect(mosq, obj, rc):
