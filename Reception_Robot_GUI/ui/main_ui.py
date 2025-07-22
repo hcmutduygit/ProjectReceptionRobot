@@ -953,6 +953,7 @@ class Ui_MainWindow(object):
         self.status_bar_2 = QtWidgets.QFrame(parent=self.robot)
         self.status_bar_2.setStyleSheet("#status_bar_2 {\n"
 "background-color: qlineargradient(spread: pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb(4, 3, 47), stop:0.5 rgb(86, 80, 140), stop:1 rgb(114, 159, 207));\n"
+"color: rgb(0, 41, 77);\n"
 "}")
         self.status_bar_2.setFrameShape(QtWidgets.QFrame.Shape.NoFrame)
         self.status_bar_2.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
@@ -1025,7 +1026,8 @@ class Ui_MainWindow(object):
         self.widget_11 = QtWidgets.QWidget(parent=self.status_bar_2)
         self.widget_11.setMaximumSize(QtCore.QSize(16777215, 50))
         self.widget_11.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"border-radius:  15px;")
+"border-radius:  15px;\n"
+"color: rgb(0, 41, 77);")
         self.widget_11.setObjectName("widget_11")
         self.horizontalLayout_15 = QtWidgets.QHBoxLayout(self.widget_11)
         self.horizontalLayout_15.setContentsMargins(-1, 0, -1, 0)
@@ -1333,6 +1335,8 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.label_14.setFont(font)
+        self.label_14.setStyleSheet("\n"
+"color: rgb(0, 41, 77);")
         self.label_14.setObjectName("label_14")
         self.horizontalLayout_19.addWidget(self.label_14)
         self.mode_select_2 = QtWidgets.QComboBox(parent=self.widget_16)
@@ -1345,6 +1349,7 @@ class Ui_MainWindow(object):
         self.mode_select_2.setFont(font)
         self.mode_select_2.setStyleSheet("border-radius:  13px;\n"
 "background-color: rgb(255, 255, 255);\n"
+"color: rgb(0, 41, 77);\n"
 "QComboBox::drop-down {\n"
 "        border: 0px;\n"
 "        width: 0px;\n"
@@ -1406,7 +1411,7 @@ class Ui_MainWindow(object):
         icon = QtGui.QIcon()
         icon.addPixmap(QPixmap(":/Icons/Icons/chevron-down.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton_7.setIcon(icon)
-        self.pushButton_7.setIconSize(QtCore.QSize(80, 80))
+        self.pushButton_7.setIconSize(QtCore.QSize(90, 90))
         self.pushButton_7.setObjectName("pushButton_7")
         self.gridLayout_12.addWidget(self.pushButton_7, 1, 1, 1, 1)
         spacerItem6 = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -1426,7 +1431,7 @@ class Ui_MainWindow(object):
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QPixmap(":/Icons/Icons/chevron-up.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton_5.setIcon(icon1)
-        self.pushButton_5.setIconSize(QtCore.QSize(80, 80))
+        self.pushButton_5.setIconSize(QtCore.QSize(90, 90))
         self.pushButton_5.setObjectName("pushButton_5")
         self.gridLayout_12.addWidget(self.pushButton_5, 0, 1, 1, 1)
         self.pushButton_8 = QtWidgets.QPushButton(parent=self.widget_18)
@@ -1439,7 +1444,7 @@ class Ui_MainWindow(object):
         icon2 = QtGui.QIcon()
         icon2.addPixmap(QPixmap(":/Icons/Icons/chevron-right.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton_8.setIcon(icon2)
-        self.pushButton_8.setIconSize(QtCore.QSize(80, 80))
+        self.pushButton_8.setIconSize(QtCore.QSize(90, 90))
         self.pushButton_8.setObjectName("pushButton_8")
         self.gridLayout_12.addWidget(self.pushButton_8, 1, 2, 1, 1)
         self.pushButton_6 = QtWidgets.QPushButton(parent=self.widget_18)
@@ -1452,7 +1457,7 @@ class Ui_MainWindow(object):
         icon3 = QtGui.QIcon()
         icon3.addPixmap(QPixmap(":/Icons/Icons/chevron-left.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton_6.setIcon(icon3)
-        self.pushButton_6.setIconSize(QtCore.QSize(80, 80))
+        self.pushButton_6.setIconSize(QtCore.QSize(90, 90))
         self.pushButton_6.setObjectName("pushButton_6")
         self.gridLayout_12.addWidget(self.pushButton_6, 1, 0, 1, 1)
         self.horizontalLayout_20.addWidget(self.widget_18)
