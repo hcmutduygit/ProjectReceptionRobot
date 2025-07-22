@@ -1380,6 +1380,7 @@ class Ui_MainWindow(object):
         spacerItem3 = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem3)
         self.horizontalLayout_4.setStretch(0, 1)
+        self.horizontalLayout_4.setStretch(1, 1)
         self.horizontalLayout_4.setStretch(2, 1)
         self.verticalLayout_21.addWidget(self.widget_16)
         self.robot_mode_2 = QtWidgets.QStackedWidget(parent=self.widget_15)
