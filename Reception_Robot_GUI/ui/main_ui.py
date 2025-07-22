@@ -953,7 +953,6 @@ class Ui_MainWindow(object):
         self.status_bar_2 = QtWidgets.QFrame(parent=self.robot)
         self.status_bar_2.setStyleSheet("#status_bar_2 {\n"
 "background-color: qlineargradient(spread: pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb(4, 3, 47), stop:0.5 rgb(86, 80, 140), stop:1 rgb(114, 159, 207));\n"
-"color: rgb(0, 41, 77);\n"
 "}")
         self.status_bar_2.setFrameShape(QtWidgets.QFrame.Shape.NoFrame)
         self.status_bar_2.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
@@ -1009,6 +1008,7 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.comboBox_2.setFont(font)
         self.comboBox_2.setStyleSheet("border-radius:  15px;\n"
+"color: rgb(0, 41, 77);\n"
 "QComboBox::drop-down {\n"
 "        border: 0px;\n"
 "        width: 0px;\n"
