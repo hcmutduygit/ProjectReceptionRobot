@@ -23,13 +23,13 @@ class AttendanceTab(QWidget):
         # so cot va ten 
         self.ui.table_attendance_2.setColumnCount(6)
         self.ui.table_attendance_2.setHorizontalHeaderLabels([
-            "Employee ID", "Name", "Department", "Status","Check-in Time", "Email"
+            "Employee ID", "Name", "Department", "Status", "Check-in Time", "Email"
                 ])
                 
         self.ui.table_attendance_2.setStyleSheet("""
             QHeaderView::section {
                 font-weight: bold;
-                font-size: 13pt;}""")
+                font-size: 15pt;}""")
 
 
         # Du lieu gia 
