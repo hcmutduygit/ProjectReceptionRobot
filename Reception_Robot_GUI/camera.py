@@ -1,46 +1,51 @@
-import threading, requests
-from PyQt6.QtCore import QUrl, QTimer
+# camera.py
+
+import threading, requests, time
+from PyQt6.QtCore import QUrl, QTimer, QLoggingCategory
 from PyQt6.QtWebEngineWidgets import QWebEngineView
 from PyQt6.QtWidgets import QWidget, QVBoxLayout
 
-class CameraTab(QWidget):
-    def __init__(self, ui):
-        super().__init__()
-        self.ui = ui
-        self.url_str = "http://192.168.0.130:5000/"
-        self.url = QUrl(self.url_str)
+# Tat log từ Qt WebEngine
+QLoggingCategory.setFilterRules("qt.webenginecontext=false")
 
+
+class CameraController:
+    def __init__(self):
+        self.url_str = "https://www.youtube.com/" #"http://192.168.0.130:5000/"
+        self.url = QUrl(self.url_str)
         self.browser = QWebEngineView()
         self.browser.setUrl(self.url)
-
-        layout = self.ui.camera_2.layout()
-        if layout is None:
-            layout = QVBoxLayout(self.ui.camera_2)
-            self.ui.camera_2.setLayout(layout)
-        layout.addWidget(self.browser)
-
-        # Trạng thái kết nối cũ
         self.connected = True
 
-        # Khởi động luồng kiểm tra kết nối camera
-        self.check_thread = threading.Thread(target=self.check_connection_loop, daemon=True)
+        self.check_thread = threading.Thread(target=self._check_connection_loop, daemon=True)
         self.check_thread.start()
 
-    def check_connection_loop(self):
+    def get_browser(self):
+        return self.browser
+
+    def _check_connection_loop(self):
         while True:
             try:
                 res = requests.get(self.url_str, timeout=2)
-                if res.status_code == 200:
-                    if not self.connected:
-                        self.connected = True
-                        QTimer.singleShot(0, self.restore_browser)
-                else:
-                    raise Exception("bad status")
+                if res.status_code == 200 and not self.connected:
+                    self.connected = True
+                    QTimer.singleShot(0, self.browser.reload)
+                elif res.status_code != 200:
+                    raise Exception("status code not 200")
             except:
-                if self.connected:
-                    self.connected = False
-            import time
+                self.connected = False
             time.sleep(5)
 
-    def restore_browser(self):
-        self.browser.setUrl(self.url)
+
+class CameraTab(QWidget):
+    def __init__(self, ui_section, browser_widget):
+        super().__init__()
+        self.ui_section = ui_section
+        self.browser = browser_widget
+
+        layout = self.ui_section.layout()
+        if layout is None:
+            layout = QVBoxLayout(self.ui_section)
+            self.ui_section.setLayout(layout)
+
+        layout.addWidget(self.browser)

@@ -137,8 +137,7 @@ class LocationTab(QWidget):
                 map_config = yaml.safe_load(file)
                 self.map_resolution = map_config['resolution']
                 self.map_origin = (map_config['origin'][0], map_config['origin'][1])
-                print(f"Loaded YAML: resolution={self.map_resolution}, origin={self.map_origin}, "
-                      f"map_width={self.map_width}, map_height={self.map_height}")
+                #print(f"Loaded YAML: resolution={self.map_resolution}, origin={self.map_origin}, "f"map_width={self.map_width}, map_height={self.map_height}")
         except Exception as e:
             print(f"❌ Lỗi khi đọc file map.yaml: {e}")
             self.map_resolution = 0.05  # Giá trị mặc định nếu không đọc được

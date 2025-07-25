@@ -3,23 +3,23 @@
 from ui.fonts import set_bold, set_regular
 
 def apply_custom_fonts(ui):
-    #thanh cong cu
+    #thanh cong cu - login
     set_bold(ui.label_mqtt)
     set_bold(ui.label_battery)
 
-    #dashboard_login 
+    #dashboard_login - login
     set_regular(ui.Signin_btn_signup)
     set_regular(ui.Signin_btn_signin)
     set_bold(ui.Signin_text)
     
-    #page_signin
+    #page_signin - login 
     set_bold(ui.label_2)
     set_regular(ui.label_4)
     set_regular(ui.Signin_username)
     set_regular(ui.Signin_password)
     set_regular(ui.Signin_btn_login)
 
-    #page_signup
+    #page_signup - login 
     set_bold(ui.label_9)
     set_regular(ui.Signup_name)
     set_regular(ui.Signup_code)
@@ -28,19 +28,19 @@ def apply_custom_fonts(ui):
     set_regular(ui.Signup_username)
     set_regular(ui.Signup_btn_signup)
 
-    #thanh cong cu
+    #thanh cong cu - robot 
     set_bold(ui.label_mqtt_3)
     set_bold(ui.label_battery_3)
     set_bold(ui.comboBox_2)
 
-    #page_attendance
+    #page_attendance - robot 
     set_regular(ui.label_22)
     set_regular(ui.label_15)
     set_regular(ui.label_16)
     set_regular(ui.label_17)
     set_bold(ui.table_attendance_2)
 
-    #page_control 
+    #page_control - robot 
     set_regular(ui.label1_5)
     set_bold(ui.label_left_2)
     set_bold(ui.label_right_2)
@@ -48,3 +48,15 @@ def apply_custom_fonts(ui):
     set_bold(ui.label)
     set_bold(ui.label_14)
     set_bold(ui.mode_select_2)
+
+
+    #thanh cong cu - guest 
+    set_bold(ui.label_mqtt_5)
+    set_bold(ui.label_battery_5)
+    #page - guest 
+    set_regular(ui.label1_10)
+    set_bold(ui.label_left_4)
+    set_bold(ui.label_right_4)
+    set_regular(ui.label1_9)
+    set_bold(ui.label_5)
+    set_bold(ui.label_6)

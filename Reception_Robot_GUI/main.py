@@ -14,7 +14,7 @@ from attendance_manager import AttendanceManager
 from battery_manager import BatteryManager
 from dataplotting import PlotTab
 from location import LocationTab
-from camera import CameraTab
+from camera import CameraController, CameraTab
 from location import MapGuiNode
 
 
@@ -36,7 +36,8 @@ class MainWindow(QMainWindow):
         self.battery_manager.start_battery_subscriber()
 
         # page_control
-        self.camera_tab = CameraTab(self.ui)
+        self.camera_controller = CameraController()
+        self.shared_browser = self.camera_controller.get_browser()  
         self.location_tab = LocationTab(self.ui)
         self.map_gui_node = MapGuiNode()
         self.executor = rclpy.executors.MultiThreadedExecutor()
@@ -61,11 +62,14 @@ class MainWindow(QMainWindow):
         # gan su kien trang dang nhap 
         self.ui.Signin_btn_signup.clicked.connect(lambda: self.ui.Page.setCurrentWidget(self.ui.Page_signup))
         self.ui.Signin_btn_signin.clicked.connect(lambda: self.ui.Page.setCurrentWidget(self.ui.Page_signin))
+        self.ui.Signin_btn_guest.clicked.connect(self._handle_guest)
         self.ui.Signin_btn_login.clicked.connect(self._handle_login)
-        self.ui.Signup_btn_signup.clicked.connect(self._handle_signup)
+        self.ui.Signup_btn_signup.clicked.connect(self._handle_signup) 
 
         # gan su kien trang sau dang nhap 
         self.ui.comboBox_2.currentTextChanged.connect(self.handle_page_switch)
+        self.ui.logout.clicked.connect(self._handle_logout)
+        self.ui.logout_2.clicked.connect(self._handle_logout)
 
     def run_executor(self):
         """Chạy executor trong thread riêng"""
@@ -74,16 +78,17 @@ class MainWindow(QMainWindow):
         except Exception as e:
             print(f"❌ Lỗi trong executor: {e}")
 
-    def changeEvent(self, event):
+    '''def changeEvent(self, event):
         if event.type() == QEvent.Type.WindowStateChange:
             if self.windowState() == Qt.WindowState.WindowNoState:
-                self.resize(950, 630)  # 👈 Khi thoát fullscreen thì đặt lại kích thước
-        super().changeEvent(event)
+                self.resize(950, 630) 
+        super().changeEvent(event)'''
 
     def _handle_login(self):
         if handle_login(self.ui, self.registered_users):
             self.ui.stackedWidget.setCurrentWidget(self.ui.robot)
             self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_control_2)
+            self.admin_camera_tab = CameraTab(self.ui.camera_2, self.shared_browser)
 
     def _handle_signup(self):
         if handle_signup(self.ui, self.registered_users):
@@ -91,6 +96,9 @@ class MainWindow(QMainWindow):
             self.ui.Page.setCurrentWidget(self.ui.Page_signin)
             self.ui.Dashboard.setCurrentWidget(self.ui.Dashboard_signin)
 
+    def _handle_guest(self):
+        self.ui.stackedWidget.setCurrentWidget(self.ui.guest)
+        self.guest_camera_tab = CameraTab(self.ui.camera_4, self.shared_browser)
 
     def _handle_logout(self):
         msgbox = QMessageBox(self)
@@ -115,9 +123,6 @@ class MainWindow(QMainWindow):
             self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_attendance_2)
         elif text == "Robot Telemetry":
             self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_telemetry_2)
-        elif text == "Logout":
-            self._handle_logout()
-
 
         
     def _shutdown_all_services(self):
