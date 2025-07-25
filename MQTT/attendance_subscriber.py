@@ -17,8 +17,8 @@ class AttendanceSubscriberThread(MQTTSubscriberThread):
             try:
                 import json
                 data = json.loads(message)
-                if isinstance(data, dict) and 'name' in data:
-                    name = str(data['name'])
+                if isinstance(data, dict) and 'message' in data:
+                    name = str(data['message'])
                     time_str = str(data.get('time', ''))
                 else:
                     name = str(message)
