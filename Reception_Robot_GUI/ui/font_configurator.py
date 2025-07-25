@@ -45,7 +45,6 @@ def apply_custom_fonts(ui):
     set_bold(ui.label_left_2)
     set_bold(ui.label_right_2)
     set_regular(ui.label1_6)
-    set_bold(ui.label_13)
-    set_bold(ui.label_19)
+    set_bold(ui.label)
     set_bold(ui.label_14)
     set_bold(ui.mode_select_2)

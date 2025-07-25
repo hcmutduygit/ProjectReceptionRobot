@@ -29,8 +29,9 @@ class MainWindow(QMainWindow):
         self.registered_users = [{"username": "admin", "password": "123", "fullname": "Admin User", "phone": "0123456789", "verify": "fablab"}]
 
         # thanh trang thai 
-        self.ui.label_mqtt.setText("disconnected")
-        self.ui.label_mqtt_3.setText("disconnected")
+        self.mqtt_status = "disconnected"
+        self.ui.label_mqtt.setText(self.mqtt_status)
+        self.ui.label_mqtt_3.setText(self.mqtt_status)
         self.battery_manager = BatteryManager(self.ui)
         self.battery_manager.start_battery_subscriber()
 
@@ -42,11 +43,6 @@ class MainWindow(QMainWindow):
         self.executor.add_node(self.map_gui_node)
         self.ros_thread = threading.Thread(target=self.run_executor, daemon=True)
         self.ros_thread.start()
-        style = "border-radius: 20px;border: 3px solid rgb(0, 41, 77);"
-        ocupied = style + "background-color: red;"
-        empty = style + "background-color: green;"
-        self.ui.right_status_2.setStyleSheet(empty)
-        self.ui.left_status_2.setStyleSheet(ocupied)
 
         # page_telemetry  
         self.plot_tab = PlotTab(self.ui)

@@ -3,12 +3,12 @@
     <file>Icons/battery.svg</file>
     <file>Icons/mqtt_icon.svg</file>
     <file>Icons/menu.svg</file>
-    <file>Icons/chevron-down.svg</file>
-    <file>Icons/chevron-left.svg</file>
-    <file>Icons/chevron-right.svg</file>
-    <file>Icons/chevron-up.svg</file>
     <file>Icons/Refresh_icon.png</file>
     <file>Icons/search.svg</file>
+    <file>Icons/8665193_chevron_down_icon.svg</file>
+    <file>Icons/8665194_chevron_left_icon.svg</file>
+    <file>Icons/8665195_chevron_right_icon.svg</file>
+    <file>Icons/8665196_chevron_up_icon.svg</file>
   </qresource>
   <qresource prefix="map">
     <file>Map/map.pgm</file>

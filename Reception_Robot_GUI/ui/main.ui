@@ -1700,41 +1700,87 @@ border-radius: 20px;</string>
                     <property name="frameShadow">
                      <enum>QFrame::Raised</enum>
                     </property>
-                    <widget class="QPushButton" name="Signin_btn_login">
-                     <property name="geometry">
-                      <rect>
-                       <x>285</x>
-                       <y>10</y>
-                       <width>150</width>
-                       <height>50</height>
-                      </rect>
+                    <layout class="QHBoxLayout" name="horizontalLayout_5">
+                     <property name="spacing">
+                      <number>30</number>
                      </property>
-                     <property name="minimumSize">
-                      <size>
-                       <width>150</width>
-                       <height>50</height>
-                      </size>
-                     </property>
-                     <property name="maximumSize">
-                      <size>
-                       <width>150</width>
-                       <height>50</height>
-                      </size>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <family>Roboto</family>
-                       <pointsize>17</pointsize>
-                       <weight>50</weight>
-                       <italic>false</italic>
-                       <bold>false</bold>
-                      </font>
-                     </property>
-                     <property name="focusPolicy">
-                      <enum>Qt::WheelFocus</enum>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">
+                     <item>
+                      <spacer name="horizontalSpacer_2">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>153</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="Signin_btn_guest">
+                       <property name="minimumSize">
+                        <size>
+                         <width>150</width>
+                         <height>50</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>150</width>
+                         <height>50</height>
+                        </size>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <family>Roboto</family>
+                         <pointsize>20</pointsize>
+                        </font>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">
+QPushButton{
+background-color: rgb(161, 226, 255);
+border-radius:10px;
+}
+QPushButton:hover{
+	background-color: rgb(216, 229, 254);
+	color: rgb(0, 41, 77);
+}</string>
+                       </property>
+                       <property name="text">
+                        <string>Guest</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="Signin_btn_login">
+                       <property name="minimumSize">
+                        <size>
+                         <width>150</width>
+                         <height>50</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>150</width>
+                         <height>50</height>
+                        </size>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <family>Roboto</family>
+                         <pointsize>20</pointsize>
+                         <weight>50</weight>
+                         <italic>false</italic>
+                         <bold>false</bold>
+                        </font>
+                       </property>
+                       <property name="focusPolicy">
+                        <enum>Qt::WheelFocus</enum>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">
 QPushButton{
 background-color: rgb(0, 41, 77);
 color: rgb(255, 255, 255);
@@ -1744,17 +1790,32 @@ QPushButton:hover{
 	background-color: rgb(216, 229, 254);
 	color: rgb(0, 41, 77);
 }</string>
-                     </property>
-                     <property name="text">
-                      <string>Login</string>
-                     </property>
-                     <property name="autoDefault">
-                      <bool>true</bool>
-                     </property>
-                     <property name="default">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
+                       </property>
+                       <property name="text">
+                        <string>Login</string>
+                       </property>
+                       <property name="autoDefault">
+                        <bool>true</bool>
+                       </property>
+                       <property name="default">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <spacer name="horizontalSpacer_3">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>153</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                    </layout>
                    </widget>
                   </item>
                   <item row="2" column="0">
@@ -2972,7 +3033,7 @@ color: rgb(0, 41, 77);</string>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFrame" name="locker_2">
+                   <widget class="QFrame" name="position">
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
@@ -3045,7 +3106,7 @@ color: rgb(238, 238, 236);
 }</string>
                           </property>
                           <property name="text">
-                           <string>	LOCKER</string>
+                           <string>POSITION</string>
                           </property>
                           <property name="alignment">
                            <set>Qt::AlignCenter</set>
@@ -3082,7 +3143,7 @@ color: rgb(0, 41, 77);</string>
                        <property name="lineWidth">
                         <number>1</number>
                        </property>
-                       <layout class="QGridLayout" name="gridLayout_15" columnstretch="0,0,0">
+                       <layout class="QGridLayout" name="gridLayout_15" columnstretch="0">
                         <property name="leftMargin">
                          <number>10</number>
                         </property>
@@ -3101,48 +3162,8 @@ color: rgb(0, 41, 77);</string>
                         <property name="verticalSpacing">
                          <number>4</number>
                         </property>
-                        <item row="0" column="2">
-                         <widget class="QLabel" name="label_19">
-                          <property name="font">
-                           <font>
-                            <family>Roboto</family>
-                            <pointsize>14</pointsize>
-                            <weight>75</weight>
-                            <bold>true</bold>
-                           </font>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true"/>
-                          </property>
-                          <property name="text">
-                           <string>Right</string>
-                          </property>
-                          <property name="alignment">
-                           <set>Qt::AlignCenter</set>
-                          </property>
-                         </widget>
-                        </item>
-                        <item row="0" column="1" rowspan="4">
-                         <widget class="QLabel" name="label_21">
-                          <property name="maximumSize">
-                           <size>
-                            <width>3</width>
-                            <height>16777215</height>
-                           </size>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true">background-color: rgb(0, 41, 77);</string>
-                          </property>
-                          <property name="frameShape">
-                           <enum>QFrame::StyledPanel</enum>
-                          </property>
-                          <property name="text">
-                           <string/>
-                          </property>
-                         </widget>
-                        </item>
                         <item row="0" column="0">
-                         <widget class="QLabel" name="label_13">
+                         <widget class="QLabel" name="label">
                           <property name="font">
                            <font>
                             <family>Roboto</family>
@@ -3152,66 +3173,7 @@ color: rgb(0, 41, 77);</string>
                            </font>
                           </property>
                           <property name="text">
-                           <string>Left</string>
-                          </property>
-                          <property name="alignment">
-                           <set>Qt::AlignCenter</set>
-                          </property>
-                         </widget>
-                        </item>
-                        <item row="1" column="0">
-                         <widget class="QLabel" name="left_status_2">
-                          <property name="minimumSize">
-                           <size>
-                            <width>40</width>
-                            <height>20</height>
-                           </size>
-                          </property>
-                          <property name="maximumSize">
-                           <size>
-                            <width>40</width>
-                            <height>40</height>
-                           </size>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true">QLabel{
-border-radius: 20px; 
-border: 3px solid rgb(0, 41, 77);
-}</string>
-                          </property>
-                          <property name="text">
-                           <string/>
-                          </property>
-                          <property name="alignment">
-                           <set>Qt::AlignCenter</set>
-                          </property>
-                         </widget>
-                        </item>
-                        <item row="1" column="2">
-                         <widget class="QLabel" name="right_status_2">
-                          <property name="minimumSize">
-                           <size>
-                            <width>40</width>
-                            <height>40</height>
-                           </size>
-                          </property>
-                          <property name="maximumSize">
-                           <size>
-                            <width>40</width>
-                            <height>40</height>
-                           </size>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true">QLabel{
-border-radius: 20px; 
-border: 3px solid rgb(0, 41, 77);
-}</string>
-                          </property>
-                          <property name="text">
-                           <string/>
-                          </property>
-                          <property name="alignment">
-                           <set>Qt::AlignCenter</set>
+                           <string>To be continue </string>
                           </property>
                          </widget>
                         </item>
@@ -3516,7 +3478,7 @@ QPushButton {
                           </spacer>
                          </item>
                          <item row="1" column="1">
-                          <widget class="QPushButton" name="pushButton_7">
+                          <widget class="QPushButton" name="control_down">
                            <property name="minimumSize">
                             <size>
                              <width>100</width>
@@ -3539,34 +3501,18 @@ QPushButton {
                            </property>
                            <property name="icon">
                             <iconset resource="../resources/resources.qrc">
-                             <normaloff>:/Icons/Icons/chevron-down.svg</normaloff>:/Icons/Icons/chevron-down.svg</iconset>
+                             <normaloff>:/Icons/Icons/8665193_chevron_down_icon.svg</normaloff>:/Icons/Icons/8665193_chevron_down_icon.svg</iconset>
                            </property>
                            <property name="iconSize">
                             <size>
-                             <width>90</width>
-                             <height>90</height>
+                             <width>50</width>
+                             <height>50</height>
                             </size>
                            </property>
                           </widget>
                          </item>
-                         <item row="0" column="0">
-                          <spacer name="horizontalSpacer_13">
-                           <property name="orientation">
-                            <enum>Qt::Horizontal</enum>
-                           </property>
-                           <property name="sizeType">
-                            <enum>QSizePolicy::Expanding</enum>
-                           </property>
-                           <property name="sizeHint" stdset="0">
-                            <size>
-                             <width>100</width>
-                             <height>20</height>
-                            </size>
-                           </property>
-                          </spacer>
-                         </item>
                          <item row="0" column="1">
-                          <widget class="QPushButton" name="pushButton_5">
+                          <widget class="QPushButton" name="control_up">
                            <property name="sizePolicy">
                             <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
                              <horstretch>0</horstretch>
@@ -3595,18 +3541,18 @@ QPushButton {
                            </property>
                            <property name="icon">
                             <iconset resource="../resources/resources.qrc">
-                             <normaloff>:/Icons/Icons/chevron-up.svg</normaloff>:/Icons/Icons/chevron-up.svg</iconset>
+                             <normaloff>:/Icons/Icons/8665196_chevron_up_icon.svg</normaloff>:/Icons/Icons/8665196_chevron_up_icon.svg</iconset>
                            </property>
                            <property name="iconSize">
                             <size>
-                             <width>90</width>
-                             <height>90</height>
+                             <width>50</width>
+                             <height>50</height>
                             </size>
                            </property>
                           </widget>
                          </item>
                          <item row="1" column="2">
-                          <widget class="QPushButton" name="pushButton_8">
+                          <widget class="QPushButton" name="control_right">
                            <property name="minimumSize">
                             <size>
                              <width>100</width>
@@ -3629,18 +3575,18 @@ QPushButton {
                            </property>
                            <property name="icon">
                             <iconset resource="../resources/resources.qrc">
-                             <normaloff>:/Icons/Icons/chevron-right.svg</normaloff>:/Icons/Icons/chevron-right.svg</iconset>
+                             <normaloff>:/Icons/Icons/8665195_chevron_right_icon.svg</normaloff>:/Icons/Icons/8665195_chevron_right_icon.svg</iconset>
                            </property>
                            <property name="iconSize">
                             <size>
-                             <width>90</width>
-                             <height>90</height>
+                             <width>50</width>
+                             <height>50</height>
                             </size>
                            </property>
                           </widget>
                          </item>
                          <item row="1" column="0">
-                          <widget class="QPushButton" name="pushButton_6">
+                          <widget class="QPushButton" name="control_left">
                            <property name="minimumSize">
                             <size>
                              <width>100</width>
@@ -3663,12 +3609,12 @@ QPushButton {
                            </property>
                            <property name="icon">
                             <iconset resource="../resources/resources.qrc">
-                             <normaloff>:/Icons/Icons/chevron-left.svg</normaloff>:/Icons/Icons/chevron-left.svg</iconset>
+                             <normaloff>:/Icons/Icons/8665194_chevron_left_icon.svg</normaloff>:/Icons/Icons/8665194_chevron_left_icon.svg</iconset>
                            </property>
                            <property name="iconSize">
                             <size>
-                             <width>90</width>
-                             <height>90</height>
+                             <width>50</width>
+                             <height>50</height>
                             </size>
                            </property>
                           </widget>
@@ -4288,7 +4234,6 @@ color: rgb(0, 41, 77);</string>
  <resources>
   <include location="../resources/resources.qrc"/>
   <include location="../resources/icon.qrc"/>
-  <include location="../resources/resources.qrc"/>
  </resources>
  <connections/>
 </ui>
