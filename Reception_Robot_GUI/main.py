@@ -38,7 +38,6 @@ class MainWindow(QMainWindow):
         # page_control
         self.camera_controller = CameraController()
         self.shared_browser = self.camera_controller.get_browser()  
-        self.location_tab = LocationTab(self.ui)
         self.map_gui_node = MapGuiNode()
         self.executor = rclpy.executors.MultiThreadedExecutor()
         self.executor.add_node(self.map_gui_node)
@@ -89,6 +88,7 @@ class MainWindow(QMainWindow):
             self.ui.stackedWidget.setCurrentWidget(self.ui.robot)
             self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_control_2)
             self.admin_camera_tab = CameraTab(self.ui.camera_2, self.shared_browser)
+            self.admin_location_tab = LocationTab(self.ui.view_map_2)
 
     def _handle_signup(self):
         if handle_signup(self.ui, self.registered_users):
@@ -99,6 +99,7 @@ class MainWindow(QMainWindow):
     def _handle_guest(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.guest)
         self.guest_camera_tab = CameraTab(self.ui.camera_4, self.shared_browser)
+        self.guest_location_tab = LocationTab(self.ui.view_map)
 
     def _handle_logout(self):
         msgbox = QMessageBox(self)

@@ -45,8 +45,8 @@ def apply_custom_fonts(ui):
     set_bold(ui.label_left_2)
     set_bold(ui.label_right_2)
     set_regular(ui.label1_6)
-    set_bold(ui.label)
-    set_bold(ui.label_14)
+    set_bold(ui.label_xy_2)
+    set_bold(ui.label_theta_2)
     set_bold(ui.mode_select_2)
 
 
@@ -55,8 +55,8 @@ def apply_custom_fonts(ui):
     set_bold(ui.label_battery_5)
     #page - guest 
     set_regular(ui.label1_10)
-    set_bold(ui.label_left_4)
-    set_bold(ui.label_right_4)
+    set_bold(ui.label_xy)
+    set_bold(ui.label_theta)
     set_regular(ui.label1_9)
-    set_bold(ui.label_5)
-    set_bold(ui.label_6)
+    set_bold(ui.label_left)
+    set_bold(ui.label_right)

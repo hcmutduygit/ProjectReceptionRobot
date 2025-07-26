@@ -33,7 +33,7 @@
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="login">
        <layout class="QHBoxLayout" name="horizontalLayout">
@@ -4660,7 +4660,7 @@ color: rgb(0, 41, 77);</string>
                   <number>0</number>
                  </property>
                  <item>
-                  <widget class="QGraphicsView" name="view_map_4">
+                  <widget class="QGraphicsView" name="view_map">
                    <property name="styleSheet">
                     <string notr="true"/>
                    </property>
