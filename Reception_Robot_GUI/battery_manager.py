@@ -9,8 +9,13 @@ class BatteryManager(BaseManager):
     def __init__(self, ui):
         super().__init__(ui, BatterySubscriberThread, BATTERY_CONFIG)
         
+        # Khoi tao trang thai cua mqtt 
+        self.mqtt_status = "disconnected"
+        self.ui.label_mqtt.setText(self.mqtt_status)
+        self.ui.label_mqtt_3.setText(self.mqtt_status)
+
         # Khởi tạo giá trị mặc định cho battery
-        self.battery_percent = 88
+        self.battery_percent = '??'
         self.ui.label_battery.setText(f"{self.battery_percent}%")
         self.ui.label_battery_3.setText(f"{self.battery_percent}%")
         
@@ -20,6 +25,9 @@ class BatteryManager(BaseManager):
 
     def start_battery_subscriber(self):
         """Khởi tạo và bắt đầu battery subscriber thread"""
+        self.mqtt_status = "connected"
+        self.ui.label_mqtt.setText(self.mqtt_status)
+        self.ui.label_mqtt_3.setText(self.mqtt_status)
         self.start_subscriber()
 
     def stop_battery_subscriber(self):
