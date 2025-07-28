@@ -17,6 +17,7 @@ class BatteryManager(BaseManager):
         # Khởi tạo giá trị mặc định cho battery
         self.battery_percent = '??'
         self.ui.label_battery.setText(f"{self.battery_percent}%")
+        self.ui.label_battery_2.setText(f"{self.battery_percent}%")
         self.ui.label_battery_3.setText(f"{self.battery_percent}%")
         
     def _connect_signals(self):
@@ -27,6 +28,7 @@ class BatteryManager(BaseManager):
         """Khởi tạo và bắt đầu battery subscriber thread"""
         self.mqtt_status = "connected"
         self.ui.label_mqtt.setText(self.mqtt_status)
+        self.ui.label_mqtt_2.setText(self.mqtt_status)
         self.ui.label_mqtt_3.setText(self.mqtt_status)
         self.start_subscriber()
 
@@ -38,5 +40,6 @@ class BatteryManager(BaseManager):
         """Cập nhật hiển thị phần trăm pin trên UI"""
         self.battery_percent = battery_percent
         self.ui.label_battery.setText(f"{battery_percent}%")
+        self.ui.label_battery_2.setText(f"{battery_percent}%")
         self.ui.label_battery_3.setText(f"{battery_percent}%")
         print(f"Battery updated to: {battery_percent}%")

@@ -51,8 +51,8 @@ def apply_custom_fonts(ui):
 
 
     #thanh cong cu - guest 
-    set_bold(ui.label_mqtt_5)
-    set_bold(ui.label_battery_5)
+    set_bold(ui.label_mqtt_2)
+    set_bold(ui.label_battery_2)
     #page - guest 
     set_regular(ui.label1_10)
     set_bold(ui.label_xy)

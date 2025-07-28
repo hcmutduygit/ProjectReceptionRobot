@@ -99,5 +99,5 @@ if __name__ == "__main__":
 
 '''
 from PyQt6.QtGui import QPixmap
-from resources import resources_rc, icon_rc 
+from resources import resources_rc
 '''
