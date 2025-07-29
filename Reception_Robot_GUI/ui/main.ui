@@ -4630,7 +4630,7 @@ color: rgb(0, 41, 77);</string>
                <number>30</number>
               </property>
               <property name="leftMargin">
-               <number>80</number>
+               <number>50</number>
               </property>
               <property name="topMargin">
                <number>30</number>
@@ -4697,7 +4697,7 @@ color: rgb(0, 41, 77);</string>
                <number>30</number>
               </property>
               <property name="rightMargin">
-               <number>40</number>
+               <number>50</number>
               </property>
               <item>
                <widget class="QWidget" name="camera_4" native="true">

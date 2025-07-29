@@ -26,10 +26,6 @@ class BatteryManager(BaseManager):
 
     def start_battery_subscriber(self):
         """Khởi tạo và bắt đầu battery subscriber thread"""
-        self.mqtt_status = "connected"
-        self.ui.label_mqtt.setText(self.mqtt_status)
-        self.ui.label_mqtt_2.setText(self.mqtt_status)
-        self.ui.label_mqtt_3.setText(self.mqtt_status)
         self.start_subscriber()
 
     def stop_battery_subscriber(self):

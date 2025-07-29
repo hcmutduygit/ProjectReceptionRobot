@@ -7,7 +7,7 @@ class MQTTConfig:
     """Class chứa tất cả cấu hình MQTT"""
     
     # Thông số kết nối MQTT Broker, sudo netstat -tulnp | grep mosquitto
-    MQTT_HOST = "192.168.0.130" #192.168.0.125
+    MQTT_HOST = "127.0.0.1" #192.168.0.130
     MQTT_PORT = 1883
     MQTT_KEEPALIVE = 60
     
@@ -16,7 +16,8 @@ class MQTTConfig:
         "battery": "robot/battery",
         "attendance": "robot/attendance",
         "camera": "robot/camera", 
-        "status": "robot/status"
+        "status": "robot/status",
+        "location": "robot/location"
     }
     
     @classmethod
@@ -65,3 +66,4 @@ class MQTTConfig:
 # Các default configs cho từng loại manager
 BATTERY_CONFIG = MQTTConfig.get_config("battery")
 ATTENDANCE_CONFIG = MQTTConfig.get_config("attendance")
+LOCATION_CONFIG = MQTTConfig.get_config("location")

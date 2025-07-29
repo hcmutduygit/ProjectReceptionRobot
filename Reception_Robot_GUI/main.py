@@ -12,10 +12,10 @@ from user import handle_login, handle_signup
 from attendance import AttendanceTab
 from attendance_manager import AttendanceManager
 from battery_manager import BatteryManager
+from location_manager import LocationManager 
 from dataplotting import PlotTab
 from location import LocationTab
 from camera import CameraController, CameraTab
-from location import MapGuiNode
 
 
 class MainWindow(QMainWindow):
@@ -34,12 +34,9 @@ class MainWindow(QMainWindow):
 
         # page_control
         self.camera_controller = CameraController()
-        self.shared_browser = self.camera_controller.get_browser()  
-        self.map_gui_node = MapGuiNode()
-        self.executor = rclpy.executors.MultiThreadedExecutor()
-        self.executor.add_node(self.map_gui_node)
-        self.ros_thread = threading.Thread(target=self.run_executor, daemon=True)
-        self.ros_thread.start()
+        self.shared_browser = self.camera_controller.get_browser()
+        self.location_manager = LocationManager(self.ui)
+        self.location_manager.start_location_subscriber()
 
         # page_telemetry  
         self.plot_tab = PlotTab(self.ui)
@@ -85,7 +82,8 @@ class MainWindow(QMainWindow):
             self.ui.stackedWidget.setCurrentWidget(self.ui.robot)
             self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_control_2)
             self.admin_camera_tab = CameraTab(self.ui.camera_2, self.shared_browser)
-            self.admin_location_tab = LocationTab(self.ui.view_map_2)
+            self.admin_location_tab = LocationTab(self.ui.view_map_2) 
+            self.location_manager = LocationManager(self.ui, location_tab=self.admin_location_tab)
 
     def _handle_signup(self):
         if handle_signup(self.ui, self.registered_users):
@@ -96,7 +94,8 @@ class MainWindow(QMainWindow):
     def _handle_guest(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.guest)
         self.guest_camera_tab = CameraTab(self.ui.camera_4, self.shared_browser)
-        self.guest_location_tab = LocationTab(self.ui.view_map)
+        self.guest_location_tab = LocationTab(self.ui.view_map) 
+        self.location_manager = LocationManager(self.ui, location_tab=self.guest_location_tab)
 
     def _handle_logout(self):
         msgbox = QMessageBox(self)
@@ -126,17 +125,14 @@ class MainWindow(QMainWindow):
     def _shutdown_all_services(self):
         self.battery_manager.stop_battery_subscriber()
         self.attendance_manager.stop_attendance_subscriber()
-        self.executor.shutdown()
-        self.map_gui_node.destroy_node()
+        self.location_manager.stop_location_subscriber()
 
     def closeEvent(self, event):
         print("Đóng cửa sổ, dọn dẹp tài nguyên...")
         self._shutdown_all_services()
-        rclpy.shutdown()
         event.accept()
 
 if __name__ == "__main__":
-    rclpy.init()
     app = QApplication(sys.argv)
     widget = MainWindow()
     widget.showMaximized()  
