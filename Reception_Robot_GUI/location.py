@@ -75,7 +75,6 @@ class LocationTab(QWidget):
         self.map_width = pixmap.width()
         self.map_height = pixmap.height()
 
-
         # Đọc thông số từ file map.yaml từ SLAM
         yaml_path = "Reception_Robot_GUI/resources/Map/map_2.yaml"
         try:
@@ -93,13 +92,13 @@ class LocationTab(QWidget):
     def update_robot_gui(self):
         """Cập nhật vị trí robot trên GUI"""
         x, y, theta = self.last_position
-        # Chuyển đổi tọa độ từ /map sang GUI với ảnh xoay 90 độ
-        py_raw = (y - self.map_origin[1]) / self.map_resolution  # y của map thành x của Qt
-        px_raw = (x - self.map_origin[0]) / self.map_resolution  # x của map thành y của Qt
-        # Điều chỉnh cho Qt và ảnh xoay 90 độ
+        # Chuyển đổi tọa độ từ /map sang GUI với 
+        py_raw = (y - self.map_origin[1]) / self.map_resolution 
+        px_raw = (x - self.map_origin[0]) / self.map_resolution  
+        # Điều chỉnh cho Qt 
         px = px_raw
         py = self.map_height - py_raw
-        # Thêm offset thủ công (có thể điều chỉnh giá trị này)
+        # Thêm offset thủ công 
         offset_x = 39 #12 #320 
         offset_y = -12 #40 #420  
         px += offset_x
@@ -109,7 +108,6 @@ class LocationTab(QWidget):
         self.robot_item.setRotation(-theta+90)  # Giữ nguyên theta
 
     def set_location(self, x, y, theta):
-        """Hàm công khai để cập nhật pose từ bên ngoài (vd: qua MQTT)"""
+        """Hàm công khai để cập nhật pose từ MQTT)"""
         self.last_position = [x, y, theta]
-        print(f"[SIM] x={x:.2f}, y={y:.2f}, θ={theta:.1f}")
         

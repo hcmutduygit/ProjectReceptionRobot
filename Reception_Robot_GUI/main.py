@@ -35,8 +35,6 @@ class MainWindow(QMainWindow):
         # page_control
         self.camera_controller = CameraController()
         self.shared_browser = self.camera_controller.get_browser()
-        self.location_manager = LocationManager(self.ui)
-        self.location_manager.start_location_subscriber()
 
         # page_telemetry  
         self.plot_tab = PlotTab(self.ui)
@@ -82,8 +80,14 @@ class MainWindow(QMainWindow):
             self.ui.stackedWidget.setCurrentWidget(self.ui.robot)
             self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_control_2)
             self.admin_camera_tab = CameraTab(self.ui.camera_2, self.shared_browser)
-            self.admin_location_tab = LocationTab(self.ui.view_map_2) 
-            self.location_manager = LocationManager(self.ui, location_tab=self.admin_location_tab)
+            # 1. Tạo GUI tab
+            self.admin_location_tab = LocationTab(self.ui.view_map_2)
+            # 2. Khởi tạo manager
+            self.location_manager = LocationManager(self.ui)
+            # 3. Gán location_tab cho manager
+            self.location_manager.location_tab = self.admin_location_tab
+            # 4. Start subscriber sau cùng
+            self.location_manager.start_location_subscriber()
 
     def _handle_signup(self):
         if handle_signup(self.ui, self.registered_users):
@@ -94,8 +98,14 @@ class MainWindow(QMainWindow):
     def _handle_guest(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.guest)
         self.guest_camera_tab = CameraTab(self.ui.camera_4, self.shared_browser)
-        self.guest_location_tab = LocationTab(self.ui.view_map) 
-        self.location_manager = LocationManager(self.ui, location_tab=self.guest_location_tab)
+        # 1. Tạo GUI tab
+        self.guest_location_tab = LocationTab(self.ui.view_map)
+        # 2. Khởi tạo manager
+        self.location_manager = LocationManager(self.ui)
+        # 3. Gán location_tab cho manager
+        self.location_manager.location_tab = self.guest_location_tab
+        # 4. Start subscriber sau cùng
+        self.location_manager.start_location_subscriber()
 
     def _handle_logout(self):
         msgbox = QMessageBox(self)
