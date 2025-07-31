@@ -1764,6 +1764,7 @@ class Ui_MainWindow(object):
         item.setFont(font)
         self.table_attendance_2.setHorizontalHeaderItem(4, item)
         item = QtWidgets.QTableWidgetItem()
+        item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignVCenter)
         font = QtGui.QFont()
         font.setFamily("Roboto")
         font.setPointSize(12)

@@ -4218,6 +4218,9 @@ color: rgb(0, 41, 77);</string>
                     <bold>true</bold>
                    </font>
                   </property>
+                  <property name="textAlignment">
+                   <set>AlignLeading|AlignVCenter</set>
+                  </property>
                  </column>
                  <column>
                   <property name="text">
