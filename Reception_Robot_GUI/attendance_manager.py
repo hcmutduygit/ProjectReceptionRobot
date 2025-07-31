@@ -29,10 +29,10 @@ class AttendanceManager(BaseManager):
         """Cập nhật hiển thị tên người trên UI và cập nhật trạng thái attendance"""
         self.current_name = name
         
-        # Cập nhật trạng thái "Present" cho người vừa được nhận diện
+        # Gui ten cua nguoi vua quet the cho UI 
         if self.attendance_tab:
-            self.attendance_tab.update_status(name=name, status="Present", time=time_str)
-            print(f"Attendance updated: {name} - Present at {time_str}")
+            self.attendance_tab.update_status(name=name, time=time_str)
+            print(f"Attendance updated: {name} - {time_str}")
         else:
             print(f"Attendance received: {name} at {time_str} (No attendance tab connected)")
             

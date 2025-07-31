@@ -61,11 +61,17 @@ class AttendanceTab(QWidget):
             self.ui.table_attendance_2.setItem(row, 6, QTableWidgetItem(entry["email"]))
         
     # ham cap nhat trang thai 
-    def update_status(self, name=None, status=None, time=None):
+    def update_status(self, name=None, time=None):
         for entry in self.attendance_data:
             if (name and entry["name"] == name):
-                entry["status"] = status
-                entry["time_in"] = time
+                if entry["time_in"] is None:
+                    entry["status"] = "Present"
+                    entry["time_in"] = time
+                elif entry["time_out"] is None:
+                    entry["status"] = "Left"
+                    entry["time_out"] = time
+                else:
+                    print(f"{name} have already left.")
                 break
 
         self.load_attendance_table(self.attendance_data)
