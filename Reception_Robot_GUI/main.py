@@ -13,6 +13,7 @@ from attendance import AttendanceTab
 from attendance_manager import AttendanceManager
 from battery_manager import BatteryManager
 from location_manager import LocationManager 
+from velocity_manager import VelocityManager 
 from dataplotting import PlotTab
 from location import LocationTab
 from camera import CameraController, CameraTab
@@ -35,6 +36,8 @@ class MainWindow(QMainWindow):
         # page_control
         self.camera_controller = CameraController()
         self.shared_browser = self.camera_controller.get_browser()
+        self.velocity_manager = VelocityManager(self.ui)
+        self.velocity_manager.start_velocity_subscriber()
 
         # page_telemetry  
         self.plot_tab = PlotTab(self.ui)
