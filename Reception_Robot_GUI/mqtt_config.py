@@ -17,7 +17,8 @@ class MQTTConfig:
         "attendance": "robot/attendance",
         "camera": "robot/camera", 
         "status": "robot/status",
-        "location": "robot/location"
+        "location": "robot/location",
+        "velocity": "robot/velocity"
     }
     
     @classmethod
@@ -67,3 +68,4 @@ class MQTTConfig:
 BATTERY_CONFIG = MQTTConfig.get_config("battery")
 ATTENDANCE_CONFIG = MQTTConfig.get_config("attendance")
 LOCATION_CONFIG = MQTTConfig.get_config("location")
+VELOCITY_CONFIG = MQTTConfig.get_config("velocity")

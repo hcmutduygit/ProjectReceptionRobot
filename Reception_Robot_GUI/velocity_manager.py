@@ -1,0 +1,39 @@
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+
+from MQTT.velocity_subscriber import VelocitySubscriberThread
+from base_manager import BaseManager
+from mqtt_config import MQTTConfig
+
+VELOCITY_CONFIG = MQTTConfig.get_config("velocity")
+
+class LocationManager(BaseManager):
+    def __init__(self, ui):
+        super().__init__(ui, VelocitySubscriberThread, VELOCITY_CONFIG)
+        # Giá trị mặc định ban đầu
+        self.velocity = {'left': '??', 'right': '??'}
+        self._update_velocity_labels()
+
+    def _connect_signals(self):
+        self.subscriber_thread.velocity_update.connect(self.handle_data_update)
+
+    def start_velocity_subscriber(self):
+        self.start_subscriber()
+
+    def stop_velocity_subscriber(self):
+        self.stop_subscriber()
+
+    def handle_data_update(self, left, right):
+        self.velocity = {
+            'left': f"{left:.2f}",
+            'right': f"{right:.2f}"
+        }
+        self._update_velocity_labels()
+
+    def _update_velocity_labels(self):
+        """Hiển thị vị trí lên các QLabel trong UI"""
+        self.ui.label_left.setText(f"θ: {self.velocity['left']}")
+        self.ui.label_left_2.setText(f"θ: {self.velocity['left']}")
+        self.ui.label_right.setText(f"θ: {self.velocity['right']}")
+        self.ui.label_right_2.setText(f"θ: {self.velocity['right']}")

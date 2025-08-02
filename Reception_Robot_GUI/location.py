@@ -105,7 +105,7 @@ class LocationTab(QWidget):
         py += offset_y
         #print(f"[SIM] x={x:.2f}, y={y:.2f}, px_raw={px_raw:.1f}, py_raw={py_raw:.1f}, "f"px={px:.1f}, py={py:.1f}, θ={theta:.1f}")
         self.robot_item.setPos(px, py)
-        self.robot_item.setRotation(-theta+90)  # Giữ nguyên theta
+        self.robot_item.setRotation(-theta+90)  
 
     def set_location(self, x, y, theta):
         """Hàm công khai để cập nhật pose từ MQTT)"""
