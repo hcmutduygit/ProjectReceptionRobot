@@ -26,6 +26,12 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         apply_custom_fonts(self.ui)
 
+        #led control testing 
+        self.led1_state = 0 
+        self.led2_state = 0 
+        self.ui.btn_led1.clicked.connect(self.toggle_led1_state)
+        self.ui.btn_led2.clicked.connect(self.toggle_led2_state)
+
         # list user
         self.registered_users = [{"username": "admin", "password": "123", "fullname": "Admin User", "phone": "0123456789", "verify": "fablab"}]
 
@@ -65,31 +71,15 @@ class MainWindow(QMainWindow):
         self.ui.logout.clicked.connect(self._handle_logout)
         self.ui.logout_2.clicked.connect(self._handle_logout)
 
-    def run_executor(self):
-        """Chạy executor trong thread riêng"""
-        try:
-            self.executor.spin()
-        except Exception as e:
-            print(f"❌ Lỗi trong executor: {e}")
-
-    '''def changeEvent(self, event):
-        if event.type() == QEvent.Type.WindowStateChange:
-            if self.windowState() == Qt.WindowState.WindowNoState:
-                self.resize(950, 630) 
-        super().changeEvent(event)'''
 
     def _handle_login(self):
         if handle_login(self.ui, self.registered_users):
             self.ui.stackedWidget.setCurrentWidget(self.ui.robot)
             self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_control_2)
             self.admin_camera_tab = CameraTab(self.ui.camera_2, self.shared_browser)
-            # 1. Tạo GUI tab
             self.admin_location_tab = LocationTab(self.ui.view_map_2)
-            # 2. Khởi tạo manager
             self.location_manager = LocationManager(self.ui)
-            # 3. Gán location_tab cho manager
             self.location_manager.location_tab = self.admin_location_tab
-            # 4. Start subscriber sau cùng
             self.location_manager.start_location_subscriber()
 
     def _handle_signup(self):
@@ -101,13 +91,9 @@ class MainWindow(QMainWindow):
     def _handle_guest(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.guest)
         self.guest_camera_tab = CameraTab(self.ui.camera_4, self.shared_browser)
-        # 1. Tạo GUI tab
         self.guest_location_tab = LocationTab(self.ui.view_map)
-        # 2. Khởi tạo manager
         self.location_manager = LocationManager(self.ui)
-        # 3. Gán location_tab cho manager
         self.location_manager.location_tab = self.guest_location_tab
-        # 4. Start subscriber sau cùng
         self.location_manager.start_location_subscriber()
 
     def _handle_logout(self):
@@ -135,6 +121,40 @@ class MainWindow(QMainWindow):
             self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_telemetry_2)
 
         
+    def toggle_led1_state(self):
+        # Tăng trạng thái: 0 → 1 → 2 → 0 ...
+        self.led1_state = (self.led1_state + 1) % 3
+
+        # Gán màu tương ứng
+        if self.led1_state == 0:
+            color = "gray"
+        elif self.led1_state == 1:
+            color = "red"
+        elif self.led1_state == 2:
+            color = "green"
+        # Cập nhật style
+        self.ui.btn_led1.setStyleSheet(f"""
+            QPushButton {{
+                background-color: {color};
+                border-radius: 20px;
+                border: 2px solid rgb(0, 0, 0);
+            }}
+        """)
+
+    def toggle_led2_state (self):
+        self.led2_state = not self.led2_state
+        if self.led2_state == 0:
+            color = "gray"
+        else: 
+            color = "green"
+        self.ui.btn_led2.setStyleSheet(f"""
+            QPushButton {{
+                background-color: {color};
+                border-radius: 20px;
+                border: 2px solid rgb(0, 0, 0);
+            }}
+        """)
+
     def _shutdown_all_services(self):
         self.battery_manager.stop_battery_subscriber()
         self.attendance_manager.stop_attendance_subscriber()

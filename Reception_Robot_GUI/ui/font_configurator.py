@@ -41,6 +41,10 @@ def apply_custom_fonts(ui):
     set_bold(ui.table_attendance_2)
 
     #page_control - robot 
+    set_bold(ui.label_14)
+    set_regular(ui.label1_4)
+    set_bold(ui.label_7)
+    set_bold(ui.label_18)
     set_regular(ui.label1_5)
     set_bold(ui.label_left_2)
     set_bold(ui.label_right_2)
