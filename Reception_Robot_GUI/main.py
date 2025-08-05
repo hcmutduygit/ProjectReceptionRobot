@@ -127,11 +127,11 @@ class MainWindow(QMainWindow):
 
         # Gán màu tương ứng
         if self.led1_state == 0:
-            color = "gray"
+            color = "rgb(155, 164, 181)"    #grey 
         elif self.led1_state == 1:
-            color = "red"
+            color = "rgb(215, 19, 19)"      #red 
         elif self.led1_state == 2:
-            color = "green"
+            color = "rgb(28, 121, 71)"      #green 
         # Cập nhật style
         self.ui.btn_led1.setStyleSheet(f"""
             QPushButton {{
@@ -144,7 +144,7 @@ class MainWindow(QMainWindow):
     def toggle_led2_state (self):
         self.led2_state = not self.led2_state
         if self.led2_state == 0:
-            color = "gray"
+            color = "rgb(155, 164, 181)"    #grey 
         else: 
             color = "white"
         self.ui.btn_led2.setStyleSheet(f"""
