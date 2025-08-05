@@ -146,7 +146,7 @@ class MainWindow(QMainWindow):
         if self.led2_state == 0:
             color = "gray"
         else: 
-            color = "green"
+            color = "white"
         self.ui.btn_led2.setStyleSheet(f"""
             QPushButton {{
                 background-color: {color};

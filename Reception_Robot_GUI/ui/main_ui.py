@@ -1396,9 +1396,9 @@ class Ui_MainWindow(object):
         self.btn_led1.setMinimumSize(QtCore.QSize(40, 40))
         self.btn_led1.setMaximumSize(QtCore.QSize(40, 40))
         self.btn_led1.setStyleSheet("QPushButton {\n"
-"border-radius: 20px; \n"
-"border: 3px solid rgb(0, 0, 0);\n"
 "background-color: rgb(154, 153, 150);\n"
+"border-radius: 20px; \n"
+"border: 2px solid rgb(0, 0, 0);\n"
 "}")
         self.btn_led1.setText("")
         self.btn_led1.setObjectName("btn_led1")
@@ -1422,9 +1422,9 @@ class Ui_MainWindow(object):
         self.btn_led2.setMinimumSize(QtCore.QSize(40, 40))
         self.btn_led2.setMaximumSize(QtCore.QSize(40, 40))
         self.btn_led2.setStyleSheet("QPushButton {\n"
-"border-radius: 20px; \n"
-"border: 3px solid rgb(0, 0, 0);\n"
 "background-color: rgb(154, 153, 150);\n"
+"border-radius: 20px; \n"
+"border: 2px solid rgb(0, 0, 0);\n"
 "}")
         self.btn_led2.setText("")
         self.btn_led2.setObjectName("btn_led2")
