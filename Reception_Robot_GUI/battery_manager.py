@@ -13,12 +13,13 @@ class BatteryManager(BaseManager):
         self.mqtt_status = "disconnected"
         self.ui.label_mqtt.setText(self.mqtt_status)
         self.ui.label_mqtt_3.setText(self.mqtt_status)
+        self.ui.label_mqtt_4.setText(self.mqtt_status)
 
         # Khởi tạo giá trị mặc định cho battery
-        self.battery_percent = '??'
+        self.battery_percent = '88'
         self.ui.label_battery.setText(f"{self.battery_percent}%")
-        self.ui.label_battery_2.setText(f"{self.battery_percent}%")
         self.ui.label_battery_3.setText(f"{self.battery_percent}%")
+        self.ui.label_battery_4.setText(f"{self.battery_percent}%")
         
     def _connect_signals(self):
         """Kết nối signal cho battery subscriber"""

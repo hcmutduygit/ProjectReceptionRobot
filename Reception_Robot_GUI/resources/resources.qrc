@@ -1,8 +1,13 @@
 <RCC>
   <qresource prefix="Icons">
     <file>Icons/log-out.svg</file>
-    <file>Icons/battery.svg</file>
     <file>Icons/mqtt_icon.svg</file>
+    <file>Icons/battery.png</file>
+    <file>Icons/charge.png</file>
+    <file>Icons/empty-battery.png</file>
+    <file>Icons/full-battery.png</file>
+    <file>Icons/half-battery.png</file>
+    <file>Icons/low-battery.png</file>
     <file>Icons/menu.svg</file>
     <file>Icons/Refresh_icon.png</file>
     <file>Icons/search.svg</file>

@@ -35,5 +35,7 @@ class VelocityManager(BaseManager):
         """Hiển thị vị trí lên các QLabel trong UI"""
         self.ui.label_left.setText(f"Left: {self.velocity['left']}")
         self.ui.label_left_2.setText(f"Left: {self.velocity['left']}")
+        self.ui.label_left_3.setText(f"Left: {self.velocity['left']}")
         self.ui.label_right.setText(f"Right: {self.velocity['right']}")
         self.ui.label_right_2.setText(f"Right: {self.velocity['right']}")
+        self.ui.label_right_3.setText(f"Right: {self.velocity['right']}")

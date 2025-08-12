@@ -46,7 +46,7 @@ class MainWindow(QMainWindow):
         self.velocity_manager.start_velocity_subscriber()
 
         # page_telemetry  
-        self.plot_tab = PlotTab(self.ui)
+        #self.plot_tab = PlotTab(self.ui)
 
         # page_attendance 
         self.attendance_tab = AttendanceTab(self.ui)
@@ -75,9 +75,9 @@ class MainWindow(QMainWindow):
     def _handle_login(self):
         if handle_login(self.ui, self.registered_users):
             self.ui.stackedWidget.setCurrentWidget(self.ui.robot)
-            self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_control_2)
-            self.admin_camera_tab = CameraTab(self.ui.camera_2, self.shared_browser)
-            self.admin_location_tab = LocationTab(self.ui.view_map_2)
+            self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_guest_2)
+            self.admin_camera_tab = CameraTab(self.ui.camera_5, self.shared_browser)
+            self.admin_location_tab = LocationTab(self.ui.view_map_3)
             self.location_manager = LocationManager(self.ui)
             self.location_manager.location_tab = self.admin_location_tab
             self.location_manager.start_location_subscriber()
@@ -114,11 +114,9 @@ class MainWindow(QMainWindow):
 
     def handle_page_switch(self, text):
         if text == "Control Panel":
-            self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_control_2)
+            self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_guest_2)    #page_control_2
         elif text == "Attendance":
             self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_attendance_2)
-        elif text == "Robot Telemetry":
-            self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_telemetry_2)
 
         
     def toggle_led1_state(self):
@@ -159,9 +157,10 @@ class MainWindow(QMainWindow):
         self.battery_manager.stop_battery_subscriber()
         self.attendance_manager.stop_attendance_subscriber()
         self.location_manager.stop_location_subscriber()
+        self.velocity_manager.stop_velocity_subscriber() 
 
     def closeEvent(self, event):
-        print("Đóng cửa sổ, dọn dẹp tài nguyên...")
+        print("Closinggg...")
         self._shutdown_all_services()
         event.accept()
 

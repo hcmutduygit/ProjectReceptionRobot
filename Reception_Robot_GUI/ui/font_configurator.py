@@ -53,10 +53,18 @@ def apply_custom_fonts(ui):
     set_bold(ui.label_theta_2)
     set_bold(ui.mode_select_2)
 
+    #page_guest2 - robot 
+    set_regular(ui.label1_11)
+    set_bold(ui.label_xy_3)
+    set_bold(ui.label_theta_3)
+    set_regular(ui.label1_12)
+    set_bold(ui.label_left_3)
+    set_bold(ui.label_right_3)
+
 
     #thanh cong cu - guest 
-    set_bold(ui.label_mqtt_2)
-    set_bold(ui.label_battery_2)
+    set_bold(ui.label_mqtt_4)
+    set_bold(ui.label_battery_4)
     #page - guest 
     set_regular(ui.label1_10)
     set_bold(ui.label_xy)

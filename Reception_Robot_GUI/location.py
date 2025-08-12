@@ -29,19 +29,14 @@ class LocationTab(QWidget):
         layout.addWidget(self.ui)
         self.ui.setScene(self.map_scene)
 
-        self.load_map("Reception_Robot_GUI/resources/Map/map_2.png")
+        self.load_map("Reception_Robot_GUI/resources/Map/map_fablab.pgm")
 
         # Tạo robot
         triangle = QPolygonF([
-            QPointF(0, -5),
-            QPointF(3, 4),
-            QPointF(-3, 4)
-        ])
-        '''triangle = QPolygonF([
             QPointF(0, -15),
             QPointF(8, 20),
             QPointF(-8, 20)
-        ])'''
+        ])
         self.robot_item = QGraphicsPolygonItem(triangle)
         self.robot_item.setBrush(QBrush(QColor(101, 230, 248)))
         self.robot_item.setPen(QPen(Qt.GlobalColor.black, 1))
@@ -76,7 +71,7 @@ class LocationTab(QWidget):
         self.map_height = pixmap.height()
 
         # Đọc thông số từ file map.yaml từ SLAM
-        yaml_path = "Reception_Robot_GUI/resources/Map/map_2.yaml"
+        yaml_path = "Reception_Robot_GUI/resources/Map/map_fablab.yaml"
         try:
             with open(yaml_path, 'r') as file:
                 map_config = yaml.safe_load(file)
@@ -92,15 +87,15 @@ class LocationTab(QWidget):
     def update_robot_gui(self):
         """Cập nhật vị trí robot trên GUI"""
         x, y, theta = self.last_position
-        # Chuyển đổi tọa độ từ /map sang GUI với 
+        # Chuyển đổi tọa độ từ /map sang GUI 
         py_raw = (y - self.map_origin[1]) / self.map_resolution 
         px_raw = (x - self.map_origin[0]) / self.map_resolution  
         # Điều chỉnh cho Qt 
         px = px_raw
         py = self.map_height - py_raw
         # Thêm offset thủ công 
-        offset_x = 39 #12 #320 
-        offset_y = -12 #40 #420  
+        offset_x = 0#39 #12 #320 
+        offset_y = 0#-12 #40 #420  
         px += offset_x
         py += offset_y
         #print(f"[SIM] x={x:.2f}, y={y:.2f}, px_raw={px_raw:.1f}, py_raw={py_raw:.1f}, "f"px={px:.1f}, py={py:.1f}, θ={theta:.1f}")
