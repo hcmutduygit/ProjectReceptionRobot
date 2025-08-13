@@ -4,7 +4,6 @@ from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QMessageBox
 from PyQt6.QtCore import QSize, Qt, QEvent
 from PyQt6.QtGui import QIcon
 
-# pyuic6 Robot_UI.ui -o robot_ui.py
 from ui.font_configurator import apply_custom_fonts
 from ui.style import QMSGBOX_STYLE
 from ui.main_ui import Ui_MainWindow
@@ -73,7 +72,8 @@ class MainWindow(QMainWindow):
 
 
     def _handle_login(self):
-        if handle_login(self.ui, self.registered_users):
+        success =  handle_login(self.ui, self.registered_users, main_window=self)
+        if success:
             self.ui.stackedWidget.setCurrentWidget(self.ui.robot)
             self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_guest_2)
             self.admin_camera_tab = CameraTab(self.ui.camera_5, self.shared_browser)
@@ -83,7 +83,8 @@ class MainWindow(QMainWindow):
             self.location_manager.start_location_subscriber()
 
     def _handle_signup(self):
-        if handle_signup(self.ui, self.registered_users):
+        success = handle_signup(self.ui, self.registered_users, main_window=self)
+        if success:
             self.ui.stackedWidget.setCurrentWidget(self.ui.login)
             self.ui.Page.setCurrentWidget(self.ui.Page_signin)
             self.ui.Dashboard.setCurrentWidget(self.ui.Dashboard_signin)
