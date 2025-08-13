@@ -21,9 +21,9 @@ class AttendanceTab(QWidget):
             header.resizeSection(i, 200)
         header.setSectionResizeMode(self.ui.table_attendance_2.columnCount() - 1, QHeaderView.ResizeMode.Stretch)
         # so cot va ten 
-        self.ui.table_attendance_2.setColumnCount(7)
+        self.ui.table_attendance_2.setColumnCount(6)
         self.ui.table_attendance_2.setHorizontalHeaderLabels([
-            "Employee ID", "Name", "Department", "Status", "Check-in Time", "Check-out Time", "Email"
+            "Employee ID", "Name", "Department", "Status", "Check-in Time", "Email"
                 ])
                 
         self.ui.table_attendance_2.setStyleSheet("""
@@ -34,12 +34,12 @@ class AttendanceTab(QWidget):
 
         # Du lieu gia 
         self.attendance_data = [
-            {"id": "E001", "name": "Ky", "dept": "HR", "email": "ky@example.com", "status": None, "time_in": None, "time_out": None },
-            {"id": "E002", "name": "Duy", "dept": "IT", "email": "phu@example.com", "status": None, "time_in": None, "time_out": None },
-            {"id": "E003", "name": "Phu", "dept": "Finance", "email": "duy@example.com", "status": None, "time_in": None, "time_out": None },
-            {"id": "E004", "name": "Thu", "dept": "Finance", "email": "thu@example.com", "status": None, "time_in": None, "time_out": None },
-            {"id": "E005", "name": "Loi", "dept": "Finance", "email": "loi@example.com", "status": None, "time_in": None, "time_out": None },
-            {"id": "E006", "name": "Thien", "dept": "Finance", "email": "thien@example.com", "status": None, "time_in": None, "time_out": None },
+            {"id": "E001", "name": "Ky", "dept": "HR", "email": "ky@example.com", "status": None, "time": None },
+            {"id": "E002", "name": "Duy", "dept": "IT", "email": "phu@example.com", "status": None, "time": None },
+            {"id": "E003", "name": "Phu", "dept": "Finance", "email": "duy@example.com", "status": None, "time": None },
+            {"id": "E004", "name": "Thu", "dept": "Finance", "email": "thu@example.com", "status": None, "time": None },
+            {"id": "E005", "name": "Loi", "dept": "Finance", "email": "loi@example.com", "status": None, "time": None },
+            {"id": "E006", "name": "Thien", "dept": "Finance", "email": "thien@example.com", "status": None, "time": None },
         ]
 
         # Gan nut search 
@@ -56,22 +56,15 @@ class AttendanceTab(QWidget):
             self.ui.table_attendance_2.setItem(row, 1, QTableWidgetItem(entry["name"]))
             self.ui.table_attendance_2.setItem(row, 2, QTableWidgetItem(entry["dept"]))
             self.ui.table_attendance_2.setItem(row, 3, QTableWidgetItem(entry.get("status") or "—"))
-            self.ui.table_attendance_2.setItem(row, 4, QTableWidgetItem(entry.get("time_in") or "—"))
-            self.ui.table_attendance_2.setItem(row, 5, QTableWidgetItem(entry.get("time_out") or "—"))
-            self.ui.table_attendance_2.setItem(row, 6, QTableWidgetItem(entry["email"]))
+            self.ui.table_attendance_2.setItem(row, 4, QTableWidgetItem(entry.get("time") or "—"))
+            self.ui.table_attendance_2.setItem(row, 5, QTableWidgetItem(entry["email"]))
         
     # ham cap nhat trang thai 
-    def update_status(self, name=None, time=None):
+    def update_status(self, name=None, status=None, time=None):
         for entry in self.attendance_data:
             if (name and entry["name"] == name):
-                if entry["time_in"] is None:
-                    entry["status"] = "Present"
-                    entry["time_in"] = time
-                elif entry["time_out"] is None:
-                    entry["status"] = "Left"
-                    entry["time_out"] = time
-                else:
-                    print(f"{name} have already left.")
+                entry["status"] = status
+                entry["time"] = time
                 break
 
         self.load_attendance_table(self.attendance_data)

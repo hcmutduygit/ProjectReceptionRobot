@@ -2908,7 +2908,7 @@ color: rgb(0, 41, 77);</string>
         <item>
          <widget class="QStackedWidget" name="stackedWidget_2">
           <property name="currentIndex">
-           <number>2</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="page_control_2">
            <layout class="QHBoxLayout" name="horizontalLayout_17" stretch="3,2">
@@ -4439,7 +4439,7 @@ color: rgb(0, 41, 77);</string>
                   <number>0</number>
                  </property>
                  <property name="columnCount">
-                  <number>7</number>
+                  <number>6</number>
                  </property>
                  <attribute name="horizontalHeaderCascadingSectionResizes">
                   <bool>false</bool>
@@ -4544,22 +4544,6 @@ color: rgb(0, 41, 77);</string>
                  <column>
                   <property name="text">
                    <string>Check-in Time</string>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <family>Roboto</family>
-                    <pointsize>12</pointsize>
-                    <weight>75</weight>
-                    <bold>true</bold>
-                   </font>
-                  </property>
-                  <property name="textAlignment">
-                   <set>AlignLeading|AlignVCenter</set>
-                  </property>
-                 </column>
-                 <column>
-                  <property name="text">
-                   <string>Check-out Time </string>
                   </property>
                   <property name="font">
                    <font>
