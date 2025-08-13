@@ -42,12 +42,12 @@ mqttc.connect(MQTT_HOST, MQTT_PORT, MQTT_KEEPALIVE_INTERVAL)
 mqttc.loop_start()
 
 # ROS2 Node
-class OdomToMQTT(Node):
+class PoseToMQTT(Node):
     def __init__(self):
-        super().__init__('odom_to_mqtt_node')
-        self.subscription = self.create_subscription(Odometry, '/odom', self.odom_callback, 10)
+        super().__init__('pose_to_mqtt_node')
+        self.subscription = self.create_subscription(Odometry, '/odom', self.pose_callback, 10)
 
-    def odom_callback(self, msg: Odometry):
+    def pose_callback(self, msg: Odometry):
         x = msg.pose.pose.position.x
         y = msg.pose.pose.position.y
         q = msg.pose.pose.orientation
@@ -71,7 +71,7 @@ class OdomToMQTT(Node):
 
 def main():
     rclpy.init()
-    node = OdomToMQTT()
+    node = PoseToMQTT()
 
     try:
         rclpy.spin(node)
