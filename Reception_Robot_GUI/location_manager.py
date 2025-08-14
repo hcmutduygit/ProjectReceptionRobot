@@ -13,7 +13,8 @@ class LocationManager(BaseManager):
         super().__init__(ui, LocationSubscriberThread, LOCATION_CONFIG)
         # Giá trị mặc định ban đầu
         self.location_tab = location_tab
-        self.location = {'x': '??', 'y': '??', 'theta': '??'}
+        #self.location = {'x': '??', 'y': '??', 'theta': '??'}
+        self.location = {'x': '??', 'y': '??'}
         self._update_location_labels()
 
     def _connect_signals(self):
@@ -25,24 +26,29 @@ class LocationManager(BaseManager):
     def stop_location_subscriber(self):
         self.stop_subscriber()
 
-    def handle_data_update(self, x, y, theta):
-        self.location = {
-            'x': f"{x:.2f}",
-            'y': f"{y:.2f}",
-            'theta': f"{theta:.1f}°"
-        }
+    def handle_data_update(self, x, y):
+        #self.location = {'x': f"{x:.2f}", 'y': f"{y:.2f}", 'theta': f"{theta:.1f}°"}
+        self.location = {'x': f"{x:.2f}", 'y': f"{y:.2f}"}
         self._update_location_labels()
         #print(f"📍Location updated: x={x:.2f}, y={y:.2f}, θ={theta:.1f}°")
         if self.location_tab is not None:
-            self.location_tab.set_location(x, y, theta)
+            #self.location_tab.set_location(x, y, theta)
+            self.location_tab.set_location(x, y)
         else:
             print("⚠️ location_tab chưa được gán.")
 
     def _update_location_labels(self):
         """Hiển thị vị trí lên các QLabel trong UI"""
-        self.ui.label_xy.setText(f"X: {self.location['x']}, Y: {self.location['y']}")
+        '''self.ui.label_xy.setText(f"X: {self.location['x']}, Y: {self.location['y']}")
         self.ui.label_xy_2.setText(f"X: {self.location['x']}, Y: {self.location['y']}")
         self.ui.label_xy_3.setText(f"X: {self.location['x']}, Y: {self.location['y']}")
         self.ui.label_theta.setText(f"θ: {self.location['theta']}")
         self.ui.label_theta_2.setText(f"θ: {self.location['theta']}")
-        self.ui.label_theta_3.setText(f"θ: {self.location['theta']}")
+        self.ui.label_theta_3.setText(f"θ: {self.location['theta']}")'''
+
+        self.ui.label_xy.setText(f"X: {self.location['x']}")
+        self.ui.label_xy_2.setText(f"X: {self.location['x']}")
+        self.ui.label_xy_3.setText(f"X: {self.location['x']}")
+        self.ui.label_theta.setText(f"Y: {self.location['y']}")
+        self.ui.label_theta_2.setText(f"Y: {self.location['y']}")
+        self.ui.label_theta_3.setText(f"Y: {self.location['y']}")
