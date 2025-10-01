@@ -3,8 +3,7 @@ from .mqtt_subscriber import MQTTSubscriberThread
 import json
 
 class LocationSubscriberThread(MQTTSubscriberThread):
-    #location_update = pyqtSignal(float, float, float)  # x, y, theta
-    location_update = pyqtSignal(float, float)          # x, y
+    location_update = pyqtSignal(float, float, float)  # x, y, theta
 
     def __init__(self, mqtt_host, mqtt_port, mqtt_topic="robot/location"):
         super().__init__(mqtt_host, mqtt_port, mqtt_topic)
@@ -18,9 +17,9 @@ class LocationSubscriberThread(MQTTSubscriberThread):
             data = json.loads(message)
             x = float(data.get('x', 0.0))
             y = float(data.get('y', 0.0))
-            #theta = float(data.get('theta', 0.0))
+            theta = float(data.get('theta', 0.0))
 
-            self.location_update.emit(x, y)
+            self.location_update.emit(x, y, theta)
 
         except (json.JSONDecodeError, ValueError, TypeError) as e:
             print(f"[MQTT] ❌ Error parsing location data: {e}")

@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QWidget, QGraphicsScene, QGraphicsView, QGraphicsPolygonItem, QGraphicsEllipseItem
+from PyQt6.QtWidgets import QWidget, QGraphicsScene, QGraphicsView, QGraphicsPolygonItem
 from PyQt6.QtGui import QPixmap, QPolygonF, QWheelEvent, QPainter, QBrush, QPen, QColor
 from PyQt6.QtCore import QPointF, Qt, QTimer, QRectF
 import yaml
@@ -32,21 +32,19 @@ class LocationTab(QWidget):
         self.load_map("Reception_Robot_GUI/resources/Map/map_fablab.pgm")
 
         # Tạo robot
-        '''triangle = QPolygonF([
+        triangle = QPolygonF([
             QPointF(0, -15),
             QPointF(8, 20),
             QPointF(-8, 20)
         ])
-        self.robot_item = QGraphicsPolygonItem(triangle)'''
-        radius = 10
-        self.robot_item = QGraphicsEllipseItem(-radius, -radius, radius*2, radius*2)
+        self.robot_item = QGraphicsPolygonItem(triangle)
         self.robot_item.setBrush(QBrush(QColor(101, 230, 248)))
-        self.robot_item.setPen(QPen(Qt.GlobalColor.black, 2))
+        self.robot_item.setPen(QPen(Qt.GlobalColor.black, 1))
         self.robot_item.setTransformOriginPoint(0, 2)
         self.map_scene.addItem(self.robot_item)
 
         # Lưu trữ vị trí mới nhất
-        self.last_position = [0.0, 0.0]
+        self.last_position = [0.0, 0.0, 0.0]
 
         # Thiết lập QTimer để cập nhật GUI định kỳ
         self.update_timer = QTimer(self)
@@ -88,8 +86,7 @@ class LocationTab(QWidget):
 
     def update_robot_gui(self):
         """Cập nhật vị trí robot trên GUI"""
-        #x, y, theta = self.last_position
-        x, y = self.last_position
+        x, y, theta = self.last_position
         # Chuyển đổi tọa độ từ /map sang GUI 
         py_raw = (y - self.map_origin[1]) / self.map_resolution 
         px_raw = (x - self.map_origin[0]) / self.map_resolution  
@@ -103,10 +100,9 @@ class LocationTab(QWidget):
         py += offset_y
         #print(f"[SIM] x={x:.2f}, y={y:.2f}, px_raw={px_raw:.1f}, py_raw={py_raw:.1f}, "f"px={px:.1f}, py={py:.1f}, θ={theta:.1f}")
         self.robot_item.setPos(px, py)
-        #self.robot_item.setRotation(-theta+90)  
+        self.robot_item.setRotation(-theta+90)  
 
-    def set_location(self, x, y):
+    def set_location(self, x, y, theta):
         """Hàm công khai để cập nhật pose từ MQTT)"""
-        #self.last_position = [x, y, theta]
-        self.last_position = [x, y]
+        self.last_position = [x, y, theta]
         

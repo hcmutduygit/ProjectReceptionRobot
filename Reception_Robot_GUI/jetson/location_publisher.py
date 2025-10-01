@@ -60,7 +60,7 @@ class PoseToMQTT(Node):
         payload = {
             "x": round(x, 3),
             "y": round(y, 3),
-            #"theta": round(theta, 2)
+            "theta": round(theta, 2)
         }
 
         try:
