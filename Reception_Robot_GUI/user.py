@@ -1,4 +1,3 @@
-# your_module.py
 from PyQt6.QtWidgets import QMessageBox
 from ui.style import show_custom_dialog
 

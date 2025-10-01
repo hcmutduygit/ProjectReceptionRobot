@@ -1,8 +1,6 @@
-import sys, rclpy, threading
+import sys
 
 from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QMessageBox
-from PyQt6.QtCore import QSize, Qt, QEvent
-from PyQt6.QtGui import QIcon
 
 from ui.font_configurator import apply_custom_fonts
 from ui.style import QMSGBOX_STYLE
@@ -13,7 +11,6 @@ from attendance_manager import AttendanceManager
 from battery_manager import BatteryManager
 from location_manager import LocationManager 
 from velocity_manager import VelocityManager 
-from dataplotting import PlotTab
 from location import LocationTab
 from camera import CameraController, CameraTab
 
@@ -44,16 +41,12 @@ class MainWindow(QMainWindow):
         self.velocity_manager = VelocityManager(self.ui)
         self.velocity_manager.start_velocity_subscriber()
 
-        # page_telemetry  
-        #self.plot_tab = PlotTab(self.ui)
-
         # page_attendance 
         self.attendance_tab = AttendanceTab(self.ui)
         self.attendance_manager = AttendanceManager(self.ui, self.attendance_tab)
         self.attendance_manager.start_attendance_subscriber()
 
-
-        # set moi vo thi hien cai nao 
+        # khoi tao 
         self.ui.stackedWidget.setCurrentWidget(self.ui.login)
         self.ui.Page.setCurrentWidget(self.ui.Page_signin)
         self.ui.Dashboard.setCurrentWidget(self.ui.Dashboard_signin)

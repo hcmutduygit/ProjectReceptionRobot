@@ -11,7 +11,7 @@ VELOCITY_CONFIG = MQTTConfig.get_config("velocity")
 class VelocityManager(BaseManager):
     def __init__(self, ui):
         super().__init__(ui, VelocitySubscriberThread, VELOCITY_CONFIG)
-        # Giá trị mặc định ban đầu
+        # Khoi tao 
         self.velocity = {'left': '??', 'right': '??'}
         self._update_velocity_labels()
 
@@ -32,7 +32,6 @@ class VelocityManager(BaseManager):
         self._update_velocity_labels()
 
     def _update_velocity_labels(self):
-        """Hiển thị vị trí lên các QLabel trong UI"""
         self.ui.label_left.setText(f"Left: {self.velocity['left']}")
         self.ui.label_left_2.setText(f"Left: {self.velocity['left']}")
         self.ui.label_left_3.setText(f"Left: {self.velocity['left']}")
