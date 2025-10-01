@@ -77,7 +77,6 @@ class LocationTab(QWidget):
                 map_config = yaml.safe_load(file)
                 self.map_resolution = map_config['resolution']
                 self.map_origin = (map_config['origin'][0], map_config['origin'][1])
-                #print(f"Loaded YAML: resolution={self.map_resolution}, origin={self.map_origin}, "f"map_width={self.map_width}, map_height={self.map_height}")
         except Exception as e:
             print(f"❌ Lỗi khi đọc file map.yaml: {e}")
             self.map_resolution = 0.05  # Giá trị mặc định nếu không đọc được
@@ -90,15 +89,13 @@ class LocationTab(QWidget):
         # Chuyển đổi tọa độ từ /map sang GUI 
         py_raw = (y - self.map_origin[1]) / self.map_resolution 
         px_raw = (x - self.map_origin[0]) / self.map_resolution  
-        # Điều chỉnh cho Qt 
         px = px_raw
         py = self.map_height - py_raw
         # Thêm offset thủ công 
-        offset_x = 0#39 #12 #320 
-        offset_y = 0#-12 #40 #420  
+        offset_x = 0
+        offset_y = 0
         px += offset_x
         py += offset_y
-        #print(f"[SIM] x={x:.2f}, y={y:.2f}, px_raw={px_raw:.1f}, py_raw={py_raw:.1f}, "f"px={px:.1f}, py={py:.1f}, θ={theta:.1f}")
         self.robot_item.setPos(px, py)
         self.robot_item.setRotation(-theta+90)  
 
