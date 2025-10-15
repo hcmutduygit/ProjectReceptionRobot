@@ -2,12 +2,14 @@ import paho.mqtt.client as mqtt
 from PyQt6.QtCore import QThread
 
 class MQTTSubscriberThread(QThread):
-    def __init__(self, mqtt_host, mqtt_port, mqtt_topic="default/topic", mqtt_keepalive=60):
+    def __init__(self, mqtt_host, mqtt_port, mqtt_topic="default/topic", mqtt_keepalive=60, mqtt_username=None, mqtt_password=None):
         super().__init__()
         self.mqtt_host = mqtt_host
         self.mqtt_port = mqtt_port
         self.mqtt_topic = mqtt_topic
         self.mqtt_keepalive = mqtt_keepalive
+        self.mqtt_username = mqtt_username
+        self.mqtt_password = mqtt_password
         self.client = None
         self._stop_requested = False
 
@@ -32,6 +34,12 @@ class MQTTSubscriberThread(QThread):
         """Main thread execution"""
         try:
             self.client = mqtt.Client()
+            
+            # Set username and password if provided
+            if self.mqtt_username and self.mqtt_password:
+                self.client.username_pw_set(self.mqtt_username, self.mqtt_password)
+                print(f"MQTT authentication set for user: {self.mqtt_username}")
+            
             self.client.on_connect = self.on_connect
             self.client.on_message = self.on_message
             self.client.on_disconnect = self.on_disconnect

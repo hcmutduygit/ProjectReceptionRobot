@@ -2,9 +2,11 @@
 import paho.mqtt.client as mqtt
 
 # Define Variables
-MQTT_HOST = "192.168.1.110"
+MQTT_HOST = "45.117.177.157" #"192.168.1.110"
 MQTT_PORT = 1883
 MQTT_KEEPALIVE_INTERVAL = 5
+MQTT_USERNAME = "usname"
+MQTT_PASSWORD = "passwd"
 MQTT_TOPIC = "robot/battery"
 # MQTT_MSG = "Hello MQTT"
 
@@ -23,6 +25,9 @@ def on_message(mosq, obj, msg):
 
 # Initiate MQTT Client
 mqttc = mqtt.Client()
+
+# Set authentication
+mqttc.username_pw_set(MQTT_USERNAME, MQTT_PASSWORD)
 
 # Register Event Handlers
 mqttc.on_message = on_message

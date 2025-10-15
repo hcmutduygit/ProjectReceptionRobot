@@ -5,9 +5,11 @@ import time
 import threading
 
 # Define Variables
-MQTT_HOST = "192.168.0.130" #"192.168.0.200"
+MQTT_HOST = "45.117.177.157" #"192.168.0.130" #"192.168.0.200"
 MQTT_PORT = 1883
 MQTT_KEEPALIVE_INTERVAL = 5
+MQTT_USERNAME = "usname"
+MQTT_PASSWORD = "passwd"
 MQTT_TOPIC = "robot/attendance"
 MQTT_MSG = "Ky"
 
@@ -21,6 +23,9 @@ def on_publish(client, userdata, mid):
 
 # Initiate MQTT Client
 mqttc = mqtt.Client()
+
+# Set authentication
+mqttc.username_pw_set(MQTT_USERNAME, MQTT_PASSWORD)
 
 # Register Event Handlers
 mqttc.on_publish = on_publish

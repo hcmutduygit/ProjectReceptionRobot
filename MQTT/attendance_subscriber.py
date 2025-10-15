@@ -4,8 +4,8 @@ from .mqtt_subscriber import MQTTSubscriberThread
 class AttendanceSubscriberThread(MQTTSubscriberThread):
     attendance_update = pyqtSignal(str, str)  # Signal để gửi giá trị tên về main window
 
-    def __init__(self, mqtt_host, mqtt_port, mqtt_topic="robot/attendance"):
-        super().__init__(mqtt_host, mqtt_port, mqtt_topic)
+    def __init__(self, mqtt_host, mqtt_port, mqtt_topic="robot/attendance", mqtt_username=None, mqtt_password=None):
+        super().__init__(mqtt_host, mqtt_port, mqtt_topic, mqtt_username=mqtt_username, mqtt_password=mqtt_password)
 
     def on_message(self, client, userdata, msg):
         """Callback khi nhận được message"""

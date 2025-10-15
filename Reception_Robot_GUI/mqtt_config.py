@@ -6,9 +6,11 @@ Tập trung quản lý các thông số MQTT để tránh hard-code ở nhiều 
 class MQTTConfig:
     """Class chứa tất cả cấu hình MQTT"""
     
-    MQTT_HOST = "127.0.0.1" #192.168.0.130
+    MQTT_HOST = "45.117.177.157" #127.0.0.1 #192.168.0.130
     MQTT_PORT = 1883
     MQTT_KEEPALIVE = 60
+    MQTT_USERNAME = "client"
+    MQTT_PASSWORD = "viam1234"
     
     # Các MQTT Topics
     TOPICS = {
@@ -29,7 +31,7 @@ class MQTTConfig:
             topic_name (str): Tên topic cần lấy config
             
         Returns:
-            dict: Dictionary chứa mqtt_host, mqtt_port, mqtt_topic
+            dict: Dictionary chứa mqtt_host, mqtt_port, mqtt_topic, mqtt_username, mqtt_password
         """
         if topic_name not in cls.TOPICS:
             raise ValueError(f"Topic '{topic_name}' không tồn tại. Available topics: {list(cls.TOPICS.keys())}")
@@ -37,7 +39,9 @@ class MQTTConfig:
         return {
             "mqtt_host": cls.MQTT_HOST,
             "mqtt_port": cls.MQTT_PORT,
-            "mqtt_topic": cls.TOPICS[topic_name]
+            "mqtt_topic": cls.TOPICS[topic_name],
+            "mqtt_username": cls.MQTT_USERNAME,
+            "mqtt_password": cls.MQTT_PASSWORD
         }
     
     @classmethod
@@ -56,6 +60,13 @@ class MQTTConfig:
         """Cập nhật MQTT port"""
         cls.MQTT_PORT = new_port
         print(f"MQTT Port updated to: {new_port}")
+    
+    @classmethod
+    def update_credentials(cls, username, password):
+        """Cập nhật MQTT username và password"""
+        cls.MQTT_USERNAME = username
+        cls.MQTT_PASSWORD = password
+        print(f"MQTT credentials updated for user: {username}")
         
     @classmethod
     def add_topic(cls, topic_name, topic_path):
