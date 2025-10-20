@@ -52,6 +52,7 @@ def apply_custom_fonts(ui):
     set_bold(ui.label_xy_2)
     set_bold(ui.label_theta_2)
     set_bold(ui.mode_select_2)
+    set_bold(ui.btn_goal)
 
     #page_guest2 - robot 
     set_regular(ui.label1_11)

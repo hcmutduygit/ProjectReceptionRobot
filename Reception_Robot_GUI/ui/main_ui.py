@@ -1664,6 +1664,25 @@ class Ui_MainWindow(object):
         self.robot_mode_2.addWidget(self.page_5)
         self.page_6 = QtWidgets.QWidget()
         self.page_6.setObjectName("page_6")
+        self.gridLayout_7 = QtWidgets.QGridLayout(self.page_6)
+        self.gridLayout_7.setObjectName("gridLayout_7")
+        self.btn_goal = QtWidgets.QPushButton(parent=self.page_6)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Ignored)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_goal.sizePolicy().hasHeightForWidth())
+        self.btn_goal.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Roboto")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.btn_goal.setFont(font)
+        self.btn_goal.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"border-radius:  15px;\n"
+"color: rgb(0, 41, 77);")
+        self.btn_goal.setObjectName("btn_goal")
+        self.gridLayout_7.addWidget(self.btn_goal, 0, 0, 1, 1)
         self.robot_mode_2.addWidget(self.page_6)
         self.verticalLayout_21.addWidget(self.robot_mode_2)
         self.horizontalLayout_17.addWidget(self.widget_15)
@@ -2546,7 +2565,7 @@ class Ui_MainWindow(object):
         self.stackedWidget.setCurrentIndex(1)
         self.Dashboard.setCurrentIndex(0)
         self.Page.setCurrentIndex(0)
-        self.stackedWidget_2.setCurrentIndex(1)
+        self.stackedWidget_2.setCurrentIndex(0)
         self.robot_mode_2.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -2596,6 +2615,7 @@ class Ui_MainWindow(object):
         self.label_14.setText(_translate("MainWindow", "MODE:"))
         self.mode_select_2.setItemText(0, _translate("MainWindow", "Manual"))
         self.mode_select_2.setItemText(1, _translate("MainWindow", "Auto"))
+        self.btn_goal.setText(_translate("MainWindow", "CHOOSE GOAL"))
         self.label_15.setText(_translate("MainWindow", "Employee ID"))
         self.label_16.setText(_translate("MainWindow", "Name"))
         self.label_17.setText(_translate("MainWindow", "Email Address"))
@@ -2627,3 +2647,13 @@ class Ui_MainWindow(object):
         self.label1_9.setText(_translate("MainWindow", "VELOCITY"))
         self.label_left.setText(_translate("MainWindow", "Left:"))
         self.label_right.setText(_translate("MainWindow", "Right:"))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec())

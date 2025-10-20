@@ -2908,7 +2908,7 @@ color: rgb(0, 41, 77);</string>
         <item>
          <widget class="QStackedWidget" name="stackedWidget_2">
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="page_control_2">
            <layout class="QHBoxLayout" name="horizontalLayout_17" stretch="3,2">
@@ -4044,7 +4044,36 @@ QPushButton {
                    </item>
                   </layout>
                  </widget>
-                 <widget class="QWidget" name="page_6"/>
+                 <widget class="QWidget" name="page_6">
+                  <layout class="QGridLayout" name="gridLayout_7">
+                   <item row="0" column="0">
+                    <widget class="QPushButton" name="btn_goal">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Roboto</family>
+                       <pointsize>14</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(255, 255, 255);
+border-radius:  15px;
+color: rgb(0, 41, 77);</string>
+                     </property>
+                     <property name="text">
+                      <string>CHOOSE GOAL</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
                 </widget>
                </item>
               </layout>

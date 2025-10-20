@@ -40,6 +40,7 @@ class MainWindow(QMainWindow):
         self.shared_browser = self.camera_controller.get_browser()
         self.velocity_manager = VelocityManager(self.ui)
         self.velocity_manager.start_velocity_subscriber()
+        self.ui.mode_select_2.currentTextChanged.connect(self.handle_mode_switch)
 
         # page_attendance 
         self.attendance_tab = AttendanceTab(self.ui)
@@ -68,9 +69,9 @@ class MainWindow(QMainWindow):
         success =  handle_login(self.ui, self.registered_users, main_window=self)
         if success:
             self.ui.stackedWidget.setCurrentWidget(self.ui.robot)
-            self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_guest_2)
-            self.admin_camera_tab = CameraTab(self.ui.camera_5, self.shared_browser)
-            self.admin_location_tab = LocationTab(self.ui.view_map_3)
+            self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_control_2)
+            self.admin_camera_tab = CameraTab(self.ui.camera_2, self.shared_browser)
+            self.admin_location_tab = LocationTab(self.ui.view_map_2)
             self.location_manager = LocationManager(self.ui)
             self.location_manager.location_tab = self.admin_location_tab
             self.location_manager.start_location_subscriber()
@@ -108,9 +109,16 @@ class MainWindow(QMainWindow):
 
     def handle_page_switch(self, text):
         if text == "Control Panel":
-            self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_guest_2)    #page_control_2
+            self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_control_2)   
         elif text == "Attendance":
             self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_attendance_2)
+            
+
+    def handle_mode_switch(self, text):
+        if text == "Manual":
+            self.ui.robot_mode_2.setCurrentWidget(self.ui.page_5)   
+        elif text == "Auto":
+            self.ui.robot_mode_2.setCurrentWidget(self.ui.page_6)
 
         
     def toggle_led1_state(self):

@@ -3,6 +3,8 @@ from PyQt6.QtGui import QPixmap, QPolygonF, QWheelEvent, QPainter, QBrush, QPen,
 from PyQt6.QtCore import QPointF, Qt, QTimer, QRectF
 import yaml
 
+from pathplanning import PathPlanner
+
 class MapGraphicsView(QGraphicsView):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -46,15 +48,15 @@ class LocationTab(QWidget):
         # Lưu trữ vị trí mới nhất
         self.last_position = [0.0, 0.0, 0.0]
 
-        # Thiết lập QTimer để cập nhật GUI định kỳ
+        # Update GUI frequency 
         self.update_timer = QTimer(self)
         self.update_timer.timeout.connect(self.update_robot_gui)
-        self.update_timer.start(100)  # Cập nhật mỗi 100ms (10 Hz)
+        self.update_timer.start(100)  # 100ms (10 Hz)
 
     def load_map(self, path: str):
         pixmap = QPixmap(path)
         if pixmap.isNull():
-            print(f"❌ Không thể load bản đồ: {path}")
+            print(f"Cannot load map: {path}")
             return
         
         # Thêm ảnh vào scene và giữ lại object
@@ -78,24 +80,20 @@ class LocationTab(QWidget):
                 self.map_resolution = map_config['resolution']
                 self.map_origin = (map_config['origin'][0], map_config['origin'][1])
         except Exception as e:
-            print(f"❌ Lỗi khi đọc file map.yaml: {e}")
-            self.map_resolution = 0.05  # Giá trị mặc định nếu không đọc được
-            self.map_origin = (-1.38, -2.4)  # Giá trị mặc định
+            print(f"Error while reading file map.yaml: {e}")
 
 
     def update_robot_gui(self):
         """Cập nhật vị trí robot trên GUI"""
         x, y, theta = self.last_position
-        # Chuyển đổi tọa độ từ /map sang GUI 
+        # Convert tọa độ từ /map sang GUI 
         py_raw = (y - self.map_origin[1]) / self.map_resolution 
         px_raw = (x - self.map_origin[0]) / self.map_resolution  
         px = px_raw
         py = self.map_height - py_raw
-        # Thêm offset thủ công 
-        offset_x = 0
-        offset_y = 0
-        px += offset_x
-        py += offset_y
+        # Thêm offset neu can  
+        px += 0
+        py += 0
         self.robot_item.setPos(px, py)
         self.robot_item.setRotation(-theta+90)  
 
