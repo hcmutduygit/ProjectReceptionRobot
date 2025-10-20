@@ -55,17 +55,16 @@ class PathPlanner:
 
         self.cost_map = cost
         
-        import matplotlib.pyplot as plt
-
+        '''import matplotlib.pyplot as plt
         plt.figure(figsize=(10, 8))
         plt.imshow(self.cost_map, cmap='hot')
         plt.colorbar(label='Chi phí')
         plt.title('Cost Map')
-        plt.show()
+        plt.show()'''
         
         
     def set_locations(self, locations: dict):
-        """Đặt các điểm đặc biệt A,B,C,D (pixel-based)"""
+        """sei 4 goals A,B,C,D (pixel-based)"""
         self.locations = locations
         for name, (x, y) in locations.items():
             self._draw_marker(x, y, name)

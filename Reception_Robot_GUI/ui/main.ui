@@ -1339,7 +1339,7 @@ color: rgb(0, 41, 77);</string>
                    <property name="font">
                     <font>
                      <family>Roboto</family>
-                     <pointsize>12</pointsize>
+                     <pointsize>15</pointsize>
                      <weight>75</weight>
                      <bold>true</bold>
                     </font>
@@ -1448,7 +1448,7 @@ color: rgb(0, 41, 77);</string>
                    <property name="font">
                     <font>
                      <family>Roboto</family>
-                     <pointsize>12</pointsize>
+                     <pointsize>15</pointsize>
                      <weight>75</weight>
                      <bold>true</bold>
                     </font>
@@ -2596,7 +2596,7 @@ border-radius:  15px;</string>
              <property name="font">
               <font>
                <family>Roboto</family>
-               <pointsize>14</pointsize>
+               <pointsize>17</pointsize>
                <weight>75</weight>
                <bold>true</bold>
               </font>
@@ -2723,7 +2723,7 @@ color: rgb(0, 41, 77);</string>
                    <property name="font">
                     <font>
                      <family>Roboto</family>
-                     <pointsize>15</pointsize>
+                     <pointsize>17</pointsize>
                      <weight>75</weight>
                      <bold>true</bold>
                     </font>
@@ -2825,7 +2825,7 @@ color: rgb(0, 41, 77);</string>
                    <property name="font">
                     <font>
                      <family>Roboto</family>
-                     <pointsize>15</pointsize>
+                     <pointsize>17</pointsize>
                      <weight>75</weight>
                      <bold>true</bold>
                     </font>
@@ -3129,7 +3129,7 @@ color: rgb(0, 41, 77);</string>
                           <property name="font">
                            <font>
                             <family>Roboto</family>
-                            <pointsize>14</pointsize>
+                            <pointsize>17</pointsize>
                             <weight>75</weight>
                             <bold>true</bold>
                            </font>
@@ -3144,7 +3144,7 @@ color: rgb(0, 41, 77);</string>
                           <property name="font">
                            <font>
                             <family>Roboto</family>
-                            <pointsize>14</pointsize>
+                            <pointsize>17</pointsize>
                             <weight>75</weight>
                             <bold>true</bold>
                            </font>
@@ -3295,7 +3295,7 @@ color: rgb(0, 41, 77);</string>
                           <property name="font">
                            <font>
                             <family>Roboto</family>
-                            <pointsize>14</pointsize>
+                            <pointsize>17</pointsize>
                             <weight>75</weight>
                             <bold>true</bold>
                            </font>
@@ -3310,7 +3310,7 @@ color: rgb(0, 41, 77);</string>
                           <property name="font">
                            <font>
                             <family>Roboto</family>
-                            <pointsize>14</pointsize>
+                            <pointsize>17</pointsize>
                             <weight>75</weight>
                             <bold>true</bold>
                            </font>
@@ -3461,7 +3461,7 @@ color: rgb(0, 41, 77);</string>
                           <property name="font">
                            <font>
                             <family>Roboto</family>
-                            <pointsize>13</pointsize>
+                            <pointsize>17</pointsize>
                             <weight>75</weight>
                             <bold>true</bold>
                            </font>
@@ -3514,7 +3514,7 @@ border: 2px solid rgb(0, 0, 0);
                           <property name="font">
                            <font>
                             <family>Roboto</family>
-                            <pointsize>13</pointsize>
+                            <pointsize>17</pointsize>
                             <weight>75</weight>
                             <bold>true</bold>
                            </font>
@@ -3691,14 +3691,14 @@ border: 2px solid rgb(0, 0, 0);
                       <widget class="QLabel" name="label_14">
                        <property name="maximumSize">
                         <size>
-                         <width>60</width>
+                         <width>100</width>
                          <height>16777215</height>
                         </size>
                        </property>
                        <property name="font">
                         <font>
                          <family>Roboto</family>
-                         <pointsize>14</pointsize>
+                         <pointsize>17</pointsize>
                          <weight>75</weight>
                          <bold>true</bold>
                         </font>
@@ -3723,7 +3723,7 @@ color: rgb(0, 41, 77);</string>
                        <property name="font">
                         <font>
                          <family>Roboto</family>
-                         <pointsize>14</pointsize>
+                         <pointsize>17</pointsize>
                          <weight>75</weight>
                          <bold>true</bold>
                         </font>
@@ -3798,7 +3798,7 @@ QComboBox::item:hover {
                   </size>
                  </property>
                  <property name="currentIndex">
-                  <number>0</number>
+                  <number>1</number>
                  </property>
                  <widget class="QWidget" name="page_5">
                   <layout class="QVBoxLayout" name="verticalLayout_31">
@@ -4045,32 +4045,151 @@ QPushButton {
                   </layout>
                  </widget>
                  <widget class="QWidget" name="page_6">
-                  <layout class="QGridLayout" name="gridLayout_7">
-                   <item row="0" column="0">
-                    <widget class="QPushButton" name="btn_goal">
+                  <layout class="QVBoxLayout" name="verticalLayout_4">
+                   <item>
+                    <widget class="QLabel" name="label_25">
                      <property name="sizePolicy">
-                      <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                        <horstretch>0</horstretch>
                        <verstretch>0</verstretch>
                       </sizepolicy>
                      </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>60</height>
+                      </size>
+                     </property>
                      <property name="font">
                       <font>
                        <family>Roboto</family>
-                       <pointsize>14</pointsize>
+                       <pointsize>17</pointsize>
                        <weight>75</weight>
                        <bold>true</bold>
                       </font>
                      </property>
+                     <property name="layoutDirection">
+                      <enum>Qt::LeftToRight</enum>
+                     </property>
                      <property name="styleSheet">
-                      <string notr="true">background-color: rgb(255, 255, 255);
-border-radius:  15px;
+                      <string notr="true">
 color: rgb(0, 41, 77);</string>
                      </property>
                      <property name="text">
-                      <string>CHOOSE GOAL</string>
+                      <string>GO TO</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
+                   </item>
+                   <item>
+                    <layout class="QGridLayout" name="gridLayout_7">
+                     <item row="0" column="1">
+                      <widget class="QPushButton" name="btn_goal_B">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <family>Roboto</family>
+                         <pointsize>20</pointsize>
+                         <weight>75</weight>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">background-color: rgb(255, 255, 255);
+border-radius:  15px;
+color: rgb(0, 41, 77);</string>
+                       </property>
+                       <property name="text">
+                        <string>B</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="0" column="0">
+                      <widget class="QPushButton" name="btn_goal_A">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <family>Roboto</family>
+                         <pointsize>20</pointsize>
+                         <weight>75</weight>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">background-color: rgb(255, 255, 255);
+border-radius:  15px;
+color: rgb(0, 41, 77);</string>
+                       </property>
+                       <property name="text">
+                        <string>A</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="1">
+                      <widget class="QPushButton" name="btn_goal_D">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <family>Roboto</family>
+                         <pointsize>20</pointsize>
+                         <weight>75</weight>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">background-color: rgb(255, 255, 255);
+border-radius:  15px;
+color: rgb(0, 41, 77);</string>
+                       </property>
+                       <property name="text">
+                        <string>D</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="0">
+                      <widget class="QPushButton" name="btn_goal_C">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <family>Roboto</family>
+                         <pointsize>20</pointsize>
+                         <weight>75</weight>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">background-color: rgb(255, 255, 255);
+border-radius:  15px;
+color: rgb(0, 41, 77);</string>
+                       </property>
+                       <property name="text">
+                        <string>C</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
                    </item>
                   </layout>
                  </widget>
@@ -4210,7 +4329,7 @@ color: rgb(0, 41, 77);</string>
                    <property name="font">
                     <font>
                      <family>Roboto</family>
-                     <pointsize>12</pointsize>
+                     <pointsize>17</pointsize>
                      <weight>50</weight>
                      <bold>false</bold>
                     </font>
@@ -4235,7 +4354,7 @@ color: rgb(0, 41, 77);</string>
                    <property name="font">
                     <font>
                      <family>Roboto</family>
-                     <pointsize>12</pointsize>
+                     <pointsize>17</pointsize>
                      <weight>50</weight>
                      <bold>false</bold>
                     </font>
@@ -4334,7 +4453,7 @@ color: rgb(0, 41, 77);</string>
                    <property name="font">
                     <font>
                      <family>Roboto</family>
-                     <pointsize>12</pointsize>
+                     <pointsize>17</pointsize>
                      <weight>50</weight>
                      <bold>false</bold>
                     </font>
@@ -4359,7 +4478,7 @@ color: rgb(0, 41, 77);</string>
                    <property name="font">
                     <font>
                      <family>Roboto</family>
-                     <pointsize>12</pointsize>
+                     <pointsize>17</pointsize>
                      <weight>50</weight>
                      <bold>false</bold>
                     </font>
@@ -4428,7 +4547,7 @@ color: rgb(0, 41, 77);</string>
                  <property name="font">
                   <font>
                    <family>Roboto</family>
-                   <pointsize>11</pointsize>
+                   <pointsize>15</pointsize>
                   </font>
                  </property>
                  <property name="focusPolicy">
@@ -4513,7 +4632,7 @@ color: rgb(0, 41, 77);</string>
                   <property name="font">
                    <font>
                     <family>Roboto</family>
-                    <pointsize>12</pointsize>
+                    <pointsize>15</pointsize>
                     <weight>75</weight>
                     <bold>true</bold>
                    </font>
@@ -4529,7 +4648,7 @@ color: rgb(0, 41, 77);</string>
                   <property name="font">
                    <font>
                     <family>Roboto</family>
-                    <pointsize>11</pointsize>
+                    <pointsize>15</pointsize>
                     <weight>75</weight>
                     <bold>true</bold>
                    </font>
@@ -4545,7 +4664,7 @@ color: rgb(0, 41, 77);</string>
                   <property name="font">
                    <font>
                     <family>Roboto</family>
-                    <pointsize>12</pointsize>
+                    <pointsize>15</pointsize>
                     <weight>75</weight>
                     <bold>true</bold>
                    </font>
@@ -4561,7 +4680,7 @@ color: rgb(0, 41, 77);</string>
                   <property name="font">
                    <font>
                     <family>Roboto</family>
-                    <pointsize>12</pointsize>
+                    <pointsize>15</pointsize>
                     <weight>75</weight>
                     <bold>true</bold>
                    </font>
@@ -4577,7 +4696,7 @@ color: rgb(0, 41, 77);</string>
                   <property name="font">
                    <font>
                     <family>Roboto</family>
-                    <pointsize>12</pointsize>
+                    <pointsize>15</pointsize>
                     <weight>75</weight>
                     <bold>true</bold>
                    </font>
@@ -4593,7 +4712,7 @@ color: rgb(0, 41, 77);</string>
                   <property name="font">
                    <font>
                     <family>Roboto</family>
-                    <pointsize>12</pointsize>
+                    <pointsize>15</pointsize>
                     <weight>75</weight>
                     <bold>true</bold>
                    </font>
@@ -4905,7 +5024,7 @@ color: rgb(0, 41, 77);</string>
                                 <property name="font">
                                  <font>
                                   <family>Roboto</family>
-                                  <pointsize>14</pointsize>
+                                  <pointsize>17</pointsize>
                                   <weight>75</weight>
                                   <bold>true</bold>
                                  </font>
@@ -4920,7 +5039,7 @@ color: rgb(0, 41, 77);</string>
                                 <property name="font">
                                  <font>
                                   <family>Roboto</family>
-                                  <pointsize>14</pointsize>
+                                  <pointsize>17</pointsize>
                                   <weight>75</weight>
                                   <bold>true</bold>
                                  </font>
@@ -5065,7 +5184,7 @@ color: rgb(0, 41, 77);</string>
                                 <property name="font">
                                  <font>
                                   <family>Roboto</family>
-                                  <pointsize>14</pointsize>
+                                  <pointsize>17</pointsize>
                                   <weight>75</weight>
                                   <bold>true</bold>
                                  </font>
@@ -5080,7 +5199,7 @@ color: rgb(0, 41, 77);</string>
                                 <property name="font">
                                  <font>
                                   <family>Roboto</family>
-                                  <pointsize>14</pointsize>
+                                  <pointsize>17</pointsize>
                                   <weight>75</weight>
                                   <bold>true</bold>
                                  </font>
@@ -5278,6 +5397,12 @@ color: rgb(0, 41, 77);</string>
               </property>
               <item>
                <widget class="QWidget" name="widget_23" native="true">
+                <property name="font">
+                 <font>
+                  <family>Roboto</family>
+                  <pointsize>17</pointsize>
+                 </font>
+                </property>
                 <layout class="QHBoxLayout" name="horizontalLayout_23">
                  <property name="topMargin">
                   <number>0</number>
@@ -5336,7 +5461,7 @@ color: rgb(0, 41, 77);</string>
                    <property name="font">
                     <font>
                      <family>Roboto</family>
-                     <pointsize>15</pointsize>
+                     <pointsize>17</pointsize>
                      <weight>75</weight>
                      <bold>true</bold>
                     </font>
@@ -5438,7 +5563,7 @@ color: rgb(0, 41, 77);</string>
                    <property name="font">
                     <font>
                      <family>Roboto</family>
-                     <pointsize>15</pointsize>
+                     <pointsize>17</pointsize>
                      <weight>75</weight>
                      <bold>true</bold>
                     </font>
@@ -5782,7 +5907,7 @@ color: rgb(0, 41, 77);</string>
                          <property name="font">
                           <font>
                            <family>Roboto</family>
-                           <pointsize>14</pointsize>
+                           <pointsize>17</pointsize>
                            <weight>75</weight>
                            <bold>true</bold>
                           </font>
@@ -5797,7 +5922,7 @@ color: rgb(0, 41, 77);</string>
                          <property name="font">
                           <font>
                            <family>Roboto</family>
-                           <pointsize>14</pointsize>
+                           <pointsize>17</pointsize>
                            <weight>75</weight>
                            <bold>true</bold>
                           </font>
@@ -5942,7 +6067,7 @@ color: rgb(0, 41, 77);</string>
                          <property name="font">
                           <font>
                            <family>Roboto</family>
-                           <pointsize>14</pointsize>
+                           <pointsize>17</pointsize>
                            <weight>75</weight>
                            <bold>true</bold>
                           </font>
@@ -5957,7 +6082,7 @@ color: rgb(0, 41, 77);</string>
                          <property name="font">
                           <font>
                            <family>Roboto</family>
-                           <pointsize>14</pointsize>
+                           <pointsize>17</pointsize>
                            <weight>75</weight>
                            <bold>true</bold>
                           </font>

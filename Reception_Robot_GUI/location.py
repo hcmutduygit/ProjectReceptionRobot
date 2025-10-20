@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import QWidget, QGraphicsScene, QGraphicsView, QGraphicsPolygonItem
 from PyQt6.QtGui import QPixmap, QPolygonF, QWheelEvent, QPainter, QBrush, QPen, QColor
-from PyQt6.QtCore import QPointF, Qt, QTimer, QRectF
+from PyQt6.QtCore import QPointF, Qt, QTimer
 import yaml
 
 from pathplanning import PathPlanner
@@ -19,9 +19,9 @@ class MapGraphicsView(QGraphicsView):
             self.scale(1 / self.zoom_factor, 1 / self.zoom_factor)
 
 class LocationTab(QWidget):
-    def __init__(self, ui):
+    def __init__(self, view):
         super().__init__()
-        self.ui = ui
+        self.ui = view
         self.map_scene = QGraphicsScene()
 
         layout = self.ui.parent().layout()
@@ -46,12 +46,24 @@ class LocationTab(QWidget):
         self.map_scene.addItem(self.robot_item)
 
         # Lưu trữ vị trí mới nhất
-        self.last_position = [0.0, 0.0, 0.0]
+        self.last_position = [9.89, 18.72, 0.0]
 
         # Update GUI frequency 
         self.update_timer = QTimer(self)
         self.update_timer.timeout.connect(self.update_robot_gui)
         self.update_timer.start(100)  # 100ms (10 Hz)
+
+        # initial pathplanner 
+        self.planner = PathPlanner(self.map_scene)
+        self.planner.load_cost_map("Reception_Robot_GUI/resources/Map/map_fablab.pgm")
+
+        # 4 goals 
+        self.planner.set_locations({
+            "A": (824, 1150),
+            "B": (584, 531),
+            "C": (1172, 513),
+            "D": (304, 983)
+        })
 
     def load_map(self, path: str):
         pixmap = QPixmap(path)
@@ -84,20 +96,24 @@ class LocationTab(QWidget):
 
 
     def update_robot_gui(self):
-        """Cập nhật vị trí robot trên GUI"""
         x, y, theta = self.last_position
         # Convert tọa độ từ /map sang GUI 
         py_raw = (y - self.map_origin[1]) / self.map_resolution 
         px_raw = (x - self.map_origin[0]) / self.map_resolution  
-        px = px_raw
-        py = self.map_height - py_raw
+        self.px = px_raw
+        self.py = self.map_height - py_raw
         # Thêm offset neu can  
-        px += 0
-        py += 0
-        self.robot_item.setPos(px, py)
+        self.px += 0
+        self.py += 0
+        self.robot_pos = (self.px, self.py)
+        self.robot_item.setPos(self.px, self.py)
         self.robot_item.setRotation(-theta+90)  
 
     def set_location(self, x, y, theta):
-        """Hàm công khai để cập nhật pose từ MQTT)"""
+        """Update position from MQTT"""
         self.last_position = [x, y, theta]
+
+    def plan_path(self, goal):
+        path = self.planner.find_path(self.robot_pos, goal)
+        self.planner.draw_path(path)
         

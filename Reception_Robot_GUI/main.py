@@ -22,7 +22,7 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         apply_custom_fonts(self.ui)
 
-        #led control testing 
+        # control page testing 
         self.led1_state = 0 
         self.led2_state = 0 
         self.ui.btn_led1.clicked.connect(self.toggle_led1_state)
@@ -72,6 +72,7 @@ class MainWindow(QMainWindow):
             self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_control_2)
             self.admin_camera_tab = CameraTab(self.ui.camera_2, self.shared_browser)
             self.admin_location_tab = LocationTab(self.ui.view_map_2)
+            self.add_path_planning_buttons(self.admin_location_tab)
             self.location_manager = LocationManager(self.ui)
             self.location_manager.location_tab = self.admin_location_tab
             self.location_manager.start_location_subscriber()
@@ -87,6 +88,7 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidget.setCurrentWidget(self.ui.guest)
         self.guest_camera_tab = CameraTab(self.ui.camera_4, self.shared_browser)
         self.guest_location_tab = LocationTab(self.ui.view_map)
+        self.add_path_planning_buttons(self.guest_location_tab)
         self.location_manager = LocationManager(self.ui)
         self.location_manager.location_tab = self.guest_location_tab
         self.location_manager.start_location_subscriber()
@@ -154,6 +156,12 @@ class MainWindow(QMainWindow):
                 border: 2px solid rgb(0, 0, 0);
             }}
         """)
+
+    def add_path_planning_buttons(self, location_tab):
+        self.ui.btn_goal_A.clicked.connect(lambda: location_tab.plan_path("A"))
+        self.ui.btn_goal_B.clicked.connect(lambda: location_tab.plan_path("B"))
+        self.ui.btn_goal_C.clicked.connect(lambda: location_tab.plan_path("C"))
+        self.ui.btn_goal_D.clicked.connect(lambda: location_tab.plan_path("D"))
 
     def _shutdown_all_services(self):
         self.battery_manager.stop_battery_subscriber()
