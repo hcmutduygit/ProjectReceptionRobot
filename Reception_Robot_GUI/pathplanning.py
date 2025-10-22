@@ -4,7 +4,7 @@ from PyQt6.QtGui import QPen, QColor, QBrush
 from PyQt6.QtCore import QPointF
 import matplotlib.path as mpltPath
 from scipy.ndimage import binary_dilation
-from scipy.interpolate import splprep, splev
+from rdp import rdp
 
 class PathPlanner:
     def __init__(self, scene):
@@ -37,14 +37,14 @@ class PathPlanner:
 
         '''Sau day la tao mask cho map (thuc te thi k di duoc du quet map trong)'''
         polygon = [
-            [   [753, 723],  #area 1 
-                [959, 841],
+            [   [754, 721],  #area 1 
+                [964, 832],
                 [615, 1412],
                 [404, 1294]],
-            [   [1010, 756],  #area 2
+            [   [989, 795],  #area 2
                 [1363, 171],
                 [1158, 49],
-                [792, 631]]
+                [788, 677]]
         ]
         for each in polygon:
             path = mpltPath.Path(each)
@@ -52,8 +52,11 @@ class PathPlanner:
             points = np.column_stack([x_coords.ravel(), y_coords.ravel()])
             mask = path.contains_points(points).reshape(cost.shape)
             cost[mask] = 1e5 
+            dilated_mask = binary_dilation(mask, iterations=10)
+            cost[dilated_mask] = 1e5
 
         self.cost_map = cost
+        
         
         '''import matplotlib.pyplot as plt
         plt.figure(figsize=(10, 8))
@@ -110,15 +113,9 @@ class PathPlanner:
 
         # smoothing path 
         if len(path) > 2: 
-            x = path[:, 1]  # (x,y)
-            y = path[:, 0]
-            # spline 
-            tck, u = splprep([x, y], s=1.0, per=0)  # s là độ mượt, per=0 cho đường không khép kín
-            u_new = np.linspace(0, 1, 100)  # Tạo 100 điểm mới
-            x_new, y_new = splev(u_new, tck)
-            smooth_path = np.column_stack((y_new.astype(int), x_new.astype(int)))
-            self.draw_path(smooth_path)
-            return smooth_path
+            simplified_path = rdp(path, epsilon=20.0) 
+            self.draw_path(simplified_path)
+            return simplified_path
         else:
             self.draw_path(path)
             return path

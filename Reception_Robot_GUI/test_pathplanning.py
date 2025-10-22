@@ -41,7 +41,7 @@ class MapWindow(QWidget):
         })
 
         # Vị trí robot hiện tại (pixel)
-        self.robot_pos = (996, 763)
+        self.robot_pos = (971, 800)
         robot_shape = QPolygonF([
             QPointF(0, -10),
             QPointF(6, 10),

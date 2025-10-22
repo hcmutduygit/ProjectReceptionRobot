@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import QWidget, QGraphicsScene, QGraphicsView, QGraphicsPolygonItem
 from PyQt6.QtGui import QPixmap, QPolygonF, QWheelEvent, QPainter, QBrush, QPen, QColor
 from PyQt6.QtCore import QPointF, Qt, QTimer
-import yaml
+import yaml, json
 
 from pathplanning import PathPlanner
 
@@ -46,7 +46,7 @@ class LocationTab(QWidget):
         self.map_scene.addItem(self.robot_item)
 
         # Lưu trữ vị trí mới nhất
-        self.last_position = [9.89, 18.72, 0.0]
+        self.last_position = [8.69, 16.77 , 0.0] #
 
         # Update GUI frequency 
         self.update_timer = QTimer(self)
@@ -100,13 +100,13 @@ class LocationTab(QWidget):
         # Convert tọa độ từ /map sang GUI 
         py_raw = (y - self.map_origin[1]) / self.map_resolution 
         px_raw = (x - self.map_origin[0]) / self.map_resolution  
-        self.px = px_raw
-        self.py = self.map_height - py_raw
+        px = px_raw
+        py = self.map_height - py_raw
         # Thêm offset neu can  
-        self.px += 0
-        self.py += 0
-        self.robot_pos = (self.px, self.py)
-        self.robot_item.setPos(self.px, self.py)
+        px += 0
+        py += 0
+        self.robot_pos = (px, py)
+        self.robot_item.setPos(px, py)
         self.robot_item.setRotation(-theta+90)  
 
     def set_location(self, x, y, theta):
@@ -116,4 +116,15 @@ class LocationTab(QWidget):
     def plan_path(self, goal):
         path = self.planner.find_path(self.robot_pos, goal)
         self.planner.draw_path(path)
+
+        waypoints = []
+        for point in path:
+            y_pixel, x_pixel = point  # (row, col)
+            # Chuyển từ pixel sang tọa độ /map
+            x_map = self.map_origin[0] + x_pixel * self.map_resolution
+            y_map = self.map_origin[1] + (self.map_height - y_pixel) * self.map_resolution  # Đảo trục y
+            waypoints.append({"x": round(x_map, 2), "y": round(y_map, 2)})
+        waypoints_json = json.dumps(waypoints, indent=2)
         
+        print(f"Waypoints in /map coordinates (JSON): {waypoints_json}")
+        return waypoints_json

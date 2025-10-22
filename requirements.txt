@@ -3,5 +3,6 @@ PyQt6-WebEngine==6.4.0
 PyQt6-WebEngine-Qt6==6.4.0  # giao tiep web 
 #pyqtgraph   # ve bieu do 
 paho-mqtt                   # mqtt 
-skikit-image                # tich hop tim duong di 
+skikit-image                # path planning 
 spicy                       # dilation map 
+rdp                         # simplified path 
