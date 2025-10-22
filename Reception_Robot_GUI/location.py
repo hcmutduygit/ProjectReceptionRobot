@@ -4,6 +4,7 @@ from PyQt6.QtCore import QPointF, Qt, QTimer
 import yaml, json
 
 from pathplanning import PathPlanner
+from MQTT.waypoints_publisher import WaypointsPublisher 
 
 class MapGraphicsView(QGraphicsView):
     def __init__(self, parent=None):
@@ -127,4 +128,5 @@ class LocationTab(QWidget):
         waypoints_json = json.dumps(waypoints, indent=2)
         
         print(f"Waypoints in /map coordinates (JSON): {waypoints_json}")
-        return waypoints_json
+        publisher = WaypointsPublisher()
+        publisher.publish_waypoints(waypoints_json)
