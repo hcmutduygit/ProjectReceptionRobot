@@ -32,7 +32,7 @@ class PathPlanner:
         cost[available] = 1.0
 
         # buffer zone 
-        dilated_mask = binary_dilation(obstacle, iterations=17)
+        dilated_mask = binary_dilation(obstacle, iterations=8)
         cost[dilated_mask] = 1e6
 
         '''Sau day la tao mask cho map (thuc te thi k di duoc du quet map trong)'''
@@ -41,10 +41,14 @@ class PathPlanner:
                 [964, 832],
                 [615, 1412],
                 [404, 1294]],
-            [   [989, 795],  #area 2
+            [   [989, 801],  #area 2
                 [1363, 171],
                 [1158, 49],
-                [788, 677]]
+                [776, 679]],
+            [   [765, 635],  #area 3
+                [659, 576],
+                [628, 621],
+                [729, 683]]
         ]
         for each in polygon:
             path = mpltPath.Path(each)
@@ -52,18 +56,18 @@ class PathPlanner:
             points = np.column_stack([x_coords.ravel(), y_coords.ravel()])
             mask = path.contains_points(points).reshape(cost.shape)
             cost[mask] = 1e5 
-            dilated_mask = binary_dilation(mask, iterations=10)
+            dilated_mask = binary_dilation(mask, iterations=8)
             cost[dilated_mask] = 1e5
 
         self.cost_map = cost
         
         
-        '''import matplotlib.pyplot as plt
+        import matplotlib.pyplot as plt
         plt.figure(figsize=(10, 8))
         plt.imshow(self.cost_map, cmap='hot')
         plt.colorbar(label='Chi phí')
         plt.title('Cost Map')
-        plt.show()'''
+        plt.show()
         
         
     def set_locations(self, locations: dict):
@@ -113,7 +117,7 @@ class PathPlanner:
 
         # smoothing path 
         if len(path) > 2: 
-            simplified_path = rdp(path, epsilon=20.0) 
+            simplified_path = rdp(path, epsilon=22.5) 
             self.draw_path(simplified_path)
             return simplified_path
         else:

@@ -19,7 +19,8 @@ class MQTTConfig:
         "camera": "robot/camera", 
         "status": "robot/status",
         "location": "robot/location",
-        "velocity": "robot/velocity"
+        "velocity": "robot/velocity",
+        "waypoints" : "robot/waypoints"
     }
     
     @classmethod

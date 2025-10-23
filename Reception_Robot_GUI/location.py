@@ -62,8 +62,8 @@ class LocationTab(QWidget):
         self.planner.set_locations({
             "A": (824, 1150),
             "B": (584, 531),
-            "C": (1172, 513),
-            "D": (304, 983)
+            "C": (887, 768),
+            "D": (744, 684)
         })
 
     def load_map(self, path: str):
