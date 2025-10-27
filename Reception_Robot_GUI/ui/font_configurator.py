@@ -43,8 +43,7 @@ def apply_custom_fonts(ui):
     #page_control - robot 
     set_bold(ui.label_14)
     set_regular(ui.label1_4)
-    set_bold(ui.label_7)
-    set_bold(ui.label_18)
+    set_bold(ui.robot_status)
     set_regular(ui.label1_5)
     set_bold(ui.label_left_2)
     set_bold(ui.label_right_2)
@@ -65,6 +64,8 @@ def apply_custom_fonts(ui):
     set_regular(ui.label1_12)
     set_bold(ui.label_left_3)
     set_bold(ui.label_right_3)
+    set_regular(ui.label1_13)
+    set_bold(ui.robot_status_2)
 
 
     #thanh cong cu - guest 

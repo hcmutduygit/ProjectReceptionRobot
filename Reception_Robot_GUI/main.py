@@ -22,12 +22,6 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         apply_custom_fonts(self.ui)
 
-        # control page testing 
-        self.led1_state = 0 
-        self.led2_state = 0 
-        self.ui.btn_led1.clicked.connect(self.toggle_led1_state)
-        self.ui.btn_led2.clicked.connect(self.toggle_led2_state)
-
         # list user
         self.registered_users = [{"username": "admin", "password": "123", "fullname": "Admin User", "phone": "0123456789", "verify": "fablab"}]
 
@@ -63,6 +57,8 @@ class MainWindow(QMainWindow):
         self.ui.comboBox_2.currentTextChanged.connect(self.handle_page_switch)
         self.ui.logout.clicked.connect(self._handle_logout)
         self.ui.logout_2.clicked.connect(self._handle_logout)
+        self.ui.mode_select_2.currentTextChanged.connect(self.handle_mode_switch)
+
 
 
     def _handle_login(self):
@@ -121,41 +117,7 @@ class MainWindow(QMainWindow):
             self.ui.robot_mode_2.setCurrentWidget(self.ui.page_5)   
         elif text == "Auto":
             self.ui.robot_mode_2.setCurrentWidget(self.ui.page_6)
-
-        
-    def toggle_led1_state(self):
-        # Tăng trạng thái: 0 → 1 → 2 → 0 ...
-        self.led1_state = (self.led1_state + 1) % 3
-
-        # Gán màu tương ứng
-        if self.led1_state == 0:
-            color = "rgb(155, 164, 181)"    #grey 
-        elif self.led1_state == 1:
-            color = "rgb(215, 19, 19)"      #red 
-        elif self.led1_state == 2:
-            color = "rgb(28, 121, 71)"      #green 
-        # Cập nhật style
-        self.ui.btn_led1.setStyleSheet(f"""
-            QPushButton {{
-                background-color: {color};
-                border-radius: 20px;
-                border: 2px solid rgb(0, 0, 0);
-            }}
-        """)
-
-    def toggle_led2_state (self):
-        self.led2_state = not self.led2_state
-        if self.led2_state == 0:
-            color = "rgb(155, 164, 181)"    #grey 
-        else: 
-            color = "white"
-        self.ui.btn_led2.setStyleSheet(f"""
-            QPushButton {{
-                background-color: {color};
-                border-radius: 20px;
-                border: 2px solid rgb(0, 0, 0);
-            }}
-        """)
+            
 
     def add_path_planning_buttons(self, location_tab):
         self.ui.btn_goal_A.clicked.connect(lambda: location_tab.plan_path("A"))
