@@ -120,10 +120,17 @@ class MainWindow(QMainWindow):
             
 
     def add_path_planning_buttons(self, location_tab):
-        self.ui.btn_goal_A.clicked.connect(lambda: location_tab.plan_path("A"))
-        self.ui.btn_goal_B.clicked.connect(lambda: location_tab.plan_path("B"))
-        self.ui.btn_goal_C.clicked.connect(lambda: location_tab.plan_path("C"))
-        self.ui.btn_goal_D.clicked.connect(lambda: location_tab.plan_path("D"))
+        goals = location_tab.get_goal_names()
+        buttons = [
+                self.ui.btn_goal_A,
+                self.ui.btn_goal_B,
+                self.ui.btn_goal_C,
+                self.ui.btn_goal_D
+            ]
+
+        for btn, name in zip(buttons, goals):
+            btn.setText(name)
+            btn.clicked.connect(lambda checked=False, n=name: location_tab.plan_path(n))
 
     def _shutdown_all_services(self):
         self.battery_manager.stop_battery_subscriber()

@@ -24,15 +24,21 @@ class LocationTab(QWidget):
         super().__init__()
         self.ui = view
         self.map_scene = QGraphicsScene()
-
         layout = self.ui.parent().layout()
         self.ui.setParent(None)
-
         self.ui = MapGraphicsView()
         layout.addWidget(self.ui)
         self.ui.setScene(self.map_scene)
 
         self.load_map("Reception_Robot_GUI/resources/Map/map_fablab.pgm")
+
+        # 4 goals 
+        self.goals = {
+            "Robotics lab": (800, 1136),
+            "Chemistry hall": (694, 583),
+            "Electrical lab": (1228, 431),
+            "Restroom": (711, 730)
+        }
 
         # Tạo robot
         triangle = QPolygonF([
@@ -56,15 +62,9 @@ class LocationTab(QWidget):
 
         # initial pathplanner 
         self.planner = PathPlanner(self.map_scene)
-        self.planner.load_cost_map("Reception_Robot_GUI/resources/Map/map_fablab.pgm")
+        # self.planner.load_cost_map("Reception_Robot_GUI/resources/Map/map_fablab.pgm")
 
-        # 4 goals 
-        self.planner.set_locations({
-            "A": (800, 1136),
-            "B": (694, 583),
-            "C": (1228, 431),
-            "D": (733, 698)
-        })
+        self.planner.set_locations(self.goals)
 
     def load_map(self, path: str):
         pixmap = QPixmap(path)
@@ -130,3 +130,6 @@ class LocationTab(QWidget):
         print(f"Waypoints in /map coordinates (JSON): {waypoints_json}")
         publisher = WaypointsPublisher()
         publisher.publish_waypoints(waypoints_json)
+
+    def get_goal_names(self):
+        return list(self.goals.keys())  #for ui to automatically update label 
