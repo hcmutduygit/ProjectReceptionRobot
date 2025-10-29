@@ -47,7 +47,7 @@ class LocationTab(QWidget):
         self.map_scene.addItem(self.robot_item)
 
         # Lưu trữ vị trí mới nhất
-        self.last_position = [8.43, 15.9 , 0.0] #
+        self.last_position = [7.49, 17.07 , 0.0] #
 
         # Update GUI frequency 
         self.update_timer = QTimer(self)
@@ -62,7 +62,7 @@ class LocationTab(QWidget):
         self.planner.set_locations({
             "A": (800, 1136),
             "B": (694, 583),
-            "C": (1175, 517),
+            "C": (1228, 431),
             "D": (733, 698)
         })
 
