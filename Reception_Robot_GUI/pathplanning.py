@@ -36,21 +36,29 @@ class PathPlanner:
         cost[dilated_mask] = 1e6
 
         '''Sau day la tao mask cho map (thuc te thi k di duoc du quet map trong)'''
-        polygon = [
+        polygon_unknown = [
             [   [754, 721],  #area 1 
                 [964, 832],
                 [615, 1412],
                 [404, 1294]],
-            [   [989, 801],  #area 2
+            [   [989, 801],  #area 2 
                 [1363, 171],
                 [1158, 49],
-                [776, 679]],
+                [776, 679],],
             [   [765, 635],  #area 3
                 [659, 576],
                 [628, 621],
-                [729, 683]]
+                [729, 683]],
+            [   [641, 1416],  #area 4
+                [974, 1228],
+                [1009, 832],
+                [1384, 185]],
+            [   [984, 803],  #area 5
+                [1356, 164],
+                [1170, 88],
+                [790, 674]]
         ]
-        for each in polygon:
+        for each in polygon_unknown:
             path = mpltPath.Path(each)
             y_coords, x_coords = np.mgrid[:cost.shape[0], :cost.shape[1]]
             points = np.column_stack([x_coords.ravel(), y_coords.ravel()])
