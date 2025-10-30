@@ -10,7 +10,7 @@ class BatteryManager(BaseManager):
         super().__init__(ui, BatterySubscriberThread, BATTERY_CONFIG)
         
         # Khoi tao trang thai cua mqtt 
-        self.mqtt_status = "disconnected"
+        self.mqtt_status = "connected"
         self.ui.label_mqtt.setText(self.mqtt_status)
         self.ui.label_mqtt_3.setText(self.mqtt_status)
         self.ui.label_mqtt_4.setText(self.mqtt_status)
