@@ -120,7 +120,7 @@ class LocationTab(QWidget):
 
         waypoints = []
         for point in path:
-            y_pixel, x_pixel = point  # (row, col)
+            x_pixel, y_pixel = point  # (x,y)
             # Chuyển từ pixel sang tọa độ /map
             x_map = self.map_origin[0] + x_pixel * self.map_resolution
             y_map = self.map_origin[1] + (self.map_height - y_pixel) * self.map_resolution  # Đảo trục y
