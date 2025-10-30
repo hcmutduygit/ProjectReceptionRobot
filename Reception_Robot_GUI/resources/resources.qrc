@@ -17,8 +17,7 @@
     <file>Icons/8665196_chevron_up_icon.svg</file>
   </qresource>
   <qresource prefix="map">
-    <file>Map/map.pgm</file>
-    <file>Map/map.png</file>
+    <file>Map/map_fablab.pgm</file>
   </qresource>
   <qresource prefix="markers">
     <file>Markers/marker.png</file>
@@ -29,5 +28,6 @@
   <qresource prefix="logos">
     <file>Logos/Fablab Logo-aftercut.png</file>
     <file>Logos/Logo BK.png</file>
+    <file>Logos/eureka.png</file>
   </qresource>
 </RCC>
