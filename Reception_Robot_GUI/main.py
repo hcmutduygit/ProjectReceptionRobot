@@ -130,7 +130,9 @@ class MainWindow(QMainWindow):
 
         for btn, name in zip(buttons, goals):
             btn.setText(name)
-            btn.clicked.connect(lambda checked=False, n=name: location_tab.plan_path(n))
+            btn.clicked.connect(lambda checked=False, n=name: (self.ui.robot_status.setText("Guidance"),
+                                                               self.ui.robot_status_2.setText("Guidance"),
+                                                               location_tab.plan_path(n)))
 
     def _shutdown_all_services(self):
         self.battery_manager.stop_battery_subscriber()
