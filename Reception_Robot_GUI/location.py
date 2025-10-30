@@ -36,7 +36,7 @@ class LocationTab(QWidget):
         # 4 goals 
         self.goals = {
             "Robotics lab": (800, 1136),
-            "Chemistry hall": (694, 583),
+            "Chemistry hall": (576, 513),
             "Electrical lab": (1228, 431),
             "Restroom": (704, 773)
         }
@@ -110,7 +110,7 @@ class LocationTab(QWidget):
         py += 0
         self.robot_pos = (px, py)
         self.robot_item.setPos(px, py)
-        self.robot_item.setRotation(theta + 0)  
+        self.robot_item.setRotation(theta - 60)  
 
         if hasattr(self, 'trajectory_path') and len(self.trajectory_path) > 0:
             current_point = (px, py)
