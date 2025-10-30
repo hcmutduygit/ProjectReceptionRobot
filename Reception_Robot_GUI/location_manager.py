@@ -13,7 +13,7 @@ class LocationManager(BaseManager):
         super().__init__(ui, LocationSubscriberThread, LOCATION_CONFIG)
         # Giá trị mặc định ban đầu
         self.location_tab = location_tab
-        self.location = {'x': '??', 'y': '??', 'theta': '??'}
+        self.location = {'x': '7.49', 'y': '17.07', 'theta': '??'}
         self._update_location_labels()
 
     def _connect_signals(self):

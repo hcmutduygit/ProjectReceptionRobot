@@ -128,8 +128,8 @@ class LocationTab(QWidget):
         waypoints_json = json.dumps(waypoints, indent=2)
         
         print(f"Waypoints in /map coordinates (JSON): {waypoints_json}")
-        publisher = WaypointsPublisher()
-        publisher.publish_waypoints(waypoints_json)
+        # publisher = WaypointsPublisher()
+        # publisher.publish_waypoints(waypoints_json)
 
     def get_goal_names(self):
         return list(self.goals.keys())  #for ui to automatically update label 
