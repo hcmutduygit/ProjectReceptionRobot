@@ -1,7 +1,7 @@
 # pathplanning.py
 import numpy as np
 from PyQt6.QtGui import QPen, QColor, QBrush
-from PyQt6.QtCore import QPointF
+from PyQt6.QtCore import Qt, QPointF
 import networkx as nx
 
 class PathPlanner:
@@ -146,6 +146,8 @@ class PathPlanner:
         if len(path) < 2:
             return
         pen = QPen(QColor(255, 0, 0), 1)
+        pen.setStyle(Qt.PenStyle.DashLine)
+        pen.setDashPattern([8, 4])
         for i in range(len(path) - 1):
             p1 = QPointF(path[i][0], path[i][1])
             p2 = QPointF(path[i + 1][0], path[i + 1][1])

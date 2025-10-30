@@ -2,6 +2,7 @@ from PyQt6.QtWidgets import QWidget, QGraphicsScene, QGraphicsView, QGraphicsPol
 from PyQt6.QtGui import QPixmap, QPolygonF, QWheelEvent, QPainter, QBrush, QPen, QColor
 from PyQt6.QtCore import QPointF, Qt, QTimer
 import yaml, json
+import numpy as np
 
 from pathplanning_fixedwp import PathPlanner
 from MQTT.waypoints_publisher import WaypointsPublisher 
@@ -37,7 +38,7 @@ class LocationTab(QWidget):
             "Robotics lab": (800, 1136),
             "Chemistry hall": (694, 583),
             "Electrical lab": (1228, 431),
-            "Restroom": (711, 730)
+            "Restroom": (704, 773)
         }
 
         # Tạo robot
@@ -62,9 +63,10 @@ class LocationTab(QWidget):
 
         # initial pathplanner 
         self.planner = PathPlanner(self.map_scene)
-        #self.planner.load_cost_map("Reception_Robot_GUI/resources/Map/map_fablab.pgm")
-
+            # self.planner.load_cost_map("Reception_Robot_GUI/resources/Map/map_fablab.pgm")
         self.planner.set_locations(self.goals)
+        self.trajectory_items = []
+        self.trajectory_path = []
 
     def load_map(self, path: str):
         pixmap = QPixmap(path)
@@ -108,13 +110,43 @@ class LocationTab(QWidget):
         py += 0
         self.robot_pos = (px, py)
         self.robot_item.setPos(px, py)
-        self.robot_item.setRotation(-theta+90)  
+        self.robot_item.setRotation(theta + 0)  
+
+        if hasattr(self, 'trajectory_path') and len(self.trajectory_path) > 0:
+            current_point = (px, py)
+            # Chỉ thêm nếu cách điểm cuối > 5px
+            if np.linalg.norm(np.array(current_point) - np.array(self.trajectory_path[-1])) > 5:
+                self.trajectory_path.append(current_point)
+                self.update_trajectory()
 
     def set_location(self, x, y, theta):
         """Update position from MQTT"""
         self.last_position = [x, y, theta]
 
+    def update_trajectory(self):
+        """Vẽ quỹ đạo realtime của robot (nét liền xanh)"""
+        if len(self.trajectory_path) < 2:
+            return
+
+        # Xóa quỹ đạo cũ
+        for item in self.trajectory_items:
+            self.map_scene.removeItem(item)
+        self.trajectory_items.clear()
+
+        # Vẽ lại toàn bộ quỹ đạo
+        pen = QPen(QColor(180, 0, 0), 3)  # Xanh lá
+        pen.setStyle(Qt.PenStyle.SolidLine)
+
+        for i in range(len(self.trajectory_path) - 1):
+            p1 = QPointF(self.trajectory_path[i][0], self.trajectory_path[i][1])
+            p2 = QPointF(self.trajectory_path[i+1][0], self.trajectory_path[i+1][1])
+            line = self.map_scene.addLine(p1.x(), p1.y(), p2.x(), p2.y(), pen)
+            self.trajectory_items.append(line)
+
     def plan_path(self, goal):
+        self.trajectory_path = [self.robot_pos]  # Bắt đầu lại từ vị trí hiện tại
+        self.update_trajectory()
+
         path = self.planner.find_path(self.robot_pos, goal)
         self.planner.draw_path(path)
 
