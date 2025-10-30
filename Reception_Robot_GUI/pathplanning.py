@@ -105,7 +105,7 @@ class PathPlanner:
         start = (int(start_px[1]), int(start_px[0]))  # (row, col)
         end = (int(goal[1]), int(goal[0]))            # (row, col)
 
-        print(f"Finding path {start_px} → {goal_label}{goal}...")
+        print(f"Finding path {start_px} → {goal_label}:{goal}...")
 
         # Tìm đường đi bằng skimage.graph
         try:

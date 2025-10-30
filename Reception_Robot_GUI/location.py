@@ -62,7 +62,7 @@ class LocationTab(QWidget):
 
         # initial pathplanner 
         self.planner = PathPlanner(self.map_scene)
-        # self.planner.load_cost_map("Reception_Robot_GUI/resources/Map/map_fablab.pgm")
+        #self.planner.load_cost_map("Reception_Robot_GUI/resources/Map/map_fablab.pgm")
 
         self.planner.set_locations(self.goals)
 
@@ -120,7 +120,7 @@ class LocationTab(QWidget):
 
         waypoints = []
         for point in path:
-            y_pixel, x_pixel = point  # (row, col)
+            x_pixel, y_pixel = point  # (x,y)
             # Chuyển từ pixel sang tọa độ /map
             x_map = self.map_origin[0] + x_pixel * self.map_resolution
             y_map = self.map_origin[1] + (self.map_height - y_pixel) * self.map_resolution  # Đảo trục y
@@ -128,8 +128,8 @@ class LocationTab(QWidget):
         waypoints_json = json.dumps(waypoints, indent=2)
         
         print(f"Waypoints in /map coordinates (JSON): {waypoints_json}")
-        # publisher = WaypointsPublisher()
-        # publisher.publish_waypoints(waypoints_json)
+        publisher = WaypointsPublisher()
+        publisher.publish_waypoints(waypoints_json)
 
     def get_goal_names(self):
         return list(self.goals.keys())  #for ui to automatically update label 

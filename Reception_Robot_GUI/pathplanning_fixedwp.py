@@ -94,7 +94,7 @@ class PathPlanner:
             raise ValueError(f"Goal '{goal_label}' not existed")
 
         goal_px = self.locations[goal_label]
-        print(f"Planning: {start_px} → {goal_label}")
+        print(f"Finding path {start_px} → {goal_label}:{goal_px}...")
 
         # start constraint 
         start_candidates = self._get_candidates(start_px)
