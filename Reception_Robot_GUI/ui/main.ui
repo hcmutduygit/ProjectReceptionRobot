@@ -2828,7 +2828,7 @@ color: rgb(0, 41, 77);</string>
         <item>
          <widget class="QStackedWidget" name="stackedWidget_2">
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="page_control_2">
            <layout class="QHBoxLayout" name="horizontalLayout_17" stretch="3,2">
@@ -4158,7 +4158,7 @@ color: rgb(0, 41, 77);</string>
    background-color: rgb(255, 255, 255);</string>
                    </property>
                    <property name="text">
-                    <string>Employee ID</string>
+                    <string>Student ID</string>
                    </property>
                   </widget>
                  </item>

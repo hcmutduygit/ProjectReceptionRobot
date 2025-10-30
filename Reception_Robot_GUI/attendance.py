@@ -18,12 +18,12 @@ class AttendanceTab(QWidget):
         # do rong cot 
         for i in range(self.ui.table_attendance_2.columnCount() - 1):
             header.setSectionResizeMode(i, QHeaderView.ResizeMode.Fixed)
-            header.resizeSection(i, 200)
+            header.resizeSection(i, 250)
         header.setSectionResizeMode(self.ui.table_attendance_2.columnCount() - 1, QHeaderView.ResizeMode.Stretch)
         # so cot va ten 
         self.ui.table_attendance_2.setColumnCount(6)
         self.ui.table_attendance_2.setHorizontalHeaderLabels([
-            "Employee ID", "Name", "Department", "Status", "Check-in Time", "Email"
+            "Student ID", "Name", "Department", "Status", "Check-in Time", "Email"
                 ])
                 
         self.ui.table_attendance_2.setStyleSheet("""
@@ -34,12 +34,12 @@ class AttendanceTab(QWidget):
 
         # Du lieu gia 
         self.attendance_data = [
-            {"id": "E001", "name": "Ky", "dept": "HR", "email": "ky@example.com", "status": None, "time": None },
-            {"id": "E002", "name": "Duy", "dept": "IT", "email": "phu@example.com", "status": None, "time": None },
-            {"id": "E003", "name": "Phu", "dept": "Finance", "email": "duy@example.com", "status": None, "time": None },
-            {"id": "E004", "name": "Thu", "dept": "Finance", "email": "thu@example.com", "status": None, "time": None },
-            {"id": "E005", "name": "Loi", "dept": "Finance", "email": "loi@example.com", "status": None, "time": None },
-            {"id": "E006", "name": "Thien", "dept": "Finance", "email": "thien@example.com", "status": None, "time": None },
+            {"id": "E001", "name": "Ky", "dept": "Mechanical Engineering", "email": "ky@example.com", "status": None, "time": None },
+            {"id": "E002", "name": "Duy", "dept": "Mechanical Engineering", "email": "phu@example.com", "status": None, "time": None },
+            {"id": "E003", "name": "Phu", "dept": "Mechanical Engineering", "email": "duy@example.com", "status": None, "time": None },
+            {"id": "E004", "name": "Thu", "dept": "Electrical Engineering", "email": "thu@example.com", "status": None, "time": None },
+            {"id": "E005", "name": "Loi", "dept": "Electrical Engineering", "email": "loi@example.com", "status": None, "time": None },
+            {"id": "E006", "name": "Thien", "dept": "Mechanical Engineering", "email": "thien@example.com", "status": None, "time": None },
         ]
 
         # Gan nut search 
