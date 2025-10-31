@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import QWidget, QGraphicsScene, QGraphicsView, QGraphicsPolygonItem
 from PyQt6.QtGui import QPixmap, QPolygonF, QWheelEvent, QPainter, QBrush, QPen, QColor
 from PyQt6.QtCore import QPointF, Qt, QTimer
-import yaml, json
+import yaml, json, csv
 import numpy as np
 
 from pathplanning_fixedwp import PathPlanner
@@ -101,21 +101,18 @@ class LocationTab(QWidget):
     def update_robot_gui(self):
         x, y, theta = self.last_position
         # Convert tọa độ từ /map sang GUI 
-        py_raw = (y - self.map_origin[1]) / self.map_resolution 
-        px_raw = (x - self.map_origin[0]) / self.map_resolution  
-        px = px_raw
-        py = self.map_height - py_raw
-        # Thêm offset neu can  
-        px += 0
-        py += 0
+        py = self.map_height - (y - self.map_origin[1]) / self.map_resolution 
+        px = (x - self.map_origin[0]) / self.map_resolution  
+
         self.robot_pos = (px, py)
         self.robot_item.setPos(px, py)
         self.robot_item.setRotation(theta - 60)  
 
         if hasattr(self, 'trajectory_path') and len(self.trajectory_path) > 0:
             current_point = (px, py)
-            # Chỉ thêm nếu cách điểm cuối > 5px
-            if np.linalg.norm(np.array(current_point) - np.array(self.trajectory_path[-1])) > 5:
+            current_time = datetime.now()
+            
+            if np.linalg.norm(np.array(current_point) - np.array(self.trajectory_path[-1])) > 5: #save if point is >5 pixel compare to last point 
                 self.trajectory_path.append(current_point)
                 self.update_trajectory()
 
@@ -124,17 +121,16 @@ class LocationTab(QWidget):
         self.last_position = [x, y, theta]
 
     def update_trajectory(self):
-        """Vẽ quỹ đạo realtime của robot (nét liền xanh)"""
+        """Vẽ quỹ đạo realtime của robot (nét liền đỏ rượu)"""
         if len(self.trajectory_path) < 2:
             return
 
-        # Xóa quỹ đạo cũ
+        # Clear the old one 
         for item in self.trajectory_items:
             self.map_scene.removeItem(item)
         self.trajectory_items.clear()
 
-        # Vẽ lại toàn bộ quỹ đạo
-        pen = QPen(QColor(180, 0, 0), 3)  # Xanh lá
+        pen = QPen(QColor(180, 0, 0), 3)
         pen.setStyle(Qt.PenStyle.SolidLine)
 
         for i in range(len(self.trajectory_path) - 1):
@@ -144,24 +140,25 @@ class LocationTab(QWidget):
             self.trajectory_items.append(line)
 
     def plan_path(self, goal):
-        self.trajectory_path = [self.robot_pos]  # Bắt đầu lại từ vị trí hiện tại
-        self.update_trajectory()
-
-        path = self.planner.find_path(self.robot_pos, goal)
-        self.planner.draw_path(path)
+        start_time = datetime.now()
+        self.trajectory_path = [((self.robot_pos), start_time)]  
+        self.update_trajectory() # Start drawing with robot position and time after had choosing any goal 
+        
+        self.planned_path = self.planner.find_path(self.robot_pos, goal)
+        self.planner.draw_path(self.planned_path)
 
         waypoints = []
-        for point in path:
+        for point in self.planned_path:
             x_pixel, y_pixel = point  # (x,y)
-            # Chuyển từ pixel sang tọa độ /map
+            # pixel to /map
             x_map = self.map_origin[0] + x_pixel * self.map_resolution
             y_map = self.map_origin[1] + (self.map_height - y_pixel) * self.map_resolution  # Đảo trục y
             waypoints.append({"x": round(x_map, 2), "y": round(y_map, 2)})
         waypoints_json = json.dumps(waypoints, indent=2)
         
         print(f"Waypoints in /map coordinates (JSON): {waypoints_json}")
-        publisher = WaypointsPublisher()
-        publisher.publish_waypoints(waypoints_json)
+        # publisher = WaypointsPublisher()
+        # publisher.publish_waypoints(waypoints_json)
 
     def get_goal_names(self):
         return list(self.goals.keys())  #for ui to automatically update label 
