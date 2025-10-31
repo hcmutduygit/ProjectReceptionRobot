@@ -107,7 +107,7 @@ class LocationTab(QWidget):
 
         self.robot_pos = (px, py)
         self.robot_item.setPos(px, py)
-        self.robot_item.setRotation(theta - 60)  
+        self.robot_item.setRotation(theta -270)  
 
         if hasattr(self, 'trajectory_path') and len(self.trajectory_path) > 0:
             current_point = (px, py)
@@ -158,8 +158,8 @@ class LocationTab(QWidget):
         waypoints_json = json.dumps(waypoints, indent=2)
         
         print(f"Waypoints in /map coordinates (JSON): {waypoints_json}")
-        # publisher = WaypointsPublisher()
-        # publisher.publish_waypoints(waypoints_json)
+        publisher = WaypointsPublisher()
+        publisher.publish_waypoints(waypoints_json)
 
     def get_goal_names(self):
         return list(self.goals.keys())  #for ui to automatically update label 

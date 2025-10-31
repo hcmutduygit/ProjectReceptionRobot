@@ -11,7 +11,7 @@ QLoggingCategory.setFilterRules("qt.webenginecontext=false")
 
 class CameraController:
     def __init__(self):
-        self.url_str = "http://192.168.81.230:5000"
+        self.url_str = "http://10.177.199.230:5000"
         self.url = QUrl(self.url_str)
         self.browser = QWebEngineView()
         self.browser.setUrl(self.url)
