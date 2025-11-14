@@ -13,7 +13,7 @@ class LocationManager(BaseManager):
         super().__init__(ui, LocationSubscriberThread, LOCATION_CONFIG)
         # Giá trị mặc định ban đầu
         self.location_tab = location_tab
-        self.location = {'x': '7.49', 'y': '17.07', 'theta': '??'}
+        self.location = {'x': '17.78', 'y': '2.35', 'theta': '??'} 
         self._update_location_labels()
 
     def _connect_signals(self):
@@ -36,7 +36,7 @@ class LocationManager(BaseManager):
         if self.location_tab is not None:
             self.location_tab.set_location(x, y, theta)
         else:
-            print("⚠️ location_tab chưa được gán.")
+            print("Location_tab chưa được gán.")
 
     def _update_location_labels(self):
         """Hiển thị vị trí lên các QLabel trong UI"""
