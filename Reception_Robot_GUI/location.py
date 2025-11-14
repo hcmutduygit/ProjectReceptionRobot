@@ -3,7 +3,8 @@ from PyQt6.QtGui import QPixmap, QPolygonF, QWheelEvent, QPainter, QBrush, QPen,
 from PyQt6.QtCore import QPointF, Qt, QTimer
 import yaml, json, csv
 import numpy as np
-from datetime import datetime 
+from datetime import datetime
+import time 
 
 from pathplanning_fixedwp import PathPlanner
 from MQTT.waypoints_publisher import WaypointsPublisher 
@@ -33,6 +34,7 @@ class LocationTab(QWidget):
         self.ui.setScene(self.map_scene)
 
         self.load_map("Reception_Robot_GUI/resources/Map/map_fablab.pgm")
+        self.logging_active = False
 
         # 4 goals 
         self.goals = {
@@ -64,7 +66,7 @@ class LocationTab(QWidget):
 
         # initial pathplanner 
         self.planner = PathPlanner(self.map_scene)
-            # self.planner.load_cost_map("Reception_Robot_GUI/resources/Map/map_fablab.pgm")
+        # self.planner.load_cost_map("Reception_Robot_GUI/resources/Map/map_fablab.pgm")
         self.planner.set_locations(self.goals)
         self.trajectory_items = []
 
@@ -122,6 +124,9 @@ class LocationTab(QWidget):
         """Update position from MQTT"""
         self.last_position = [x, y, theta]
 
+    def get_goal_names(self):
+        return list(self.goals.keys())  #for ui to automatically update label 
+
     def update_trajectory(self):
         """Vẽ quỹ đạo realtime của robot (nét liền đỏ rượu)"""
         if len(self.trajectory_points) < 2:
@@ -142,81 +147,140 @@ class LocationTab(QWidget):
             self.trajectory_items.append(line)
 
     def plan_path(self, goal):
-        start_time = datetime.now()
-        self.trajectory_points = [self.robot_pos]
-        self.trajectory_times  = [start_time]
-        self.update_trajectory() # Start drawing with robot position and time after had choosing any goal 
-        
+        # start_time = datetime.now()
+        current_pos_map = self.last_position  # [x, y, theta] trong /map
+        # goal_pixel = self.goals[goal]  # (px, py) trong pixel
+
+        # Chuyển goal từ pixel → /map
+        # x_map = self.map_origin[0] + goal_pixel[0] * self.map_resolution
+        # y_map = self.map_origin[1] + (self.map_height - goal_pixel[1]) * self.map_resolution
+
+        # Lập kế hoạch đường đi (pixel)
         self.planned_path = self.planner.find_path(self.robot_pos, goal)
         self.planner.draw_path(self.planned_path)
 
-        waypoints = []
-        for point in self.planned_path:
-            x_pixel, y_pixel = point  # (x,y)
-            # pixel to /map
-            x_map = self.map_origin[0] + x_pixel * self.map_resolution
-            y_map = self.map_origin[1] + (self.map_height - y_pixel) * self.map_resolution  # Đảo trục y
-            waypoints.append({"x": round(x_map, 2), "y": round(y_map, 2)})
-        waypoints_json = json.dumps(waypoints, indent=2)
-        
+        # Chuyển toàn bộ planned_path từ pixel → /map
+        self.plan_points = []
+        for px, py in self.planned_path:
+            x = self.map_origin[0] + px * self.map_resolution
+            y = self.map_origin[1] + (self.map_height - py) * self.map_resolution
+            self.plan_points.append({"x": round(x, 3), "y": round(y, 3)})
+
+        # Bắt đầu từ vị trí hiện tại + danh sách kế hoạch
+        current_wp = {"x": round(current_pos_map[0], 3), "y": round(current_pos_map[1], 3)}
+        self.full_plan_points = [current_wp] + self.plan_points  # Lưu toàn bộ để xuất
+
+        # Khởi tạo log
+        self.log_data = []
+        self.current_segment_idx = 0  # Chỉ số đoạn hiện tại: từ full_plan_points[i] → [i+1]
+        self.threshold_to_next = 0.3  # meter
+        self.last_log_time = 0
+
+        # Bắt đầu timer log (100ms để check, nhưng chỉ ghi mỗi 1s)
+        self.logging_active = True
+        self.log_timer = QTimer(self)
+        self.log_timer.timeout.connect(self.logging_step)
+        self.log_timer.start(100)  # 10 Hz check
+
+        # Gửi waypoints
+        waypoints_json = json.dumps(self.full_plan_points, indent=2)
         print(f"Waypoints in /map coordinates (JSON): {waypoints_json}")
         publisher = WaypointsPublisher()
         publisher.publish_waypoints(waypoints_json)
 
-    def get_goal_names(self):
-        return list(self.goals.keys())  #for ui to automatically update label 
+    def logging_step(self):
+        if not self.logging_active or len(self.full_plan_points) < 2:
+            return
+
+        now = time.time()
+        if now - self.last_log_time < 1.0:
+            return
+        self.last_log_time = now
+
+        actual_x = self.last_position[0]
+        actual_y = self.last_position[1]
+        timestamp = datetime.now()
+
+        # Lấy đoạn hiện tại
+        idx = self.current_segment_idx
+        if idx + 1 >= len(self.full_plan_points):
+            self.stop_logging()
+            return
+
+        p1 = self.full_plan_points[idx]
+        p2 = self.full_plan_points[idx + 1]
+        x1, y1 = p1["x"], p1["y"]
+        x2, y2 = p2["x"], p2["y"]
+        xr, yr = actual_x, actual_y
+
+        # Vector
+        vx, vy = x2 - x1, y2 - y1
+        wx, wy = xr - x1, yr - y1
+        c1 = wx * vx + wy * vy
+        c2 = vx * vx + vy * vy
+
+        if c2 == 0:
+            t = 0.0
+        else:
+            t = max(0.0, min(1.0, c1 / c2))
+
+        # Điểm chiếu lên đoạn thẳng
+        plan_x = x1 + t * vx
+        plan_y = y1 + t * vy
+
+        # CTE
+        error = np.hypot(xr - plan_x, yr - plan_y)
+
+        # Ghi log
+        self.log_data.append((timestamp, plan_x, plan_y, actual_x, actual_y, error))
+
+        # Kiểm tra chuyển đoạn
+        dist_to_next = np.hypot(xr - x2, yr - y2)
+        if dist_to_next < self.threshold_to_next and idx + 2 < len(self.full_plan_points):
+            self.current_segment_idx += 1
+
+    def stop_logging(self):
+        if hasattr(self, 'log_timer'):
+            self.log_timer.stop()
+        self.logging_active = False
+        self.export_path_comparison()
+
 
     def export_path_comparison(self):
-        if not hasattr(self, 'planned_path') or len(self.planned_path) == 0:
-            print("No planned path.")
+        if not hasattr(self, 'log_data') or len(self.log_data) == 0:
+            print("Robot is not moving")
             return
-        if len(self.trajectory_points) < 2:
-            print("Robot chưa di chuyển.")
+        if not hasattr(self, 'full_plan_points') or len(self.full_plan_points) < 2:
+            print("No planned path")
             return
 
-        # === TẠO THƯ MỤC ===
-        import os
-        comp_dir = os.path.join(os.path.dirname(__file__), 'comparison')
-        os.makedirs(comp_dir, exist_ok=True)
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        full_path = os.path.join(comp_dir, f"path_comparison_{timestamp}.csv")
+        timestamp_str = datetime.now().strftime("%Y%m%d_%H%M%S")
+        full_path = f"log_path/path_comparison_{timestamp_str}.csv"
 
-        # === CHUYỂN PIXEL → /MAP ===
-        def pixel_to_map(p):
-            x, y = p
-            return round(self.map_origin[0] + x * self.map_resolution, 3), \
-                round(self.map_origin[1] + (self.map_height - y) * self.map_resolution, 3)
+        errors = [row[5] for row in self.log_data]
 
-        planned_map = [pixel_to_map(p) for p in self.planned_path]
-        actual_map  = [pixel_to_map(p) for p in self.trajectory_points]
-        actual_times = [t.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3] for t in self.trajectory_times]
-
-        # === NỘI SUY ===
-        from scipy.interpolate import interp1d
-        planned_np = np.array(planned_map)
-        actual_np  = np.array(actual_map)
-
-        dist_planned = np.cumsum(np.linalg.norm(np.diff(planned_np, axis=0), axis=1))
-        dist_planned = np.insert(dist_planned, 0, 0)
-        dist_actual  = np.cumsum(np.linalg.norm(np.diff(actual_np, axis=0), axis=1))
-        dist_actual  = np.insert(dist_actual, 0, 0)
-
-        interp_x = interp1d(dist_planned, planned_np[:, 0], kind='linear', fill_value="extrapolate")
-        interp_y = interp1d(dist_planned, planned_np[:, 1], kind='linear', fill_value="extrapolate")
-        interp_x_vals = interp_x(dist_actual)
-        interp_y_vals = interp_y(dist_actual)
-        errors = np.linalg.norm(np.stack((interp_x_vals - actual_np[:, 0],
-                                        interp_y_vals - actual_np[:, 1]), axis=1), axis=1)
-
-        # === GHI CSV ===
         with open(full_path, 'w', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
             writer.writerow(['time', 'actual_x', 'actual_y', 'plan_x', 'plan_y', 'error_m'])
-            for i in range(len(actual_map)):
-                writer.writerow([actual_times[i], actual_map[i][0], actual_map[i][1],
-                                round(interp_x_vals[i], 3), round(interp_y_vals[i], 3), round(errors[i], 3)])
+            for row in self.log_data:
+                writer.writerow([
+                    row[0].strftime("%Y-%m-%d %H:%M:%S.%f")[:-3],
+                    round(row[3], 3),
+                    round(row[4], 3),
+                    round(row[1], 3),
+                    round(row[2], 3),
+                    round(row[5], 3)
+                ])
             writer.writerow([])
-            summary = f"Avg error: {np.mean(errors):.3f}m | Max error: {np.max(errors):.3f}m"
-            writer.writerow([summary])
+            if errors:
+                mean_error = np.mean(errors)
+                max_error = np.max(errors)
+                summary = f"Avg error: {mean_error:.3f}m | Max error: {max_error:.3f}m"
+                writer.writerow([summary])
 
         print(f"Exported: {full_path}")
+
+        # Reset
+        self.log_data = []
+        self.current_segment_idx = 0
+        self.logging_active = False

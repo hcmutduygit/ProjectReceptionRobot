@@ -72,7 +72,7 @@ class MainWindow(QMainWindow):
             self.admin_camera_tab = CameraTab(self.ui.camera_2, self.shared_browser)
             self.admin_location_tab = LocationTab(self.ui.view_map_2)
             self.add_path_planning_buttons(self.admin_location_tab)
-            self.arrival_manager.subscriber_thread.arrival_update.connect(lambda: self.admin_location_tab.export_path_comparison())
+            self.arrival_manager.subscriber_thread.arrival_update.connect(lambda arrived: self.handle_arrival_signal(arrived))
             self.location_manager = LocationManager(self.ui)
             self.location_manager.location_tab = self.admin_location_tab
             self.location_manager.start_location_subscriber()
@@ -122,15 +122,14 @@ class MainWindow(QMainWindow):
         elif text == "Auto":
             self.ui.robot_mode_2.setCurrentWidget(self.ui.page_6)
             
+    def handle_arrival_signal(self, arrived):
+        if arrived == 1 and hasattr(self, 'admin_location_tab'):
+            self.admin_location_tab.stop_logging()  # Dừng + export
+
 
     def add_path_planning_buttons(self, location_tab):
         goals = location_tab.get_goal_names()
-        buttons = [
-                self.ui.btn_goal_A,
-                self.ui.btn_goal_B,
-                self.ui.btn_goal_C,
-                self.ui.btn_goal_D
-            ]
+        buttons = [self.ui.btn_goal_A, self.ui.btn_goal_B, self.ui.btn_goal_C, self.ui.btn_goal_D]
 
         for btn, name in zip(buttons, goals):
             btn.setText(name)
