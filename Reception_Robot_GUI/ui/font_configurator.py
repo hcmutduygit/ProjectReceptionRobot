@@ -51,6 +51,7 @@ def apply_custom_fonts(ui):
     set_bold(ui.label_xy_2)
     set_bold(ui.label_theta_2)
     set_bold(ui.mode_select_2)
+    set_bold(ui.label_log)
     set_bold(ui.label_25)
     set_bold(ui.btn_goal_A)
     set_bold(ui.btn_goal_B)

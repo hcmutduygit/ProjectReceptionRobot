@@ -7,9 +7,9 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-
 from PyQt6.QtGui import QPixmap
 from resources import resources_rc
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -1612,6 +1612,45 @@ class Ui_MainWindow(object):
         self.horizontalLayout_20.addItem(spacerItem8)
         self.verticalLayout_31.addWidget(self.widget_17)
         self.robot_mode_2.addWidget(self.page_5)
+        self.page_log = QtWidgets.QWidget()
+        self.page_log.setObjectName("page_log")
+        self.horizontalLayout_31 = QtWidgets.QHBoxLayout(self.page_log)
+        self.horizontalLayout_31.setObjectName("horizontalLayout_31")
+        self.widget_27 = QtWidgets.QWidget(parent=self.page_log)
+        self.widget_27.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.widget_27.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"border-radius:  15px;\n"
+"color: rgb(0, 41, 77);")
+        self.widget_27.setObjectName("widget_27")
+        self.horizontalLayout_29 = QtWidgets.QHBoxLayout(self.widget_27)
+        self.horizontalLayout_29.setContentsMargins(-1, 0, -1, 0)
+        self.horizontalLayout_29.setObjectName("horizontalLayout_29")
+        self.widget_30 = QtWidgets.QWidget(parent=self.widget_27)
+        self.widget_30.setObjectName("widget_30")
+        self.horizontalLayout_30 = QtWidgets.QHBoxLayout(self.widget_30)
+        self.horizontalLayout_30.setContentsMargins(-1, 0, -1, 0)
+        self.horizontalLayout_30.setObjectName("horizontalLayout_30")
+        self.label_log = QtWidgets.QLabel(parent=self.widget_30)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_log.sizePolicy().hasHeightForWidth())
+        self.label_log.setSizePolicy(sizePolicy)
+        self.label_log.setMinimumSize(QtCore.QSize(0, 30))
+        self.label_log.setMaximumSize(QtCore.QSize(16777215, 50))
+        font = QtGui.QFont()
+        font.setFamily("Roboto")
+        font.setPointSize(17)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_log.setFont(font)
+        self.label_log.setTextFormat(QtCore.Qt.TextFormat.PlainText)
+        self.label_log.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.label_log.setObjectName("label_log")
+        self.horizontalLayout_30.addWidget(self.label_log)
+        self.horizontalLayout_29.addWidget(self.widget_30)
+        self.horizontalLayout_31.addWidget(self.widget_27)
+        self.robot_mode_2.addWidget(self.page_log)
         self.page_6 = QtWidgets.QWidget()
         self.page_6.setObjectName("page_6")
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.page_6)
@@ -2674,12 +2713,12 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
         self.Dashboard.setCurrentIndex(0)
         self.Page.setCurrentIndex(1)
-        self.stackedWidget_2.setCurrentIndex(1)
+        self.stackedWidget_2.setCurrentIndex(0)
         self.mode_select_2.setCurrentIndex(0)
-        self.robot_mode_2.setCurrentIndex(1)
+        self.robot_mode_2.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -2725,6 +2764,7 @@ class Ui_MainWindow(object):
         self.label_14.setText(_translate("MainWindow", "MODE:"))
         self.mode_select_2.setItemText(0, _translate("MainWindow", "Auto"))
         self.mode_select_2.setItemText(1, _translate("MainWindow", "Manual"))
+        self.label_log.setText(_translate("MainWindow", "Robot is moving to {place} "))
         self.label_25.setText(_translate("MainWindow", "GO TO"))
         self.btn_goal_B.setText(_translate("MainWindow", "B"))
         self.btn_goal_A.setText(_translate("MainWindow", "A"))

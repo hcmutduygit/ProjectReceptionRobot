@@ -122,10 +122,6 @@ class MainWindow(QMainWindow):
         elif text == "Auto":
             self.ui.robot_mode_2.setCurrentWidget(self.ui.page_6)
             
-    def handle_arrival_signal(self, arrived):
-        if arrived == 1 and hasattr(self, 'admin_location_tab'):
-            self.admin_location_tab.stop_logging()  # Dừng + export
-
 
     def add_path_planning_buttons(self, location_tab):
         goals = location_tab.get_goal_names()
@@ -135,7 +131,14 @@ class MainWindow(QMainWindow):
             btn.setText(name)
             btn.clicked.connect(lambda checked=False, n=name: (self.ui.robot_status.setText("Guidance"),
                                                                self.ui.robot_status_2.setText("Guidance"),
+                                                               self.ui.robot_mode_2.setCurrentWidget(self.ui.page_log),
+                                                               self.ui.label_log.setText(f"Robot is moving to {n}"),
                                                                location_tab.plan_path(n)))
+
+    def handle_arrival_signal(self, arrived):
+        if arrived == 1 and hasattr(self, 'admin_location_tab'):
+            self.ui.robot_mode_2.setCurrentWidget(self.ui.page_6)
+            self.admin_location_tab.stop_logging()  # Dừng + export
 
     def _shutdown_all_services(self):
         self.battery_manager.stop_battery_subscriber()
