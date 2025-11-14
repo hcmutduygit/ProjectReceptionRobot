@@ -10,6 +10,7 @@ from attendance import AttendanceTab
 from attendance_manager import AttendanceManager
 from battery_manager import BatteryManager
 from location_manager import LocationManager 
+from arrival_manager import ArrivalManager 
 from velocity_manager import VelocityManager 
 from location import LocationTab
 from camera import CameraController, CameraTab
@@ -34,6 +35,8 @@ class MainWindow(QMainWindow):
         self.shared_browser = self.camera_controller.get_browser()
         self.velocity_manager = VelocityManager(self.ui)
         self.velocity_manager.start_velocity_subscriber()
+        self.arrival_manager = ArrivalManager(self.ui)
+        self.arrival_manager.start_arrival_subscriber()
         self.ui.mode_select_2.currentTextChanged.connect(self.handle_mode_switch)
 
         # page_attendance 
@@ -69,6 +72,7 @@ class MainWindow(QMainWindow):
             self.admin_camera_tab = CameraTab(self.ui.camera_2, self.shared_browser)
             self.admin_location_tab = LocationTab(self.ui.view_map_2)
             self.add_path_planning_buttons(self.admin_location_tab)
+            self.arrival_manager.subscriber_thread.arrival_update.connect(lambda: self.admin_location_tab.export_path_comparison())
             self.location_manager = LocationManager(self.ui)
             self.location_manager.location_tab = self.admin_location_tab
             self.location_manager.start_location_subscriber()

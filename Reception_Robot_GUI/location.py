@@ -67,7 +67,6 @@ class LocationTab(QWidget):
             # self.planner.load_cost_map("Reception_Robot_GUI/resources/Map/map_fablab.pgm")
         self.planner.set_locations(self.goals)
         self.trajectory_items = []
-        self.trajectory_path = []
 
     def load_map(self, path: str):
         pixmap = QPixmap(path)
@@ -107,14 +106,16 @@ class LocationTab(QWidget):
 
         self.robot_pos = (px, py)
         self.robot_item.setPos(px, py)
-        self.robot_item.setRotation(theta -270)  
+        self.robot_item.setRotation(theta -270 + 30)  
 
-        if hasattr(self, 'trajectory_path') and len(self.trajectory_path) > 0:
+        if hasattr(self, 'trajectory_points') and len(self.trajectory_points) > 0:
             current_point = (px, py)
             current_time = datetime.now()
             
-            if np.linalg.norm(np.array(current_point) - np.array(self.trajectory_path[-1])) > 5: #save if point is >5 pixel compare to last point 
-                self.trajectory_path.append(current_point)
+            last_point = self.trajectory_points[-1]
+            if np.linalg.norm(np.array(current_point) - np.array(last_point)) > 5: #save if point is >5 pixel compare to last point 
+                self.trajectory_points.append(current_point)
+                self.trajectory_times.append(current_time)
                 self.update_trajectory()
 
     def set_location(self, x, y, theta):
@@ -123,7 +124,7 @@ class LocationTab(QWidget):
 
     def update_trajectory(self):
         """Vẽ quỹ đạo realtime của robot (nét liền đỏ rượu)"""
-        if len(self.trajectory_path) < 2:
+        if len(self.trajectory_points) < 2:
             return
 
         # Clear the old one 
@@ -134,15 +135,16 @@ class LocationTab(QWidget):
         pen = QPen(QColor(180, 0, 0), 3)
         pen.setStyle(Qt.PenStyle.SolidLine)
 
-        for i in range(len(self.trajectory_path) - 1):
-            p1 = QPointF(self.trajectory_path[i][0], self.trajectory_path[i][1])
-            p2 = QPointF(self.trajectory_path[i+1][0], self.trajectory_path[i+1][1])
+        for i in range(len(self.trajectory_points) - 1):
+            p1 = QPointF(self.trajectory_points[i][0], self.trajectory_points[i][1])
+            p2 = QPointF(self.trajectory_points[i+1][0], self.trajectory_points[i+1][1])
             line = self.map_scene.addLine(p1.x(), p1.y(), p2.x(), p2.y(), pen)
             self.trajectory_items.append(line)
 
     def plan_path(self, goal):
         start_time = datetime.now()
-        self.trajectory_path = [((self.robot_pos), start_time)]  
+        self.trajectory_points = [self.robot_pos]
+        self.trajectory_times  = [start_time]
         self.update_trajectory() # Start drawing with robot position and time after had choosing any goal 
         
         self.planned_path = self.planner.find_path(self.robot_pos, goal)
@@ -163,3 +165,58 @@ class LocationTab(QWidget):
 
     def get_goal_names(self):
         return list(self.goals.keys())  #for ui to automatically update label 
+
+    def export_path_comparison(self):
+        if not hasattr(self, 'planned_path') or len(self.planned_path) == 0:
+            print("No planned path.")
+            return
+        if len(self.trajectory_points) < 2:
+            print("Robot chưa di chuyển.")
+            return
+
+        # === TẠO THƯ MỤC ===
+        import os
+        comp_dir = os.path.join(os.path.dirname(__file__), 'comparison')
+        os.makedirs(comp_dir, exist_ok=True)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        full_path = os.path.join(comp_dir, f"path_comparison_{timestamp}.csv")
+
+        # === CHUYỂN PIXEL → /MAP ===
+        def pixel_to_map(p):
+            x, y = p
+            return round(self.map_origin[0] + x * self.map_resolution, 3), \
+                round(self.map_origin[1] + (self.map_height - y) * self.map_resolution, 3)
+
+        planned_map = [pixel_to_map(p) for p in self.planned_path]
+        actual_map  = [pixel_to_map(p) for p in self.trajectory_points]
+        actual_times = [t.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3] for t in self.trajectory_times]
+
+        # === NỘI SUY ===
+        from scipy.interpolate import interp1d
+        planned_np = np.array(planned_map)
+        actual_np  = np.array(actual_map)
+
+        dist_planned = np.cumsum(np.linalg.norm(np.diff(planned_np, axis=0), axis=1))
+        dist_planned = np.insert(dist_planned, 0, 0)
+        dist_actual  = np.cumsum(np.linalg.norm(np.diff(actual_np, axis=0), axis=1))
+        dist_actual  = np.insert(dist_actual, 0, 0)
+
+        interp_x = interp1d(dist_planned, planned_np[:, 0], kind='linear', fill_value="extrapolate")
+        interp_y = interp1d(dist_planned, planned_np[:, 1], kind='linear', fill_value="extrapolate")
+        interp_x_vals = interp_x(dist_actual)
+        interp_y_vals = interp_y(dist_actual)
+        errors = np.linalg.norm(np.stack((interp_x_vals - actual_np[:, 0],
+                                        interp_y_vals - actual_np[:, 1]), axis=1), axis=1)
+
+        # === GHI CSV ===
+        with open(full_path, 'w', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            writer.writerow(['time', 'actual_x', 'actual_y', 'plan_x', 'plan_y', 'error_m'])
+            for i in range(len(actual_map)):
+                writer.writerow([actual_times[i], actual_map[i][0], actual_map[i][1],
+                                round(interp_x_vals[i], 3), round(interp_y_vals[i], 3), round(errors[i], 3)])
+            writer.writerow([])
+            summary = f"Avg error: {np.mean(errors):.3f}m | Max error: {np.max(errors):.3f}m"
+            writer.writerow([summary])
+
+        print(f"Exported: {full_path}")

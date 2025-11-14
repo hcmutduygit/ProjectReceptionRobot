@@ -63,7 +63,7 @@ class AttendanceTab(QWidget):
     def update_status(self, name=None, status=None, time=None):
         for entry in self.attendance_data:
             if (name and entry["name"] == name):
-                entry["status"] = status
+                entry["status"] = "Present"
                 entry["time"] = time
                 break
 

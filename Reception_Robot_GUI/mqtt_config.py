@@ -20,7 +20,8 @@ class MQTTConfig:
         "status": "robot/status",
         "location": "robot/location",
         "velocity": "robot/velocity",
-        "waypoints" : "robot/waypoints"
+        "waypoints" : "robot/waypoints",
+        "arrival": "robot/arrival"
     }
     
     @classmethod
