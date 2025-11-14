@@ -25,19 +25,23 @@ class MapWindow(QWidget):
         # --- Scene + Map ---
         self.scene = QGraphicsScene()
         self.view.setScene(self.scene)
-        self.map_pix = QPixmap("Reception_Robot_GUI/resources/Map/map_fablab.pgm")
+        self.map_pix = QPixmap("Reception_Robot_GUI/resources/Map/new_map2.pgm")
         self.scene.addPixmap(self.map_pix)
 
         # --- Path planner ---
         self.planner = PathPlanner(self.scene)
-        self.planner.load_cost_map("Reception_Robot_GUI/resources/Map/map_fablab.pgm")
+        # self.planner.load_cost_map("Reception_Robot_GUI/resources/Map/new_map2.pgm")
 
-        # 4 điểm cố định (pixel)
+        # điểm cố định (pixel)
         self.planner.set_locations({
-            "A": (824, 1150),
-            "B": (584, 531),
-            "C": (1172, 513),
-            "D": (304, 983)
+            " 1": (821, 763),
+            " 2": (804, 545),
+            " 3": (866, 504),
+            " 4": (860, 377),
+            " 5": (835, 269),
+            " 6": (736, 273),
+            " 7": (735, 306),
+            " 8": (850, 304)
         })
 
         # Vị trí robot hiện tại (pixel)

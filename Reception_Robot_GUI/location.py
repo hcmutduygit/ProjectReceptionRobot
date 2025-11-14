@@ -33,15 +33,15 @@ class LocationTab(QWidget):
         layout.addWidget(self.ui)
         self.ui.setScene(self.map_scene)
 
-        self.load_map("Reception_Robot_GUI/resources/Map/map_fablab.pgm")
+        self.load_map("Reception_Robot_GUI/resources/Map/new_map2.pgm")
         self.logging_active = False
 
         # 4 goals 
         self.goals = {
-            "Robotics lab": (800, 1136),
-            "Chemistry hall": (576, 513),
-            "Electrical lab": (1228, 431),
-            "Restroom": (704, 773)
+            "Robotics lab": (464, 792),
+            "Chemistry hall": (825, 262),
+            "Electrical lab": (1116, 778),
+            "Restroom": (711, 501)
         }
 
         # Tạo robot
@@ -57,7 +57,7 @@ class LocationTab(QWidget):
         self.map_scene.addItem(self.robot_item)
 
         # Lưu trữ vị trí mới nhất
-        self.last_position = [7.49, 17.07 , 0.0] #
+        self.last_position = [17.78, 2.35 , 0.0] #
 
         # Update GUI frequency 
         self.update_timer = QTimer(self)
@@ -66,7 +66,7 @@ class LocationTab(QWidget):
 
         # initial pathplanner 
         self.planner = PathPlanner(self.map_scene)
-        # self.planner.load_cost_map("Reception_Robot_GUI/resources/Map/map_fablab.pgm")
+        # self.planner.load_cost_map("Reception_Robot_GUI/resources/Map/new_map2.pgm")
         self.planner.set_locations(self.goals)
         self.trajectory_items = []
 
@@ -90,7 +90,7 @@ class LocationTab(QWidget):
         self.map_height = pixmap.height()
 
         # Đọc thông số từ file map.yaml từ SLAM
-        yaml_path = "Reception_Robot_GUI/resources/Map/map_fablab.yaml"
+        yaml_path = "Reception_Robot_GUI/resources/Map/new_map2.yaml"
         try:
             with open(yaml_path, 'r') as file:
                 map_config = yaml.safe_load(file)

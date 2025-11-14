@@ -15,7 +15,7 @@ class MapClickView(QGraphicsView):
         self.scene = QGraphicsScene()
         pixmap = QPixmap(map_path)
         if pixmap.isNull():
-            print(f"❌ Không thể load ảnh: {map_path}")
+            print(f"Kông thể load ảnh: {map_path}")
             sys.exit(1)
 
         self.scene.addPixmap(pixmap)
@@ -35,7 +35,7 @@ class MapClickView(QGraphicsView):
                 self.map_origin = (map_config['origin'][0], map_config['origin'][1])
                 print(f"Loaded map config - resolution: {self.map_resolution}, origin: {self.map_origin}")
         except Exception as e:
-            print(f"❌ Error while reading {yaml_path}: {e}")
+            print(f"Error while reading {yaml_path}: {e}")
             self.map_resolution = 0.05  # Giá trị mặc định nếu không đọc được
             self.map_origin = (0.0, 0.0)
 
@@ -51,10 +51,17 @@ class MapClickView(QGraphicsView):
             # Chuyển từ pixel sang tọa độ /map
             y_map = (self.map_height - y_pixel) * self.map_resolution + self.map_origin[1]
             x_map = x_pixel * self.map_resolution + self.map_origin[0]
-            print(f"📍 Tọa độ /map: ({x_map:.2f}, {y_map:.2f})m")
+            print(f"   Tọa độ /map: ({x_map:.2f}, {y_map:.2f})m")
             
         super().mousePressEvent(event)
 
+        tupple_x = [17.6858554792, 16.8749998552, 19.9679920085, 19.6681547578, 18.4091273325, 13.4507733824, 13.4117297827, 19.1596853144, 19.66815475, 19.96799200, 16.87499985, 17.68585547]
+        tupple_y = [1.52747189432,  12.4088992202, 14.4544250146, 20.8412712994, 26.2399740808, 26.0336352831, 24.3740114849, 24.5011076441, 20.84127129, 14.45442501, 12.4088992202, 1.527471894]
+
+        for i, (x, y) in enumerate(zip(tupple_x, tupple_y), 1):
+            py = self.map_height - (y - self.map_origin[1]) / self.map_resolution 
+            px = (x - self.map_origin[0]) / self.map_resolution 
+            print(f'"{i:2d}": ({int(px)}, {int(py)}),')
 
 class MapClickWindow(QMainWindow):
     def __init__(self, map_path):
@@ -67,7 +74,7 @@ class MapClickWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    map_path = "Reception_Robot_GUI/resources/Map/map_fablab.pgm"
+    map_path = "Reception_Robot_GUI/resources/Map/new_map2.pgm"
     window = MapClickWindow(map_path)
     window.show()
     sys.exit(app.exec())
