@@ -15,6 +15,8 @@ from manager.manager_battery import BatteryManager
 from manager.manager_location import LocationManager 
 from manager.manager_arrival import ArrivalManager 
 from manager.manager_velocity import VelocityManager 
+from manager.manager_telemetry import TelemetryManager
+
 
 from location import LocationTab
 from camera import CameraController, CameraTab
@@ -51,6 +53,8 @@ class MainWindow(QMainWindow):
 
         # page_telemetry
         self.telemetry_tab = PlotTelemetry(self.ui)
+        self.telemetry_manager = TelemetryManager(self.ui, self.telemetry_tab)
+        self.telemetry_manager.start_telemetry_subscriber()
 
         # khoi tao 
         self.ui.stackedWidget.setCurrentWidget(self.ui.login)

@@ -3,7 +3,7 @@ from PyQt6.QtCore import QTimer
 import pyqtgraph as pg
 import time
 from collections import deque
-
+from MQTT.telemetry_subscriber import TelemetrySubscriberThread
 
 class PlotTelemetry(QWidget):
     def __init__(self, ui):
@@ -14,6 +14,9 @@ class PlotTelemetry(QWidget):
         self.layout_imu  = self.ui.imupac
         self.layout_odom = self.ui.odompac
         self.layout_cte  = self.ui.cte
+
+        self.imu_loss = 0.0
+        self.odom_loss = 0.0
 
         # --- Check xem còn widget cũ k --- 
         for lay in (self.layout_imu, self.layout_odom, self.layout_cte):
@@ -58,35 +61,11 @@ class PlotTelemetry(QWidget):
         self.curve_cte  = self.plot_cte.plot( pen=pg.mkPen('#2ecc71', width=2), name="CTE")
 
         # --- Timers ---
-        self.timer_imu = QTimer(self)
-        self.timer_imu.timeout.connect(self.update_imu)
-        self.timer_imu.start(10000)     # IMU packet loss 10s 
-
-        self.timer_odom = QTimer(self)
-        self.timer_odom.timeout.connect(self.update_odom)
-        self.timer_odom.start(10000)    # Odom packet loss 10s 
-
         self.timer_cte = QTimer(self)
         self.timer_cte.timeout.connect(self.update_cte)
         self.timer_cte.start(1000)      # CTE 1s
 
     # ==============================================================
-
-    def update_imu(self):
-        now = time.time() - self.start_time
-        value = self._get_imu_packet_loss()
-        self.t_imu.append(now)
-        self.v_imu.append(value)
-        self.curve_imu.setData(self.t_imu, self.v_imu)
-        self.plot_imu.setXRange(max(0, now - 120), now)   # show the last 2 minutes 
-
-    def update_odom(self):
-        now = time.time() - self.start_time
-        value = self._get_odom_packet_loss()
-        self.t_odom.append(now)
-        self.v_odom.append(value)
-        self.curve_odom.setData(self.t_odom, self.v_odom)
-        self.plot_odom.setXRange(max(0, now - 120), now)   # show the last 2 minutes 
 
     def update_cte(self):
         now = time.time() - self.start_time
@@ -98,13 +77,29 @@ class PlotTelemetry(QWidget):
 
     # ==============================================================
 
-    def _get_imu_packet_loss(self):
-        import random
-        return random.uniform(0, 8)
+    def update_packet_loss(self, imu, odom, send):
+        expected_imu = send
+        expected_odom = send
 
-    def _get_odom_packet_loss(self):
-        import random
-        return random.uniform(0, 10)
+        self.imu_loss = max(0.0, 100.0 * (expected_imu - imu) / expected_imu)
+        self.odom_loss = max(0.0, 100.0 * (expected_odom - odom) / expected_odom)
+
+        now = time.time() - self.start_time
+
+        # Thêm điểm vào buffer
+        self.t_imu.append(now)
+        self.v_imu.append(self.imu_loss)
+
+        self.t_odom.append(now)
+        self.v_odom.append(self.odom_loss)
+
+        # Update đồ thị ngay lập tức
+        self.curve_imu.setData(self.t_imu, self.v_imu)
+        self.curve_odom.setData(self.t_odom, self.v_odom)
+
+        # XRange 2 phút
+        self.plot_imu.setXRange(max(0, now - 120), now)
+        self.plot_odom.setXRange(max(0, now - 120), now)
 
     def _get_cte_error(self):
         import random
