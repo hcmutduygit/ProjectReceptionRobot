@@ -15,7 +15,10 @@ class PathPlanner:
             "wp1": (822, 785),
             "wp2": (808, 509),
             "wp3": (860, 509),
-            "wp4": (850, 299),
+            "wp4": (850, 304),
+            "wp5": (835, 269),
+            "wp6": (736, 273),
+            "wp7": (735, 306),
         }
 
         # === graph ===
@@ -23,7 +26,10 @@ class PathPlanner:
             "wp1": ["wp2"],
             "wp2": ["wp1", "wp3"],
             "wp3": ["wp2", "wp4"],
-            "wp4": ["wp3"],
+            "wp4": ["wp3", "wp5"],
+            "wp5": ["wp4", "wp6"],
+            "wp6": ["wp5", "wp7"],
+            "wp7": ["wp4", "wp6"],
         }
 
         self._draw_fixed_waypoints()
@@ -35,7 +41,7 @@ class PathPlanner:
             pen = QPen(QColor(0, 0, 0), 1)
             self.scene.addEllipse(x - r, y - r, r * 2, r * 2, pen, brush)
             # text = self.scene.addText(name)
-            # text.setDefaultTextColor(QColor(255, 255, 255))
+            # text.setDefaultTextColor(QColor(0, 0, 0))
             # text.setPos(x + 12, y - 15)
 
     def set_locations(self, locations: dict):
