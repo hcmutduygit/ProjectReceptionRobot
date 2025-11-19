@@ -12,8 +12,10 @@ from battery_manager import BatteryManager
 from location_manager import LocationManager 
 from arrival_manager import ArrivalManager 
 from velocity_manager import VelocityManager 
+
 from location import LocationTab
 from camera import CameraController, CameraTab
+from robot_telemetry import PlotTelemetry
 
 
 class MainWindow(QMainWindow):
@@ -43,6 +45,9 @@ class MainWindow(QMainWindow):
         self.attendance_tab = AttendanceTab(self.ui)
         self.attendance_manager = AttendanceManager(self.ui, self.attendance_tab)
         self.attendance_manager.start_attendance_subscriber()
+
+        # page_telemetry
+        self.telemetry_tab = PlotTelemetry(self.ui)
 
         # khoi tao 
         self.ui.stackedWidget.setCurrentWidget(self.ui.login)
@@ -114,6 +119,8 @@ class MainWindow(QMainWindow):
             self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_control_2)   
         elif text == "Attendance":
             self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_attendance_2)
+        elif text == "Robot Telemetry":
+            self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_data)
             
 
     def handle_mode_switch(self, text):

@@ -2565,14 +2565,20 @@ border-radius:  15px;</string>
             <widget class="QComboBox" name="comboBox_2">
              <property name="minimumSize">
               <size>
-               <width>200</width>
+               <width>250</width>
                <height>0</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>200</width>
+               <width>250</width>
                <height>50</height>
+              </size>
+             </property>
+             <property name="sizeIncrement">
+              <size>
+               <width>0</width>
+               <height>0</height>
               </size>
              </property>
              <property name="font">
@@ -2608,6 +2614,11 @@ QComboBox::item:hover {
              <item>
               <property name="text">
                <string>Attendance</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Robot Telemetry</string>
               </property>
              </item>
             </widget>
@@ -2890,7 +2901,7 @@ color: rgb(0, 41, 77);</string>
         <item>
          <widget class="QStackedWidget" name="stackedWidget_2">
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <widget class="QWidget" name="page_control_2">
            <layout class="QHBoxLayout" name="horizontalLayout_17" stretch="3,2">
@@ -5188,6 +5199,35 @@ color: rgb(0, 41, 77);</string>
             </item>
            </layout>
           </widget>
+          <widget class="QWidget" name="page_data">
+           <layout class="QHBoxLayout" name="horizontalLayout_33">
+            <item>
+             <widget class="QWidget" name="widget_8" native="true">
+              <layout class="QHBoxLayout" name="horizontalLayout_32">
+               <property name="spacing">
+                <number>15</number>
+               </property>
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout_34">
+                 <property name="spacing">
+                  <number>15</number>
+                 </property>
+                 <item>
+                  <layout class="QVBoxLayout" name="imupac"/>
+                 </item>
+                 <item>
+                  <layout class="QVBoxLayout" name="odompac"/>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="cte"/>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
          </widget>
         </item>
        </layout>
@@ -6253,6 +6293,7 @@ color: rgb(0, 41, 77);</string>
  </widget>
  <resources>
   <include location="../resources/resources.qrc"/>
+  <include location="../../../.designer/resources/resources.qrc"/>
  </resources>
  <connections/>
 </ui>
