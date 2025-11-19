@@ -2,7 +2,7 @@ import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from MQTT.battery_subscriber import BatterySubscriberThread
-from base_manager import BaseManager
+from manager.manager_base import BaseManager
 from mqtt_config import BATTERY_CONFIG
 
 class BatteryManager(BaseManager):

@@ -1,4 +1,6 @@
-import sys
+import os, sys
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, project_root)
 
 from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QMessageBox
 
@@ -7,11 +9,12 @@ from ui.style import QMSGBOX_STYLE
 from ui.main_ui import Ui_MainWindow
 from user import handle_login, handle_signup
 from attendance import AttendanceTab
-from attendance_manager import AttendanceManager
-from battery_manager import BatteryManager
-from location_manager import LocationManager 
-from arrival_manager import ArrivalManager 
-from velocity_manager import VelocityManager 
+
+from manager.manager_attendance import AttendanceManager
+from manager.manager_battery import BatteryManager
+from manager.manager_location import LocationManager 
+from manager.manager_arrival import ArrivalManager 
+from manager.manager_velocity import VelocityManager 
 
 from location import LocationTab
 from camera import CameraController, CameraTab

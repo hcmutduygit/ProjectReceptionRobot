@@ -3,7 +3,7 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 from MQTT.location_subscriber import LocationSubscriberThread
-from base_manager import BaseManager
+from manager.manager_base import BaseManager
 from mqtt_config import MQTTConfig
 
 LOCATION_CONFIG = MQTTConfig.get_config("location")

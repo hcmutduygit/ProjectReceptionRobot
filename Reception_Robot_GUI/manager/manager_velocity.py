@@ -3,7 +3,7 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 from MQTT.velocity_subscriber import VelocitySubscriberThread
-from base_manager import BaseManager
+from manager.manager_base import BaseManager
 from mqtt_config import MQTTConfig
 
 VELOCITY_CONFIG = MQTTConfig.get_config("velocity")

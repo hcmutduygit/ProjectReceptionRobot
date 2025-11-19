@@ -3,7 +3,7 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 from MQTT.arrival_subscriber import ArrivalSubscriberThread
-from base_manager import BaseManager
+from manager.manager_base import BaseManager
 from mqtt_config import MQTTConfig
 
 ARRIVAL_CONFIG = MQTTConfig.get_config("arrival")
