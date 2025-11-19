@@ -14,7 +14,7 @@ class PathPlanner:
         self.fixed_waypoints = {
             "wp1": (822, 785),
             "wp2": (808, 509),
-            "wp3": (853, 509),
+            "wp3": (860, 509),
             "wp4": (850, 299),
         }
 
