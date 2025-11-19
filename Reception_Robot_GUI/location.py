@@ -33,10 +33,10 @@ class LocationTab(QWidget):
         self.ui = MapGraphicsView()
         layout.addWidget(self.ui)
         self.ui.setScene(self.map_scene)
-        self.logger = PathLogger(self)
+        self.logger = PathLogger()
+        self.logger.location_tab = self
 
         self.load_map("Reception_Robot_GUI/resources/Map/new_map2.pgm")
-        self.logging_active = False
 
         # 4 goals 
         self.goals = {

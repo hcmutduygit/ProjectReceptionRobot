@@ -83,6 +83,7 @@ class MainWindow(QMainWindow):
             self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_control_2)
             self.admin_camera_tab = CameraTab(self.ui.camera_2, self.shared_browser)
             self.admin_location_tab = LocationTab(self.ui.view_map_2)
+            self.admin_location_tab.logger.cte_signal.connect(self.telemetry_tab.update_cte)
             self.add_path_planning_buttons(self.admin_location_tab)
             self.arrival_manager.subscriber_thread.arrival_update.connect(lambda arrived: self.handle_arrival_signal(arrived))
             self.location_manager = LocationManager(self.ui)
@@ -152,7 +153,7 @@ class MainWindow(QMainWindow):
     def handle_arrival_signal(self, arrived):
         if arrived == 1 and hasattr(self, 'admin_location_tab'):
             self.ui.robot_mode_2.setCurrentWidget(self.ui.page_6)
-            self.admin_location_tab.stop_logging()  # Dừng + export
+            self.admin_location_tab.logger.stop_logging()  # Dừng + export
 
     def _shutdown_all_services(self):
         self.battery_manager.stop_battery_subscriber()

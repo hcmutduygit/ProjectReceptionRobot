@@ -2,16 +2,17 @@ import csv
 import numpy as np
 from datetime import datetime
 import time
-from PyQt6.QtCore import QTimer
+from PyQt6.QtCore import QObject, QTimer, pyqtSignal
 
+class PathLogger(QObject):
+    """
+    Class chịu trách nhiệm ghi log path-comparison, xuất CSV và ghi vào plot 
+    """
+    cte_signal = pyqtSignal(float)
 
-class PathLogger:
-    """
-    Class chịu trách nhiệm ghi log path-comparison và xuất CSV.
-    Được tách riêng hoàn toàn khỏi LocationTab, không thay đổi logic.
-    """
-    def __init__(self, parent):
-        self.parent = parent                     # để lấy last_position
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.location_tab = None
         self.log_data = []
         self.current_segment_idx = 0
         self.threshold_to_next = 0.3
@@ -29,7 +30,7 @@ class PathLogger:
         self.logging_active = True
 
         # Tạo timer mới mỗi lần start (giống hệt code gốc)
-        self.log_timer = QTimer(self.parent)
+        self.log_timer = QTimer(self)
         self.log_timer.timeout.connect(self.logging_step)
         self.log_timer.start(100)  # 10 Hz check
 
@@ -42,8 +43,8 @@ class PathLogger:
             return
         self.last_log_time = now
 
-        actual_x = self.parent.last_position[0]
-        actual_y = self.parent.last_position[1]
+        actual_x = self.location_tab.last_position[0]
+        actual_y = self.location_tab.last_position[1]
         timestamp = datetime.now()
 
         # Lấy đoạn hiện tại
@@ -75,6 +76,7 @@ class PathLogger:
 
         # CTE
         error = np.hypot(xr - plan_x, yr - plan_y)
+        self.cte_signal.emit(error)
 
         # Ghi log
         self.log_data.append((timestamp, plan_x, plan_y, actual_x, actual_y, error))

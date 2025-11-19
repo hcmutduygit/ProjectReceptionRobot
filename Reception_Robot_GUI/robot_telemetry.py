@@ -1,9 +1,7 @@
 from PyQt6.QtWidgets import QWidget
-from PyQt6.QtCore import QTimer
 import pyqtgraph as pg
 import time
 from collections import deque
-from MQTT.telemetry_subscriber import TelemetrySubscriberThread
 
 class PlotTelemetry(QWidget):
     def __init__(self, ui):
@@ -60,22 +58,16 @@ class PlotTelemetry(QWidget):
         self.curve_odom = self.plot_odom.plot(pen=pg.mkPen('#3498db', width=2), name="Odom Loss")
         self.curve_cte  = self.plot_cte.plot( pen=pg.mkPen('#2ecc71', width=2), name="CTE")
 
-        # --- Timers ---
-        self.timer_cte = QTimer(self)
-        self.timer_cte.timeout.connect(self.update_cte)
-        self.timer_cte.start(1000)      # CTE 1s
-
     # ==============================================================
 
-    def update_cte(self):
+    def update_cte(self, cte):
         now = time.time() - self.start_time
-        value = self._get_cte_error()
+        value = cte
         self.t_cte.append(now)
         self.v_cte.append(value)
         self.curve_cte.setData(self.t_cte, self.v_cte)
         self.plot_cte.setXRange(max(0, now - 15), now)   # show the last 15 secs
 
-    # ==============================================================
 
     def update_packet_loss(self, imu, odom, send):
         expected_imu = send
@@ -100,7 +92,3 @@ class PlotTelemetry(QWidget):
         # XRange 2 phút
         self.plot_imu.setXRange(max(0, now - 120), now)
         self.plot_odom.setXRange(max(0, now - 120), now)
-
-    def _get_cte_error(self):
-        import random
-        return random.uniform(-0.6, 0.6)
