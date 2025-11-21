@@ -5,7 +5,7 @@ import json
 class TelemetrySubscriberThread(MQTTSubscriberThread):
     telemetry_update = pyqtSignal(int, int, int)
 
-    def __init__(self, mqtt_host, mqtt_port, mqtt_topic="robot/velocity", mqtt_username=None, mqtt_password=None):
+    def __init__(self, mqtt_host, mqtt_port, mqtt_topic="robot/telemetry", mqtt_username=None, mqtt_password=None):
         super().__init__(mqtt_host, mqtt_port, mqtt_topic, mqtt_username=mqtt_username, mqtt_password=mqtt_password)
 
     def on_message(self, client, userdata, msg):
