@@ -38,10 +38,11 @@ class LocationManager(BaseManager):
             print("Location_tab chưa được gán.")
 
     def _update_location_labels(self):
-        """Hiển thị vị trí lên các QLabel trong UI"""
+        
         self.ui.label_xy.setText(f"X: {self.location['x']}, Y: {self.location['y']}")
         self.ui.label_xy_2.setText(f"X: {self.location['x']}, Y: {self.location['y']}")
         self.ui.label_xy_3.setText(f"X: {self.location['x']}, Y: {self.location['y']}")
+
         self.ui.label_theta.setText(f"θ: {self.location['theta']}")
         self.ui.label_theta_2.setText(f"θ: {self.location['theta']}")
         self.ui.label_theta_3.setText(f"θ: {self.location['theta']}")

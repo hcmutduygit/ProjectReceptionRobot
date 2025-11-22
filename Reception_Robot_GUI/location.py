@@ -39,7 +39,6 @@ class LocationTab(QWidget):
         self.logger.location_tab = self
 
         self.load_map("Reception_Robot_GUI/resources/Map/new_map2.pgm")
-        self.last_position = [17.78, 2.35 , 0.0] 
         self.create_robot()
 
         # 4 goals 
@@ -51,6 +50,7 @@ class LocationTab(QWidget):
         }
 
         # Update GUI frequency 
+        self.last_position = [17.78, 2.35 , 0.0] 
         self.update_timer = QTimer(self)
         self.update_timer.timeout.connect(self.update_robot_gui)
         self.update_timer.start(100)  # 100ms (10 Hz)
