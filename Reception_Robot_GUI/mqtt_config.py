@@ -22,7 +22,8 @@ class MQTTConfig:
         "velocity": "robot/velocity",
         "waypoints" : "robot/waypoints",
         "arrival": "robot/arrival",
-        "telemetry": "robot/telemetry"
+        "telemetry": "robot/telemetry",
+        "goal": "robot/goal"
     }
     
     @classmethod

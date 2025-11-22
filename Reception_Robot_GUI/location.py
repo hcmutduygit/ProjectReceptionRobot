@@ -8,7 +8,7 @@ import time
 
 from pathplanning_fixedwp import PathPlanner
 from logger import PathLogger
-from MQTT.waypoints_publisher import WaypointsPublisher 
+from MQTT.publisher_waypoints import WaypointsPublisher 
 
 class MapGraphicsView(QGraphicsView):
     def __init__(self, parent=None):

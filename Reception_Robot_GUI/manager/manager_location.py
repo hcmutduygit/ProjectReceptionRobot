@@ -2,7 +2,7 @@ import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
-from MQTT.location_subscriber import LocationSubscriberThread
+from MQTT.subscriber_location import LocationSubscriberThread
 from manager.manager_base import BaseManager
 from mqtt_config import MQTTConfig
 
