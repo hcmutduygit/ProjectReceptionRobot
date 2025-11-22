@@ -1,4 +1,4 @@
-import os, sys
+import os, sys, json
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, project_root)
 
@@ -16,12 +16,13 @@ from manager.manager_location import LocationManager
 from manager.manager_arrival import ArrivalManager 
 from manager.manager_velocity import VelocityManager 
 from manager.manager_telemetry import TelemetryManager
-
+from manager.manager_goal import GoalManager
 
 from location import LocationTab
 from camera import CameraController, CameraTab
 from robot_telemetry import PlotTelemetry
 
+from MQTT.publisher_goal import GoalPublisher 
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
@@ -89,6 +90,9 @@ class MainWindow(QMainWindow):
             self.location_manager = LocationManager(self.ui)
             self.location_manager.location_tab = self.admin_location_tab
             self.location_manager.start_location_subscriber()
+            self.goal_manager = GoalManager(self.ui)
+            self.goal_manager.location_tab = self.admin_location_tab
+            self.goal_manager.start_goal_subscriber()
 
     def _handle_signup(self):
         success = handle_signup(self.ui, self.registered_users, main_window=self)
@@ -148,7 +152,13 @@ class MainWindow(QMainWindow):
                                                                self.ui.robot_status_2.setText("Guidance"),
                                                                self.ui.robot_mode_2.setCurrentWidget(self.ui.page_log),
                                                                self.ui.label_log.setText(f"Robot is moving to {n}"),
-                                                               location_tab.plan_path(n)))
+                                                               self.send_goal(n)))
+
+    def send_goal(self, place: str):
+        goal_json = json.dumps(place)
+        print(f"Goal in /map coordinates (JSON): {goal_json}")
+        publisher = GoalPublisher()
+        publisher.publish_goal(goal_json)
 
     def handle_arrival_signal(self, arrived):
         if arrived == 1 and hasattr(self, 'admin_location_tab'):

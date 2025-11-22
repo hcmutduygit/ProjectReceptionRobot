@@ -3,7 +3,7 @@
 import sys
 import signal
 import json
-from mqtt_publisher_config import MQTTTemplate, get_topic
+from MQTT.mqtt_publisher_config import MQTTTemplate, get_topic
 
 # Signal handler for clean exit
 def signal_handler(sig, frame):

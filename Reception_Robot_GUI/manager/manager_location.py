@@ -32,13 +32,13 @@ class LocationManager(BaseManager):
             'theta': f"{theta:.1f}°"
         }
         self._update_location_labels()
+        
         if self.location_tab is not None:
             self.location_tab.set_location(x, y, theta)
         else:
             print("Location_tab chưa được gán.")
 
     def _update_location_labels(self):
-        
         self.ui.label_xy.setText(f"X: {self.location['x']}, Y: {self.location['y']}")
         self.ui.label_xy_2.setText(f"X: {self.location['x']}, Y: {self.location['y']}")
         self.ui.label_xy_3.setText(f"X: {self.location['x']}, Y: {self.location['y']}")
