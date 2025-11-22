@@ -27,16 +27,20 @@ class LocationTab(QWidget):
     def __init__(self, view):
         super().__init__()
         self.ui = view
-        self.map_scene = QGraphicsScene()
         layout = self.ui.parent().layout()
         self.ui.setParent(None)
         self.ui = MapGraphicsView()
         layout.addWidget(self.ui)
+
+        self.map_scene = QGraphicsScene()
         self.ui.setScene(self.map_scene)
+
         self.logger = PathLogger()
         self.logger.location_tab = self
 
         self.load_map("Reception_Robot_GUI/resources/Map/new_map2.pgm")
+        self.last_position = [17.78, 2.35 , 0.0] 
+        self.create_robot()
 
         # 4 goals 
         self.goals = {
@@ -46,7 +50,17 @@ class LocationTab(QWidget):
             "Restroom": (711, 501)
         }
 
-        # Tạo robot
+        # Update GUI frequency 
+        self.update_timer = QTimer(self)
+        self.update_timer.timeout.connect(self.update_robot_gui)
+        self.update_timer.start(100)  # 100ms (10 Hz)
+
+        # initial pathplanner 
+        self.planner = PathPlanner(self.map_scene)
+        self.planner.set_locations(self.goals)
+        self.trajectory_items = []
+
+    def create_robot(self):
         triangle = QPolygonF([
             QPointF(0, -15),
             QPointF(8, 20),
@@ -57,20 +71,6 @@ class LocationTab(QWidget):
         self.robot_item.setPen(QPen(Qt.GlobalColor.black, 1))
         self.robot_item.setTransformOriginPoint(0, 2)
         self.map_scene.addItem(self.robot_item)
-
-        # Lưu trữ vị trí mới nhất
-        self.last_position = [17.78, 2.35 , 0.0] #
-
-        # Update GUI frequency 
-        self.update_timer = QTimer(self)
-        self.update_timer.timeout.connect(self.update_robot_gui)
-        self.update_timer.start(100)  # 100ms (10 Hz)
-
-        # initial pathplanner 
-        self.planner = PathPlanner(self.map_scene)
-        # self.planner.load_cost_map("Reception_Robot_GUI/resources/Map/new_map2.pgm")
-        self.planner.set_locations(self.goals)
-        self.trajectory_items = []
 
     def load_map(self, path: str):
         pixmap = QPixmap(path)
@@ -87,11 +87,11 @@ class LocationTab(QWidget):
         # Fit hình ảnh vào view
         self.ui.fitInView(self.map_scene.sceneRect(), Qt.AspectRatioMode.KeepAspectRatio)
 
-        # Lưu thông tin ảnh
+        # map information 
         self.map_width = pixmap.width()
         self.map_height = pixmap.height()
 
-        # Đọc thông số từ file map.yaml từ SLAM
+        # yaml 
         yaml_path = "Reception_Robot_GUI/resources/Map/new_map2.yaml"
         try:
             with open(yaml_path, 'r') as file:
@@ -104,7 +104,7 @@ class LocationTab(QWidget):
 
     def update_robot_gui(self):
         x, y, theta = self.last_position
-        # Convert tọa độ từ /map sang GUI 
+        # /map to /pixel 
         py = self.map_height - (y - self.map_origin[1]) / self.map_resolution 
         px = (x - self.map_origin[0]) / self.map_resolution  
 
@@ -181,6 +181,4 @@ class LocationTab(QWidget):
         publisher = WaypointsPublisher()
         publisher.publish_waypoints(waypoints_json)
 
-    def stop_logging(self):
-        self.logger.stop_logging()
         

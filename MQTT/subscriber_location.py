@@ -22,4 +22,4 @@ class LocationSubscriberThread(MQTTSubscriberThread):
             self.location_update.emit(x, y, theta)
 
         except (json.JSONDecodeError, ValueError, TypeError) as e:
-            print(f"[MQTT] ❌ Error parsing location data: {e}")
+            print(f"[MQTT] Error parsing location data: {e}")

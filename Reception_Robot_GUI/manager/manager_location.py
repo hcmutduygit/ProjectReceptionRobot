@@ -32,7 +32,6 @@ class LocationManager(BaseManager):
             'theta': f"{theta:.1f}°"
         }
         self._update_location_labels()
-        #print(f"📍Location updated: x={x:.2f}, y={y:.2f}, θ={theta:.1f}°")
         if self.location_tab is not None:
             self.location_tab.set_location(x, y, theta)
         else:
