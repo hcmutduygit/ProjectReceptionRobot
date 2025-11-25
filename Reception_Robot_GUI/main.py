@@ -164,6 +164,8 @@ class MainWindow(QMainWindow):
         if arrived == 1 and hasattr(self, 'admin_location_tab'):
             self.ui.robot_mode_2.setCurrentWidget(self.ui.page_6)
             self.admin_location_tab.logger.stop_logging()  # Dừng + export
+            self.ui.robot_status.setText("Idle")
+            self.ui.robot_status_2.setText("Idle")
 
     def _shutdown_all_services(self):
         self.battery_manager.stop_battery_subscriber()
