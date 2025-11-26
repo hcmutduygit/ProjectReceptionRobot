@@ -11,6 +11,7 @@ GOAL_CONFIG = MQTTConfig.get_config("goal")
 class GoalManager(BaseManager):
     def __init__(self, ui, location_tab=None):
         super().__init__(ui, GoalSubscriberThread, GOAL_CONFIG)
+        self.ui = ui 
         self.goal = None
         self.location_tab = location_tab
 
@@ -27,5 +28,9 @@ class GoalManager(BaseManager):
         if name:
             self.goal = name
             self.location_tab.plan_path(name)
+            self.ui.robot_status.setText("Guidance")
+            self.ui.robot_status_2.setText("Guidance")
+            self.ui.robot_mode_2.setCurrentWidget(self.ui.page_log)
+            self.ui.label_log.setText(f"Robot is moving to {name}")
         else:
             self.goal = None 

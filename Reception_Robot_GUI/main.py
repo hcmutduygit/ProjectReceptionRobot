@@ -148,11 +148,7 @@ class MainWindow(QMainWindow):
 
         for btn, name in zip(buttons, goals):
             btn.setText(name)
-            btn.clicked.connect(lambda checked=False, n=name: (self.ui.robot_status.setText("Guidance"),
-                                                               self.ui.robot_status_2.setText("Guidance"),
-                                                               self.ui.robot_mode_2.setCurrentWidget(self.ui.page_log),
-                                                               self.ui.label_log.setText(f"Robot is moving to {n}"),
-                                                               self.send_goal(n)))
+            btn.clicked.connect(lambda checked=False, n=name: (self.send_goal(n)))
 
     def send_goal(self, place: str):
         goal_json = json.dumps(place)

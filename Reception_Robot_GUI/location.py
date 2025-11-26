@@ -45,12 +45,12 @@ class LocationTab(QWidget):
         self.goals = {
             "Robotics lab": (464, 792),
             "Chemistry hall": (825, 262),
-            "Electrical lab": (1116, 778),
+            "Stairs": (833, 727),
             "Restroom": (711, 501)
         }
 
         # Update GUI frequency 
-        self.last_position = [17.78, 2.35 , 0.0] 
+        self.last_position = [0.0, 0.0 , 0.0] 
         self.update_timer = QTimer(self)
         self.update_timer.timeout.connect(self.update_robot_gui)
         self.update_timer.start(100)  # 100ms (10 Hz)
