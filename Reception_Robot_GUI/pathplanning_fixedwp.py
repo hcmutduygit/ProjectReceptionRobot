@@ -30,7 +30,7 @@ class PathPlanner:
             "wp2": ["wp1", "wp3"],
             "wp3": ["wp2", "wp4"],
             "wp4": ["wp3", "wp5"],
-            "wp5": ["wp4", "wp8"], #, "wp6"
+            "wp5": ["wp4"], #, "wp6", "wp8"
             # "wp6": ["wp5", "wp7"], 
             # "wp7": ["wp8", "wp6"],
             # "wp8": ["wp5", "wp7"],
