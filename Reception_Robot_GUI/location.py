@@ -45,7 +45,7 @@ class LocationTab(QWidget):
         self.goals = {
             "Robotics lab": (464, 792),
             "Chemistry hall": (835, 269),
-            "Stairs": (833, 727),
+            "Stairs": (820, 727),
             "Restroom": (711, 501)
         }
 
