@@ -109,6 +109,7 @@ class LocationTab(QWidget):
                             Qt.TransformationMode.SmoothTransformation)
 
         self.robot_item = QGraphicsPixmapItem(pixmap)
+        self.robot_item.setZValue(100)
 
         self.robot_w = pixmap.width()
         self.robot_h = pixmap.height()
