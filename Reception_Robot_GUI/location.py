@@ -53,7 +53,7 @@ class LocationTab(QWidget):
             "Stairs": (820, 727),
             "Restroom": (711, 501),
             "Electrical lab": (1116, 778),
-            "Water intake": (736, 273),
+            "Water intake": (736, 269),
         }
 
         # Position
