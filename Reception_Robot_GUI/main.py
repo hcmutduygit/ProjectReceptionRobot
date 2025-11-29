@@ -144,7 +144,7 @@ class MainWindow(QMainWindow):
 
     def add_path_planning_buttons(self, location_tab):
         goals = location_tab.get_goal_names()
-        buttons = [self.ui.btn_goal_A, self.ui.btn_goal_B, self.ui.btn_goal_C, self.ui.btn_goal_D]
+        buttons = [self.ui.btn_goal_A, self.ui.btn_goal_B, self.ui.btn_goal_C, self.ui.btn_goal_D, self.ui.btn_goal_E, self.ui.btn_goal_F]
 
         for btn, name in zip(buttons, goals):
             btn.setText(name)

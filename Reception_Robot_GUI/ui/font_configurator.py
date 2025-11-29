@@ -57,6 +57,8 @@ def apply_custom_fonts(ui):
     set_bold(ui.btn_goal_B)
     set_bold(ui.btn_goal_C)
     set_bold(ui.btn_goal_D)
+    set_bold(ui.btn_goal_E)
+    set_bold(ui.btn_goal_F)
 
     #page_guest2 - robot 
     set_regular(ui.label1_11)
