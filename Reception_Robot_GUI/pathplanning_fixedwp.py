@@ -21,6 +21,8 @@ class PathPlanner:
             "wp6": (835, 269),
             "wp7": (736, 269),
             "wp8": (750, 306),
+            "wp9": (790, 305),
+            "wp10": (960, 787)
         }
 
         # === graph ===
@@ -29,11 +31,13 @@ class PathPlanner:
             "wp1": ["wp0", "wp2"],
             "wp2": ["wp1", "wp3"],
             "wp3": ["wp2", "wp4"],
-            "wp4": ["wp3", "wp5"],
+            "wp4": ["wp3", "wp5", "wp9"],
             "wp5": ["wp4", "wp6", "wp8"], #
             "wp6": ["wp5", "wp7"], 
             "wp7": ["wp8", "wp6"],
-            "wp8": ["wp5", "wp7"],
+            "wp8": ["wp7", "wp9"],
+            "wp9": ["wp4", "wp8"],
+            "wp10": ["wp1"]
         }
 
         self._draw_fixed_waypoints()
@@ -63,7 +67,8 @@ class PathPlanner:
         text.setPos(x + 10, y - 12)
 
     # ======================================================
-    # check if start/goal is on the segment between 2 wp 
+    # check if start/goal is on the segment between 2 wp
+    # if start os goal has 1 candidate, check if that candidate wp is between start and goal 
     # ======================================================
     def _is_on_segment(self, point, wp1, wp2, tolerance=25):
         p = np.array(point)
@@ -78,19 +83,10 @@ class PathPlanner:
         dist = np.linalg.norm(p - closest)
         return dist <= tolerance
     
-    def _are_collinear(self, p1, p2, p3, tolerance=30.0):
-        """
-        Kiểm tra 3 điểm p1, p2, p3 có gần thẳng hàng không
-        Dùng diện tích tam giác ≈ 0 → thẳng hàng
-        """
-        p1, p2, p3 = np.array(p1), np.array(p2), np.array(p3)
-        area = np.abs(np.cross(p2 - p1, p3 - p1))  # 0.5 * base * height
-        return area <= tolerance  # tolerance tính bằng pixel², 30 rất thoải mái
-
     def _get_candidates(self, point):
         candidates = set()
 
-        # 1. Kiểm tra có nằm gần segment nào không → ưu tiên cao nhất
+        # Check if point is on the segment 
         for wp1, neighbors in self.graph_connections.items():
             for wp2 in neighbors:
                 if wp1 >= wp2: continue  # tránh kiểm tra 2 lần
@@ -98,27 +94,37 @@ class PathPlanner:
                     candidates.add(wp1)
                     candidates.add(wp2)
 
-        # 2. Nếu không nằm gần segment nào → xem có nên đi thẳng không (mới!)
+        # if not on the segment, add nearest wp 
         if not candidates:
             nearest_wp_name = min(self.fixed_waypoints,
                                 key=lambda wp: np.linalg.norm(np.array(point) - np.array(self.fixed_waypoints[wp])))
-            nearest_wp_pos = self.fixed_waypoints[nearest_wp_name]
-
-            # Nếu điểm hiện tại + nearest_wp + goal gần thẳng hàng → KHÔNG dùng wp nào cả
-            # → sẽ được xử lý ở find_path() bằng cách bỏ qua graph
-            for goal_name, goal_pos in self.locations.items():
-                if self._are_collinear(point, nearest_wp_pos, goal_pos, tolerance=40):
-                    print(f"Phát hiện thẳng hàng: {point} ≈ {nearest_wp_pos} ≈ {goal_pos} → BỎ QUA wp, đi thẳng!")
-                    return []  # Trả về rỗng → find_path sẽ tự động đi thẳng
-
-            # Không thẳng hàng → vẫn dùng nearest như cũ (an toàn)
             candidates.add(nearest_wp_name)
 
         return list(candidates)
     
+    def _is_between(self, start, wp, goal, tolerance):
+        s, w, g = np.array(start), np.array(wp), np.array(goal)
+        
+        # 1. Phải gần thẳng hàng
+        if np.abs(np.cross(g - s, w - s)) > tolerance:
+            return False
+        
+        # 2. wp phải nằm giữa (dot product)
+        dot = np.dot(w - s, g - s)
+        len_sq = np.dot(g - s, g - s)
+        if dot < 0 or dot > len_sq:
+            return False
+        
+        return True
 
     # ==============================
-    # DIJKSTRA + DOUBLE CONSTRAINT (start/goal is on segment of not)
+    # DIJKSTRA + DOUBLE CONSTRAINT (start/goal is on segment of not) 
+# {"x":14.0,
+# "y":25.5,
+# "theta":0.0}
+# {"x":18.0,
+# "y":1.5,
+# "theta":0.0}
     # ==============================
     def find_path(self, start_px, goal_label):
         if goal_label not in self.locations:
@@ -131,10 +137,18 @@ class PathPlanner:
         start_candidates = self._get_candidates(start_px)
         goal_candidates = self._get_candidates(goal_px)
 
-        if not start_candidates and not goal_candidates:
-            path = [start_px, goal_px]
-            self.draw_path(path)
-            return path
+        if len(start_candidates) == 1 or len(goal_candidates) == 1:
+            wp_s = self.fixed_waypoints[start_candidates[0]]
+            wp_g = self.fixed_waypoints[goal_candidates[0]]
+            skip_start_wp = self._is_between(start_px, wp_s, goal_px, tolerance=3)
+            skip_goal_wp  = self._is_between(start_px, wp_g, goal_px, tolerance=3)
+
+            if skip_start_wp or skip_goal_wp:
+                wp_name = start_candidates[0] if skip_start_wp else goal_candidates[0]
+                print(f"BỎ QUA wp {wp_name} vì nó nằm giữa đường đi → đi thẳng!")
+                path = [start_px, goal_px]
+                self.draw_path(path)
+                return path
         
         # graph 
         G = nx.Graph()
@@ -156,8 +170,6 @@ class PathPlanner:
                     if cost < min_cost:
                         min_cost = cost
                         best_path = path
-                        best_start_wp = s_wp
-                        best_goal_wp = g_wp
                 except nx.NetworkXNoPath:
                     continue
 
