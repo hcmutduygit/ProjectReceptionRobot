@@ -40,7 +40,7 @@ class PathPlanner:
 
     def _draw_fixed_waypoints(self):
         for name, (x, y) in self.fixed_waypoints.items():
-            r = 8
+            r = 4
             brush = QBrush(QColor(0, 255, 0))
             pen = QPen(QColor(0, 0, 0), 1)
             self.scene.addEllipse(x - r, y - r, r * 2, r * 2, pen, brush)
@@ -54,7 +54,7 @@ class PathPlanner:
             self._draw_marker(x, y, name)
 
     def _draw_marker(self, x, y, label):
-        r = 8
+        r = 6
         brush = QBrush(QColor(255, 200, 0))
         pen = QPen(QColor(0, 0, 0), 1)
         self.scene.addEllipse(x - r, y - r, r * 2, r * 2, pen, brush)
