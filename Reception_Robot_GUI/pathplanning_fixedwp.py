@@ -12,7 +12,8 @@ class PathPlanner:
 
         # === 4 fixed waypoints ===
         self.fixed_waypoints = { 
-            "wp0": (649, 791),
+            "wp11": (580, 791),
+            "wp0": (700, 789),
             "wp1": (822, 780),
             "wp2": (808, 525),
             "wp3": (864, 504), 
@@ -27,7 +28,8 @@ class PathPlanner:
 
         # === graph ===
         self.graph_connections = {
-            "wp0": ["wp1"],
+            "wp11": ["wp0"],
+            "wp0": ["wp1", "wp11"],
             "wp1": ["wp0", "wp2"],
             "wp2": ["wp1", "wp3"],
             "wp3": ["wp2", "wp4"],
