@@ -32,14 +32,13 @@ class PathPlanner:
             "wp2": ["wp1", "wp3"],
             "wp3": ["wp2", "wp4"],
             "wp4": ["wp3", "wp5", "wp9"],
-            "wp5": ["wp4", "wp6", "wp8"], #
-            "wp6": ["wp5", "wp7"], 
-            "wp7": ["wp8", "wp6"],
+            "wp5": ["wp4", "wp6", "wp9"],
+            "wp6": ["wp5", "wp7", "wp9"], 
+            "wp7": ["wp6", "wp8"],
             "wp8": ["wp7", "wp9"],
-            "wp9": ["wp4", "wp8"],
+            "wp9": ["wp4", "wp5", "wp6", "wp8"],
             "wp10": ["wp1"]
         }
-
         self._draw_fixed_waypoints()
 
     def _draw_fixed_waypoints(self):
@@ -48,9 +47,9 @@ class PathPlanner:
             brush = QBrush(QColor(0, 255, 0))
             pen = QPen(QColor(0, 0, 0), 1)
             self.scene.addEllipse(x - r, y - r, r * 2, r * 2, pen, brush)
-            # text = self.scene.addText(name)
-            # text.setDefaultTextColor(QColor(0, 0, 0))
-            # text.setPos(x + 12, y - 15)
+            text = self.scene.addText(name)
+            text.setDefaultTextColor(QColor(0, 0, 0))
+            text.setPos(x + 12, y - 15)
 
     def set_locations(self, locations: dict):
         self.locations = locations
@@ -70,7 +69,7 @@ class PathPlanner:
     # check if start/goal is on the segment between 2 wp
     # if start os goal has 1 candidate, check if that candidate wp is between start and goal 
     # ======================================================
-    def _is_on_segment(self, point, wp1, wp2, tolerance=25):
+    def _is_on_segment(self, point, wp1, wp2, tolerance):
         p = np.array(point)
         a = np.array(self.fixed_waypoints[wp1])
         b = np.array(self.fixed_waypoints[wp2])
@@ -90,7 +89,7 @@ class PathPlanner:
         for wp1, neighbors in self.graph_connections.items():
             for wp2 in neighbors:
                 if wp1 >= wp2: continue  # tránh kiểm tra 2 lần
-                if self._is_on_segment(point, wp1, wp2, tolerance=30):
+                if self._is_on_segment(point, wp1, wp2, tolerance=10):
                     candidates.add(wp1)
                     candidates.add(wp2)
 
@@ -99,7 +98,6 @@ class PathPlanner:
             nearest_wp_name = min(self.fixed_waypoints,
                                 key=lambda wp: np.linalg.norm(np.array(point) - np.array(self.fixed_waypoints[wp])))
             candidates.add(nearest_wp_name)
-
         return list(candidates)
     
     def _is_between(self, start, wp, goal, tolerance):
@@ -117,26 +115,43 @@ class PathPlanner:
         
         return True
 
-    # ==============================
-    # DIJKSTRA + DOUBLE CONSTRAINT (start/goal is on segment of not) 
 # {"x":14.0,
 # "y":25.5,
 # "theta":0.0}
 # {"x":18.0,
 # "y":1.5,
 # "theta":0.0}
+# {"x":10.0,
+# "y":14.5,
+# "theta":0.0}
+# {"x":20.0,
+# "y":16.5,
+# "theta":0.0}
+
+    # ==============================
+    # DIJKSTRA + DOUBLE CONSTRAINT (start/goal is on segment of not) 
     # ==============================
     def find_path(self, start_px, goal_label):
         if goal_label not in self.locations:
             raise ValueError(f"Goal '{goal_label}' not existed")
-
         goal_px = self.locations[goal_label]
         print(f"Finding path {start_px} → {goal_label}:{goal_px}...")
 
+        # if distance between start and goal is small 
+        distance_pixels = np.linalg.norm(np.array(start_px) - np.array(goal_px))
+        if distance_pixels < 80:  
+            print(f"Distance between start and goal is small ({distance_pixels:.1f}px)")
+            path = [start_px, goal_px]
+            self.draw_path(path)
+            return path
+
         # start, goal constraint 
         start_candidates = self._get_candidates(start_px)
+        print(f"Start candidate: {start_candidates}")
         goal_candidates = self._get_candidates(goal_px)
+        print(f"Goal candidate: {goal_candidates}")
 
+        # if start or goal has 1 candidate, we check if they are conlinear 
         if len(start_candidates) == 1 or len(goal_candidates) == 1:
             wp_s = self.fixed_waypoints[start_candidates[0]]
             wp_g = self.fixed_waypoints[goal_candidates[0]]
@@ -152,7 +167,6 @@ class PathPlanner:
         
         # graph 
         G = nx.Graph()
-
         for wp1, neighbors in self.graph_connections.items():
             for wp2 in neighbors:
                 dist = np.linalg.norm(np.array(self.fixed_waypoints[wp1]) - np.array(self.fixed_waypoints[wp2]))
