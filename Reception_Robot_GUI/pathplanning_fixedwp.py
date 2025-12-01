@@ -10,7 +10,7 @@ class PathPlanner:
         self.path_items = []
         self.locations = {}
 
-        # === 4 fixed waypoints ===
+        # === n fixed waypoints ===
         self.fixed_waypoints = { 
             "wp11": (580, 791),
             "wp0": (700, 789),
@@ -49,9 +49,9 @@ class PathPlanner:
             brush = QBrush(QColor(0, 255, 0))
             pen = QPen(QColor(0, 0, 0), 1)
             self.scene.addEllipse(x - r, y - r, r * 2, r * 2, pen, brush)
-            text = self.scene.addText(name)
-            text.setDefaultTextColor(QColor(0, 0, 0))
-            text.setPos(x + 12, y - 15)
+            # text = self.scene.addText(name)
+            # text.setDefaultTextColor(QColor(0, 0, 0))
+            # text.setPos(x + 12, y - 15)
 
     def set_locations(self, locations: dict):
         self.locations = locations
