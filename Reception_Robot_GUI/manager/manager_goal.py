@@ -27,7 +27,7 @@ class GoalManager(BaseManager):
     def handle_goal_update(self, name):
         if name:
             self.goal = name.lower().capitalize()
-            self.location_tab.plan_path(name)
+            self.location_tab.plan_path(name.lower().capitalize())
             self.ui.robot_status.setText("Guidance")
             self.ui.robot_status_2.setText("Guidance")
             self.ui.robot_mode_2.setCurrentWidget(self.ui.page_log)
