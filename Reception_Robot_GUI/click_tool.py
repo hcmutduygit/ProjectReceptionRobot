@@ -15,7 +15,7 @@ class MapClickView(QGraphicsView):
         self.scene = QGraphicsScene()
         pixmap = QPixmap(map_path)
         if pixmap.isNull():
-            print(f"Kông thể load ảnh: {map_path}")
+            print(f"Không thể load ảnh: {map_path}")
             sys.exit(1)
 
         self.scene.addPixmap(pixmap)
@@ -43,6 +43,13 @@ class MapClickView(QGraphicsView):
         print("Click lên bản đồ để lấy tọa độ pixel")
 
     def mousePressEvent(self, event: QMouseEvent):
+
+        x = 19.8933045439
+        y = 16.4363054122
+        py = self.map_height - (y - self.map_origin[1]) / self.map_resolution 
+        px = (x - self.map_origin[0]) / self.map_resolution 
+        print(f"Example conversion: ({x}, {y})m → ({int(px)}, {int(py)}) pixels")
+
         if event.button() == Qt.MouseButton.LeftButton:
             scene_pos = self.mapToScene(event.position().toPoint())
             x_pixel, y_pixel = int(scene_pos.x()), int(scene_pos.y())
@@ -63,6 +70,7 @@ class MapClickView(QGraphicsView):
         #     px = (x - self.map_origin[0]) / self.map_resolution 
         #     print(f'"{i:2d}": ({int(px)}, {int(py)}),')
 
+
 class MapClickWindow(QMainWindow):
     def __init__(self, map_path):
         super().__init__()
@@ -70,6 +78,7 @@ class MapClickWindow(QMainWindow):
         self.resize(800, 600)
         self.map_view = MapClickView(map_path)
         self.setCentralWidget(self.map_view)
+        
 
 
 if __name__ == "__main__":

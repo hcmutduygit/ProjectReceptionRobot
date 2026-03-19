@@ -17,7 +17,7 @@ class PathPlanner:
             "wp1": (822, 780),
             "wp2": (808, 525),
             "wp3": (864, 504), 
-            "wp4": (862, 381),
+            "wp4": (860, 400),
             "wp5": (850, 304),
             "wp6": (835, 269),
             "wp7": (736, 269),
@@ -49,9 +49,9 @@ class PathPlanner:
             brush = QBrush(QColor(0, 255, 0))
             pen = QPen(QColor(0, 0, 0), 1)
             self.scene.addEllipse(x - r, y - r, r * 2, r * 2, pen, brush)
-            # text = self.scene.addText(name)
-            # text.setDefaultTextColor(QColor(0, 0, 0))
-            # text.setPos(x + 12, y - 15)
+            text = self.scene.addText(name)
+            text.setDefaultTextColor(QColor(0, 0, 0))
+            text.setPos(x + 12, y - 15)
 
     def set_locations(self, locations: dict):
         self.locations = locations
